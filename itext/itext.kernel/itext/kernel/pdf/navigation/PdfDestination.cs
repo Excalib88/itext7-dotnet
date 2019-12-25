@@ -47,7 +47,7 @@ using iText.Kernel.Pdf;
 
 namespace iText.Kernel.Pdf.Navigation {
     public abstract class PdfDestination : PdfObjectWrapper<PdfObject> {
-        protected internal PdfDestination(PdfObject pdfObject)
+        public PdfDestination(PdfObject pdfObject)
             : base(pdfObject) {
         }
 

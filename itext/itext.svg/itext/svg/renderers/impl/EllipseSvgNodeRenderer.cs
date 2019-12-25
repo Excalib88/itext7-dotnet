@@ -60,7 +60,7 @@ namespace iText.Svg.Renderers.Impl {
 
         internal float ry;
 
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             PdfCanvas cv = context.GetCurrentCanvas();
             cv.WriteLiteral("% ellipse\n");
             if (SetParameters()) {
@@ -74,7 +74,7 @@ namespace iText.Svg.Renderers.Impl {
         /// and maps it's values to arc parmateter cx, cy , rx, ry respectively
         /// </summary>
         /// <returns>boolean values to indicate whether all values exit or not</returns>
-        protected internal virtual bool SetParameters() {
+        public virtual bool SetParameters() {
             cx = 0;
             cy = 0;
             if (GetAttribute(SvgConstants.Attributes.CX) != null) {

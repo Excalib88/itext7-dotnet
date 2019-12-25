@@ -41,7 +41,8 @@ source product.
 For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Action;
@@ -49,8 +50,8 @@ using iText.Kernel.Pdf.Navigation;
 
 namespace iText.Kernel.Pdf.Annot {
     public class PdfLinkAnnotation : PdfAnnotation {
-        private static readonly ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfLinkAnnotation
-            ));
+        //private static readonly ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfLinkAnnotation
+        //    ));
 
         /// <summary>Highlight modes.</summary>
         public static readonly PdfName None = PdfName.N;
@@ -65,7 +66,7 @@ namespace iText.Kernel.Pdf.Annot {
         /// see
         /// <see cref="PdfAnnotation.MakeAnnotation(iText.Kernel.Pdf.PdfObject)"/>
         /// </summary>
-        protected internal PdfLinkAnnotation(PdfDictionary pdfObject)
+        public PdfLinkAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 
@@ -84,11 +85,11 @@ namespace iText.Kernel.Pdf.Annot {
         public virtual iText.Kernel.Pdf.Annot.PdfLinkAnnotation SetDestination(PdfObject destination) {
             if (GetPdfObject().ContainsKey(PdfName.A)) {
                 GetPdfObject().Remove(PdfName.A);
-                logger.Warn(iText.IO.LogMessageConstant.DESTINATION_NOT_PERMITTED_WHEN_ACTION_IS_SET);
+                //logger.Warn(iText.IO.LogMessageConstant.DESTINATION_NOT_PERMITTED_WHEN_ACTION_IS_SET);
             }
             if (destination.IsArray() && ((PdfArray)destination).Get(0).IsNumber()) {
-                LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfLinkAnnotation)).Warn(iText.IO.LogMessageConstant.INVALID_DESTINATION_TYPE
-                    );
+                //LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfLinkAnnotation)).Warn(iText.IO.LogMessageConstant.INVALID_DESTINATION_TYPE
+                //    );
             }
             return (iText.Kernel.Pdf.Annot.PdfLinkAnnotation)Put(PdfName.Dest, destination);
         }
@@ -155,7 +156,7 @@ namespace iText.Kernel.Pdf.Annot {
         public virtual iText.Kernel.Pdf.Annot.PdfLinkAnnotation SetAction(PdfAction action) {
             if (GetDestinationObject() != null) {
                 RemoveDestination();
-                logger.Warn(iText.IO.LogMessageConstant.ACTION_WAS_SET_TO_LINK_ANNOTATION_WITH_DESTINATION);
+                //logger.Warn(iText.IO.LogMessageConstant.ACTION_WAS_SET_TO_LINK_ANNOTATION_WITH_DESTINATION);
             }
             return (iText.Kernel.Pdf.Annot.PdfLinkAnnotation)Put(PdfName.A, action.GetPdfObject());
         }

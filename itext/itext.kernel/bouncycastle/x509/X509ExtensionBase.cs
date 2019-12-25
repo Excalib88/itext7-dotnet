@@ -10,9 +10,9 @@ namespace Org.BouncyCastle.X509
 	public abstract class X509ExtensionBase
 		: IX509Extension
 	{
-		protected abstract X509Extensions GetX509Extensions();
+		public abstract X509Extensions GetX509Extensions();
 
-		protected virtual ISet GetExtensionOids(
+		public virtual ISet GetExtensionOids(
 			bool critical)
 		{
 			X509Extensions extensions = GetX509Extensions();

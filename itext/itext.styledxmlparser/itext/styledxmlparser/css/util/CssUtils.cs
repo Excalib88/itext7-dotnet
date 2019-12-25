@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Text;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Colors;
 using iText.Layout.Font;
@@ -221,9 +222,9 @@ namespace iText.StyledXmlParser.Css.Util {
                     }
                 }
             }
-            ILog logger = LogManager.GetLogger(typeof(iText.StyledXmlParser.Css.Util.CssUtils));
-            logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNKNOWN_ABSOLUTE_METRIC_LENGTH_PARSED
-                , unit.Equals("") ? defaultMetric : unit));
+            //ILog logger = LogManager.GetLogger(typeof(iText.StyledXmlParser.Css.Util.CssUtils));
+            //logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNKNOWN_ABSOLUTE_METRIC_LENGTH_PARSED
+            //    , unit.Equals("") ? defaultMetric : unit));
             return f;
         }
 
@@ -586,8 +587,8 @@ namespace iText.StyledXmlParser.Css.Util {
         public static float[] ParseRgbaColor(String colorValue) {
             float[] rgbaColor = WebColors.GetRGBAColor(colorValue);
             if (rgbaColor == null) {
-                ILog logger = LogManager.GetLogger(typeof(iText.StyledXmlParser.Css.Util.CssUtils));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.COLOR_NOT_PARSED, colorValue));
+                //ILog logger = LogManager.GetLogger(typeof(iText.StyledXmlParser.Css.Util.CssUtils));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.COLOR_NOT_PARSED, colorValue));
                 rgbaColor = new float[] { 0, 0, 0, 1 };
             }
             return rgbaColor;

@@ -49,13 +49,13 @@ using iText.IO.Source;
 namespace iText.IO.Colors {
     /// <summary>Class used to represented the International Color Consortium profile</summary>
     public class IccProfile {
-        protected internal byte[] data;
+        public byte[] data;
 
-        protected internal int numComponents;
+        public int numComponents;
 
         private static IDictionary<String, int?> cstags = new Dictionary<String, int?>();
 
-        protected internal IccProfile() {
+        public IccProfile() {
         }
 
         /// <summary>Construct an icc profile from the passed byte[], using the passed number of components.</summary>

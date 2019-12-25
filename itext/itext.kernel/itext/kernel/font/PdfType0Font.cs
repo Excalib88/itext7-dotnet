@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font;
 using iText.IO.Font.Cmap;
 using iText.IO.Font.Otf;
@@ -59,21 +60,21 @@ namespace iText.Kernel.Font {
             )0x08, (byte)0x04, (byte)0x02, (byte)0x01 };
 
         /// <summary>CIDFont Type0 (Type1 outlines).</summary>
-        protected internal const int CID_FONT_TYPE_0 = 0;
+        public const int CID_FONT_TYPE_0 = 0;
 
         /// <summary>CIDFont Type2 (TrueType outlines).</summary>
-        protected internal const int CID_FONT_TYPE_2 = 2;
+        public const int CID_FONT_TYPE_2 = 2;
 
-        protected internal bool vertical;
+        public bool vertical;
 
-        protected internal CMapEncoding cmapEncoding;
+        public CMapEncoding cmapEncoding;
 
         //longTag is actually ordered set of usedGlyphs, shall be renamed in 7.2
-        protected internal ICollection<int> longTag;
+        public ICollection<int> longTag;
 
-        protected internal int cidFontType;
+        public int cidFontType;
 
-        protected internal char[] specificUnicodeDifferences;
+        public char[] specificUnicodeDifferences;
 
         internal PdfType0Font(TrueTypeFont ttf, String cmap)
             : base() {
@@ -102,7 +103,7 @@ namespace iText.Kernel.Font {
             }
         }
 
-        // Note. Make this constructor protected. Only PdfFontFactory (kernel level) will
+        // Note. Make this constructor public. Only PdfFontFactory (kernel level) will
         // be able to create Type0 font based on predefined font.
         // Or not? Possible it will be convenient construct PdfType0Font based on custom CidFont.
         // There is no typography features in CJK fonts.
@@ -134,8 +135,8 @@ namespace iText.Kernel.Font {
                     toUnicodeCMap = FontUtil.GetToUnicodeFromUniMap(uniMap);
                     if (toUnicodeCMap == null) {
                         toUnicodeCMap = FontUtil.GetToUnicodeFromUniMap(PdfEncodings.IDENTITY_H);
-                        ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
-                        logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.UNKNOWN_CMAP, uniMap));
+                        //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
+                        //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.UNKNOWN_CMAP, uniMap));
                     }
                 }
                 fontProgram = DocTrueTypeFont.CreateFontProgram(cidFont, toUnicodeCMap);
@@ -183,7 +184,7 @@ namespace iText.Kernel.Font {
                     cidFontType = CID_FONT_TYPE_2;
                 }
                 else {
-                    LogManager.GetLogger(GetType()).Error(iText.IO.LogMessageConstant.FAILED_TO_DETERMINE_CID_FONT_SUBTYPE);
+                    //LogManager.GetLogger(GetType()).Error(iText.IO.LogMessageConstant.FAILED_TO_DETERMINE_CID_FONT_SUBTYPE);
                 }
             }
             longTag = new SortedSet<int>();
@@ -566,9 +567,9 @@ namespace iText.Kernel.Font {
                     for (int codeLength = 1; codeLength <= 4 && i + codeLength <= cids.Length; codeLength++) {
                         failedCodes.Append((int)cids[i + codeLength - 1]).Append(" ");
                     }
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
-                    logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.COULD_NOT_FIND_GLYPH_WITH_CODE, failedCodes
-                        .ToString()));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
+                    //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.COULD_NOT_FIND_GLYPH_WITH_CODE, failedCodes
+                    //    .ToString()));
                     i += codeSpaceMatchedLength - 1;
                 }
                 if (glyph != null && glyph.GetChars() != null) {
@@ -623,7 +624,7 @@ namespace iText.Kernel.Font {
             return GetToUnicode();
         }
 
-        protected internal override PdfDictionary GetFontDescriptor(String fontName) {
+        public override PdfDictionary GetFontDescriptor(String fontName) {
             PdfDictionary fontDescriptor = new PdfDictionary();
             MakeObjectIndirect(fontDescriptor);
             fontDescriptor.Put(PdfName.Type, PdfName.FontDescriptor);
@@ -651,7 +652,7 @@ namespace iText.Kernel.Font {
         /// <param name="metrics">the horizontal width metrics</param>
         /// <returns>fully initialized CIDFont</returns>
         [System.ObsoleteAttribute(@"will be removed in 7.2")]
-        protected internal virtual PdfDictionary GetCidFontType2(TrueTypeFont ttf, PdfDictionary fontDescriptor, String
+        public virtual PdfDictionary GetCidFontType2(TrueTypeFont ttf, PdfDictionary fontDescriptor, String
              fontName, int[][] metrics) {
             return GetCidFont(fontDescriptor, fontName, ttf != null && !ttf.IsCff());
         }
@@ -672,7 +673,7 @@ namespace iText.Kernel.Font {
         /// Deprecated and is not used right now.
         /// </param>
         [System.ObsoleteAttribute(@"will be removed in 7.2")]
-        protected internal virtual void AddRangeUni(TrueTypeFont ttf, IDictionary<int, int[]> longTag, bool includeMetrics
+        public virtual void AddRangeUni(TrueTypeFont ttf, IDictionary<int, int[]> longTag, bool includeMetrics
             ) {
             AddRangeUni(ttf, longTag.Keys);
         }
@@ -739,8 +740,8 @@ namespace iText.Kernel.Font {
                                 ttfBytes = ttf.GetSubset(longTag, subset);
                             }
                             catch (iText.IO.IOException) {
-                                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
-                                logger.Warn(iText.IO.LogMessageConstant.FONT_SUBSET_ISSUE);
+                                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
+                                //logger.Warn(iText.IO.LogMessageConstant.FONT_SUBSET_ISSUE);
                                 ttfBytes = null;
                             }
                         }
@@ -798,7 +799,7 @@ namespace iText.Kernel.Font {
         /// <param name="glyphIds">glyph ids used in from the font</param>
         /// <returns>fully initialized CIDFont</returns>
         [System.ObsoleteAttribute(@"use GetCidFont(iText.Kernel.Pdf.PdfDictionary, System.String, bool) instead.")]
-        protected internal virtual PdfDictionary GetCidFontType2(TrueTypeFont ttf, PdfDictionary fontDescriptor, String
+        public virtual PdfDictionary GetCidFontType2(TrueTypeFont ttf, PdfDictionary fontDescriptor, String
              fontName, int[] glyphIds) {
             return GetCidFont(fontDescriptor, fontName, ttf != null && !ttf.IsCff());
         }
@@ -811,7 +812,7 @@ namespace iText.Kernel.Font {
         /// otherwise false, i.e. CIDFontType0 (Type1/CFF glyphs)
         /// </param>
         /// <returns>fully initialized CIDFont</returns>
-        protected internal virtual PdfDictionary GetCidFont(PdfDictionary fontDescriptor, String fontName, bool isType2
+        public virtual PdfDictionary GetCidFont(PdfDictionary fontDescriptor, String fontName, bool isType2
             ) {
             PdfDictionary cidFont = new PdfDictionary();
             MarkObjectAsIndirect(cidFont);
@@ -840,8 +841,8 @@ namespace iText.Kernel.Font {
             }
             else {
                 //The implementation should be realized in DEVSIX-2730
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
-                logger.Warn("Vertical writing has not been implemented yet.");
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType0Font));
+                //logger.Warn("Vertical writing has not been implemented yet.");
             }
             return cidFont;
         }
@@ -947,7 +948,7 @@ namespace iText.Kernel.Font {
         /// </param>
         [System.ObsoleteAttribute(@"use iText.IO.Font.TrueTypeFont.UpdateUsedGlyphs(Java.Util.SortedSet{E}, bool, System.Collections.Generic.IList{E}) instead."
             )]
-        protected internal virtual void AddRangeUni(TrueTypeFont ttf, ICollection<int> longTag) {
+        public virtual void AddRangeUni(TrueTypeFont ttf, ICollection<int> longTag) {
             ttf.UpdateUsedGlyphs((SortedSet<int>)longTag, subset, subsetRanges);
         }
 

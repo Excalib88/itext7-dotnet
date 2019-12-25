@@ -457,11 +457,11 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfDictionary();
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfDictionary dictionary = (iText.Kernel.Pdf.PdfDictionary)from;
             foreach (KeyValuePair<PdfName, PdfObject> entry in dictionary.map) {
@@ -470,7 +470,7 @@ namespace iText.Kernel.Pdf {
         }
 
         /// <summary>Release content of PdfDictionary.</summary>
-        protected internal virtual void ReleaseContent() {
+        public virtual void ReleaseContent() {
             map = null;
         }
     }

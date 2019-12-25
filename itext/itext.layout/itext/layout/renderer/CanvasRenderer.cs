@@ -41,7 +41,8 @@ source product.
 For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel.Pdf.Tagutils;
 using iText.Layout;
 using iText.Layout.Layout;
@@ -49,7 +50,7 @@ using iText.Layout.Properties;
 
 namespace iText.Layout.Renderer {
     public class CanvasRenderer : RootRenderer {
-        protected internal Canvas canvas;
+        public Canvas canvas;
 
         /// <summary>Creates a CanvasRenderer from its corresponding layout object.</summary>
         /// <remarks>
@@ -88,8 +89,8 @@ namespace iText.Layout.Renderer {
 
         public override void AddChild(IRenderer renderer) {
             if (true.Equals(GetPropertyAsBoolean(Property.FULL))) {
-                LogManager.GetLogger(typeof(iText.Layout.Renderer.CanvasRenderer)).Warn("Canvas is already full. Element will be skipped."
-                    );
+                //LogManager.GetLogger(typeof(iText.Layout.Renderer.CanvasRenderer)).Warn("Canvas is already full. Element will be skipped."
+                //    );
             }
             else {
                 base.AddChild(renderer);
@@ -97,7 +98,7 @@ namespace iText.Layout.Renderer {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override void FlushSingleRenderer(IRenderer resultRenderer) {
+        public override void FlushSingleRenderer(IRenderer resultRenderer) {
             Transform transformProp = resultRenderer.GetProperty<Transform>(Property.TRANSFORM);
             if (!waitingDrawingElements.Contains(resultRenderer)) {
                 ProcessWaitingDrawing(resultRenderer, transformProp, waitingDrawingElements);
@@ -130,7 +131,7 @@ namespace iText.Layout.Renderer {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override LayoutArea UpdateCurrentArea(LayoutResult overflowResult) {
+        public override LayoutArea UpdateCurrentArea(LayoutResult overflowResult) {
             if (currentArea == null) {
                 int pageNumber = canvas.IsCanvasOfPage() ? canvas.GetPdfDocument().GetPageNumber(canvas.GetPage()) : 0;
                 currentArea = new RootLayoutArea(pageNumber, canvas.GetRootArea().Clone());

@@ -65,7 +65,7 @@ namespace iText.Svg.Renderers.Impl {
         internal override void PreDraw(SvgDrawContext context) {
         }
 
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             PdfCanvas currentCanvas = context.GetCurrentCanvas();
             foreach (ISvgNodeRenderer child in GetChildren()) {
                 currentCanvas.SaveState();

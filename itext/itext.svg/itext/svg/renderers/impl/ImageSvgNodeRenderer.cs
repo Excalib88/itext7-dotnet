@@ -61,7 +61,7 @@ namespace iText.Svg.Renderers.Impl {
             return copy;
         }
 
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             ResourceResolver resourceResolver = context.GetResourceResolver();
             if (resourceResolver == null || this.attributesAndStyles == null) {
                 return;

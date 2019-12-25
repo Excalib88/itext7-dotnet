@@ -49,15 +49,15 @@ using iText.IO.Util;
 namespace iText.IO.Font.Otf {
     /// <author><a href="mailto:paawak@gmail.com">Palash Ray</a></author>
     public abstract class OpenTypeFontTableReader {
-        protected internal readonly RandomAccessFileOrArray rf;
+        public readonly RandomAccessFileOrArray rf;
 
-        protected internal readonly int tableLocation;
+        public readonly int tableLocation;
 
-        protected internal IList<OpenTableLookup> lookupList;
+        public IList<OpenTableLookup> lookupList;
 
-        protected internal OpenTypeScript scriptsType;
+        public OpenTypeScript scriptsType;
 
-        protected internal OpenTypeFeature featuresType;
+        public OpenTypeFeature featuresType;
 
         private readonly IDictionary<int, Glyph> indexGlyphMap;
 
@@ -65,7 +65,7 @@ namespace iText.IO.Font.Otf {
 
         private readonly int unitsPerEm;
 
-        protected internal OpenTypeFontTableReader(RandomAccessFileOrArray rf, int tableLocation, OpenTypeGdefTableReader
+        public OpenTypeFontTableReader(RandomAccessFileOrArray rf, int tableLocation, OpenTypeGdefTableReader
              gdef, IDictionary<int, Glyph> indexGlyphMap, int unitsPerEm) {
             this.rf = rf;
             this.tableLocation = tableLocation;
@@ -179,34 +179,34 @@ namespace iText.IO.Font.Otf {
             return languageRecord;
         }
 
-        protected internal abstract OpenTableLookup ReadLookupTable(int lookupType, int lookupFlag, int[] subTableLocations
+        public abstract OpenTableLookup ReadLookupTable(int lookupType, int lookupFlag, int[] subTableLocations
             );
 
-        protected internal OtfClass ReadClassDefinition(int classLocation) {
+        public OtfClass ReadClassDefinition(int classLocation) {
             return OtfClass.Create(rf, classLocation);
         }
 
-        protected internal int[] ReadUShortArray(int size, int location) {
+        public int[] ReadUShortArray(int size, int location) {
             return OtfReadCommon.ReadUShortArray(rf, size, location);
         }
 
-        protected internal int[] ReadUShortArray(int size) {
+        public int[] ReadUShortArray(int size) {
             return OtfReadCommon.ReadUShortArray(rf, size);
         }
 
-        protected internal virtual void ReadCoverages(int[] locations, IList<ICollection<int>> coverage) {
+        public virtual void ReadCoverages(int[] locations, IList<ICollection<int>> coverage) {
             OtfReadCommon.ReadCoverages(rf, locations, coverage);
         }
 
-        protected internal IList<int> ReadCoverageFormat(int coverageLocation) {
+        public IList<int> ReadCoverageFormat(int coverageLocation) {
             return OtfReadCommon.ReadCoverageFormat(rf, coverageLocation);
         }
 
-        protected internal virtual SubstLookupRecord[] ReadSubstLookupRecords(int substCount) {
+        public virtual SubstLookupRecord[] ReadSubstLookupRecords(int substCount) {
             return OtfReadCommon.ReadSubstLookupRecords(rf, substCount);
         }
 
-        protected internal virtual TagAndLocation[] ReadTagAndLocations(int baseLocation) {
+        public virtual TagAndLocation[] ReadTagAndLocations(int baseLocation) {
             int count = rf.ReadUnsignedShort();
             TagAndLocation[] tagslLocs = new TagAndLocation[count];
             for (int k = 0; k < count; ++k) {

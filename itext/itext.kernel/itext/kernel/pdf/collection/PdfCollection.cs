@@ -141,7 +141,7 @@ namespace iText.Kernel.Pdf.Collection {
             return new PdfCollectionSort(GetPdfObject().GetAsDictionary(PdfName.Sort));
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

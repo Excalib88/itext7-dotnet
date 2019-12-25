@@ -72,13 +72,13 @@ namespace iText.Kernel.Pdf {
             (PdfName.ESIC, PdfName.Pdf_Version_1_7, 5);
 
         /// <summary>The prefix used in the Extensions dictionary added to the Catalog.</summary>
-        protected internal PdfName prefix;
+        public PdfName prefix;
 
         /// <summary>The base version.</summary>
-        protected internal PdfName baseVersion;
+        public PdfName baseVersion;
 
         /// <summary>The extension level within the base version.</summary>
-        protected internal int extensionLevel;
+        public int extensionLevel;
 
         /// <summary>Creates a PdfDeveloperExtension object.</summary>
         /// <param name="prefix">the prefix referring to the developer</param>

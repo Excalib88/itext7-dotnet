@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="resources\default.css">
+      <LogicalName>iText.Html2Pdf.default.css</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeMono.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeMono.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeMonoBold.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeMonoBold.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeMonoBoldOblique.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeMonoBoldOblique.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeMonoOblique.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeMonoOblique.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSans.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSans.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSansBold.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSansBold.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSansBoldOblique.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSansBoldOblique.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSansOblique.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSansOblique.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSerif.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSerif.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSerifBold.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSerifBold.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSerifBoldItalic.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSerifBoldItalic.ttf</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\font\FreeSerifItalic.ttf">
+      <LogicalName>iText.Html2Pdf.font.FreeSerifItalic.ttf</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\itext.forms\itext.forms.csproj" />
+    <ProjectReference Include="..\itext.io\itext.io.csproj" />
+    <ProjectReference Include="..\itext.svg\itext.svg.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Common.Logging.Core" Version="3.4.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>

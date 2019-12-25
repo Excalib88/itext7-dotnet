@@ -46,21 +46,21 @@ using System.Text;
 
 namespace iText.IO.Font.Cmap {
     public class CMapObject {
-        protected internal const int STRING = 1;
+        public const int STRING = 1;
 
-        protected internal const int HEX_STRING = 2;
+        public const int HEX_STRING = 2;
 
-        protected internal const int NAME = 3;
+        public const int NAME = 3;
 
-        protected internal const int NUMBER = 4;
+        public const int NUMBER = 4;
 
-        protected internal const int LITERAL = 5;
+        public const int LITERAL = 5;
 
-        protected internal const int ARRAY = 6;
+        public const int ARRAY = 6;
 
-        protected internal const int DICTIONARY = 7;
+        public const int DICTIONARY = 7;
 
-        protected internal const int TOKEN = 8;
+        public const int TOKEN = 8;
 
         private int type;
 

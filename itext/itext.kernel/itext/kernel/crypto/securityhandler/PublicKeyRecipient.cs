@@ -49,7 +49,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
 
         private int permission = 0;
 
-        protected internal byte[] cms = null;
+        public byte[] cms = null;
 
         public PublicKeyRecipient(X509Certificate certificate, int permission) {
             this.certificate = certificate;
@@ -64,11 +64,11 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return permission;
         }
 
-        protected internal virtual void SetCms(byte[] cms) {
+        public virtual void SetCms(byte[] cms) {
             this.cms = cms;
         }
 
-        protected internal virtual byte[] GetCms() {
+        public virtual byte[] GetCms() {
             return cms;
         }
     }

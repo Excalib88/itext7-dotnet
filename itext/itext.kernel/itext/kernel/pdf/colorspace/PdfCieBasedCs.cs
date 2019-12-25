@@ -69,11 +69,11 @@ namespace iText.Kernel.Pdf.Colorspace {
             base.Flush();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
-        protected internal PdfCieBasedCs(PdfArray pdfObject)
+        public PdfCieBasedCs(PdfArray pdfObject)
             : base(pdfObject) {
         }
 

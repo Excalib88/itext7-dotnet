@@ -45,7 +45,7 @@ using iText.Kernel.Counter.Event;
 
 namespace iText.Kernel.Pdf {
     public class DocumentProperties {
-        protected internal IMetaInfo metaInfo = null;
+        public IMetaInfo metaInfo = null;
 
         public DocumentProperties() {
         }

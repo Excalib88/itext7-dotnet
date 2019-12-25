@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel;
 using iText.Kernel.Pdf;
 
@@ -152,8 +153,8 @@ namespace iText.Kernel.Pdf.Filespec {
 
         public static PdfFileSpec Wrap(PdfDictionary dictionary) {
             if (!PdfName.EncryptedPayload.Equals(dictionary.GetAsName(PdfName.AFRelationship))) {
-                LogManager.GetLogger(typeof(PdfEncryptedPayloadFileSpecFactory)).Error(iText.IO.LogMessageConstant.ENCRYPTED_PAYLOAD_FILE_SPEC_SHALL_HAVE_AFRELATIONSHIP_FILED_EQUAL_TO_ENCRYPTED_PAYLOAD
-                    );
+                //LogManager.GetLogger(typeof(PdfEncryptedPayloadFileSpecFactory)).Error(iText.IO.LogMessageConstant.ENCRYPTED_PAYLOAD_FILE_SPEC_SHALL_HAVE_AFRELATIONSHIP_FILED_EQUAL_TO_ENCRYPTED_PAYLOAD
+                    //);
             }
             PdfDictionary ef = dictionary.GetAsDictionary(PdfName.EF);
             if (ef == null || (ef.GetAsStream(PdfName.F) == null) && (ef.GetAsStream(PdfName.UF) == null)) {
@@ -185,7 +186,7 @@ namespace iText.Kernel.Pdf.Filespec {
         }
 
         public static String GenerateFileDisplay(PdfEncryptedPayload ep) {
-            return ep.GetSubtype().GetValue() + "Protected.pdf";
+            return ep.GetSubtype().GetValue() + "public.pdf";
         }
 
         private static PdfFileSpec AddEncryptedPayloadDictionary(PdfFileSpec fs, PdfEncryptedPayload ep) {

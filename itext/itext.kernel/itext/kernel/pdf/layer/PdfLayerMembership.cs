@@ -178,11 +178,11 @@ namespace iText.Kernel.Pdf.Layer {
             return GetPdfObject().GetIndirectReference();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
-        protected internal virtual PdfDocument GetDocument() {
+        public virtual PdfDocument GetDocument() {
             return GetPdfObject().GetIndirectReference().GetDocument();
         }
     }

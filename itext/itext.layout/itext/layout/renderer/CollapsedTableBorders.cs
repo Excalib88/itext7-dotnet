@@ -233,7 +233,7 @@ namespace iText.Layout.Renderer {
         }
 
         //endregion
-        protected internal override void BuildBordersArrays(CellRenderer cell, int row, int col, int[] rowspansToDeduct
+        public override void BuildBordersArrays(CellRenderer cell, int row, int col, int[] rowspansToDeduct
             ) {
             // We should check if the row number is less than horizontal borders array size. It can happen if the cell with
             // big rowspan doesn't fit current area and is going to be placed partial.
@@ -306,7 +306,7 @@ namespace iText.Layout.Renderer {
             BuildBordersArrays(cell, row, false);
         }
 
-        protected internal virtual void BuildBordersArrays(CellRenderer cell, int row, bool isNeighbourCell) {
+        public virtual void BuildBordersArrays(CellRenderer cell, int row, bool isNeighbourCell) {
             int colspan = (int)cell.GetPropertyAsInteger(Property.COLSPAN);
             int rowspan = (int)cell.GetPropertyAsInteger(Property.ROWSPAN);
             int colN = ((Cell)cell.GetModelElement()).GetCol();
@@ -335,7 +335,7 @@ namespace iText.Layout.Renderer {
 
         // endregion
         // region lowlevel
-        protected internal virtual bool CheckAndReplaceBorderInArray(IList<IList<Border>> borderArray, int i, int 
+        public virtual bool CheckAndReplaceBorderInArray(IList<IList<Border>> borderArray, int i, int 
             j, Border borderToAdd, bool hasPriority) {
             //        if (borderArray.size() <= i) {
             //            for (int count = borderArray.size(); count <= i; count++) {
@@ -380,7 +380,7 @@ namespace iText.Layout.Renderer {
 
         // endregion
         // region draw
-        protected internal override TableBorders DrawHorizontalBorder(int i, float startX, float y1, PdfCanvas canvas
+        public override TableBorders DrawHorizontalBorder(int i, float startX, float y1, PdfCanvas canvas
             , float[] countedColumnWidth) {
             IList<Border> borders = GetHorizontalBorder(startRow + /*- largeTableIndexOffset*/ i);
             float x1 = startX;
@@ -436,7 +436,7 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders DrawVerticalBorder(int i, float startY, float x1, PdfCanvas canvas
+        public override TableBorders DrawVerticalBorder(int i, float startY, float x1, PdfCanvas canvas
             , IList<float> heights) {
             IList<Border> borders = GetVerticalBorder(i);
             float y1 = startY;
@@ -507,14 +507,14 @@ namespace iText.Layout.Renderer {
 
         // endregion
         // region occupation
-        protected internal override TableBorders ApplyLeftAndRightTableBorder(Rectangle layoutBox, bool reverse) {
+        public override TableBorders ApplyLeftAndRightTableBorder(Rectangle layoutBox, bool reverse) {
             if (null != layoutBox) {
                 layoutBox.ApplyMargins(0, rightBorderMaxWidth / 2, 0, leftBorderMaxWidth / 2, reverse);
             }
             return this;
         }
 
-        protected internal override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
+        public override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
              isEmpty, bool force, bool reverse) {
             if (!isEmpty) {
                 return ApplyTopTableBorder(occupiedBox, layoutBox, reverse);
@@ -529,7 +529,7 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
+        public override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
             , bool isEmpty, bool force, bool reverse) {
             if (!isEmpty) {
                 return ApplyBottomTableBorder(occupiedBox, layoutBox, reverse);
@@ -544,7 +544,7 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
+        public override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
              reverse) {
             float topIndent = (reverse ? -1 : 1) * GetMaxTopWidth();
             layoutBox.DecreaseHeight(topIndent / 2);
@@ -552,7 +552,7 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
+        public override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
             , bool reverse) {
             float bottomTableBorderWidth = (reverse ? -1 : 1) * GetMaxBottomWidth();
             layoutBox.DecreaseHeight(bottomTableBorderWidth / 2);
@@ -560,19 +560,19 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders ApplyCellIndents(Rectangle box, float topIndent, float rightIndent
+        public override TableBorders ApplyCellIndents(Rectangle box, float topIndent, float rightIndent
             , float bottomIndent, float leftIndent, bool reverse) {
             box.ApplyMargins(topIndent / 2, rightIndent / 2, bottomIndent / 2, leftIndent / 2, false);
             return this;
         }
 
-        protected internal override float GetCellVerticalAddition(float[] indents) {
+        public override float GetCellVerticalAddition(float[] indents) {
             return indents[0] / 2 + indents[2] / 2;
         }
 
         // endregion
         // region update, footer/header
-        protected internal override TableBorders UpdateBordersOnNewPage(bool isOriginalNonSplitRenderer, bool isFooterOrHeader
+        public override TableBorders UpdateBordersOnNewPage(bool isOriginalNonSplitRenderer, bool isFooterOrHeader
             , TableRenderer currentRenderer, TableRenderer headerRenderer, TableRenderer footerRenderer) {
             if (!isFooterOrHeader) {
                 // collapse all cell borders
@@ -604,19 +604,19 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders SkipFooter(Border[] borders) {
+        public override TableBorders SkipFooter(Border[] borders) {
             SetTableBoundingBorders(borders);
             SetBottomBorderCollapseWith(null);
             return this;
         }
 
-        protected internal override TableBorders SkipHeader(Border[] borders) {
+        public override TableBorders SkipHeader(Border[] borders) {
             SetTableBoundingBorders(borders);
             SetTopBorderCollapseWith(null);
             return this;
         }
 
-        protected internal override TableBorders CollapseTableWithFooter(TableBorders footerBordersHandler, bool hasContent
+        public override TableBorders CollapseTableWithFooter(TableBorders footerBordersHandler, bool hasContent
             ) {
             ((iText.Layout.Renderer.CollapsedTableBorders)footerBordersHandler).SetTopBorderCollapseWith(hasContent ? 
                 GetLastHorizontalBorder() : GetTopBorderCollapseWith());
@@ -624,7 +624,7 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders CollapseTableWithHeader(TableBorders headerBordersHandler, bool updateBordersHandler
+        public override TableBorders CollapseTableWithHeader(TableBorders headerBordersHandler, bool updateBordersHandler
             ) {
             ((iText.Layout.Renderer.CollapsedTableBorders)headerBordersHandler).SetBottomBorderCollapseWith(GetHorizontalBorder
                 (startRow));
@@ -634,7 +634,7 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders FixHeaderOccupiedArea(Rectangle occupiedBox, Rectangle layoutBox) {
+        public override TableBorders FixHeaderOccupiedArea(Rectangle occupiedBox, Rectangle layoutBox) {
             float topBorderMaxWidth = GetMaxTopWidth();
             layoutBox.IncreaseHeight(topBorderMaxWidth);
             occupiedBox.MoveUp(topBorderMaxWidth).DecreaseHeight(topBorderMaxWidth);

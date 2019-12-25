@@ -50,7 +50,7 @@ using iText.Kernel.Pdf.Function;
 
 namespace iText.Kernel.Pdf.Colorspace {
     public abstract class PdfSpecialCs : PdfColorSpace {
-        protected internal PdfSpecialCs(PdfArray pdfObject)
+        public PdfSpecialCs(PdfArray pdfObject)
             : base(pdfObject) {
         }
 
@@ -74,7 +74,7 @@ namespace iText.Kernel.Pdf.Colorspace {
             base.Flush();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
@@ -145,7 +145,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         }
 
         public class DeviceN : PdfSpecialCs {
-            protected internal int numOfComponents = 0;
+            public int numOfComponents = 0;
 
             public DeviceN(PdfArray pdfObject)
                 : base(pdfObject) {
@@ -176,7 +176,7 @@ namespace iText.Kernel.Pdf.Colorspace {
                 return ((PdfArray)GetPdfObject()).GetAsArray(1);
             }
 
-            protected internal static PdfArray GetDeviceNCsArray(PdfArray names, PdfObject alternateSpace, PdfObject tintTransform
+            public static PdfArray GetDeviceNCsArray(PdfArray names, PdfObject alternateSpace, PdfObject tintTransform
                 ) {
                 PdfArray deviceN = new PdfArray();
                 deviceN.Add(PdfName.DeviceN);
@@ -206,7 +206,7 @@ namespace iText.Kernel.Pdf.Colorspace {
                 }
             }
 
-            protected internal static PdfArray GetNChannelCsArray(PdfArray names, PdfObject alternateSpace, PdfObject 
+            public static PdfArray GetNChannelCsArray(PdfArray names, PdfObject alternateSpace, PdfObject 
                 tintTransform, PdfDictionary attributes) {
                 PdfArray nChannel = GetDeviceNCsArray(names, alternateSpace, tintTransform);
                 nChannel.Add(attributes);
@@ -215,7 +215,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         }
 
         public class Pattern : PdfColorSpace {
-            protected internal override bool IsWrappedObjectMustBeIndirect() {
+            public override bool IsWrappedObjectMustBeIndirect() {
                 return false;
             }
 
@@ -223,7 +223,7 @@ namespace iText.Kernel.Pdf.Colorspace {
                 : base(PdfName.Pattern) {
             }
 
-            protected internal Pattern(PdfObject pdfObj)
+            public Pattern(PdfObject pdfObj)
                 : base(pdfObj) {
             }
 
@@ -253,7 +253,7 @@ namespace iText.Kernel.Pdf.Colorspace {
                 base.Flush();
             }
 
-            protected internal override bool IsWrappedObjectMustBeIndirect() {
+            public override bool IsWrappedObjectMustBeIndirect() {
                 return true;
             }
 

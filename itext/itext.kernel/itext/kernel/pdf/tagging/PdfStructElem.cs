@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel;
 using iText.Kernel.Pdf;
@@ -507,8 +508,8 @@ namespace iText.Kernel.Pdf.Tagging {
         /// <param name="fs">file specification dictionary of associated file</param>
         public virtual void AddAssociatedFile(String description, PdfFileSpec fs) {
             if (null == ((PdfDictionary)fs.GetPdfObject()).Get(PdfName.AFRelationship)) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagging.PdfStructElem));
-                logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagging.PdfStructElem));
+                //logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
             }
             if (null != description) {
                 GetDocument().GetCatalog().GetNameTree(PdfName.EmbeddedFiles).AddEntry(description, fs.GetPdfObject());
@@ -609,11 +610,11 @@ namespace iText.Kernel.Pdf.Tagging {
             }
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
-        protected internal virtual PdfDocument GetDocument() {
+        public virtual PdfDocument GetDocument() {
             PdfDictionary structDict = GetPdfObject();
             PdfIndirectReference indRef = structDict.GetIndirectReference();
             if (indRef == null && structDict.GetAsDictionary(PdfName.P) != null) {

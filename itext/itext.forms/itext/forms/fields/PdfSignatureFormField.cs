@@ -48,15 +48,15 @@ using iText.Kernel.Pdf.Annot;
 namespace iText.Forms.Fields {
     /// <summary>An AcroForm field containing signature data.</summary>
     public class PdfSignatureFormField : PdfFormField {
-        protected internal PdfSignatureFormField(PdfDocument pdfDocument)
+        public PdfSignatureFormField(PdfDocument pdfDocument)
             : base(pdfDocument) {
         }
 
-        protected internal PdfSignatureFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
+        public PdfSignatureFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
             : base(widget, pdfDocument) {
         }
 
-        protected internal PdfSignatureFormField(PdfDictionary pdfObject)
+        public PdfSignatureFormField(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

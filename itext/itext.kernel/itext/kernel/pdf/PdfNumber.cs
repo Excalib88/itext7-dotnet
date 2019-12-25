@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Source;
 using iText.IO.Util;
 
@@ -146,23 +147,23 @@ namespace iText.Kernel.Pdf {
         public override int GetHashCode() {
             if (changed) {
                 //if the instance was modified, hashCode also will be changed, it may cause inconsistency.
-                ILog logger = LogManager.GetLogger(typeof(PdfReader));
-                logger.Warn(iText.IO.LogMessageConstant.CALCULATE_HASHCODE_FOR_MODIFIED_PDFNUMBER);
+                //ILog logger = LogManager.GetLogger(typeof(PdfReader));
+                //logger.Warn(iText.IO.LogMessageConstant.CALCULATE_HASHCODE_FOR_MODIFIED_PDFNUMBER);
                 changed = false;
             }
             long hash = JavaUtil.DoubleToLongBits(value);
             return (int)(hash ^ ((long)(((ulong)hash) >> 32)));
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfNumber();
         }
 
-        protected internal virtual bool IsDoubleNumber() {
+        public virtual bool IsDoubleNumber() {
             return isDouble;
         }
 
-        protected internal override void GenerateContent() {
+        public override void GenerateContent() {
             if (isDouble) {
                 content = ByteUtils.GetIsoBytes(value);
             }
@@ -171,7 +172,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual void GenerateValue() {
+        public virtual void GenerateValue() {
             try {
                 value = Double.Parse(iText.IO.Util.JavaUtil.GetStringForBytes(content, iText.IO.Util.EncodingUtil.ISO_8859_1
                     ), System.Globalization.CultureInfo.InvariantCulture);
@@ -182,7 +183,7 @@ namespace iText.Kernel.Pdf {
             isDouble = true;
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfNumber number = (iText.Kernel.Pdf.PdfNumber)from;
             value = number.value;

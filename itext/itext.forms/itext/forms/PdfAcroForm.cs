@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Forms.Fields;
 using iText.Forms.Xfa;
 using iText.IO.Util;
@@ -107,17 +108,17 @@ namespace iText.Forms {
         /// fields themselves, or by the PDF viewer application. Default is
         /// <c>true</c>.
         /// </remarks>
-        protected internal bool generateAppearance = true;
+        public bool generateAppearance = true;
 
         /// <summary>
         /// A map of field names and their associated
         /// <see cref="iText.Forms.Fields.PdfFormField">form field</see>
         /// objects.
         /// </summary>
-        protected internal IDictionary<String, PdfFormField> fields = new LinkedDictionary<String, PdfFormField>();
+        public IDictionary<String, PdfFormField> fields = new LinkedDictionary<String, PdfFormField>();
 
         /// <summary>The PdfDocument to which the PdfAcroForm belongs.</summary>
-        protected internal PdfDocument document;
+        public PdfDocument document;
 
         private PdfDictionary defaultResources;
 
@@ -125,7 +126,7 @@ namespace iText.Forms {
 
         private XfaForm xfaForm;
 
-        private static ILog logger = LogManager.GetLogger(typeof(iText.Forms.PdfAcroForm));
+        //private static ILog logger = LogManager.GetLogger(typeof(iText.Forms.PdfAcroForm));
 
         /// <summary>Creates a PdfAcroForm as a wrapper of a dictionary.</summary>
         /// <remarks>
@@ -829,7 +830,7 @@ namespace iText.Forms {
                     }
                 }
                 else {
-                    logger.Error(iText.IO.LogMessageConstant.N_ENTRY_IS_REQUIRED_FOR_APPEARANCE_DICTIONARY);
+                    //logger.Error(iText.IO.LogMessageConstant.N_ENTRY_IS_REQUIRED_FOR_APPEARANCE_DICTIONARY);
                 }
                 PdfArray fFields = GetFields();
                 fFields.Remove(fieldObject);
@@ -996,17 +997,17 @@ namespace iText.Forms {
         /// <see cref="iText.Kernel.Pdf.PdfArray"/>
         /// of field dictionaries
         /// </returns>
-        protected internal virtual PdfArray GetFields() {
+        public virtual PdfArray GetFields() {
             PdfArray fields = GetPdfObject().GetAsArray(PdfName.Fields);
             if (fields == null) {
-                logger.Warn(iText.IO.LogMessageConstant.NO_FIELDS_IN_ACROFORM);
+                //logger.Warn(iText.IO.LogMessageConstant.NO_FIELDS_IN_ACROFORM);
                 fields = new PdfArray();
                 GetPdfObject().Put(PdfName.Fields, fields);
             }
             return fields;
         }
 
-        protected override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
 
@@ -1015,7 +1016,7 @@ namespace iText.Forms {
             int index = 1;
             foreach (PdfObject field in array) {
                 if (field.IsFlushed()) {
-                    logger.Info(iText.IO.LogMessageConstant.FORM_FIELD_WAS_FLUSHED);
+                    //logger.Info(iText.IO.LogMessageConstant.FORM_FIELD_WAS_FLUSHED);
                     continue;
                 }
                 PdfFormField formField = PdfFormField.MakeFormField(field, document);

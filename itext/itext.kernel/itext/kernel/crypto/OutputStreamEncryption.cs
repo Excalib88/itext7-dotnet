@@ -46,7 +46,7 @@ using System.IO;
 
 namespace iText.Kernel.Crypto {
 	public abstract class OutputStreamEncryption : Stream {
-		protected internal Stream @out;
+		public Stream @out;
 
 		private byte[] sb = new byte[1];
 
@@ -54,28 +54,28 @@ namespace iText.Kernel.Crypto {
         /// Creates a new instance of <see cref="OutputStreamEncryption"/>
         /// </summary>
         /// <param name="out">the target <see cref="Stream"/> to write encrypted content to</param>
-        protected internal OutputStreamEncryption(Stream @out) {
+        public OutputStreamEncryption(Stream @out) {
 			this.@out = @out;
 		}
 
-		/// <summary>
-		/// Closes this output stream and releases any system resources
-		/// associated with this stream.
-		/// </summary>
-		/// <remarks>
-		/// Closes this output stream and releases any system resources
-		/// associated with this stream. The general contract of
-		/// <c>close</c>
-		/// is that it closes the output stream. A closed stream cannot perform
-		/// output operations and cannot be reopened.
-		/// <p>
-		/// The
-		/// <c>close</c>
-		/// method of
-		/// <c>OutputStream</c>
-		/// does nothing.
-		/// </remarks>
-	    protected override void Dispose(bool disposing) {
+        /// <summary>
+        /// Closes this output stream and releases any system resources
+        /// associated with this stream.
+        /// </summary>
+        /// <remarks>
+        /// Closes this output stream and releases any system resources
+        /// associated with this stream. The general contract of
+        /// <c>close</c>
+        /// is that it closes the output stream. A closed stream cannot perform
+        /// output operations and cannot be reopened.
+        /// <p>
+        /// The
+        /// <c>close</c>
+        /// method of
+        /// <c>OutputStream</c>
+        /// does nothing.
+        /// </remarks>
+        protected override void Dispose(bool disposing) {
 	        if (disposing) {
 	            Finish();
 	            @out.Dispose();

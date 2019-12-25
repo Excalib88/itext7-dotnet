@@ -68,7 +68,7 @@ namespace iText.Svg.Renderers.Impl {
         /// the object that knows the place to draw this element and
         /// maintains its state
         /// </param>
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             if (GetChildren().Count > 0) {
                 // if branch has no children, don't do anything
                 PdfStream stream = new PdfStream();
@@ -296,7 +296,7 @@ namespace iText.Svg.Renderers.Impl {
         /// <see cref="AbstractBranchSvgNodeRenderer"/>
         /// </summary>
         /// <param name="deepCopy">renderer to add copies of children to</param>
-        protected internal void DeepCopyChildren(AbstractBranchSvgNodeRenderer deepCopy) {
+        public void DeepCopyChildren(AbstractBranchSvgNodeRenderer deepCopy) {
             foreach (ISvgNodeRenderer child in children) {
                 ISvgNodeRenderer newChild = child.CreateDeepCopy();
                 child.SetParent(deepCopy);

@@ -273,13 +273,13 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.GetValidOptions()"/>
-        protected internal override int GetValidOptions() {
+        public override int GetValidOptions() {
             return URI | HAS_QUALIFIERS | QUALIFIER | HAS_LANGUAGE | HAS_TYPE | STRUCT | ARRAY | ARRAY_ORDERED | ARRAY_ALTERNATE
                  | ARRAY_ALT_TEXT | SCHEMA_NODE | SEPARATE_NODE;
         }
 
         /// <seealso cref="Options.DefineOptionName(int)"/>
-        protected internal override String DefineOptionName(int option) {
+        public override String DefineOptionName(int option) {
             switch (option) {
                 case URI: {
                     return "URI";
@@ -336,7 +336,7 @@ namespace iText.Kernel.XMP.Options {
         /// and URI cannot be a struct.
         /// </summary>
         /// <param name="options">the bitmask to check.</param>
-        protected internal override void AssertConsistency(int options) {
+        public override void AssertConsistency(int options) {
             if ((options & STRUCT) > 0 && (options & ARRAY) > 0) {
                 throw new XMPException("IsStruct and IsArray options are mutually exclusive", XMPError.BADOPTIONS);
             }

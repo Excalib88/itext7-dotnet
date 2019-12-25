@@ -124,7 +124,7 @@ namespace iText.IO.Image {
         /// <param name="components">1,3 or 4 for GrayScale, RGB and CMYK</param>
         /// <param name="bpc">bits per component. Must be 1,2,4 or 8</param>
         /// <param name="data">the image data</param>
-        protected internal static void UpdateRawImageParameters(RawImageData image, int width, int height, int components
+        public static void UpdateRawImageParameters(RawImageData image, int width, int height, int components
             , int bpc, byte[] data) {
             image.SetHeight(height);
             image.SetWidth(width);
@@ -139,7 +139,7 @@ namespace iText.IO.Image {
             image.data = data;
         }
 
-        protected internal static void UpdateRawImageParameters(RawImageData image, int width, int height, int components
+        public static void UpdateRawImageParameters(RawImageData image, int width, int height, int components
             , int bpc, byte[] data, int[] transparency) {
             if (transparency != null && transparency.Length != components * 2) {
                 throw new iText.IO.IOException(iText.IO.IOException.TransparencyLengthMustBeEqualTo2WithCcittImages);
@@ -155,7 +155,7 @@ namespace iText.IO.Image {
             }
         }
 
-        protected internal static void UpdateRawImageParameters(RawImageData image, int width, int height, bool reverseBits
+        public static void UpdateRawImageParameters(RawImageData image, int width, int height, bool reverseBits
             , int typeCCITT, int parameters, byte[] data, int[] transparency) {
             if (transparency != null && transparency.Length != 2) {
                 throw new iText.IO.IOException(iText.IO.IOException.TransparencyLengthMustBeEqualTo2WithCcittImages);
@@ -164,7 +164,7 @@ namespace iText.IO.Image {
             image.SetTransparency(transparency);
         }
 
-        protected internal static void UpdateCcittImageParameters(RawImageData image, int width, int height, bool 
+        public static void UpdateCcittImageParameters(RawImageData image, int width, int height, bool 
             reverseBits, int typeCcitt, int parameters, byte[] data) {
             if (typeCcitt != RawImageData.CCITTG4 && typeCcitt != RawImageData.CCITTG3_1D && typeCcitt != RawImageData
                 .CCITTG3_2D) {

@@ -57,15 +57,15 @@ namespace iText.Forms.Fields {
 
         public static readonly int FF_RICH_TEXT = MakeFieldFlag(26);
 
-        protected internal PdfTextFormField(PdfDocument pdfDocument)
+        public PdfTextFormField(PdfDocument pdfDocument)
             : base(pdfDocument) {
         }
 
-        protected internal PdfTextFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
+        public PdfTextFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
             : base(widget, pdfDocument) {
         }
 
-        protected internal PdfTextFormField(PdfDictionary pdfObject)
+        public PdfTextFormField(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

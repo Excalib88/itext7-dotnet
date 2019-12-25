@@ -56,28 +56,28 @@ namespace iText.Layout.Borders {
         /// <summary>Creates a Border3D instance with the specified width.</summary>
         /// <remarks>Creates a Border3D instance with the specified width. Also sets the color to gray.</remarks>
         /// <param name="width">with of the border</param>
-        protected internal Border3D(float width)
+        public Border3D(float width)
             : this(GRAY, width) {
         }
 
         /// <summary>Creates a Border3D instance with the specified width and color.</summary>
         /// <param name="color">color of the border</param>
         /// <param name="width">width of the border</param>
-        protected internal Border3D(DeviceRgb color, float width)
+        public Border3D(DeviceRgb color, float width)
             : base(color, width) {
         }
 
         /// <summary>Creates a Border3D instance with the specified width and color.</summary>
         /// <param name="color">color of the border</param>
         /// <param name="width">width of the border</param>
-        protected internal Border3D(DeviceCmyk color, float width)
+        public Border3D(DeviceCmyk color, float width)
             : base(color, width) {
         }
 
         /// <summary>Creates a Border3D instance with the specified width and color.</summary>
         /// <param name="color">color of the border</param>
         /// <param name="width">width of the border</param>
-        protected internal Border3D(DeviceGray color, float width)
+        public Border3D(DeviceGray color, float width)
             : base(color, width) {
         }
 
@@ -85,7 +85,7 @@ namespace iText.Layout.Borders {
         /// <param name="color">color of the border</param>
         /// <param name="width">width of the border</param>
         /// <param name="opacity">opacity of the border</param>
-        protected internal Border3D(DeviceRgb color, float width, float opacity)
+        public Border3D(DeviceRgb color, float width, float opacity)
             : base(color, width, opacity) {
         }
 
@@ -93,7 +93,7 @@ namespace iText.Layout.Borders {
         /// <param name="color">color of the border</param>
         /// <param name="width">width of the border</param>
         /// <param name="opacity">opacity of the border</param>
-        protected internal Border3D(DeviceCmyk color, float width, float opacity)
+        public Border3D(DeviceCmyk color, float width, float opacity)
             : base(color, width, opacity) {
         }
 
@@ -101,7 +101,7 @@ namespace iText.Layout.Borders {
         /// <param name="color">color of the border</param>
         /// <param name="width">width of the border</param>
         /// <param name="opacity">opacity of the border</param>
-        protected internal Border3D(DeviceGray color, float width, float opacity)
+        public Border3D(DeviceGray color, float width, float opacity)
             : base(color, width, opacity) {
         }
 
@@ -205,7 +205,7 @@ namespace iText.Layout.Borders {
         /// color of the border darker and returns the result
         /// </summary>
         /// <returns>The darker color</returns>
-        protected internal virtual Color GetDarkerColor() {
+        public virtual Color GetDarkerColor() {
             Color color = this.transparentColor.GetColor();
             if (color is DeviceRgb) {
                 return DeviceRgb.MakeDarker((DeviceRgb)color);
@@ -233,7 +233,7 @@ namespace iText.Layout.Borders {
         /// <see cref="Side">side</see>
         /// the color will be applied on
         /// </param>
-        protected internal abstract void SetInnerHalfColor(PdfCanvas canvas, Border.Side side);
+        public abstract void SetInnerHalfColor(PdfCanvas canvas, Border.Side side);
 
         /// <summary>
         /// Sets the fill color for the outer half of
@@ -245,6 +245,6 @@ namespace iText.Layout.Borders {
         /// <see cref="Side">side</see>
         /// the color will be applied on
         /// </param>
-        protected internal abstract void SetOuterHalfColor(PdfCanvas canvas, Border.Side side);
+        public abstract void SetOuterHalfColor(PdfCanvas canvas, Border.Side side);
     }
 }

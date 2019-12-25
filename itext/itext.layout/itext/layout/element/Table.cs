@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel;
 using iText.Kernel.Pdf.Tagging;
 using iText.Kernel.Pdf.Tagutils;
@@ -73,7 +74,7 @@ namespace iText.Layout.Element {
     /// to the canvas, in order to reclaim memory that is locked up.
     /// </remarks>
     public class Table : BlockElement<iText.Layout.Element.Table>, ILargeElement {
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         private IList<Cell[]> rows;
 
@@ -824,8 +825,8 @@ namespace iText.Layout.Element {
                     return renderer;
                 }
                 else {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Element.Table));
-                    logger.Error("Invalid renderer for Table: must be inherited from TableRenderer");
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Element.Table));
+                    //logger.Error("Invalid renderer for Table: must be inherited from TableRenderer");
                 }
             }
             // In case of large tables, we only add to the renderer the cells from complete row groups,
@@ -1002,7 +1003,7 @@ namespace iText.Layout.Element {
             return tagProperties;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new TableRenderer(this);
         }
 
@@ -1030,7 +1031,7 @@ namespace iText.Layout.Element {
             return normalized;
         }
 
-        protected internal virtual IList<Table.RowRange> GetRowGroups() {
+        public virtual IList<Table.RowRange> GetRowGroups() {
             int lastRowWeCanFlush = currentColumn == columnWidths.Length ? currentRow : currentRow - 1;
             int[] cellBottomRows = new int[columnWidths.Length];
             int currentRowGroupStart = rowWindowStart;

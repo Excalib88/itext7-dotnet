@@ -73,23 +73,23 @@ namespace iText.IO.Font {
             return panose;
         }
 
-        protected internal virtual void SetTtfVersion(String ttfVersion) {
+        public virtual void SetTtfVersion(String ttfVersion) {
             this.ttfVersion = ttfVersion;
         }
 
-        protected internal virtual void SetTtfUniqueId(String ttfUniqueId) {
+        public virtual void SetTtfUniqueId(String ttfUniqueId) {
             this.ttfUniqueId = ttfUniqueId;
         }
 
-        protected internal virtual void SetType1Xuid(int? type1Xuid) {
+        public virtual void SetType1Xuid(int? type1Xuid) {
             this.type1Xuid = type1Xuid;
         }
 
-        protected internal virtual void SetPanose(byte[] panose) {
+        public virtual void SetPanose(byte[] panose) {
             this.panose = iText.IO.Util.JavaUtil.GetStringForBytes(panose);
         }
 
-        protected internal virtual void SetPanose(String panose) {
+        public virtual void SetPanose(String panose) {
             this.panose = panose;
         }
     }

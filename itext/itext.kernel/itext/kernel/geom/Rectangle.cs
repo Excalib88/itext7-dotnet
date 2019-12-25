@@ -53,13 +53,13 @@ namespace iText.Kernel.Geom {
     public class Rectangle {
         private static float EPS = 1e-4f;
 
-        protected internal float x;
+        public float x;
 
-        protected internal float y;
+        public float y;
 
-        protected internal float width;
+        public float width;
 
-        protected internal float height;
+        public float height;
 
         /// <summary>Creates new instance.</summary>
         /// <param name="x">the x coordinate of lower left point</param>

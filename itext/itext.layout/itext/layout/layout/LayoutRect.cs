@@ -46,13 +46,13 @@ namespace com.itextpdf.layout.layout
 	[System.ObsoleteAttribute(@"Will be removed in iText 7.2. Use iText.Kernel.Geom.Rectangle instead.")]
 	public class LayoutRect
 	{
-		protected internal float x;
+		public float x;
 
-		protected internal float y;
+		public float y;
 
-		protected internal float width;
+		public float width;
 
-		protected internal float height;
+		public float height;
 
 		public LayoutRect(float x, float y, float width, float height)
 		{

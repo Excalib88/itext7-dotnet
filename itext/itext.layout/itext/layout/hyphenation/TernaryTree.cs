@@ -68,13 +68,13 @@ namespace iText.Layout.Hyphenation {
         /// Pointer to low branch and to rest of the key when it is
         /// stored directly in this node, we don't have unions in java!
         /// </summary>
-        protected internal char[] lo;
+        public char[] lo;
 
         /// <summary>Pointer to high branch.</summary>
-        protected internal char[] hi;
+        public char[] hi;
 
         /// <summary>Pointer to equal branch and to data when this node is a string terminator.</summary>
-        protected internal char[] eq;
+        public char[] eq;
 
         /// <summary>The character stored in this node: splitchar.</summary>
         /// <remarks>
@@ -90,22 +90,22 @@ namespace iText.Layout.Hyphenation {
         /// This shouldn't be a problem if we give the usual semantics to
         /// strings since 0xFFFF is garanteed not to be an Unicode character.
         /// </remarks>
-        protected internal char[] sc;
+        public char[] sc;
 
         /// <summary>This vector holds the trailing of the keys when the branch is compressed.</summary>
-        protected internal CharVector kv;
+        public CharVector kv;
 
         /// <summary>root</summary>
-        protected internal char root;
+        public char root;
 
         /// <summary>free node</summary>
-        protected internal char freenode;
+        public char freenode;
 
         /// <summary>number of items in tree</summary>
-        protected internal int length;
+        public int length;
 
         /// <summary>allocation size for arrays</summary>
-        protected internal const int BLOCK_SIZE = 2048;
+        public const int BLOCK_SIZE = 2048;
 
         /// <summary>default constructor</summary>
         internal TernaryTree() {
@@ -124,7 +124,7 @@ namespace iText.Layout.Hyphenation {
         }
 
         /// <summary>initialize</summary>
-        protected internal virtual void Init() {
+        public virtual void Init() {
             root = (char)0;
             freenode = (char)1;
             length = 0;
@@ -481,7 +481,7 @@ namespace iText.Layout.Hyphenation {
         /// <param name="v">array of values</param>
         /// <param name="offset">where to insert</param>
         /// <param name="n">count to insert</param>
-        protected internal virtual void InsertBalanced(String[] k, char[] v, int offset, int n) {
+        public virtual void InsertBalanced(String[] k, char[] v, int offset, int n) {
             int m;
             if (n < 1) {
                 return;

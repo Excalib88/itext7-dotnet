@@ -122,7 +122,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
         /// image content)
         /// </remarks>
         /// <param name="text">the text to append to the text results accumulated so far</param>
-        protected internal void AppendTextChunk(String text) {
+        public void AppendTextChunk(String text) {
             result.Append(text);
         }
     }

@@ -51,7 +51,7 @@ namespace iText.Layout.Layout {
     /// </summary>
     public class LineLayoutResult : MinMaxWidthLayoutResult {
         /// <summary>Indicates whether split was forced by new line symbol or not.</summary>
-        protected internal bool splitForcedByNewline;
+        public bool splitForcedByNewline;
 
         private IList<IRenderer> floatsOverflowedToNextPage;
 

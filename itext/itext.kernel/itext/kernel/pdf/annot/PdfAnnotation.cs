@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font;
 using iText.Kernel.Colors;
 using iText.Kernel.Geom;
@@ -279,7 +280,7 @@ namespace iText.Kernel.Pdf.Annot {
         /// </remarks>
         public static readonly PdfString ReviewModel = new PdfString("Review");
 
-        protected internal PdfPage page;
+        public PdfPage page;
 
         /// <summary>
         /// Factory method that creates the type specific
@@ -430,13 +431,13 @@ namespace iText.Kernel.Pdf.Annot {
             return annotation;
         }
 
-        protected internal PdfAnnotation(Rectangle rect)
+        public PdfAnnotation(Rectangle rect)
             : this(new PdfDictionary()) {
             Put(PdfName.Rect, new PdfArray(rect));
             Put(PdfName.Subtype, GetSubtype());
         }
 
-        protected internal PdfAnnotation(PdfDictionary pdfObject)
+        public PdfAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
             MarkObjectAsIndirect(GetPdfObject());
         }
@@ -1572,8 +1573,8 @@ namespace iText.Kernel.Pdf.Annot {
         /// <param name="fs">file specification dictionary of associated file</param>
         public virtual void AddAssociatedFile(PdfFileSpec fs) {
             if (null == ((PdfDictionary)fs.GetPdfObject()).Get(PdfName.AFRelationship)) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfAnnotation));
-                logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfAnnotation));
+                //logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
             }
             PdfArray afArray = GetPdfObject().GetAsArray(PdfName.AF);
             if (afArray == null) {
@@ -1615,13 +1616,13 @@ namespace iText.Kernel.Pdf.Annot {
             base.Flush();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
         // Created as a private static class in order to facilitate autoport.
         internal class PdfUnknownAnnotation : PdfAnnotation {
-            protected internal PdfUnknownAnnotation(PdfDictionary pdfObject)
+            public PdfUnknownAnnotation(PdfDictionary pdfObject)
                 : base(pdfObject) {
             }
 

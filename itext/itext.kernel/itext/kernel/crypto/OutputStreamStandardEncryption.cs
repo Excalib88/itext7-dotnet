@@ -46,7 +46,7 @@ using System.IO;
 
 namespace iText.Kernel.Crypto {
     public class OutputStreamStandardEncryption : OutputStreamEncryption {
-        protected internal ARCFOUREncryption arcfour;
+        public ARCFOUREncryption arcfour;
 
         /// <summary>Creates a new instance of OutputStreamStandardEncryption</summary>
         /// <param name="out"/>

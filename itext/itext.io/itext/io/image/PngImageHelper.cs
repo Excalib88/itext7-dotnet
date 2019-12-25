@@ -45,7 +45,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Colors;
 using iText.IO.Font;
 using iText.IO.Source;
@@ -216,8 +217,7 @@ namespace iText.IO.Image {
             ReadPng(pngStream, png);
             if (png.iccProfile != null && png.iccProfile.GetNumComponents() != GetExpectedNumberOfColorComponents(png)
                 ) {
-                LogManager.GetLogger(typeof(PngImageHelper)).Warn(iText.IO.LogMessageConstant.PNG_IMAGE_HAS_ICC_PROFILE_WITH_INCOMPATIBLE_NUMBER_OF_COLOR_COMPONENTS
-                    );
+                //LogManager.GetLogger(typeof(PngImageHelper)).Warn(iText.IO.LogMessageConstant.PNG_IMAGE_HAS_ICC_PROFILE_WITH_INCOMPATIBLE_NUMBER_OF_COLOR_COMPONENTS);
             }
             try {
                 int pal0 = 0;

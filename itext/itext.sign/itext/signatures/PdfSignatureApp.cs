@@ -67,7 +67,7 @@ namespace iText.Signatures {
             GetPdfObject().Put(PdfName.Name, new PdfName(name));
         }
 
-        protected override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

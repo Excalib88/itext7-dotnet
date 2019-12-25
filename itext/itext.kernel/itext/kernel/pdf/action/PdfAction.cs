@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Annot;
@@ -245,8 +246,8 @@ namespace iText.Kernel.Pdf.Action {
                 action.Put(PdfName.D, destination.GetPdfObject());
             }
             else {
-                LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.EMBEDDED_GO_TO_DESTINATION_NOT_SPECIFIED
-                    );
+                //LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.EMBEDDED_GO_TO_DESTINATION_NOT_SPECIFIED
+                //    );
             }
             if (targetDictionary != null) {
                 action.Put(PdfName.T, targetDictionary.GetPdfObject());
@@ -654,7 +655,7 @@ namespace iText.Kernel.Pdf.Action {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
@@ -719,8 +720,8 @@ namespace iText.Kernel.Pdf.Action {
                                 );
                         }
                         else {
-                            LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.STRUCTURE_ELEMENT_REPLACED_BY_ITS_ID_IN_STRUCTURE_DESTINATION
-                                );
+                            //LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.STRUCTURE_ELEMENT_REPLACED_BY_ITS_ID_IN_STRUCTURE_DESTINATION
+                            //    );
                             ((PdfArray)destination.GetPdfObject()).Set(0, id);
                             destination.GetPdfObject().SetModified();
                         }
@@ -731,8 +732,8 @@ namespace iText.Kernel.Pdf.Action {
 
         public static void ValidateNotRemoteDestination(PdfDestination destination) {
             if (destination is PdfExplicitRemoteGoToDestination) {
-                LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.INVALID_DESTINATION_TYPE
-                    );
+                //LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.INVALID_DESTINATION_TYPE
+                //    );
             }
             else {
                 if (destination is PdfExplicitDestination) {
@@ -740,8 +741,8 @@ namespace iText.Kernel.Pdf.Action {
                     // destination page is in a current PDF document. See section 12.3.2.2 of ISO 32000-1.
                     PdfObject firstObj = ((PdfArray)destination.GetPdfObject()).Get(0);
                     if (firstObj.IsNumber()) {
-                        LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.INVALID_DESTINATION_TYPE
-                            );
+                        //LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfAction)).Warn(iText.IO.LogMessageConstant.INVALID_DESTINATION_TYPE
+                        //    );
                     }
                 }
             }

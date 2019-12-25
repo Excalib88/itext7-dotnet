@@ -47,7 +47,7 @@ using iText.IO.Util;
 namespace iText.Layout.Font {
     /// <summary>Sort given set of fonts according to font name and style.</summary>
     public class FontSelector {
-        protected internal IList<FontInfo> fonts;
+        public IList<FontInfo> fonts;
 
         private const int EXPECTED_FONT_IS_BOLD_AWARD = 5;
 
@@ -72,7 +72,7 @@ namespace iText.Layout.Font {
         /// </param>
         public FontSelector(ICollection<FontInfo> allFonts, IList<String> fontFamilies, FontCharacteristics fc) {
             this.fonts = new List<FontInfo>(allFonts);
-            //Possible issue in .NET, virtual protected member in constructor.
+            //Possible issue in .NET, virtual public member in constructor.
             JavaCollectionsUtil.Sort(this.fonts, GetComparator(fontFamilies, fc));
         }
 
@@ -95,7 +95,7 @@ namespace iText.Layout.Font {
             return fonts;
         }
 
-        protected internal virtual IComparer<FontInfo> GetComparator(IList<String> fontFamilies, FontCharacteristics
+        public virtual IComparer<FontInfo> GetComparator(IList<String> fontFamilies, FontCharacteristics
              fc) {
             return new FontSelector.PdfFontComparator(fontFamilies, fc);
         }

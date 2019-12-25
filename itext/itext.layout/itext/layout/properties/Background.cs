@@ -61,15 +61,15 @@ namespace iText.Layout.Properties {
     /// location of the edges of the background coloring.
     /// </remarks>
     public class Background {
-        protected internal TransparentColor transparentColor;
+        public TransparentColor transparentColor;
 
-        protected internal float extraLeft;
+        public float extraLeft;
 
-        protected internal float extraRight;
+        public float extraRight;
 
-        protected internal float extraTop;
+        public float extraTop;
 
-        protected internal float extraBottom;
+        public float extraBottom;
 
         /// <summary>Creates a background with a specified color.</summary>
         /// <param name="color">the background color</param>

@@ -84,7 +84,7 @@ namespace iText.Kernel.XMP.Options {
 
         /// <param name="optionBit">the binary bit or bits that are requested</param>
         /// <returns>Returns if <b>all</b> of the requested bits are set or not.</returns>
-        protected internal virtual bool GetOption(int optionBit) {
+        public virtual bool GetOption(int optionBit) {
             return (options & optionBit) != 0;
         }
 
@@ -153,12 +153,12 @@ namespace iText.Kernel.XMP.Options {
 
         /// <summary>To be implemeted by inheritants.</summary>
         /// <returns>Returns a bit mask where all valid option bits are set.</returns>
-        protected internal abstract int GetValidOptions();
+        public abstract int GetValidOptions();
 
         /// <summary>To be implemeted by inheritants.</summary>
         /// <param name="option">a single, valid option bit.</param>
         /// <returns>Returns a human readable name for an option bit.</returns>
-        protected internal abstract String DefineOptionName(int option);
+        public abstract String DefineOptionName(int option);
 
         /// <summary>The inheriting option class can do additional checks on the options.</summary>
         /// <remarks>
@@ -170,7 +170,7 @@ namespace iText.Kernel.XMP.Options {
         /// (it has to be made public therefore).
         /// </remarks>
         /// <param name="options">the bitmask to check.</param>
-        protected internal virtual void AssertConsistency(int options) {
+        public virtual void AssertConsistency(int options) {
         }
 
         // empty, no checks

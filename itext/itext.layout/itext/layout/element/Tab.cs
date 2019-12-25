@@ -62,7 +62,7 @@ namespace iText.Layout.Element {
     /// objects defined for the enveloping element.
     /// </remarks>
     public class Tab : AbstractElement<Tab>, ILeafElement {
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new TabRenderer(this);
         }
     }

@@ -483,7 +483,7 @@ namespace iText.Signatures {
                 return rangeIsCorrect;
             }
 
-            protected override PdfDictionary ReadDictionary(bool objStm) {
+            public override PdfDictionary ReadDictionary(bool objStm) {
                 // The method copies the logic of PdfReader's method.
                 // Only Contents related checks have been introduced.
                 currentLevel++;
@@ -538,7 +538,7 @@ namespace iText.Signatures {
                 return dic;
             }
 
-            protected override PdfObject ReadReference(bool readAsDirect) {
+            public override PdfObject ReadReference(bool readAsDirect) {
                 return new PdfNull();
             }
         }

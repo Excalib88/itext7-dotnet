@@ -72,7 +72,7 @@ namespace iText.Kernel {
         public const String LICENSE_FILE_NOT_LOADED = "License file not loaded.";
 
         /// <summary>Object for more details</summary>
-        protected internal Object @object;
+        public Object @object;
 
         private IList<Object> messageParams;
 
@@ -150,7 +150,7 @@ namespace iText.Kernel {
         /// Placeholder format is defined similar to the following: "{0}".
         /// </remarks>
         /// <returns>params for exception message.</returns>
-        protected internal virtual Object[] GetMessageParams() {
+        public virtual Object[] GetMessageParams() {
             Object[] parameters = new Object[messageParams.Count];
             for (int i = 0; i < messageParams.Count; i++) {
                 parameters[i] = messageParams[i];

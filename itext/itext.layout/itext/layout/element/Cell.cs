@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Pdf.Tagging;
 using iText.Kernel.Pdf.Tagutils;
@@ -86,7 +87,7 @@ namespace iText.Layout.Element {
 
         private int colspan;
 
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         /// <summary>Creates a cell which takes a custom amount of cell spaces in the table.</summary>
         /// <param name="rowspan">the number of rows this cell must occupy. Negative numbers will make the argument default to 1.
@@ -120,8 +121,8 @@ namespace iText.Layout.Element {
                     cellRenderer = (CellRenderer)renderer;
                 }
                 else {
-                    ILog logger = LogManager.GetLogger(typeof(Table));
-                    logger.Error("Invalid renderer for Table: must be inherited from TableRenderer");
+                    //ILog logger = LogManager.GetLogger(typeof(Table));
+                    //logger.Error("Invalid renderer for Table: must be inherited from TableRenderer");
                 }
             }
             //cellRenderer could be null in case invalid type (see logger message above)
@@ -238,11 +239,11 @@ namespace iText.Layout.Element {
             return tagProperties;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new CellRenderer(this);
         }
 
-        protected internal virtual iText.Layout.Element.Cell UpdateCellIndexes(int row, int col, int numberOfColumns
+        public virtual iText.Layout.Element.Cell UpdateCellIndexes(int row, int col, int numberOfColumns
             ) {
             this.row = row;
             this.col = col;

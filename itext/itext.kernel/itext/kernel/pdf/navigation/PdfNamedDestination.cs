@@ -60,7 +60,7 @@ namespace iText.Kernel.Pdf.Navigation {
             return array != null ? array.Get(0) : null;
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

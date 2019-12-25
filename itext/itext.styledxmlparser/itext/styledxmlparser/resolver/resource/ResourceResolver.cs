@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Codec;
 using iText.IO.Image;
 using iText.IO.Util;
@@ -57,8 +58,8 @@ namespace iText.StyledXmlParser.Resolver.Resource {
 
         public const String DATA_SCHEMA_PREFIX = "data:";
 
-        private static readonly ILog logger = LogManager.GetLogger(typeof(iText.StyledXmlParser.Resolver.Resource.ResourceResolver
-            ));
+        //private static readonly ILog logger = LogManager.GetLogger(typeof(iText.StyledXmlParser.Resolver.Resource.ResourceResolver
+            //));
 
         /// <summary>
         /// The
@@ -139,8 +140,8 @@ namespace iText.StyledXmlParser.Resolver.Resource {
                     return imageXObject_1;
                 }
             }
-            logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_IMAGE_WITH_GIVEN_BASE_URI
-                , uriResolver.GetBaseUri(), src));
+            //logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_IMAGE_WITH_GIVEN_BASE_URI
+                //, uriResolver.GetBaseUri(), src));
             return null;
         }
 
@@ -185,8 +186,8 @@ namespace iText.StyledXmlParser.Resolver.Resource {
                 }
             }
             catch (Exception e) {
-                logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_STREAM_WITH_GIVEN_BASE_URI
-                    , uriResolver.GetBaseUri(), src), e);
+                //logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_STREAM_WITH_GIVEN_BASE_URI
+                //    , uriResolver.GetBaseUri(), src), e);
                 return null;
             }
         }
@@ -205,8 +206,8 @@ namespace iText.StyledXmlParser.Resolver.Resource {
                 }
             }
             catch (System.IO.IOException ioe) {
-                logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_STREAM_WITH_GIVEN_BASE_URI
-                    , uriResolver.GetBaseUri(), src), ioe);
+                //logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_STREAM_WITH_GIVEN_BASE_URI
+                //    , uriResolver.GetBaseUri(), src), ioe);
                 return null;
             }
         }
@@ -228,8 +229,8 @@ namespace iText.StyledXmlParser.Resolver.Resource {
                 return UrlUtil.OpenStream(uriResolver.ResolveAgainstBaseUri(src));
             }
             catch (Exception e) {
-                logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_STREAM_WITH_GIVEN_BASE_URI
-                    , uriResolver.GetBaseUri(), src), e);
+                //logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RETRIEVE_STREAM_WITH_GIVEN_BASE_URI
+                //    , uriResolver.GetBaseUri(), src), e);
                 return null;
             }
         }
@@ -274,7 +275,7 @@ namespace iText.StyledXmlParser.Resolver.Resource {
             }
         }
 
-        protected internal virtual PdfXObject TryResolveBase64ImageSource(String src) {
+        public virtual PdfXObject TryResolveBase64ImageSource(String src) {
             try {
                 String fixedSrc = iText.IO.Util.StringUtil.ReplaceAll(src, "\\s", "");
                 fixedSrc = fixedSrc.Substring(fixedSrc.IndexOf(BASE64IDENTIFIER, StringComparison.Ordinal) + 7);
@@ -290,7 +291,7 @@ namespace iText.StyledXmlParser.Resolver.Resource {
             return null;
         }
 
-        protected internal virtual PdfXObject TryResolveUrlImageSource(String uri) {
+        public virtual PdfXObject TryResolveUrlImageSource(String uri) {
             try {
                 Uri url = uriResolver.ResolveAgainstBaseUri(uri);
                 url = UrlUtil.GetFinalURL(url);
@@ -314,7 +315,7 @@ namespace iText.StyledXmlParser.Resolver.Resource {
         /// <see cref="iText.Kernel.Pdf.Xobject.PdfXObject"/>
         /// containing the Image loaded in
         /// </returns>
-        protected internal virtual PdfXObject CreateImageByUrl(Uri url) {
+        public virtual PdfXObject CreateImageByUrl(Uri url) {
             return new PdfImageXObject(ImageDataFactory.Create(url));
         }
 

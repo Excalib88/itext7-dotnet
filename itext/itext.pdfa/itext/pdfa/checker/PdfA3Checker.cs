@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Pdf;
 using iText.Pdfa;
@@ -60,7 +61,7 @@ namespace iText.Pdfa.Checker {
     /// The specification implemented by this class is ISO 19005-3
     /// </remarks>
     public class PdfA3Checker : PdfA2Checker {
-        protected internal static readonly ICollection<PdfName> allowedAFRelationships = new HashSet<PdfName>(JavaUtil.ArraysAsList
+        public static readonly ICollection<PdfName> allowedAFRelationships = new HashSet<PdfName>(JavaUtil.ArraysAsList
             (PdfName.Source, PdfName.Data, PdfName.Alternative, PdfName.Supplement, PdfName.Unspecified));
 
         /// <summary>Creates a PdfA3Checker with the required conformance level</summary>
@@ -72,7 +73,7 @@ namespace iText.Pdfa.Checker {
             : base(conformanceLevel) {
         }
 
-        protected internal override void CheckFileSpec(PdfDictionary fileSpec) {
+        public override void CheckFileSpec(PdfDictionary fileSpec) {
             PdfName relationship = fileSpec.GetAsName(PdfName.AFRelationship);
             if (relationship == null || !allowedAFRelationships.Contains(relationship)) {
                 throw new PdfAConformanceException(PdfAConformanceException.FILE_SPECIFICATION_DICTIONARY_SHALL_CONTAIN_ONE_OF_THE_PREDEFINED_AFRELATIONSHIP_KEYS
@@ -106,8 +107,8 @@ namespace iText.Pdfa.Checker {
                     }
                 }
                 else {
-                    ILog logger = LogManager.GetLogger(typeof(PdfAChecker));
-                    logger.Warn(PdfAConformanceLogMessageConstant.EMBEDDED_FILE_SHOULD_CONTAIN_PARAMS_KEY);
+                    //ILog logger = LogManager.GetLogger(typeof(PdfAChecker));
+                    //logger.Warn(PdfAConformanceLogMessageConstant.EMBEDDED_FILE_SHOULD_CONTAIN_PARAMS_KEY);
                 }
             }
         }

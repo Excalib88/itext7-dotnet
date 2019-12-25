@@ -65,17 +65,17 @@ namespace iText.Kernel.Pdf.Layer {
     /// </remarks>
     public class PdfLayer : PdfObjectWrapper<PdfDictionary>, IPdfOCG {
         /// <summary>Used for titling group of objects but not actually grouping them.</summary>
-        protected internal String title;
+        public String title;
 
-        protected internal bool on = true;
+        public bool on = true;
 
-        protected internal bool onPanel = true;
+        public bool onPanel = true;
 
-        protected internal bool locked = false;
+        public bool locked = false;
 
-        protected internal iText.Kernel.Pdf.Layer.PdfLayer parent;
+        public iText.Kernel.Pdf.Layer.PdfLayer parent;
 
-        protected internal IList<iText.Kernel.Pdf.Layer.PdfLayer> children;
+        public IList<iText.Kernel.Pdf.Layer.PdfLayer> children;
 
         /// <summary>Creates a new layer by existing dictionary, which must be an indirect object.</summary>
         /// <param name="layerDictionary">the layer dictionary, must have an indirect reference.</param>
@@ -457,11 +457,11 @@ namespace iText.Kernel.Pdf.Layer {
             return children == null ? null : new List<iText.Kernel.Pdf.Layer.PdfLayer>(children);
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
-        protected internal virtual PdfDocument GetDocument() {
+        public virtual PdfDocument GetDocument() {
             return GetPdfObject().GetIndirectReference().GetDocument();
         }
 
@@ -469,7 +469,7 @@ namespace iText.Kernel.Pdf.Layer {
         /// <param name="title">the title of the layer</param>
         /// <param name="document">the document this title layer belongs to</param>
         /// <returns>the created layer</returns>
-        protected internal static iText.Kernel.Pdf.Layer.PdfLayer CreateTitleSilent(String title, PdfDocument document
+        public static iText.Kernel.Pdf.Layer.PdfLayer CreateTitleSilent(String title, PdfDocument document
             ) {
             if (title == null) {
                 throw new ArgumentException("Invalid title argument");
@@ -481,7 +481,7 @@ namespace iText.Kernel.Pdf.Layer {
 
         /// <summary>Gets the /Usage dictionary, creating a new one if necessary.</summary>
         /// <returns>the /Usage dictionary</returns>
-        protected internal virtual PdfDictionary GetUsage() {
+        public virtual PdfDictionary GetUsage() {
             PdfDictionary usage = GetPdfObject().GetAsDictionary(PdfName.Usage);
             if (usage == null) {
                 usage = new PdfDictionary();

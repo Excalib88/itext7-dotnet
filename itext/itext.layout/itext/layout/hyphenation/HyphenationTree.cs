@@ -35,13 +35,13 @@ namespace iText.Layout.Hyphenation {
     /// </remarks>
     public class HyphenationTree : TernaryTree, IPatternConsumer {
         /// <summary>value space: stores the interletter values</summary>
-        protected internal ByteVector vspace;
+        public ByteVector vspace;
 
         /// <summary>This map stores hyphenation exceptions</summary>
-        protected internal IDictionary<String, IList> stoplist;
+        public IDictionary<String, IList> stoplist;
 
         /// <summary>This map stores the character classes</summary>
-        protected internal TernaryTree classmap;
+        public TernaryTree classmap;
 
         /// <summary>Temporary map to store interletter values on pattern loading.</summary>
         [System.NonSerialized]
@@ -73,7 +73,7 @@ namespace iText.Layout.Hyphenation {
         /// the index into the vspace array where the packed values
         /// are stored.
         /// </returns>
-        protected internal virtual int PackValues(String values) {
+        public virtual int PackValues(String values) {
             int i;
             int n = values.Length;
             int m = (n & 1) == 1 ? (n >> 1) + 2 : (n >> 1) + 1;
@@ -98,7 +98,7 @@ namespace iText.Layout.Hyphenation {
         /// <summary>Unpack values.</summary>
         /// <param name="k">an integer</param>
         /// <returns>a string</returns>
-        protected internal virtual String UnpackValues(int k) {
+        public virtual String UnpackValues(int k) {
             StringBuilder buf = new StringBuilder();
             byte v = vspace.Get(k++);
             while (v != 0) {
@@ -157,7 +157,7 @@ namespace iText.Layout.Hyphenation {
         /// <param name="t">second character array</param>
         /// <param name="ti">starting index into second array</param>
         /// <returns>an integer</returns>
-        protected internal virtual int Hstrcmp(char[] s, int si, char[] t, int ti) {
+        public virtual int Hstrcmp(char[] s, int si, char[] t, int ti) {
             for (; s[si] == t[ti]; si++, ti++) {
                 if (s[si] == 0) {
                     return 0;
@@ -172,7 +172,7 @@ namespace iText.Layout.Hyphenation {
         /// <summary>Get values.</summary>
         /// <param name="k">an integer</param>
         /// <returns>a byte array</returns>
-        protected internal virtual byte[] GetValues(int k) {
+        public virtual byte[] GetValues(int k) {
             StringBuilder buf = new StringBuilder();
             byte v = vspace.Get(k++);
             while (v != 0) {
@@ -223,7 +223,7 @@ namespace iText.Layout.Hyphenation {
         /// <param name="word">null terminated word to match</param>
         /// <param name="index">start index from word</param>
         /// <param name="il">interletter values array to update</param>
-        protected internal virtual void SearchPatterns(char[] word, int index, byte[] il) {
+        public virtual void SearchPatterns(char[] word, int index, byte[] il) {
             byte[] values;
             int i = index;
             char p;

@@ -50,20 +50,20 @@ namespace iText.Kernel.Pdf {
         private const int LENGTH_OF_INDIRECTS_CHAIN = 31;
 
         /// <summary>Object number.</summary>
-        protected internal readonly int objNr;
+        public readonly int objNr;
 
         /// <summary>Object generation.</summary>
-        protected internal int genNr;
+        public int genNr;
 
         /// <summary>PdfObject that current PdfIndirectReference instance refers to.</summary>
-        protected internal PdfObject refersTo = null;
+        public PdfObject refersTo = null;
 
         /// <summary>Indirect reference number of object stream containing refersTo object.</summary>
         /// <remarks>
         /// Indirect reference number of object stream containing refersTo object.
         /// If refersTo is not placed into object stream - objectStreamNumber = 0.
         /// </remarks>
-        protected internal int objectStreamNumber = 0;
+        public int objectStreamNumber = 0;
 
         /// <summary>
         /// Offset in a document of the
@@ -76,24 +76,24 @@ namespace iText.Kernel.Pdf {
         /// object.
         /// If the object placed into object stream then it is an object index inside object stream.
         /// </remarks>
-        protected internal long offsetOrIndex = 0;
+        public long offsetOrIndex = 0;
 
         /// <summary>PdfDocument object belongs to.</summary>
         /// <remarks>PdfDocument object belongs to. For direct objects it is null.</remarks>
-        protected internal PdfDocument pdfDocument = null;
+        public PdfDocument pdfDocument = null;
 
-        protected internal PdfIndirectReference(PdfDocument doc, int objNr)
+        public PdfIndirectReference(PdfDocument doc, int objNr)
             : this(doc, objNr, 0) {
         }
 
-        protected internal PdfIndirectReference(PdfDocument doc, int objNr, int genNr)
+        public PdfIndirectReference(PdfDocument doc, int objNr, int genNr)
             : base() {
             this.pdfDocument = doc;
             this.objNr = objNr;
             this.genNr = genNr;
         }
 
-        protected internal PdfIndirectReference(PdfDocument doc, int objNr, int genNr, long offset)
+        public PdfIndirectReference(PdfDocument doc, int objNr, int genNr, long offset)
             : base() {
             this.pdfDocument = doc;
             this.objNr = objNr;
@@ -143,7 +143,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual void SetRefersTo(PdfObject refersTo) {
+        public virtual void SetRefersTo(PdfObject refersTo) {
             this.refersTo = refersTo;
         }
 
@@ -275,7 +275,7 @@ namespace iText.Kernel.Pdf {
 
         /// <summary>Gets a PdfWriter associated with the document object belongs to.</summary>
         /// <returns>PdfWriter.</returns>
-        protected internal virtual PdfWriter GetWriter() {
+        public virtual PdfWriter GetWriter() {
             if (GetDocument() != null) {
                 return GetDocument().GetWriter();
             }
@@ -284,23 +284,23 @@ namespace iText.Kernel.Pdf {
 
         /// <summary>Gets a PdfReader associated with the document object belongs to.</summary>
         /// <returns>PdfReader.</returns>
-        protected internal virtual PdfReader GetReader() {
+        public virtual PdfReader GetReader() {
             if (GetDocument() != null) {
                 return GetDocument().GetReader();
             }
             return null;
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return PdfNull.PDF_NULL;
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
         }
 
         /// <summary>Sets special states of current object.</summary>
         /// <param name="state">special flag of current object</param>
-        protected internal override PdfObject SetState(short state) {
+        public override PdfObject SetState(short state) {
             return base.SetState(state);
         }
 

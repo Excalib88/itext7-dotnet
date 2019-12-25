@@ -144,7 +144,7 @@ namespace iText.Kernel.Pdf {
             return Add(new PdfString(text).GetValue());
         }
 
-        protected internal virtual bool Add(String text) {
+        public virtual bool Add(String text) {
             if (text.Length > 0) {
                 if (lastString != null) {
                     lastString.Append(text);

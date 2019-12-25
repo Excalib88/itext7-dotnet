@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font;
 using iText.IO.Font.Constants;
 using iText.IO.Font.Otf;
@@ -326,7 +327,7 @@ namespace iText.Kernel.Font {
             base.Flush();
         }
 
-        protected internal override PdfDictionary GetFontDescriptor(String fontName) {
+        public override PdfDictionary GetFontDescriptor(String fontName) {
             if (fontName != null && fontName.Length > 0) {
                 PdfDictionary fontDescriptor = new PdfDictionary();
                 MakeObjectIndirect(fontDescriptor);
@@ -352,17 +353,17 @@ namespace iText.Kernel.Font {
             else {
                 if (GetPdfObject().GetIndirectReference() != null && GetPdfObject().GetIndirectReference().GetDocument().IsTagged
                     ()) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType3Font));
-                    logger.Warn(iText.IO.LogMessageConstant.TYPE3_FONT_ISSUE_TAGGED_PDF);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfType3Font));
+                    //logger.Warn(iText.IO.LogMessageConstant.TYPE3_FONT_ISSUE_TAGGED_PDF);
                 }
             }
             return null;
         }
 
-        protected internal override void AddFontStream(PdfDictionary fontDescriptor) {
+        public override void AddFontStream(PdfDictionary fontDescriptor) {
         }
 
-        protected internal virtual PdfDocument GetDocument() {
+        public virtual PdfDocument GetDocument() {
             return GetPdfObject().GetIndirectReference().GetDocument();
         }
 

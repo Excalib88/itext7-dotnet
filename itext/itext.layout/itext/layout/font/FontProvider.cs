@@ -102,9 +102,9 @@ namespace iText.Layout.Font {
         /// <see cref="FontSelector"/>
         /// if it's impossible to select a font for all other set font-families
         /// </summary>
-        protected internal readonly String defaultFontFamily;
+        public readonly String defaultFontFamily;
 
-        protected internal readonly IDictionary<FontInfo, PdfFont> pdfFonts;
+        public readonly IDictionary<FontInfo, PdfFont> pdfFonts;
 
         /// <summary>Creates a new instance of FontProvider</summary>
         /// <param name="fontSet">predefined set of fonts, could be null.</param>
@@ -328,7 +328,7 @@ namespace iText.Layout.Font {
         /// an instance of
         /// <see cref="FontSelector"/>.
         /// </returns>
-        protected internal virtual FontSelector CreateFontSelector(ICollection<FontInfo> fonts, IList<String> fontFamilies
+        public virtual FontSelector CreateFontSelector(ICollection<FontInfo> fonts, IList<String> fontFamilies
             , FontCharacteristics fc) {
             IList<String> fontFamiliesToBeProcessed = new List<String>(fontFamilies);
             fontFamiliesToBeProcessed.Add(defaultFontFamily);

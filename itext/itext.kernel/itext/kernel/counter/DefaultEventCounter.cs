@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Codec;
 using iText.IO.Util;
 using iText.Kernel.Counter.Context;
@@ -63,7 +64,7 @@ namespace iText.Kernel.Counter {
 
         private int repeatLevel = 10000;
 
-        private ILog logger;
+        //private ILog logger;
 
         public DefaultEventCounter()
             : base(UnknownContext.RESTRICTIVE) {
@@ -87,7 +88,7 @@ namespace iText.Kernel.Counter {
              + "gaW50ZW50aW9uLCBwbGVhc2UgY29udGFjdCB1cyBieSBmaWxsaW5nIG91dCB0aGlz" + "IGZvcm06IGh0dHA6Ly9pdGV4dHBkZi5jb20vc2FsZXMgb3IgYnkgY29udGFjdGluZ"
              + "yBvdXIgc2FsZXMgZGVwYXJ0bWVudC4=");
 
-        protected internal override void OnEvent(IEvent @event, IMetaInfo metaInfo) {
+        public override void OnEvent(IEvent @event, IMetaInfo metaInfo) {
             if (count.IncrementAndGet() > repeatLevel) {
                 if (iText.Kernel.Version.IsAGPLVersion() || iText.Kernel.Version.IsExpired()) {
                     String message = iText.IO.Util.JavaUtil.GetStringForBytes(message_1, iText.IO.Util.EncodingUtil.ISO_8859_1
@@ -102,10 +103,10 @@ namespace iText.Kernel.Counter {
                     else {
                         repeatLevel = REPEAT[2];
                     }
-                    if (logger == null) {
-                        logger = LogManager.GetLogger(this.GetType());
-                    }
-                    logger.Info(message);
+                    //if (logger == null) {
+                    //    logger = LogManager.GetLogger(this.GetType());
+                    //}
+                    //logger.Info(message);
                 }
                 count.Set(0);
             }

@@ -57,15 +57,15 @@ namespace iText.Layout.Font {
     /// will create next sub text and set current font.
     /// </remarks>
     public abstract class FontSelectorStrategy {
-        protected internal String text;
+        public String text;
 
-        protected internal int index;
+        public int index;
 
-        protected internal readonly FontProvider provider;
+        public readonly FontProvider provider;
 
-        protected internal readonly FontSet tempFonts;
+        public readonly FontSet tempFonts;
 
-        protected internal FontSelectorStrategy(String text, FontProvider provider, FontSet tempFonts) {
+        public FontSelectorStrategy(String text, FontProvider provider, FontSet tempFonts) {
             this.text = text;
             this.index = 0;
             this.provider = provider;
@@ -84,7 +84,7 @@ namespace iText.Layout.Font {
         /// <param name="fontInfo">instance of FontInfo.</param>
         /// <returns>cached or just created PdfFont on success, otherwise null.</returns>
         /// <seealso cref="FontProvider.GetPdfFont(FontInfo, FontSet)"/>
-        protected internal virtual PdfFont GetPdfFont(FontInfo fontInfo) {
+        public virtual PdfFont GetPdfFont(FontInfo fontInfo) {
             return provider.GetPdfFont(fontInfo, tempFonts);
         }
     }

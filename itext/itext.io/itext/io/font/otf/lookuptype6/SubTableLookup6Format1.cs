@@ -56,7 +56,7 @@ namespace iText.IO.Font.Otf.Lookuptype6 {
             this.substMap = substMap;
         }
 
-        protected internal override IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startGlyphId) {
+        public override IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startGlyphId) {
             if (substMap.ContainsKey(startGlyphId) && !openReader.IsSkip(startGlyphId, lookupFlag)) {
                 return substMap.Get(startGlyphId);
             }

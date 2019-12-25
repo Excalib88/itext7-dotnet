@@ -83,7 +83,7 @@ namespace iText.Kernel.Numbering {
         /// <summary>Returns a roman representation of an integer.</summary>
         /// <param name="index">the original number</param>
         /// <returns>the roman number representation (lower case)</returns>
-        protected internal static String Convert(int index) {
+        public static String Convert(int index) {
             StringBuilder buf = new StringBuilder();
             // lower than 0 ? Add minus
             if (index < 0) {

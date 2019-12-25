@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using Org.BouncyCastle.Asn1.Esf;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
@@ -84,57 +85,57 @@ namespace iText.Signatures {
         public const int CERTIFIED_FORM_FILLING_AND_ANNOTATIONS = 3;
 
         /// <summary>The certification level.</summary>
-        protected internal int certificationLevel = NOT_CERTIFIED;
+        public int certificationLevel = NOT_CERTIFIED;
 
         /// <summary>The name of the field.</summary>
-        protected internal String fieldName;
+        public String fieldName;
 
         /// <summary>The file right before the signature is added (can be null).</summary>
-        protected internal FileStream raf;
+        public FileStream raf;
 
         /// <summary>The bytes of the file right before the signature is added (if raf is null).</summary>
-        protected internal byte[] bout;
+        public byte[] bout;
 
         /// <summary>Array containing the byte positions of the bytes that need to be hashed.</summary>
-        protected internal long[] range;
+        public long[] range;
 
         /// <summary>The PdfDocument.</summary>
-        protected internal PdfDocument document;
+        public PdfDocument document;
 
         /// <summary>The crypto dictionary.</summary>
-        protected internal PdfSignature cryptoDictionary;
+        public PdfSignature cryptoDictionary;
 
         private PdfName digestMethod;
 
         /// <summary>Holds value of property signatureEvent.</summary>
-        protected internal PdfSigner.ISignatureEvent signatureEvent;
+        public PdfSigner.ISignatureEvent signatureEvent;
 
         /// <summary>OutputStream for the bytes of the document.</summary>
-        protected internal Stream originalOS;
+        public Stream originalOS;
 
         /// <summary>Outputstream that temporarily holds the output in memory.</summary>
-        protected internal MemoryStream temporaryOS;
+        public MemoryStream temporaryOS;
 
         /// <summary>Tempfile to hold the output temporarily.</summary>
-        protected internal FileInfo tempFile;
+        public FileInfo tempFile;
 
         /// <summary>Name and content of keys that can only be added in the close() method.</summary>
-        protected internal IDictionary<PdfName, PdfLiteral> exclusionLocations;
+        public IDictionary<PdfName, PdfLiteral> exclusionLocations;
 
         /// <summary>Indicates if the pdf document has already been pre-closed.</summary>
-        protected internal bool preClosed = false;
+        public bool preClosed = false;
 
         /// <summary>Signature field lock dictionary.</summary>
-        protected internal PdfSigFieldLock fieldLock;
+        public PdfSigFieldLock fieldLock;
 
         /// <summary>The signature appearance.</summary>
-        protected internal PdfSignatureAppearance appearance;
+        public PdfSignatureAppearance appearance;
 
         /// <summary>Holds value of property signDate.</summary>
-        protected internal DateTime signDate;
+        public DateTime signDate;
 
         /// <summary>Boolean to check if this PdfSigner instance has been closed already or not.</summary>
-        protected internal bool closed;
+        public bool closed;
 
         /// <summary>Creates a PdfSigner instance.</summary>
         /// <remarks>
@@ -218,7 +219,7 @@ namespace iText.Signatures {
             closed = false;
         }
 
-        protected internal virtual PdfDocument InitDocument(PdfReader reader, PdfWriter writer, StampingProperties
+        public virtual PdfDocument InitDocument(PdfReader reader, PdfWriter writer, StampingProperties
              properties) {
             PdfAConformanceLevel conformanceLevel = reader.GetPdfAConformanceLevel();
             if (null == conformanceLevel) {
@@ -387,7 +388,7 @@ namespace iText.Signatures {
 
         /// <summary>Sets the PdfDocument.</summary>
         /// <param name="document">The PdfDocument</param>
-        protected internal virtual void SetDocument(PdfDocument document) {
+        public virtual void SetDocument(PdfDocument document) {
             this.document = document;
         }
 
@@ -700,7 +701,7 @@ namespace iText.Signatures {
         ///     </param>
         /// <param name="crlList">a list of CrlClient implementations</param>
         /// <returns>a collection of CRL bytes that can be embedded in a PDF</returns>
-        protected internal virtual ICollection<byte[]> ProcessCrl(X509Certificate cert, ICollection<ICrlClient> crlList
+        public virtual ICollection<byte[]> ProcessCrl(X509Certificate cert, ICollection<ICrlClient> crlList
             ) {
             if (crlList == null) {
                 return null;
@@ -724,13 +725,13 @@ namespace iText.Signatures {
             }
         }
 
-        protected internal virtual void AddDeveloperExtension(PdfDeveloperExtension extension) {
+        public virtual void AddDeveloperExtension(PdfDeveloperExtension extension) {
             document.GetCatalog().AddDeveloperExtension(extension);
         }
 
         /// <summary>Checks if the document is in the process of closing.</summary>
         /// <returns>true if the document is in the process of closing, false otherwise</returns>
-        protected internal virtual bool IsPreClosed() {
+        public virtual bool IsPreClosed() {
             return preClosed;
         }
 
@@ -747,7 +748,7 @@ namespace iText.Signatures {
         /// Map with names and sizes to be excluded in the signature
         /// calculation. The key is a PdfName and the value an Integer. At least the /Contents must be present
         /// </param>
-        protected internal virtual void PreClose(IDictionary<PdfName, int?> exclusionSizes) {
+        public virtual void PreClose(IDictionary<PdfName, int?> exclusionSizes) {
             if (preClosed) {
                 throw new PdfException(PdfException.DocumentAlreadyPreClosed);
             }
@@ -915,7 +916,7 @@ namespace iText.Signatures {
         /// <see cref="System.IO.Stream"/>
         /// of bytes to be signed.
         /// </returns>
-        protected internal virtual Stream GetRangeStream() {
+        public virtual Stream GetRangeStream() {
             RandomAccessSourceFactory fac = new RandomAccessSourceFactory();
             return new RASInputStream(fac.CreateRanged(GetUnderlyingSource(), range));
         }
@@ -934,7 +935,7 @@ namespace iText.Signatures {
         /// in
         /// <see cref="PreClose(System.Collections.Generic.IDictionary{K, V})"/>
         /// </param>
-        protected internal virtual void Close(PdfDictionary update) {
+        public virtual void Close(PdfDictionary update) {
             try {
                 if (!preClosed) {
                     throw new PdfException(PdfException.DocumentMustBePreClosed);
@@ -1001,7 +1002,7 @@ namespace iText.Signatures {
 
         /// <summary>Returns the underlying source.</summary>
         /// <returns>The underlying source</returns>
-        protected internal virtual IRandomAccessSource GetUnderlyingSource() {
+        public virtual IRandomAccessSource GetUnderlyingSource() {
             RandomAccessSourceFactory fac = new RandomAccessSourceFactory();
             return raf == null ? fac.CreateSource(bout) : fac.CreateSource(raf);
         }
@@ -1012,7 +1013,7 @@ namespace iText.Signatures {
         /// This method is only used for Certifying signatures.
         /// </remarks>
         /// <param name="crypto">the signature dictionary</param>
-        protected internal virtual void AddDocMDP(PdfSignature crypto) {
+        public virtual void AddDocMDP(PdfSignature crypto) {
             PdfDictionary reference = new PdfDictionary();
             PdfDictionary transformParams = new PdfDictionary();
             transformParams.Put(PdfName.P, new PdfNumber(certificationLevel));
@@ -1035,7 +1036,7 @@ namespace iText.Signatures {
         /// </remarks>
         /// <param name="crypto">the signature dictionary</param>
         /// <param name="fieldLock"/>
-        protected internal virtual void AddFieldMDP(PdfSignature crypto, PdfSigFieldLock fieldLock) {
+        public virtual void AddFieldMDP(PdfSignature crypto, PdfSigFieldLock fieldLock) {
             PdfDictionary reference = new PdfDictionary();
             PdfDictionary transformParams = new PdfDictionary();
             transformParams.PutAll(fieldLock.GetPdfObject());
@@ -1054,7 +1055,7 @@ namespace iText.Signatures {
             types.Add(reference);
         }
 
-        protected internal virtual bool DocumentContainsCertificationOrApprovalSignatures() {
+        public virtual bool DocumentContainsCertificationOrApprovalSignatures() {
             bool containsCertificationOrApprovalSignature = false;
             PdfDictionary urSignature = null;
             PdfDictionary catalogPerms = document.GetCatalog().GetPdfObject().GetAsDictionary(PdfName.Perms);
@@ -1088,14 +1089,14 @@ namespace iText.Signatures {
         /// <summary>Get the rectangle associated to the provided widget.</summary>
         /// <param name="widget">PdfWidgetAnnotation to extract the rectangle from</param>
         /// <returns>Rectangle</returns>
-        protected internal virtual Rectangle GetWidgetRectangle(PdfWidgetAnnotation widget) {
+        public virtual Rectangle GetWidgetRectangle(PdfWidgetAnnotation widget) {
             return widget.GetRectangle().ToRectangle();
         }
 
         /// <summary>Get the page number associated to the provided widget.</summary>
         /// <param name="widget">PdfWidgetAnnotation from which to extract the page number</param>
         /// <returns>page number</returns>
-        protected internal virtual int GetWidgetPageNumber(PdfWidgetAnnotation widget) {
+        public virtual int GetWidgetPageNumber(PdfWidgetAnnotation widget) {
             int pageNumber = 0;
             PdfDictionary pageDict = widget.GetPdfObject().GetAsDictionary(PdfName.P);
             if (pageDict != null) {
@@ -1132,8 +1133,8 @@ namespace iText.Signatures {
                         reference.Put(PdfName.DigestMethod, digestMethod);
                     }
                     else {
-                        ILog logger = LogManager.GetLogger(typeof(PdfSigner));
-                        logger.Error(iText.IO.LogMessageConstant.UNKNOWN_DIGEST_METHOD);
+                        //ILog logger = LogManager.GetLogger(typeof(PdfSigner));
+                        //logger.Error(iText.IO.LogMessageConstant.UNKNOWN_DIGEST_METHOD);
                     }
                 }
             }

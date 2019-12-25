@@ -47,7 +47,7 @@ namespace iText.Kernel.Events {
     /// <summary>Describes abstract event.</summary>
     public class Event {
         /// <summary>A type of event.</summary>
-        protected internal String type;
+        public String type;
 
         /// <summary>Creates an event of the specified type.</summary>
         /// <param name="type">type of event</param>

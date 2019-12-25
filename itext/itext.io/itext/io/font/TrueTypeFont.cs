@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Font.Constants;
 using iText.IO.Font.Otf;
 using iText.IO.Util;
@@ -52,9 +53,9 @@ namespace iText.IO.Font {
     public class TrueTypeFont : FontProgram {
         private OpenTypeParser fontParser;
 
-        protected internal int[][] bBoxes;
+        public int[][] bBoxes;
 
-        protected internal bool isVertical;
+        public bool isVertical;
 
         private GlyphSubstitutionTableReader gsubTable;
 
@@ -70,7 +71,7 @@ namespace iText.IO.Font {
         /// glyph number for the second character. The value is the amount of kerning in
         /// normalized 1000 units as an <c>Integer</c>. This value is usually negative.
         /// </remarks>
-        protected internal IntHashtable kerning = new IntHashtable();
+        public IntHashtable kerning = new IntHashtable();
 
         private byte[] fontStreamBytes;
 
@@ -80,7 +81,7 @@ namespace iText.IO.Font {
             InitializeFontProperties();
         }
 
-        protected internal TrueTypeFont() {
+        public TrueTypeFont() {
             fontNames = new FontNames();
         }
 
@@ -208,7 +209,7 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal virtual void ReadGdefTable() {
+        public virtual void ReadGdefTable() {
             int[] gdef = fontParser.tables.Get("GDEF");
             if (gdef != null) {
                 gdefTable = new OpenTypeGdefTableReader(fontParser.raf, gdef[0]);
@@ -219,7 +220,7 @@ namespace iText.IO.Font {
             gdefTable.ReadTable();
         }
 
-        protected internal virtual void ReadGsubTable() {
+        public virtual void ReadGsubTable() {
             int[] gsub = fontParser.tables.Get("GSUB");
             if (gsub != null) {
                 gsubTable = new GlyphSubstitutionTableReader(fontParser.raf, gsub[0], gdefTable, codeToGlyph, fontMetrics.
@@ -227,7 +228,7 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal virtual void ReadGposTable() {
+        public virtual void ReadGposTable() {
             int[] gpos = fontParser.tables.Get("GPOS");
             if (gpos != null) {
                 gposTable = new GlyphPositioningTableReader(fontParser.raf, gpos[0], gdefTable, codeToGlyph, fontMetrics.GetUnitsPerEm
@@ -294,9 +295,9 @@ namespace iText.IO.Font {
             foreach (int charCode in cmap.Keys) {
                 int index = cmap.Get(charCode)[0];
                 if (index >= numOfGlyphs) {
-                    ILog LOGGER = LogManager.GetLogger(typeof(iText.IO.Font.TrueTypeFont));
-                    LOGGER.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.FONT_HAS_INVALID_GLYPH, GetFontNames().GetFontName
-                        (), index));
+                    //ILog LOGGER = LogManager.GetLogger(typeof(iText.IO.Font.TrueTypeFont));
+                    //LOGGER.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.FONT_HAS_INVALID_GLYPH, GetFontNames().GetFontName
+                        //(), index));
                     continue;
                 }
                 Glyph glyph = new Glyph(index, glyphWidths[index], charCode, bBoxes != null ? bBoxes[index] : null);

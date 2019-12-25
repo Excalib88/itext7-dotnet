@@ -54,28 +54,28 @@ namespace iText.IO.Font {
 
         // In case Type1: char code to glyph.
         // In case TrueType: glyph index to glyph.
-        protected internal IDictionary<int, Glyph> codeToGlyph = new Dictionary<int, Glyph>();
+        public IDictionary<int, Glyph> codeToGlyph = new Dictionary<int, Glyph>();
 
-        protected internal IDictionary<int, Glyph> unicodeToGlyph = new Dictionary<int, Glyph>();
+        public IDictionary<int, Glyph> unicodeToGlyph = new Dictionary<int, Glyph>();
 
-        protected internal bool isFontSpecific;
+        public bool isFontSpecific;
 
-        protected internal FontNames fontNames;
+        public FontNames fontNames;
 
-        protected internal FontMetrics fontMetrics = new FontMetrics();
+        public FontMetrics fontMetrics = new FontMetrics();
 
-        protected internal FontIdentification fontIdentification = new FontIdentification();
+        public FontIdentification fontIdentification = new FontIdentification();
 
-        protected internal int avgWidth;
+        public int avgWidth;
 
         /// <summary>The font's encoding name.</summary>
         /// <remarks>
         /// The font's encoding name. This encoding is 'StandardEncoding' or 'AdobeStandardEncoding' for a font
         /// that can be totally encoded according to the characters names. For all other names the font is treated as symbolic.
         /// </remarks>
-        protected internal String encodingScheme = FontEncoding.FONT_SPECIFIC;
+        public String encodingScheme = FontEncoding.FONT_SPECIFIC;
 
-        protected internal String registry;
+        public String registry;
 
         public virtual int CountOfGlyphs() {
             return Math.Max(codeToGlyph.Count, unicodeToGlyph.Count);
@@ -167,7 +167,7 @@ namespace iText.IO.Font {
             return false;
         }
 
-        protected internal virtual void SetRegistry(String registry) {
+        public virtual void SetRegistry(String registry) {
             this.registry = registry;
         }
 
@@ -196,19 +196,19 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal virtual void SetTypoAscender(int ascender) {
+        public virtual void SetTypoAscender(int ascender) {
             fontMetrics.SetTypoAscender(ascender);
         }
 
-        protected internal virtual void SetTypoDescender(int descender) {
+        public virtual void SetTypoDescender(int descender) {
             fontMetrics.SetTypoDescender(descender);
         }
 
-        protected internal virtual void SetCapHeight(int capHeight) {
+        public virtual void SetCapHeight(int capHeight) {
             fontMetrics.SetCapHeight(capHeight);
         }
 
-        protected internal virtual void SetXHeight(int xHeight) {
+        public virtual void SetXHeight(int xHeight) {
             fontMetrics.SetXHeight(xHeight);
         }
 
@@ -219,15 +219,15 @@ namespace iText.IO.Font {
         /// Italic angle in counter-clockwise degrees from the vertical. Zero for upright text, negative for text that leans to the right (forward).
         /// </remarks>
         /// <param name="italicAngle">in counter-clockwise degrees from the vertical</param>
-        protected internal virtual void SetItalicAngle(int italicAngle) {
+        public virtual void SetItalicAngle(int italicAngle) {
             fontMetrics.SetItalicAngle(italicAngle);
         }
 
-        protected internal virtual void SetStemV(int stemV) {
+        public virtual void SetStemV(int stemV) {
             fontMetrics.SetStemV(stemV);
         }
 
-        protected internal virtual void SetStemH(int stemH) {
+        public virtual void SetStemH(int stemH) {
             fontMetrics.SetStemH(stemH);
         }
 
@@ -236,7 +236,7 @@ namespace iText.IO.Font {
         /// integer form 100 to 900. See
         /// <see cref="iText.IO.Font.Constants.FontWeights"/>.
         /// </param>
-        protected internal virtual void SetFontWeight(int fontWeight) {
+        public virtual void SetFontWeight(int fontWeight) {
             fontNames.SetFontWeight(fontWeight);
         }
 
@@ -245,15 +245,15 @@ namespace iText.IO.Font {
         /// 
         /// <see cref="iText.IO.Font.Constants.FontStretches"/>.
         /// </param>
-        protected internal virtual void SetFontStretch(String fontWidth) {
+        public virtual void SetFontStretch(String fontWidth) {
             fontNames.SetFontStretch(fontWidth);
         }
 
-        protected internal virtual void SetFixedPitch(bool isFixedPitch) {
+        public virtual void SetFixedPitch(bool isFixedPitch) {
             fontMetrics.SetIsFixedPitch(isFixedPitch);
         }
 
-        protected internal virtual void SetBold(bool isBold) {
+        public virtual void SetBold(bool isBold) {
             if (isBold) {
                 fontNames.SetMacStyle(fontNames.GetMacStyle() | FontMacStyleFlags.BOLD);
             }
@@ -262,13 +262,13 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal virtual void SetBbox(int[] bbox) {
+        public virtual void SetBbox(int[] bbox) {
             fontMetrics.SetBbox(bbox[0], bbox[1], bbox[2], bbox[3]);
         }
 
         /// <summary>Sets a preferred font family name.</summary>
         /// <param name="fontFamily">a preferred font family name.</param>
-        protected internal virtual void SetFontFamily(String fontFamily) {
+        public virtual void SetFontFamily(String fontFamily) {
             fontNames.SetFamilyName(fontFamily);
         }
 
@@ -279,14 +279,14 @@ namespace iText.IO.Font {
         /// If full name is null, it will be set as well.
         /// </remarks>
         /// <param name="fontName">the PostScript name of the font, shall not be null or empty.</param>
-        protected internal virtual void SetFontName(String fontName) {
+        public virtual void SetFontName(String fontName) {
             fontNames.SetFontName(fontName);
             if (fontNames.GetFullName() == null) {
                 fontNames.SetFullName(fontName);
             }
         }
 
-        protected internal virtual void FixSpaceIssue() {
+        public virtual void FixSpaceIssue() {
             Glyph space = unicodeToGlyph.Get(32);
             if (space != null) {
                 codeToGlyph.Put(space.GetCode(), space);

@@ -54,7 +54,7 @@ namespace iText.Kernel.Pdf.Canvas.Draw {
     /// </summary>
     public class DottedLine : ILineDrawer {
         /// <summary>the gap between the dots.</summary>
-        protected internal float gap = 4;
+        public float gap = 4;
 
         private float lineWidth = 1;
 

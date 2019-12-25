@@ -68,7 +68,7 @@ namespace iText.Kernel.Pdf.Collection {
             return new PdfCollectionField(GetPdfObject().GetAsDictionary(new PdfName(name)));
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

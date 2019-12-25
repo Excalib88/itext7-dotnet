@@ -61,14 +61,14 @@ namespace iText.Svg.Renderers.Impl {
     public class TextSvgBranchRenderer : AbstractSvgNodeRenderer, ISvgTextNodeRenderer {
         /// <summary>Top level transformation to flip the y-axis results in the character glyphs being mirrored, this tf corrects for this behaviour
         ///     </summary>
-        protected internal static readonly AffineTransform TEXTFLIP = new AffineTransform(1, 0, 0, -1, 0, 0);
+        public static readonly AffineTransform TEXTFLIP = new AffineTransform(1, 0, 0, -1, 0, 0);
 
         /// <summary>Placeholder default font-size until DEVSIX-2607 is resolved</summary>
         private const float DEFAULT_FONT_SIZE = 12f;
 
         private readonly IList<ISvgTextNodeRenderer> children = new List<ISvgTextNodeRenderer>();
 
-        protected internal bool performRootTransformations;
+        public bool performRootTransformations;
 
         private PdfFont font;
 
@@ -160,7 +160,7 @@ namespace iText.Svg.Renderers.Impl {
         /// the object that knows the place to draw this element and
         /// maintains its state
         /// </param>
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             if (GetChildren().Count > 0) {
                 // if branch has no children, don't do anything
                 PdfCanvas currentCanvas = context.GetCurrentCanvas();

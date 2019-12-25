@@ -50,11 +50,11 @@ namespace iText.IO.Source {
 	{
 		private readonly ByteBuffer numBuffer = new ByteBuffer(32);
 
-		protected internal Stream outputStream = null;
+		public Stream outputStream = null;
 
-		protected internal long currentPos = 0;
+		public long currentPos = 0;
 
-		protected internal bool closeStream = true;
+		public bool closeStream = true;
 
 		//long=19 + max frac=6 => 26 => round to 32.
 		public static bool GetHighPrecision()
@@ -151,7 +151,7 @@ namespace iText.IO.Source {
 			outputStream.Flush();
 		}
 
-	    protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing) {
 	        if (disposing) {
 	            if (closeStream)
 	            {

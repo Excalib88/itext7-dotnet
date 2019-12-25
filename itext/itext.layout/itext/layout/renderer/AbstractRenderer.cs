@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel;
 using iText.Kernel.Colors;
@@ -82,39 +83,39 @@ namespace iText.Layout.Renderer {
         /// <see cref="iText.Kernel.Geom.Rectangle"/>
         /// coordinates to consider rectangles equal
         /// </summary>
-        protected internal const float EPS = 1e-4f;
+        public const float EPS = 1e-4f;
 
         /// <summary>The infinity value which is used while layouting</summary>
-        protected internal const float INF = 1e6f;
+        public const float INF = 1e6f;
 
         // TODO linkedList?
-        protected internal IList<IRenderer> childRenderers = new List<IRenderer>();
+        public IList<IRenderer> childRenderers = new List<IRenderer>();
 
-        protected internal IList<IRenderer> positionedRenderers = new List<IRenderer>();
+        public IList<IRenderer> positionedRenderers = new List<IRenderer>();
 
-        protected internal IPropertyContainer modelElement;
+        public IPropertyContainer modelElement;
 
-        protected internal bool flushed = false;
+        public bool flushed = false;
 
-        protected internal LayoutArea occupiedArea;
+        public LayoutArea occupiedArea;
 
-        protected internal IRenderer parent;
+        public IRenderer parent;
 
-        protected internal IDictionary<int, Object> properties = new Dictionary<int, Object>();
+        public IDictionary<int, Object> properties = new Dictionary<int, Object>();
 
-        protected internal bool isLastRendererForModelElement = true;
+        public bool isLastRendererForModelElement = true;
 
         /// <summary>Creates a renderer.</summary>
-        protected internal AbstractRenderer() {
+        public AbstractRenderer() {
         }
 
         /// <summary>Creates a renderer for the specified layout element.</summary>
         /// <param name="modelElement">the layout element that will be drawn by this renderer</param>
-        protected internal AbstractRenderer(IElement modelElement) {
+        public AbstractRenderer(IElement modelElement) {
             this.modelElement = modelElement;
         }
 
-        protected internal AbstractRenderer(iText.Layout.Renderer.AbstractRenderer other) {
+        public AbstractRenderer(iText.Layout.Renderer.AbstractRenderer other) {
             this.childRenderers = other.childRenderers;
             this.positionedRenderers = other.positionedRenderers;
             this.modelElement = other.modelElement;
@@ -438,7 +439,7 @@ namespace iText.Layout.Renderer {
             flushed = true;
         }
 
-        protected internal virtual void BeginElementOpacityApplying(DrawContext drawContext) {
+        public virtual void BeginElementOpacityApplying(DrawContext drawContext) {
             float? opacity = this.GetPropertyAsFloat(Property.OPACITY);
             if (opacity != null && opacity < 1f) {
                 PdfExtGState extGState = new PdfExtGState();
@@ -447,7 +448,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual void EndElementOpacityApplying(DrawContext drawContext) {
+        public virtual void EndElementOpacityApplying(DrawContext drawContext) {
             float? opacity = this.GetPropertyAsFloat(Property.OPACITY);
             if (opacity != null && opacity < 1f) {
                 drawContext.GetCanvas().RestoreState();
@@ -473,9 +474,9 @@ namespace iText.Layout.Renderer {
                 }
                 Rectangle backgroundArea = ApplyMargins(bBox, false);
                 if (backgroundArea.GetWidth() <= 0 || backgroundArea.GetHeight() <= 0) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                    logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.RECTANGLE_HAS_NEGATIVE_OR_ZERO_SIZES, "background"
-                        ));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                    //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.RECTANGLE_HAS_NEGATIVE_OR_ZERO_SIZES, "background"
+                    //    ));
                 }
                 else {
                     bool backgroundAreaIsClipped = false;
@@ -501,9 +502,9 @@ namespace iText.Layout.Renderer {
                         Rectangle imageRectangle = new Rectangle(backgroundArea.GetX(), backgroundArea.GetTop() - backgroundXObject
                             .GetHeight(), backgroundXObject.GetWidth(), backgroundXObject.GetHeight());
                         if (imageRectangle.GetWidth() <= 0 || imageRectangle.GetHeight() <= 0) {
-                            ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                            logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.RECTANGLE_HAS_NEGATIVE_OR_ZERO_SIZES, "background-image"
-                                ));
+                            //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                            //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.RECTANGLE_HAS_NEGATIVE_OR_ZERO_SIZES, "background-image"
+                            //    ));
                         }
                         else {
                             ApplyBorderBox(backgroundArea, true);
@@ -535,15 +536,15 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual bool ClipBorderArea(DrawContext drawContext, Rectangle outerBorderBox) {
+        public virtual bool ClipBorderArea(DrawContext drawContext, Rectangle outerBorderBox) {
             return ClipArea(drawContext, outerBorderBox, true, true, false, true);
         }
 
-        protected internal virtual bool ClipBackgroundArea(DrawContext drawContext, Rectangle outerBorderBox) {
+        public virtual bool ClipBackgroundArea(DrawContext drawContext, Rectangle outerBorderBox) {
             return ClipArea(drawContext, outerBorderBox, true, false, false, false);
         }
 
-        protected internal virtual bool ClipBackgroundArea(DrawContext drawContext, Rectangle outerBorderBox, bool
+        public virtual bool ClipBackgroundArea(DrawContext drawContext, Rectangle outerBorderBox, bool
              considerBordersBeforeClipping) {
             return ClipArea(drawContext, outerBorderBox, true, false, considerBordersBeforeClipping, false);
         }
@@ -800,8 +801,8 @@ namespace iText.Layout.Renderer {
                 float leftWidth = borders[3] != null ? borders[3].GetWidth() : 0;
                 Rectangle bBox = GetBorderAreaBBox();
                 if (bBox.GetWidth() < 0 || bBox.GetHeight() < 0) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                    logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.RECTANGLE_HAS_NEGATIVE_SIZE, "border"));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                    //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.RECTANGLE_HAS_NEGATIVE_SIZE, "border"));
                     return;
                 }
                 float x1 = bBox.GetX();
@@ -1011,33 +1012,33 @@ namespace iText.Layout.Renderer {
             return IsFirstOnRootArea(false);
         }
 
-        protected internal virtual void ApplyDestinationsAndAnnotation(DrawContext drawContext) {
+        public virtual void ApplyDestinationsAndAnnotation(DrawContext drawContext) {
             ApplyDestination(drawContext.GetDocument());
             ApplyAction(drawContext.GetDocument());
             ApplyLinkAnnotation(drawContext.GetDocument());
         }
 
-        protected internal static bool IsBorderBoxSizing(IRenderer renderer) {
+        public static bool IsBorderBoxSizing(IRenderer renderer) {
             BoxSizingPropertyValue? boxSizing = renderer.GetProperty<BoxSizingPropertyValue?>(Property.BOX_SIZING);
             return boxSizing != null && boxSizing.Equals(BoxSizingPropertyValue.BORDER_BOX);
         }
 
-        protected internal virtual bool IsOverflowProperty(OverflowPropertyValue? equalsTo, int overflowProperty) {
+        public virtual bool IsOverflowProperty(OverflowPropertyValue? equalsTo, int overflowProperty) {
             return IsOverflowProperty(equalsTo, this.GetProperty<OverflowPropertyValue?>(overflowProperty));
         }
 
-        protected internal static bool IsOverflowProperty(OverflowPropertyValue? equalsTo, IRenderer renderer, int
+        public static bool IsOverflowProperty(OverflowPropertyValue? equalsTo, IRenderer renderer, int
              overflowProperty) {
             return IsOverflowProperty(equalsTo, renderer.GetProperty<OverflowPropertyValue?>(overflowProperty));
         }
 
-        protected internal static bool IsOverflowProperty(OverflowPropertyValue? equalsTo, OverflowPropertyValue? 
+        public static bool IsOverflowProperty(OverflowPropertyValue? equalsTo, OverflowPropertyValue? 
             rendererOverflowProperty) {
             return equalsTo.Equals(rendererOverflowProperty) || equalsTo.Equals(OverflowPropertyValue.FIT) && rendererOverflowProperty
                  == null;
         }
 
-        protected internal static bool IsOverflowFit(OverflowPropertyValue? rendererOverflowProperty) {
+        public static bool IsOverflowFit(OverflowPropertyValue? rendererOverflowProperty) {
             return rendererOverflowProperty == null || OverflowPropertyValue.FIT.Equals(rendererOverflowProperty);
         }
 
@@ -1098,7 +1099,7 @@ namespace iText.Layout.Renderer {
         /// </param>
         /// <returns>element's fixed content box width or null if it's not set.</returns>
         /// <seealso cref="HasAbsoluteUnitValue(int)"/>
-        protected internal virtual float? RetrieveWidth(float parentBoxWidth) {
+        public virtual float? RetrieveWidth(float parentBoxWidth) {
             float? minWidth = RetrieveUnitValue(parentBoxWidth, Property.MIN_WIDTH);
             float? maxWidth = RetrieveUnitValue(parentBoxWidth, Property.MAX_WIDTH);
             if (maxWidth != null && minWidth != null && minWidth > maxWidth) {
@@ -1140,7 +1141,7 @@ namespace iText.Layout.Renderer {
         /// </param>
         /// <returns>element's fixed content box max width or null if it's not set.</returns>
         /// <seealso cref="HasAbsoluteUnitValue(int)"/>
-        protected internal virtual float? RetrieveMaxWidth(float parentBoxWidth) {
+        public virtual float? RetrieveMaxWidth(float parentBoxWidth) {
             float? maxWidth = RetrieveUnitValue(parentBoxWidth, Property.MAX_WIDTH);
             if (maxWidth != null) {
                 float? minWidth = RetrieveUnitValue(parentBoxWidth, Property.MIN_WIDTH);
@@ -1171,7 +1172,7 @@ namespace iText.Layout.Renderer {
         /// </param>
         /// <returns>element's fixed content box max width or null if it's not set.</returns>
         /// <seealso cref="HasAbsoluteUnitValue(int)"/>
-        protected internal virtual float? RetrieveMinWidth(float parentBoxWidth) {
+        public virtual float? RetrieveMinWidth(float parentBoxWidth) {
             float? minWidth = RetrieveUnitValue(parentBoxWidth, Property.MIN_WIDTH);
             if (minWidth != null) {
                 if (IsBorderBoxSizing(this)) {
@@ -1192,7 +1193,7 @@ namespace iText.Layout.Renderer {
         /// property value.
         /// </remarks>
         /// <param name="updatedWidthValue">element's new fixed content box width.</param>
-        protected internal virtual void UpdateWidth(UnitValue updatedWidthValue) {
+        public virtual void UpdateWidth(UnitValue updatedWidthValue) {
             if (updatedWidthValue.IsPointValue() && IsBorderBoxSizing(this)) {
                 updatedWidthValue.SetValue(updatedWidthValue.GetValue() + CalculatePaddingBorderWidth(this));
             }
@@ -1212,7 +1213,7 @@ namespace iText.Layout.Renderer {
         /// properties.
         /// </remarks>
         /// <returns>element's fixed content box height or null if it's not set.</returns>
-        protected internal virtual float? RetrieveHeight() {
+        public virtual float? RetrieveHeight() {
             float? height = null;
             UnitValue heightUV = GetPropertyAsUnitValue(Property.HEIGHT);
             float? parentResolvedHeight = RetrieveResolvedParentDeclaredHeight();
@@ -1300,7 +1301,7 @@ namespace iText.Layout.Renderer {
         /// property value.
         /// </remarks>
         /// <param name="updatedHeight">element's new fixed content box height, shall be not null.</param>
-        protected internal virtual void UpdateHeight(UnitValue updatedHeight) {
+        public virtual void UpdateHeight(UnitValue updatedHeight) {
             if (IsBorderBoxSizing(this) && updatedHeight.IsPointValue()) {
                 updatedHeight.SetValue(updatedHeight.GetValue() + CalculatePaddingBorderHeight(this));
             }
@@ -1315,7 +1316,7 @@ namespace iText.Layout.Renderer {
         /// property value.
         /// </remarks>
         /// <returns>element's content box max-height or null if it's not set.</returns>
-        protected internal virtual float? RetrieveMaxHeight() {
+        public virtual float? RetrieveMaxHeight() {
             float? maxHeight = null;
             float? minHeight = null;
             float? directParentDeclaredHeight = RetrieveDirectParentDeclaredHeight();
@@ -1361,7 +1362,7 @@ namespace iText.Layout.Renderer {
         /// property value.
         /// </remarks>
         /// <param name="updatedMaxHeight">element's new content box max-height, shall be not null.</param>
-        protected internal virtual void UpdateMaxHeight(UnitValue updatedMaxHeight) {
+        public virtual void UpdateMaxHeight(UnitValue updatedMaxHeight) {
             if (IsBorderBoxSizing(this) && updatedMaxHeight.IsPointValue()) {
                 updatedMaxHeight.SetValue(updatedMaxHeight.GetValue() + CalculatePaddingBorderHeight(this));
             }
@@ -1376,7 +1377,7 @@ namespace iText.Layout.Renderer {
         /// property value.
         /// </remarks>
         /// <returns>element's content box min-height or null if it's not set.</returns>
-        protected internal virtual float? RetrieveMinHeight() {
+        public virtual float? RetrieveMinHeight() {
             float? minHeight = null;
             float? directParentDeclaredHeight = RetrieveDirectParentDeclaredHeight();
             UnitValue minHeightUV = GetPropertyAsUnitValue(this, Property.MIN_HEIGHT);
@@ -1413,23 +1414,23 @@ namespace iText.Layout.Renderer {
         /// property value.
         /// </remarks>
         /// <param name="updatedMinHeight">element's new content box min-height, shall be not null.</param>
-        protected internal virtual void UpdateMinHeight(UnitValue updatedMinHeight) {
+        public virtual void UpdateMinHeight(UnitValue updatedMinHeight) {
             if (IsBorderBoxSizing(this) && updatedMinHeight.IsPointValue()) {
                 updatedMinHeight.SetValue(updatedMinHeight.GetValue() + CalculatePaddingBorderHeight(this));
             }
             SetProperty(Property.MIN_HEIGHT, updatedMinHeight);
         }
 
-        protected internal virtual float? RetrieveUnitValue(float baseValue, int property) {
+        public virtual float? RetrieveUnitValue(float baseValue, int property) {
             return RetrieveUnitValue(baseValue, property, false);
         }
 
-        protected internal virtual float? RetrieveUnitValue(float baseValue, int property, bool pointOnly) {
+        public virtual float? RetrieveUnitValue(float baseValue, int property, bool pointOnly) {
             UnitValue value = this.GetProperty<UnitValue>(property);
             if (pointOnly && value.GetUnitType() == UnitValue.POINT) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, property
-                    ));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, property
+                //    ));
             }
             if (value != null) {
                 if (value.GetUnitType() == UnitValue.PERCENT) {
@@ -1448,11 +1449,11 @@ namespace iText.Layout.Renderer {
         }
 
         //TODO is behavior of copying all properties in split case common to all renderers?
-        protected internal virtual IDictionary<int, Object> GetOwnProperties() {
+        public virtual IDictionary<int, Object> GetOwnProperties() {
             return properties;
         }
 
-        protected internal virtual void AddAllProperties(IDictionary<int, Object> properties) {
+        public virtual void AddAllProperties(IDictionary<int, Object> properties) {
             this.properties.AddAll(properties);
         }
 
@@ -1463,14 +1464,14 @@ namespace iText.Layout.Renderer {
         /// NOTE: this method will no go further than the first child.
         /// </remarks>
         /// <returns>the first yline of the nested children, null if there is no text found</returns>
-        protected internal virtual float? GetFirstYLineRecursively() {
+        public virtual float? GetFirstYLineRecursively() {
             if (childRenderers.Count == 0) {
                 return null;
             }
             return ((iText.Layout.Renderer.AbstractRenderer)childRenderers[0]).GetFirstYLineRecursively();
         }
 
-        protected internal virtual float? GetLastYLineRecursively() {
+        public virtual float? GetLastYLineRecursively() {
             if (!AllowLastYLineRecursiveExtraction()) {
                 return null;
             }
@@ -1486,7 +1487,7 @@ namespace iText.Layout.Renderer {
             return null;
         }
 
-        protected internal virtual bool AllowLastYLineRecursiveExtraction() {
+        public virtual bool AllowLastYLineRecursiveExtraction() {
             return !IsOverflowProperty(OverflowPropertyValue.HIDDEN, Property.OVERFLOW_X) && !IsOverflowProperty(OverflowPropertyValue
                 .HIDDEN, Property.OVERFLOW_Y);
         }
@@ -1503,26 +1504,26 @@ namespace iText.Layout.Renderer {
         /// <see cref="iText.Kernel.Geom.Rectangle">border box</see>
         /// of the renderer
         /// </returns>
-        protected internal virtual Rectangle ApplyMargins(Rectangle rect, UnitValue[] margins, bool reverse) {
+        public virtual Rectangle ApplyMargins(Rectangle rect, UnitValue[] margins, bool reverse) {
             if (!margins[0].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_TOP));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_TOP));
             }
             if (!margins[1].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_RIGHT));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_RIGHT));
             }
             if (!margins[2].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_BOTTOM));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_BOTTOM));
             }
             if (!margins[3].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_LEFT));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_LEFT));
             }
             return rect.ApplyMargins(margins[0].GetValue(), margins[1].GetValue(), margins[2].GetValue(), margins[3].GetValue
                 (), reverse);
@@ -1534,7 +1535,7 @@ namespace iText.Layout.Renderer {
         /// <c>float[]</c>
         /// margins of the renderer
         /// </returns>
-        protected internal virtual UnitValue[] GetMargins() {
+        public virtual UnitValue[] GetMargins() {
             return GetMargins(this);
         }
 
@@ -1544,7 +1545,7 @@ namespace iText.Layout.Renderer {
         /// <c>float[]</c>
         /// paddings of the renderer
         /// </returns>
-        protected internal virtual UnitValue[] GetPaddings() {
+        public virtual UnitValue[] GetPaddings() {
             return GetPaddings(this);
         }
 
@@ -1560,26 +1561,26 @@ namespace iText.Layout.Renderer {
         /// <see cref="iText.Kernel.Geom.Rectangle">border box</see>
         /// of the renderer
         /// </returns>
-        protected internal virtual Rectangle ApplyPaddings(Rectangle rect, UnitValue[] paddings, bool reverse) {
+        public virtual Rectangle ApplyPaddings(Rectangle rect, UnitValue[] paddings, bool reverse) {
             if (!paddings[0].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .PADDING_TOP));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .PADDING_TOP));
             }
             if (!paddings[1].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .PADDING_RIGHT));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .PADDING_RIGHT));
             }
             if (!paddings[2].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .PADDING_BOTTOM));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .PADDING_BOTTOM));
             }
             if (!paddings[3].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .PADDING_LEFT));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .PADDING_LEFT));
             }
             return rect.ApplyMargins(paddings[0].GetValue(), paddings[1].GetValue(), paddings[2].GetValue(), paddings[
                 3].GetValue(), reverse);
@@ -1601,7 +1602,7 @@ namespace iText.Layout.Renderer {
         /// <see cref="iText.Kernel.Geom.Rectangle">border box</see>
         /// of the renderer
         /// </returns>
-        protected internal virtual Rectangle ApplyBorderBox(Rectangle rect, Border[] borders, bool reverse) {
+        public virtual Rectangle ApplyBorderBox(Rectangle rect, Border[] borders, bool reverse) {
             float topWidth = borders[0] != null ? borders[0].GetWidth() : 0;
             float rightWidth = borders[1] != null ? borders[1].GetWidth() : 0;
             float bottomWidth = borders[2] != null ? borders[2].GetWidth() : 0;
@@ -1609,7 +1610,7 @@ namespace iText.Layout.Renderer {
             return rect.ApplyMargins(topWidth, rightWidth, bottomWidth, leftWidth, reverse);
         }
 
-        protected internal virtual void ApplyAbsolutePosition(Rectangle parentRect) {
+        public virtual void ApplyAbsolutePosition(Rectangle parentRect) {
             float? top = this.GetPropertyAsFloat(Property.TOP);
             float? bottom = this.GetPropertyAsFloat(Property.BOTTOM);
             float? left = this.GetPropertyAsFloat(Property.LEFT);
@@ -1636,13 +1637,13 @@ namespace iText.Layout.Renderer {
                 }
             }
             catch (Exception) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
-                    "Absolute positioning might be applied incorrectly."));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
+                //    "Absolute positioning might be applied incorrectly."));
             }
         }
 
-        protected internal virtual void ApplyRelativePositioningTranslation(bool reverse) {
+        public virtual void ApplyRelativePositioningTranslation(bool reverse) {
             float top = (float)this.GetPropertyAsFloat(Property.TOP, 0f);
             float bottom = (float)this.GetPropertyAsFloat(Property.BOTTOM, 0f);
             float left = (float)this.GetPropertyAsFloat(Property.LEFT, 0f);
@@ -1655,15 +1656,15 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual void ApplyDestination(PdfDocument document) {
+        public virtual void ApplyDestination(PdfDocument document) {
             String destination = this.GetProperty<String>(Property.DESTINATION);
             if (destination != null) {
                 int pageNumber = occupiedArea.GetPageNumber();
                 if (pageNumber < 1 || pageNumber > document.GetNumberOfPages()) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                    String logMessageArg = "Property.DESTINATION, which specifies this element location as destination, see ElementPropertyContainer.setDestination.";
-                    logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.UNABLE_TO_APPLY_PAGE_DEPENDENT_PROP_UNKNOWN_PAGE_ON_WHICH_ELEMENT_IS_DRAWN
-                        , logMessageArg));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                    //String logMessageArg = "Property.DESTINATION, which specifies this element location as destination, see ElementPropertyContainer.setDestination.";
+                    //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.UNABLE_TO_APPLY_PAGE_DEPENDENT_PROP_UNKNOWN_PAGE_ON_WHICH_ELEMENT_IS_DRAWN
+                    //    , logMessageArg));
                     return;
                 }
                 PdfArray array = new PdfArray();
@@ -1677,7 +1678,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual void ApplyAction(PdfDocument document) {
+        public virtual void ApplyAction(PdfDocument document) {
             PdfAction action = this.GetProperty<PdfAction>(Property.ACTION);
             if (action != null) {
                 PdfLinkAnnotation link = this.GetProperty<PdfLinkAnnotation>(Property.LINK_ANNOTATION);
@@ -1696,15 +1697,15 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual void ApplyLinkAnnotation(PdfDocument document) {
+        public virtual void ApplyLinkAnnotation(PdfDocument document) {
             PdfLinkAnnotation linkAnnotation = this.GetProperty<PdfLinkAnnotation>(Property.LINK_ANNOTATION);
             if (linkAnnotation != null) {
                 int pageNumber = occupiedArea.GetPageNumber();
                 if (pageNumber < 1 || pageNumber > document.GetNumberOfPages()) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                    String logMessageArg = "Property.LINK_ANNOTATION, which specifies a link associated with this element content area, see com.itextpdf.layout.element.Link.";
-                    logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.UNABLE_TO_APPLY_PAGE_DEPENDENT_PROP_UNKNOWN_PAGE_ON_WHICH_ELEMENT_IS_DRAWN
-                        , logMessageArg));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                    //String logMessageArg = "Property.LINK_ANNOTATION, which specifies a link associated with this element content area, see com.itextpdf.layout.element.Link.";
+                    //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.UNABLE_TO_APPLY_PAGE_DEPENDENT_PROP_UNKNOWN_PAGE_ON_WHICH_ELEMENT_IS_DRAWN
+                    //    , logMessageArg));
                     return;
                 }
                 Rectangle pdfBBox = CalculateAbsolutePdfBBox();
@@ -1754,7 +1755,7 @@ namespace iText.Layout.Renderer {
             return null;
         }
 
-        protected internal virtual void UpdateHeightsOnSplit(bool wasHeightClipped, iText.Layout.Renderer.AbstractRenderer
+        public virtual void UpdateHeightsOnSplit(bool wasHeightClipped, iText.Layout.Renderer.AbstractRenderer
              splitRenderer, iText.Layout.Renderer.AbstractRenderer overflowRenderer) {
             UpdateHeightsOnSplit(occupiedArea.GetBBox().GetHeight(), wasHeightClipped, splitRenderer, overflowRenderer
                 , true);
@@ -1765,8 +1766,8 @@ namespace iText.Layout.Renderer {
             ) {
             if (wasHeightClipped) {
                 // if height was clipped, max height exists and can be resolved
-                ILog logger = LogManager.GetLogger(typeof(BlockRenderer));
-                logger.Warn(iText.IO.LogMessageConstant.CLIP_ELEMENT);
+                //ILog logger = LogManager.GetLogger(typeof(BlockRenderer));
+                //logger.Warn(iText.IO.LogMessageConstant.CLIP_ELEMENT);
                 if (enlargeOccupiedAreaOnHeightWasClipped) {
                     float? maxHeight = RetrieveMaxHeight();
                     splitRenderer.occupiedArea.GetBBox().MoveDown((float)maxHeight - usedHeight).SetHeight((float)maxHeight);
@@ -1842,7 +1843,7 @@ namespace iText.Layout.Renderer {
             return MinMaxWidthUtils.CountDefaultMinMaxWidth(this);
         }
 
-        protected internal virtual bool SetMinMaxWidthBasedOnFixedWidth(MinMaxWidth minMaxWidth) {
+        public virtual bool SetMinMaxWidthBasedOnFixedWidth(MinMaxWidth minMaxWidth) {
             // retrieve returns max width, if there is no width.
             if (HasAbsoluteUnitValue(Property.WIDTH)) {
                 //Renderer may override retrieveWidth, double check is required.
@@ -1856,15 +1857,15 @@ namespace iText.Layout.Renderer {
             return false;
         }
 
-        protected internal virtual bool IsNotFittingHeight(LayoutArea layoutArea) {
+        public virtual bool IsNotFittingHeight(LayoutArea layoutArea) {
             return !IsPositioned() && occupiedArea.GetBBox().GetHeight() > layoutArea.GetBBox().GetHeight();
         }
 
-        protected internal virtual bool IsNotFittingWidth(LayoutArea layoutArea) {
+        public virtual bool IsNotFittingWidth(LayoutArea layoutArea) {
             return !IsPositioned() && occupiedArea.GetBBox().GetWidth() > layoutArea.GetBBox().GetWidth();
         }
 
-        protected internal virtual bool IsNotFittingLayoutArea(LayoutArea layoutArea) {
+        public virtual bool IsNotFittingLayoutArea(LayoutArea layoutArea) {
             return IsNotFittingHeight(layoutArea) || IsNotFittingWidth(layoutArea);
         }
 
@@ -1873,7 +1874,7 @@ namespace iText.Layout.Renderer {
         /// a
         /// <c>boolean</c>
         /// </returns>
-        protected internal virtual bool IsPositioned() {
+        public virtual bool IsPositioned() {
             return !IsStaticLayout();
         }
 
@@ -1882,34 +1883,34 @@ namespace iText.Layout.Renderer {
         /// a
         /// <c>boolean</c>
         /// </returns>
-        protected internal virtual bool IsFixedLayout() {
+        public virtual bool IsFixedLayout() {
             Object positioning = this.GetProperty<Object>(Property.POSITION);
             return Convert.ToInt32(LayoutPosition.FIXED).Equals(positioning);
         }
 
-        protected internal virtual bool IsStaticLayout() {
+        public virtual bool IsStaticLayout() {
             Object positioning = this.GetProperty<Object>(Property.POSITION);
             return positioning == null || Convert.ToInt32(LayoutPosition.STATIC).Equals(positioning);
         }
 
-        protected internal virtual bool IsRelativePosition() {
+        public virtual bool IsRelativePosition() {
             int? positioning = this.GetPropertyAsInteger(Property.POSITION);
             return Convert.ToInt32(LayoutPosition.RELATIVE).Equals(positioning);
         }
 
-        protected internal virtual bool IsAbsolutePosition() {
+        public virtual bool IsAbsolutePosition() {
             int? positioning = this.GetPropertyAsInteger(Property.POSITION);
             return Convert.ToInt32(LayoutPosition.ABSOLUTE).Equals(positioning);
         }
 
-        protected internal virtual bool IsKeepTogether() {
+        public virtual bool IsKeepTogether() {
             return true.Equals(GetPropertyAsBoolean(Property.KEEP_TOGETHER));
         }
 
         // Note! The second parameter is here on purpose. Currently occupied area is passed as a value of this parameter in
         // BlockRenderer, but actually, the block can have many areas, and occupied area will be the common area of sub-areas,
         // whereas child element alignment should be performed area-wise.
-        protected internal virtual void AlignChildHorizontally(IRenderer childRenderer, Rectangle currentArea) {
+        public virtual void AlignChildHorizontally(IRenderer childRenderer, Rectangle currentArea) {
             float availableWidth = currentArea.GetWidth();
             HorizontalAlignment? horizontalAlignment = childRenderer.GetProperty<HorizontalAlignment?>(Property.HORIZONTAL_ALIGNMENT
                 );
@@ -1930,9 +1931,9 @@ namespace iText.Layout.Renderer {
                         }
                     }
                     catch (NullReferenceException) {
-                        ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                        logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
-                            "Some of the children might not end up aligned horizontally."));
+                        //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                        //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
+                        //    "Some of the children might not end up aligned horizontally."));
                     }
                 }
             }
@@ -1945,7 +1946,7 @@ namespace iText.Layout.Renderer {
         /// and if <c>Property.BORDER</c> is also not set then <c>null</c> is returned
         /// on position of this border
         /// </returns>
-        protected internal virtual Border[] GetBorders() {
+        public virtual Border[] GetBorders() {
             return GetBorders(this);
         }
 
@@ -1957,11 +1958,11 @@ namespace iText.Layout.Renderer {
         /// and if <c>Property.BORDER_RADIUS</c> is also not set then <c>null</c> is returned
         /// on position of this border radius
         /// </returns>
-        protected internal virtual BorderRadius[] GetBorderRadii() {
+        public virtual BorderRadius[] GetBorderRadii() {
             return GetBorderRadii(this);
         }
 
-        protected internal virtual iText.Layout.Renderer.AbstractRenderer SetBorders(Border border, int borderNumber
+        public virtual iText.Layout.Renderer.AbstractRenderer SetBorders(Border border, int borderNumber
             ) {
             switch (borderNumber) {
                 case 0: {
@@ -2002,7 +2003,7 @@ namespace iText.Layout.Renderer {
         /// which is a bbox of the content not relative to the parent's layout area but rather to
         /// the some pdf entity coordinate system.
         /// </returns>
-        protected internal virtual Rectangle CalculateAbsolutePdfBBox() {
+        public virtual Rectangle CalculateAbsolutePdfBBox() {
             Rectangle contentBox = GetOccupiedAreaBBox();
             IList<Point> contentBoxPoints = RectangleToPointsList(contentBox);
             iText.Layout.Renderer.AbstractRenderer renderer = this;
@@ -2029,7 +2030,7 @@ namespace iText.Layout.Renderer {
         /// <summary>Calculates bounding box around points.</summary>
         /// <param name="points">list of the points calculated bbox will enclose.</param>
         /// <returns>array of float values which denote left, bottom, right, top lines of bbox in this specific order</returns>
-        protected internal virtual Rectangle CalculateBBox(IList<Point> points) {
+        public virtual Rectangle CalculateBBox(IList<Point> points) {
             double minX = double.MaxValue;
             double minY = double.MaxValue;
             double maxX = -double.MaxValue;
@@ -2043,7 +2044,7 @@ namespace iText.Layout.Renderer {
             return new Rectangle((float)minX, (float)minY, (float)(maxX - minX), (float)(maxY - minY));
         }
 
-        protected internal virtual IList<Point> RectangleToPointsList(Rectangle rect) {
+        public virtual IList<Point> RectangleToPointsList(Rectangle rect) {
             IList<Point> points = new List<Point>();
             points.AddAll(JavaUtil.ArraysAsList(new Point(rect.GetLeft(), rect.GetBottom()), new Point(rect.GetRight()
                 , rect.GetBottom()), new Point(rect.GetRight(), rect.GetTop()), new Point(rect.GetLeft(), rect.GetTop(
@@ -2051,7 +2052,7 @@ namespace iText.Layout.Renderer {
             return points;
         }
 
-        protected internal virtual IList<Point> TransformPoints(IList<Point> points, AffineTransform transform) {
+        public virtual IList<Point> TransformPoints(IList<Point> points, AffineTransform transform) {
             foreach (Point point in points) {
                 transform.Transform(point, point);
             }
@@ -2069,7 +2070,7 @@ namespace iText.Layout.Renderer {
         /// array of two floats, where first element denotes x-coordinate shift and the second
         /// element denotes y-coordinate shift which are needed to align points bbox at the given lines.
         /// </returns>
-        protected internal virtual float[] CalculateShiftToPositionBBoxOfPointsAt(float left, float top, IList<Point
+        public virtual float[] CalculateShiftToPositionBBoxOfPointsAt(float left, float top, IList<Point
             > points) {
             double minX = double.MaxValue;
             double maxY = -double.MaxValue;
@@ -2088,7 +2089,7 @@ namespace iText.Layout.Renderer {
         /// <see cref="iText.Layout.Properties.Property"/>
         /// </param>
         /// <returns>false if property value either null, or percent, otherwise true.</returns>
-        protected internal virtual bool HasAbsoluteUnitValue(int property) {
+        public virtual bool HasAbsoluteUnitValue(int property) {
             UnitValue value = this.GetProperty<UnitValue>(property);
             return value != null && value.IsPointValue();
         }
@@ -2099,7 +2100,7 @@ namespace iText.Layout.Renderer {
         /// <see cref="iText.Layout.Properties.Property"/>
         /// </param>
         /// <returns>false if property value either null, or point, otherwise true.</returns>
-        protected internal virtual bool HasRelativeUnitValue(int property) {
+        public virtual bool HasRelativeUnitValue(int property) {
             UnitValue value = this.GetProperty<UnitValue>(property);
             return value != null && value.IsPercentValue();
         }
@@ -2207,9 +2208,9 @@ namespace iText.Layout.Renderer {
                 if (font is String || font is String[]) {
                     if (font is String) {
                         // TODO remove this if-clause before 7.2
-                        ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
-                        logger.Warn(iText.IO.LogMessageConstant.FONT_PROPERTY_OF_STRING_TYPE_IS_DEPRECATED_USE_STRINGS_ARRAY_INSTEAD
-                            );
+                        //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.AbstractRenderer));
+                        //logger.Warn(iText.IO.LogMessageConstant.FONT_PROPERTY_OF_STRING_TYPE_IS_DEPRECATED_USE_STRINGS_ARRAY_INSTEAD
+                        //    );
                         IList<String> splitFontFamily = FontFamilySplitter.SplitFontFamily((String)font);
                         font = splitFontFamily.ToArray(new String[splitFontFamily.Count]);
                     }
@@ -2359,14 +2360,14 @@ namespace iText.Layout.Renderer {
             return transform;
         }
 
-        protected internal virtual void BeginTransformationIfApplied(PdfCanvas canvas) {
+        public virtual void BeginTransformationIfApplied(PdfCanvas canvas) {
             if (this.GetProperty<Transform>(Property.TRANSFORM) != null) {
                 AffineTransform transform = CreateTransformationInsideOccupiedArea();
                 canvas.SaveState().ConcatMatrix(transform);
             }
         }
 
-        protected internal virtual void EndTransformationIfApplied(PdfCanvas canvas) {
+        public virtual void EndTransformationIfApplied(PdfCanvas canvas) {
             if (this.GetProperty<Transform>(Property.TRANSFORM) != null) {
                 canvas.RestoreState();
             }

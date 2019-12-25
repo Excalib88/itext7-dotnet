@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Colors;
 using iText.IO.Source;
 using iText.IO.Util;
@@ -55,62 +56,62 @@ namespace iText.IO.Image {
 
         private static readonly Object staticLock = new Object();
 
-        protected internal Uri url;
+        public Uri url;
 
-        protected internal int[] transparency;
+        public int[] transparency;
 
-        protected internal ImageType originalType;
+        public ImageType originalType;
 
-        protected internal float width;
+        public float width;
 
-        protected internal float height;
+        public float height;
 
-        protected internal byte[] data;
+        public byte[] data;
 
-        protected internal int imageSize;
+        public int imageSize;
 
-        protected internal int bpc = 1;
+        public int bpc = 1;
 
-        protected internal int colorSpace = -1;
+        public int colorSpace = -1;
 
-        protected internal float[] decode;
+        public float[] decode;
 
-        protected internal IDictionary<String, Object> decodeParms;
+        public IDictionary<String, Object> decodeParms;
 
-        protected internal bool inverted = false;
+        public bool inverted = false;
 
-        protected internal float rotation;
+        public float rotation;
 
-        protected internal IccProfile profile;
+        public IccProfile profile;
 
-        protected internal int dpiX = 0;
+        public int dpiX = 0;
 
-        protected internal int dpiY = 0;
+        public int dpiY = 0;
 
-        protected internal int colorTransform = 1;
+        public int colorTransform = 1;
 
-        protected internal bool deflated;
+        public bool deflated;
 
-        protected internal bool mask = false;
+        public bool mask = false;
 
-        protected internal iText.IO.Image.ImageData imageMask;
+        public iText.IO.Image.ImageData imageMask;
 
-        protected internal bool interpolation;
+        public bool interpolation;
 
-        protected internal float XYRatio = 0;
+        public float XYRatio = 0;
 
-        protected internal String filter;
+        public String filter;
 
-        protected internal IDictionary<String, Object> imageAttributes;
+        public IDictionary<String, Object> imageAttributes;
 
-        protected internal long? mySerialId = GetSerialId();
+        public long? mySerialId = GetSerialId();
 
-        protected internal ImageData(Uri url, ImageType type) {
+        public ImageData(Uri url, ImageType type) {
             this.url = url;
             this.originalType = type;
         }
 
-        protected internal ImageData(byte[] bytes, ImageType type) {
+        public ImageData(byte[] bytes, ImageType type) {
             this.data = bytes;
             this.originalType = type;
         }
@@ -313,13 +314,13 @@ namespace iText.IO.Image {
         /// <summary>Checks if image can be inline</summary>
         /// <returns>if the image can be inline</returns>
         public virtual bool CanImageBeInline() {
-            ILog logger = LogManager.GetLogger(typeof(iText.IO.Image.ImageData));
+            //ILog logger = LogManager.GetLogger(typeof(iText.IO.Image.ImageData));
             if (imageSize > 4096) {
-                logger.Warn(iText.IO.LogMessageConstant.IMAGE_SIZE_CANNOT_BE_MORE_4KB);
+                //logger.Warn(iText.IO.LogMessageConstant.IMAGE_SIZE_CANNOT_BE_MORE_4KB);
                 return false;
             }
             if (imageMask != null) {
-                logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_MASK);
+                //logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_MASK);
                 return false;
             }
             return true;

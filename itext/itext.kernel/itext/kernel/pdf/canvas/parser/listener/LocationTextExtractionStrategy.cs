@@ -224,7 +224,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
         /// <param name="previousChunk">the chunk that appeared immediately before the current chunk</param>
         /// <returns>true if the two chunks represent different words (i.e. should have a space between them).  False otherwise.
         ///     </returns>
-        protected internal virtual bool IsChunkAtWordBoundary(TextChunk chunk, TextChunk previousChunk) {
+        public virtual bool IsChunkAtWordBoundary(TextChunk chunk, TextChunk previousChunk) {
             return chunk.GetLocation().IsAtWordBoundary(previousChunk.GetLocation());
         }
 

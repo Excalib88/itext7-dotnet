@@ -249,7 +249,7 @@ namespace iText.Kernel.Utils {
         /// <param name="documentPageRange">the page range of the original document to be included in the document being created now.
         ///     </param>
         /// <returns>the PdfWriter instance for the document which is being created.</returns>
-        protected internal virtual PdfWriter GetNextPdfWriter(PageRange documentPageRange) {
+        public virtual PdfWriter GetNextPdfWriter(PageRange documentPageRange) {
             return new PdfWriter(new ByteArrayOutputStream());
         }
 

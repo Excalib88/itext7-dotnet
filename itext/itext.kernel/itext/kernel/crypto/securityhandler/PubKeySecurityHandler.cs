@@ -63,12 +63,12 @@ namespace iText.Kernel.Crypto.Securityhandler {
 
         private byte[] seed;
 
-        protected internal PubKeySecurityHandler() {
+        public PubKeySecurityHandler() {
             seed = EncryptionUtils.GenerateSeed(SEED_LENGTH);
             recipients = new List<PublicKeyRecipient>();
         }
 
-        protected internal virtual byte[] ComputeGlobalKey(String messageDigestAlgorithm, bool encryptMetadata) {
+        public virtual byte[] ComputeGlobalKey(String messageDigestAlgorithm, bool encryptMetadata) {
             IDigest md;
             byte[] encodedRecipient;
             try {
@@ -88,7 +88,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return md.Digest();
         }
 
-        protected internal static byte[] ComputeGlobalKeyOnReading(PdfDictionary encryptionDictionary, ICipherParameters
+        public static byte[] ComputeGlobalKeyOnReading(PdfDictionary encryptionDictionary, ICipherParameters
              certificateKey, X509Certificate certificate, bool encryptMetadata, String digestAlgorithm) {
             PdfArray recipients = encryptionDictionary.GetAsArray(PdfName.Recipients);
             if (recipients == null) {
@@ -116,7 +116,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return encryptionKey;
         }
 
-        protected internal virtual void AddAllRecipients(X509Certificate[] certs, int[] permissions) {
+        public virtual void AddAllRecipients(X509Certificate[] certs, int[] permissions) {
             if (certs != null) {
                 for (int i = 0; i < certs.Length; i++) {
                     AddRecipient(certs[i], permissions[i]);
@@ -124,7 +124,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             }
         }
 
-        protected internal virtual PdfArray CreateRecipientsArray() {
+        public virtual PdfArray CreateRecipientsArray() {
             PdfArray recipients;
             try {
                 recipients = GetEncodedRecipients();
@@ -135,14 +135,14 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return recipients;
         }
 
-        protected internal abstract void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
+        public abstract void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
              encryptMetadata, bool embeddedFilesOnly);
 
-        protected internal abstract String GetDigestAlgorithm();
+        public abstract String GetDigestAlgorithm();
 
-        protected internal abstract void InitKey(byte[] globalKey, int keyLength);
+        public abstract void InitKey(byte[] globalKey, int keyLength);
 
-        protected internal virtual void InitKeyAndFillDictionary(PdfDictionary encryptionDictionary, X509Certificate
+        public virtual void InitKeyAndFillDictionary(PdfDictionary encryptionDictionary, X509Certificate
             [] certs, int[] permissions, bool encryptMetadata, bool embeddedFilesOnly) {
             AddAllRecipients(certs, permissions);
             int? keyLen = encryptionDictionary.GetAsInt(PdfName.Length);
@@ -153,7 +153,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             SetPubSecSpecificHandlerDicEntries(encryptionDictionary, encryptMetadata, embeddedFilesOnly);
         }
 
-        protected internal virtual void InitKeyAndReadDictionary(PdfDictionary encryptionDictionary, ICipherParameters
+        public virtual void InitKeyAndReadDictionary(PdfDictionary encryptionDictionary, ICipherParameters
              certificateKey, X509Certificate certificate, bool encryptMetadata) {
             String digestAlgorithm = GetDigestAlgorithm();
             byte[] encryptionKey = ComputeGlobalKeyOnReading(encryptionDictionary, (ICipherParameters)certificateKey, 

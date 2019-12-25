@@ -53,7 +53,7 @@ namespace iText.Signatures {
     /// </summary>
     public class RootStoreVerifier : CertificateVerifier {
         /// <summary>A key store against which certificates can be verified.</summary>
-        protected internal List<X509Certificate> rootStore = null;
+        public List<X509Certificate> rootStore = null;
 
         /// <summary>Creates a RootStoreVerifier in a chain of verifiers.</summary>
         /// <param name="verifier">the next verifier in the chain</param>

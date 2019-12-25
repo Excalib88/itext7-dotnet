@@ -51,7 +51,7 @@ namespace iText.Svg.Renderers.Impl {
     /// implementation for the &lt;svg&gt; tag.
     /// </summary>
     public class SvgTagSvgNodeRenderer : AbstractBranchSvgNodeRenderer {
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             context.AddViewPort(this.CalculateViewPort(context));
             base.DoDraw(context);
         }
@@ -93,7 +93,7 @@ namespace iText.Svg.Renderers.Impl {
             return new Rectangle(portX, portY, portWidth, portHeight);
         }
 
-        protected internal override bool CanElementFill() {
+        public override bool CanElementFill() {
             return false;
         }
 

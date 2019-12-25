@@ -176,7 +176,7 @@ namespace iText.Kernel.XMP.Impl
 		}
 
 		/// <summary>Checks if the supplied options are consistent.</summary>
-		protected internal virtual void CheckOptionsConsistence()
+		public virtual void CheckOptionsConsistence()
 		{
 			if (options.GetEncodeUTF16BE() | options.GetEncodeUTF16LE())
 			{

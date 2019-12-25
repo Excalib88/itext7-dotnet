@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.StyledXmlParser.Css;
 using iText.StyledXmlParser.Css.Media;
@@ -93,8 +94,8 @@ namespace iText.Svg.Css.Impl {
                 }
             }
             catch (System.IO.IOException e) {
-                ILog logger = LogManager.GetLogger(this.GetType());
-                logger.Warn(SvgLogMessageConstant.ERROR_INITIALIZING_DEFAULT_CSS, e);
+                //ILog logger = LogManager.GetLogger(this.GetType());
+                //logger.Warn(SvgLogMessageConstant.ERROR_INITIALIZING_DEFAULT_CSS, e);
                 this.css = new CssStyleSheet();
             }
         }
@@ -134,8 +135,8 @@ namespace iText.Svg.Css.Impl {
                 IStylesContainer parentNode = (IStylesContainer)node.ParentNode();
                 IDictionary<String, String> parentStyles = parentNode.GetStyles();
                 if (parentStyles == null && !(node.ParentNode() is IDocumentNode)) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Svg.Css.Impl.SvgStyleResolver));
-                    logger.Error(iText.StyledXmlParser.LogMessageConstant.ERROR_RESOLVING_PARENT_STYLES);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Svg.Css.Impl.SvgStyleResolver));
+                    //logger.Error(iText.StyledXmlParser.LogMessageConstant.ERROR_RESOLVING_PARENT_STYLES);
                 }
                 if (parentStyles != null) {
                     foreach (KeyValuePair<String, String> entry in parentStyles) {
@@ -163,8 +164,8 @@ namespace iText.Svg.Css.Impl {
                     xlinkValue = this.resourceResolver.ResolveAgainstBaseUri(attr.GetValue()).ToExternalForm();
                 }
                 catch (UriFormatException mue) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Svg.Css.Impl.SvgStyleResolver));
-                    logger.Error(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RESOLVE_IMAGE_URL, mue);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Svg.Css.Impl.SvgStyleResolver));
+                    //logger.Error(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_RESOLVE_IMAGE_URL, mue);
                 }
             }
             attributesMap.Put(attr.GetKey(), xlinkValue);
@@ -216,8 +217,8 @@ namespace iText.Svg.Css.Impl {
                                 this.css.AppendCssStyleSheet(styleSheet);
                             }
                             catch (System.IO.IOException exc) {
-                                ILog logger = LogManager.GetLogger(typeof(iText.Svg.Css.Impl.SvgStyleResolver));
-                                logger.Error(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_PROCESS_EXTERNAL_CSS_FILE, exc);
+                                //ILog logger = LogManager.GetLogger(typeof(iText.Svg.Css.Impl.SvgStyleResolver));
+                                //logger.Error(iText.StyledXmlParser.LogMessageConstant.UNABLE_TO_PROCESS_EXTERNAL_CSS_FILE, exc);
                             }
                         }
                     }

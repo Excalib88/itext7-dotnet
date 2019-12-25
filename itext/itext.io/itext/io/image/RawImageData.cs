@@ -84,13 +84,13 @@ namespace iText.IO.Image {
         public const int CCITT_ENDOFBLOCK = 8;
 
         //NOTE in itext5 instead of typeCcitt bpc property was using for both bpc and type CCITT.
-        protected internal int typeCcitt;
+        public int typeCcitt;
 
-        protected internal RawImageData(Uri url, ImageType type)
+        public RawImageData(Uri url, ImageType type)
             : base(url, type) {
         }
 
-        protected internal RawImageData(byte[] bytes, ImageType type)
+        public RawImageData(byte[] bytes, ImageType type)
             : base(bytes, type) {
         }
 

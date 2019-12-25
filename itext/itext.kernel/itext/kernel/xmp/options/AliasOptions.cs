@@ -122,7 +122,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.DefineOptionName(int)"/>
-        protected internal override String DefineOptionName(int option) {
+        public override String DefineOptionName(int option) {
             switch (option) {
                 case PROP_DIRECT: {
                     return "PROP_DIRECT";
@@ -151,7 +151,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.GetValidOptions()"/>
-        protected internal override int GetValidOptions() {
+        public override int GetValidOptions() {
             return PROP_DIRECT | PROP_ARRAY | PROP_ARRAY_ORDERED | PROP_ARRAY_ALTERNATE | PROP_ARRAY_ALT_TEXT;
         }
     }

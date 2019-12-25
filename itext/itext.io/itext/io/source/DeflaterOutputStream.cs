@@ -62,7 +62,7 @@ namespace iText.IO.Source {
 		{
 		}
 
-	    protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing) {
 	        if (disposing) {
 	            Finish();
 	        }

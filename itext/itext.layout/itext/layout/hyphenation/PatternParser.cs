@@ -227,7 +227,7 @@ namespace iText.Layout.Hyphenation {
             return il.ToString();
         }
 
-        protected internal virtual void GetExternalClasses() {
+        public virtual void GetExternalClasses() {
             Parse(ResourceUtil.GetResourceStream(HyphenationConstants.HYPHENATION_DEFAULT_RESOURCE + "External.classes.xml"), "classes.xml");
         }
 

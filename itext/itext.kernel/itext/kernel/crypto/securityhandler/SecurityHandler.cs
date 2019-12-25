@@ -43,15 +43,16 @@ address: sales@itextpdf.com
 */
 using System;
 using System.IO;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security;
+
 using iText.Kernel;
 using iText.Kernel.Crypto;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Security;
 
 namespace iText.Kernel.Crypto.Securityhandler {
     public abstract class SecurityHandler {
         /// <summary>The global encryption key</summary>
-        protected internal byte[] mkey = new byte[0];
+        public byte[] mkey = new byte[0];
 
         /// <summary>The encryption key for a particular object/generation.</summary>
         /// <remarks>
@@ -60,7 +61,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
         /// <see cref="SetHashKeyForNextObject(int, int)"/>
         /// for every object individually based in its object/generation.
         /// </remarks>
-        protected internal byte[] nextObjectKey;
+        public byte[] nextObjectKey;
 
         /// <summary>
         /// The encryption key length for a particular object/generation
@@ -68,15 +69,15 @@ namespace iText.Kernel.Crypto.Securityhandler {
         /// <see cref="SetHashKeyForNextObject(int, int)"/>
         /// for every object individually based in its object/generation.
         /// </summary>
-        protected internal int nextObjectKeySize;
+        public int nextObjectKeySize;
 
         [System.NonSerialized]
-        protected internal IDigest md5;
+        public IDigest md5;
 
         /// <summary>Work area to prepare the object/generation bytes</summary>
-        protected internal byte[] extra = new byte[5];
+        public byte[] extra = new byte[5];
 
-        protected internal SecurityHandler() {
+        public SecurityHandler() {
             SafeInitMessageDigest();
         }
 

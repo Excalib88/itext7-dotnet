@@ -54,7 +54,7 @@ namespace iText.IO.Font {
         public const String NOTDEF = ".notdef";
 
         /// <summary>Base font encoding.</summary>
-        protected internal String baseEncoding;
+        public String baseEncoding;
 
         /// <summary>
         /// <see langword="true"/>
@@ -67,20 +67,20 @@ namespace iText.IO.Font {
         /// <c>encoding</c>
         /// is only used to map a char to the position inside the font, not to the expected char name.
         /// </remarks>
-        protected internal bool fontSpecific;
+        public bool fontSpecific;
 
         /// <summary>Mapping map from unicode to simple code according to the encoding.</summary>
-        protected internal IntHashtable unicodeToCode;
+        public IntHashtable unicodeToCode;
 
-        protected internal int[] codeToUnicode;
+        public int[] codeToUnicode;
 
         /// <summary>Encoding names.</summary>
-        protected internal String[] differences;
+        public String[] differences;
 
         /// <summary>Encodings unicode differences</summary>
-        protected internal IntHashtable unicodeDifferences;
+        public IntHashtable unicodeDifferences;
 
-        protected internal FontEncoding() {
+        public FontEncoding() {
             unicodeToCode = new IntHashtable(256);
             codeToUnicode = ArrayUtil.FillWithValue(new int[256], -1);
             unicodeDifferences = new IntHashtable(256);
@@ -269,7 +269,7 @@ namespace iText.IO.Font {
             return Object.Equals(NormalizeEncoding(encoding), baseEncoding);
         }
 
-        protected internal virtual void FillCustomEncoding() {
+        public virtual void FillCustomEncoding() {
             differences = new String[256];
             StringTokenizer tok = new StringTokenizer(baseEncoding.Substring(1), " ,\t\n\r\f");
             if (tok.NextToken().Equals("full")) {
@@ -318,7 +318,7 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal virtual void FillNamedEncoding() {
+        public virtual void FillNamedEncoding() {
             // check if the encoding exists
             PdfEncodings.ConvertToBytes(" ", baseEncoding);
             bool stdEncoding = PdfEncodings.WINANSI.Equals(baseEncoding) || PdfEncodings.MACROMAN.Equals(baseEncoding);
@@ -348,7 +348,7 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal virtual void FillStandardEncoding() {
+        public virtual void FillStandardEncoding() {
             int[] encoded = PdfEncodings.standardEncoding;
             for (int ch = 0; ch < 256; ++ch) {
                 int uni = encoded[ch];
@@ -374,7 +374,7 @@ namespace iText.IO.Font {
         /// </remarks>
         /// <param name="enc">the encoding to be normalized</param>
         /// <returns>the normalized encoding</returns>
-        protected internal static String NormalizeEncoding(String enc) {
+        public static String NormalizeEncoding(String enc) {
             String tmp = enc == null ? "" : enc.ToLowerInvariant();
             switch (tmp) {
                 case "":

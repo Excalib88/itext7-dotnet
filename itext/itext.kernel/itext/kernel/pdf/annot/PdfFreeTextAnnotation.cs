@@ -66,7 +66,7 @@ namespace iText.Kernel.Pdf.Annot {
         /// see
         /// <see cref="PdfAnnotation.MakeAnnotation(iText.Kernel.Pdf.PdfObject)"/>
         /// </summary>
-        protected internal PdfFreeTextAnnotation(PdfDictionary pdfObject)
+        public PdfFreeTextAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

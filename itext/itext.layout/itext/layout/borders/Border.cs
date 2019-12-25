@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Colors;
 using iText.Kernel.Geom;
@@ -96,13 +97,13 @@ namespace iText.Layout.Borders {
 
         /// <summary>The color of the border.</summary>
         /// <seealso cref="iText.Layout.Properties.TransparentColor"/>
-        protected internal TransparentColor transparentColor;
+        public TransparentColor transparentColor;
 
         /// <summary>The width of the border.</summary>
-        protected internal float width;
+        public float width;
 
         /// <summary>The type of the border.</summary>
-        protected internal int type;
+        public int type;
 
         /// <summary>The hash value for the border.</summary>
         private int hash;
@@ -121,7 +122,7 @@ namespace iText.Layout.Borders {
         /// to be set by default is black
         /// </remarks>
         /// <param name="width">the width which the border should have</param>
-        protected internal Border(float width)
+        public Border(float width)
             : this(ColorConstants.BLACK, width) {
         }
 
@@ -133,7 +134,7 @@ namespace iText.Layout.Borders {
         /// </summary>
         /// <param name="color">the color which the border should have</param>
         /// <param name="width">the width which the border should have</param>
-        protected internal Border(Color color, float width) {
+        public Border(Color color, float width) {
             this.transparentColor = new TransparentColor(color);
             this.width = width;
         }
@@ -149,7 +150,7 @@ namespace iText.Layout.Borders {
         /// <param name="width">the width which the border should have</param>
         /// <param name="opacity">the opacity which border should have; a float between 0 and 1, where 1 stands for fully opaque color and 0 - for fully transparent
         ///     </param>
-        protected internal Border(Color color, float width, float opacity) {
+        public Border(Color color, float width, float opacity) {
             this.transparentColor = new TransparentColor(color, opacity);
             this.width = width;
         }
@@ -263,10 +264,10 @@ namespace iText.Layout.Borders {
         public virtual void Draw(PdfCanvas canvas, float x1, float y1, float x2, float y2, float horizontalRadius1
             , float verticalRadius1, float horizontalRadius2, float verticalRadius2, Border.Side defaultSide, float
              borderWidthBefore, float borderWidthAfter) {
-            ILog logger = LogManager.GetLogger(typeof(iText.Layout.Borders.Border));
-            logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.METHOD_IS_NOT_IMPLEMENTED_BY_DEFAULT_OTHER_METHOD_WILL_BE_USED
-                , "Border#draw(PdfCanvas, float, float, float, float, float, float, float, float, Side, float, float", 
-                "Border#draw(PdfCanvas, float, float, float, float, Side, float, float)"));
+            //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Borders.Border));
+            //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.METHOD_IS_NOT_IMPLEMENTED_BY_DEFAULT_OTHER_METHOD_WILL_BE_USED
+            //    , "Border#draw(PdfCanvas, float, float, float, float, float, float, float, float, Side, float, float", 
+            //    "Border#draw(PdfCanvas, float, float, float, float, Side, float, float)"));
             Draw(canvas, x1, y1, x2, y2, defaultSide, borderWidthBefore, borderWidthAfter);
         }
 
@@ -399,7 +400,7 @@ namespace iText.Layout.Borders {
         /// the corresponded
         /// <see cref="Side">side</see>
         /// </returns>
-        protected internal virtual Border.Side GetBorderSide(float x1, float y1, float x2, float y2, Border.Side defaultSide
+        public virtual Border.Side GetBorderSide(float x1, float y1, float x2, float y2, Border.Side defaultSide
             ) {
             bool isLeft = false;
             bool isRight = false;
@@ -448,7 +449,7 @@ namespace iText.Layout.Borders {
             LEFT
         }
 
-        protected internal virtual Point GetIntersectionPoint(Point lineBeg, Point lineEnd, Point clipLineBeg, Point
+        public virtual Point GetIntersectionPoint(Point lineBeg, Point lineEnd, Point clipLineBeg, Point
              clipLineEnd) {
             double A1 = lineBeg.GetY() - lineEnd.GetY();
             double A2 = clipLineBeg.GetY() - clipLineEnd.GetY();
@@ -468,7 +469,7 @@ namespace iText.Layout.Borders {
         /// </param>
         /// <param name="initialGap">the initial size of the gap</param>
         /// <returns>the adjusted size of the gap</returns>
-        protected internal virtual float GetDotsGap(double distance, float initialGap) {
+        public virtual float GetDotsGap(double distance, float initialGap) {
             double gapsNum = Math.Ceiling(distance / initialGap);
             if (gapsNum == 0) {
                 return initialGap;
@@ -496,7 +497,7 @@ namespace iText.Layout.Borders {
         /// </param>
         /// <param name="borderWidthBefore">defines width of the border that is before the current one</param>
         /// <param name="borderWidthAfter">defines width of the border that is after the current one</param>
-        protected internal virtual void DrawDiscontinuousBorders(PdfCanvas canvas, Rectangle boundingRectangle, float
+        public virtual void DrawDiscontinuousBorders(PdfCanvas canvas, Rectangle boundingRectangle, float
             [] horizontalRadii, float[] verticalRadii, Border.Side defaultSide, float borderWidthBefore, float borderWidthAfter
             ) {
             float x1 = boundingRectangle.GetX();
@@ -670,7 +671,7 @@ namespace iText.Layout.Borders {
         /// <param name="y2">y-ordinate of point B</param>
         /// <param name="defaultSide">default side of the border used to determine the side given by points A and B</param>
         /// <returns>float[] containing the adjusted starting points in the form {x1,y1,x2,y2}</returns>
-        protected internal virtual float[] GetStartingPointsForBorderSide(float x1, float y1, float x2, float y2, 
+        public virtual float[] GetStartingPointsForBorderSide(float x1, float y1, float x2, float y2, 
             Border.Side defaultSide) {
             float widthHalf = width / 2;
             Border.Side borderSide = GetBorderSide(x1, y1, x2, y2, defaultSide);

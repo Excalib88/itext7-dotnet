@@ -57,13 +57,13 @@ namespace iText.Kernel.Crypto.Securityhandler {
             : base(encryptionDictionary, password, documentId, encryptMetadata) {
         }
 
-        protected internal override void CalculatePermissions(int permissions) {
+        public override void CalculatePermissions(int permissions) {
             permissions |= PERMS_MASK_1_FOR_REVISION_3_OR_GREATER;
             permissions &= PERMS_MASK_2;
             this.permissions = permissions;
         }
 
-        protected internal override byte[] ComputeOwnerKey(byte[] userPad, byte[] ownerPad) {
+        public override byte[] ComputeOwnerKey(byte[] userPad, byte[] ownerPad) {
             byte[] ownerKey = new byte[32];
             byte[] digest = md5.Digest(ownerPad);
             byte[] mkey = new byte[keyLength / 8];
@@ -83,7 +83,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return ownerKey;
         }
 
-        protected internal override void ComputeGlobalEncryptionKey(byte[] userPad, byte[] ownerKey, bool encryptMetadata
+        public override void ComputeGlobalEncryptionKey(byte[] userPad, byte[] ownerKey, bool encryptMetadata
             ) {
             mkey = new byte[keyLength / 8];
             // fixed by ujihara in order to follow PDF reference
@@ -111,7 +111,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             Array.Copy(digest, 0, mkey, 0, mkey.Length);
         }
 
-        protected internal override byte[] ComputeUserKey() {
+        public override byte[] ComputeUserKey() {
             byte[] userKey = new byte[32];
             md5.Update(pad);
             byte[] digest = md5.Digest(documentId);
@@ -129,7 +129,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return userKey;
         }
 
-        protected internal override void SetSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool encryptMetadata
+        public override void SetSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool encryptMetadata
             , bool embeddedFilesOnly) {
             if (encryptMetadata) {
                 encryptionDictionary.Put(PdfName.R, new PdfNumber(3));
@@ -159,7 +159,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             }
         }
 
-        protected internal override bool IsValidPassword(byte[] uValue, byte[] userKey) {
+        public override bool IsValidPassword(byte[] uValue, byte[] userKey) {
             return !EqualsArray(uValue, userKey, 16);
         }
     }

@@ -45,33 +45,33 @@ using Org.BouncyCastle.X509;
 
 namespace iText.Kernel.Pdf {
     public class WriterProperties {
-        protected internal int compressionLevel;
+        public int compressionLevel;
 
         /// <summary>Indicates if to use full compression (using object streams).</summary>
-        protected internal bool? isFullCompression;
+        public bool? isFullCompression;
 
         /// <summary>Indicates if the writer copy objects in a smart mode.</summary>
         /// <remarks>
         /// Indicates if the writer copy objects in a smart mode. If so PdfDictionary and PdfStream will be hashed
         /// and reused if there's an object with the same content later.
         /// </remarks>
-        protected internal bool smartMode;
+        public bool smartMode;
 
-        protected internal bool debugMode;
+        public bool debugMode;
 
-        protected internal bool addXmpMetadata;
+        public bool addXmpMetadata;
 
-        protected internal bool addUAXmpMetadata;
+        public bool addUAXmpMetadata;
 
-        protected internal PdfVersion pdfVersion;
+        public PdfVersion pdfVersion;
 
-        protected internal EncryptionProperties encryptionProperties;
+        public EncryptionProperties encryptionProperties;
 
         /// <summary>The ID entry that represents the initial identifier.</summary>
-        protected internal PdfString initialDocumentId;
+        public PdfString initialDocumentId;
 
         /// <summary>The ID entry that represents a change in a document.</summary>
-        protected internal PdfString modifiedDocumentId;
+        public PdfString modifiedDocumentId;
 
         public WriterProperties() {
             smartMode = false;

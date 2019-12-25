@@ -50,7 +50,7 @@ namespace iText.Svg.Renderers.Impl {
     /// implementation for the &lt;circle&gt; tag.
     /// </summary>
     public class CircleSvgNodeRenderer : EllipseSvgNodeRenderer {
-        protected internal override bool SetParameters() {
+        public override bool SetParameters() {
             cx = 0;
             cy = 0;
             if (GetAttribute(SvgConstants.Attributes.CX) != null) {

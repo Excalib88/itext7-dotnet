@@ -228,13 +228,13 @@ namespace iText.IO.Font {
             return offsets;
         }
 
-        protected internal String key;
+        public String key;
 
-        protected internal Object[] args = new Object[48];
+        public Object[] args = new Object[48];
 
-        protected internal int arg_count = 0;
+        public int arg_count = 0;
 
-        protected internal virtual void GetDictItem() {
+        public virtual void GetDictItem() {
             for (int i = 0; i < arg_count; i++) {
                 args[i] = null;
             }
@@ -359,8 +359,8 @@ namespace iText.IO.Font {
         }
 
         /// <summary>List items for the linked list that builds the new CID font.</summary>
-        protected internal abstract class Item {
-            protected internal int myOffset = -1;
+        public abstract class Item {
+            public int myOffset = -1;
 
             /// <summary>remember the current offset and increment by item's size in bytes.</summary>
             public virtual void Increment(int[] currentOffset) {
@@ -376,7 +376,7 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal abstract class OffsetItem : CFFFont.Item {
+        public abstract class OffsetItem : CFFFont.Item {
             public int value;
 
             /// <summary>set the value of an offset item that was initially unknown.</summary>
@@ -390,7 +390,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>A range item.</summary>
-        protected internal sealed class RangeItem : CFFFont.Item {
+        public sealed class RangeItem : CFFFont.Item {
             public int offset;
 
             public int length;
@@ -431,7 +431,7 @@ namespace iText.IO.Font {
         /// and a negative value means that this is a dict item that uses a
         /// variable-size representation.
         /// </remarks>
-        protected internal sealed class IndexOffsetItem : CFFFont.OffsetItem {
+        public sealed class IndexOffsetItem : CFFFont.OffsetItem {
             public readonly int size;
 
             public IndexOffsetItem(int size, int value) {
@@ -457,12 +457,12 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal sealed class IndexBaseItem : CFFFont.Item {
+        public sealed class IndexBaseItem : CFFFont.Item {
             public IndexBaseItem() {
             }
         }
 
-        protected internal sealed class IndexMarkerItem : CFFFont.Item {
+        public sealed class IndexMarkerItem : CFFFont.Item {
             private CFFFont.OffsetItem offItem;
 
             private CFFFont.IndexBaseItem indexBase;
@@ -482,7 +482,7 @@ namespace iText.IO.Font {
         /// TODO To change the template for this generated type comment go to
         /// Window - Preferences - Java - Code Generation - Code and Comments
         /// </summary>
-        protected internal sealed class SubrMarkerItem : CFFFont.Item {
+        public sealed class SubrMarkerItem : CFFFont.Item {
             private CFFFont.OffsetItem offItem;
 
             private CFFFont.IndexBaseItem indexBase;
@@ -503,7 +503,7 @@ namespace iText.IO.Font {
         /// an unknown offset in a dictionary for the list.
         /// We will fix up the offset later; for now, assume it's large.
         /// </remarks>
-        protected internal sealed class DictOffsetItem : CFFFont.OffsetItem {
+        public sealed class DictOffsetItem : CFFFont.OffsetItem {
             public readonly int size;
 
             public DictOffsetItem() {
@@ -528,7 +528,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>Card24 item.</summary>
-        protected internal sealed class UInt24Item : CFFFont.Item {
+        public sealed class UInt24Item : CFFFont.Item {
             public int value;
 
             public UInt24Item(int value) {
@@ -549,7 +549,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>Card32 item.</summary>
-        protected internal sealed class UInt32Item : CFFFont.Item {
+        public sealed class UInt32Item : CFFFont.Item {
             public int value;
 
             public UInt32Item(int value) {
@@ -571,7 +571,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>A SID or Card16 item.</summary>
-        protected internal sealed class UInt16Item : CFFFont.Item {
+        public sealed class UInt16Item : CFFFont.Item {
             public char value;
 
             public UInt16Item(char value) {
@@ -594,7 +594,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>A Card8 item.</summary>
-        protected internal sealed class UInt8Item : CFFFont.Item {
+        public sealed class UInt8Item : CFFFont.Item {
             public char value;
 
             public UInt8Item(char value) {
@@ -613,7 +613,7 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal sealed class StringItem : CFFFont.Item {
+        public sealed class StringItem : CFFFont.Item {
             public String s;
 
             public StringItem(String s) {
@@ -638,7 +638,7 @@ namespace iText.IO.Font {
         /// This implementation is inefficient: it doesn't use the variable-length
         /// representation.
         /// </remarks>
-        protected internal sealed class DictNumberItem : CFFFont.Item {
+        public sealed class DictNumberItem : CFFFont.Item {
             public readonly int value;
 
             public int size = 5;
@@ -669,7 +669,7 @@ namespace iText.IO.Font {
         /// An offset-marker item for the list.
         /// It is used to mark an offset and to set the offset list item.
         /// </remarks>
-        protected internal sealed class MarkerItem : CFFFont.Item {
+        public sealed class MarkerItem : CFFFont.Item {
             internal CFFFont.OffsetItem p;
 
             public MarkerItem(CFFFont.OffsetItem pointerToMarker) {
@@ -684,7 +684,7 @@ namespace iText.IO.Font {
         /// <summary>a utility that creates a range item for an entire index</summary>
         /// <param name="indexOffset">where the index is</param>
         /// <returns>a range item representing the entire index</returns>
-        protected internal virtual CFFFont.RangeItem GetEntireIndexRange(int indexOffset) {
+        public virtual CFFFont.RangeItem GetEntireIndexRange(int indexOffset) {
             Seek(indexOffset);
             int count = GetCard16();
             if (count == 0) {
@@ -975,27 +975,27 @@ namespace iText.IO.Font {
         }
 
         /// <summary>A random Access File or an array</summary>
-        protected internal RandomAccessFileOrArray buf;
+        public RandomAccessFileOrArray buf;
 
         private int offSize;
 
-        protected internal int nameIndexOffset;
+        public int nameIndexOffset;
 
-        protected internal int topdictIndexOffset;
+        public int topdictIndexOffset;
 
-        protected internal int stringIndexOffset;
+        public int stringIndexOffset;
 
-        protected internal int gsubrIndexOffset;
+        public int gsubrIndexOffset;
 
-        protected internal int[] nameOffsets;
+        public int[] nameOffsets;
 
-        protected internal int[] topdictOffsets;
+        public int[] topdictOffsets;
 
-        protected internal int[] stringOffsets;
+        public int[] stringOffsets;
 
-        protected internal int[] gsubrOffsets;
+        public int[] gsubrOffsets;
 
-        protected internal sealed class Font {
+        public sealed class Font {
             public String name;
 
             public String fullName;
@@ -1066,8 +1066,8 @@ namespace iText.IO.Font {
             private readonly CFFFont _enclosing;
         }
 
-        // Changed from private to protected by Ygal&Oren
-        protected internal CFFFont.Font[] fonts;
+        // Changed from private to public by Ygal&Oren
+        public CFFFont.Font[] fonts;
 
         internal RandomAccessSourceFactory rasFactory = new RandomAccessSourceFactory();
 

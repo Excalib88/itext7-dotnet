@@ -54,7 +54,7 @@ namespace iText.Kernel.Pdf.Filespec {
             : base(pdfObject) {
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

@@ -129,7 +129,7 @@ namespace iText.IO.Font.Cmap {
             }
         }
 
-        //    protected static byte[] toByteArray(String value) {
+        //    public static byte[] toByteArray(String value) {
         //        if (PdfEncodings.isPdfDocEncoding(value)) {
         //            return PdfEncodings.convertToBytes(value, PdfEncodings.PDF_DOC_ENCODING);
         //        } else {
@@ -144,7 +144,7 @@ namespace iText.IO.Font.Cmap {
             return bytes;
         }
 
-        protected internal virtual String ToUnicodeString(String value, bool isHexWriting) {
+        public virtual String ToUnicodeString(String value, bool isHexWriting) {
             byte[] bytes = DecodeStringToByte(value);
             if (isHexWriting) {
                 return PdfEncodings.ConvertToString(bytes, PdfEncodings.UNICODE_BIG_UNMARKED);

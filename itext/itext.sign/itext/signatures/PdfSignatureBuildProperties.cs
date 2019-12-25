@@ -96,7 +96,7 @@ namespace iText.Signatures {
             return new PdfSignatureApp(appPropDic);
         }
 
-        protected override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

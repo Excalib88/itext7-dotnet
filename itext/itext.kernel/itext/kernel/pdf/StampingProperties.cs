@@ -43,9 +43,9 @@ address: sales@itextpdf.com
 */
 namespace iText.Kernel.Pdf {
     public class StampingProperties : DocumentProperties {
-        protected internal bool appendMode = false;
+        public bool appendMode = false;
 
-        protected internal bool preserveEncryption = false;
+        public bool preserveEncryption = false;
 
         public StampingProperties() {
         }

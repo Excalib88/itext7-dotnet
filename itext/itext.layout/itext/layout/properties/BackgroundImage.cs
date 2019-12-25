@@ -44,11 +44,11 @@ using iText.Kernel.Pdf.Xobject;
 
 namespace iText.Layout.Properties {
     public class BackgroundImage {
-        protected internal PdfXObject image;
+        public PdfXObject image;
 
-        protected internal bool repeatX;
+        public bool repeatX;
 
-        protected internal bool repeatY;
+        public bool repeatY;
 
         private BackgroundImage(PdfXObject image, bool repeatX, bool repeatY) {
             this.image = image;

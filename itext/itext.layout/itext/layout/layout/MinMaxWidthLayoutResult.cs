@@ -50,7 +50,7 @@ namespace iText.Layout.Layout {
     /// <see cref="iText.Layout.Renderer.IRenderer.Layout(LayoutContext)">layouting</see>.
     /// </summary>
     public class MinMaxWidthLayoutResult : LayoutResult {
-        protected internal MinMaxWidth minMaxWidth;
+        public MinMaxWidth minMaxWidth;
 
         public MinMaxWidthLayoutResult(int status, LayoutArea occupiedArea, IRenderer splitRenderer, IRenderer overflowRenderer
             )

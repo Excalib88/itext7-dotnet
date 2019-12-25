@@ -224,7 +224,7 @@ namespace iText.IO.Font {
 
         /// <summary>Read the FDSelect of the font and compute the array and its length</summary>
         /// <param name="Font">The index of the font being processed</param>
-        protected internal virtual void ReadFDSelect(int Font) {
+        public virtual void ReadFDSelect(int Font) {
             // Restore the number of glyphs
             int NumOfGlyphs = fonts[Font].nglyphs;
             int[] FDSelect = new int[NumOfGlyphs];
@@ -281,7 +281,7 @@ namespace iText.IO.Font {
 
         /// <summary>Function reads the FDSelect and builds the FDArrayUsed Map According to the glyphs used</summary>
         /// <param name="Font">the Number of font being processed</param>
-        protected internal virtual void BuildFDArrayUsed(int Font) {
+        public virtual void BuildFDArrayUsed(int Font) {
             int[] FDSelect = fonts[Font].FDSelect;
             // For each glyph used
             foreach (int? glyphsInList1 in glyphsInList) {
@@ -296,7 +296,7 @@ namespace iText.IO.Font {
 
         /// <summary>Read the FDArray count, offsize and Offset array</summary>
         /// <param name="Font">the Number of font being processed</param>
-        protected internal virtual void ReadFDArray(int Font) {
+        public virtual void ReadFDArray(int Font) {
             Seek(fonts[Font].fdarrayOffset);
             fonts[Font].FDArrayCount = GetCard16();
             fonts[Font].FDArrayOffsize = GetCard8();
@@ -366,7 +366,7 @@ namespace iText.IO.Font {
         /// <param name="Offset">The offset to the relevant subrs index</param>
         /// <param name="Font">the font</param>
         /// <returns>The calculated Bias</returns>
-        protected internal virtual int CalcBias(int Offset, int Font) {
+        public virtual int CalcBias(int Offset, int Font) {
             Seek(Offset);
             int nSubrs = GetCard16();
             // If type==1 -> bias=0
@@ -391,7 +391,7 @@ namespace iText.IO.Font {
 
         /// <summary>Function uses BuildNewIndex to create the new index of the subset charstrings</summary>
         /// <param name="FontIndex">the font</param>
-        protected internal virtual void BuildNewCharString(int FontIndex) {
+        public virtual void BuildNewCharString(int FontIndex) {
             NewCharStringsIndex = BuildNewIndex(fonts[FontIndex].charstringsOffsets, GlyphsUsed, ENDCHAR_OP);
         }
 
@@ -401,7 +401,7 @@ namespace iText.IO.Font {
         /// the FD Array lsubrs will be subsetted.
         /// </remarks>
         /// <param name="Font">the font</param>
-        protected internal virtual void BuildNewLGSubrs(int Font) {
+        public virtual void BuildNewLGSubrs(int Font) {
             // If the font is CID then the lsubrs are divided into FontDicts.
             // for each FD array the lsubrs will be subsetted.
             if (fonts[Font].isCID) {
@@ -471,7 +471,7 @@ namespace iText.IO.Font {
         /// </summary>
         /// <param name="Font">the font</param>
         /// <param name="FD">The FDARRAY processed</param>
-        protected internal virtual void BuildFDSubrsOffsets(int Font, int FD) {
+        public virtual void BuildFDSubrsOffsets(int Font, int FD) {
             // Initiate to -1 to indicate lsubr operator present
             fonts[Font].PrivateSubrsOffset[FD] = -1;
             // Goto beginning of objects
@@ -502,7 +502,7 @@ namespace iText.IO.Font {
         /// <param name="SubrsOffsets">the offset array of the subr index</param>
         /// <param name="hSubr">Map of the subrs used</param>
         /// <param name="lSubr">list of the subrs used</param>
-        protected internal virtual void BuildSubrUsed(int Font, int FD, int SubrOffset, int[] SubrsOffsets, ICollection
+        public virtual void BuildSubrUsed(int Font, int FD, int SubrOffset, int[] SubrsOffsets, ICollection
             <int> hSubr, IList<int> lSubr) {
             // Calc the Bias for the subr index
             int LBias = CalcBias(SubrOffset, Font);
@@ -548,7 +548,7 @@ namespace iText.IO.Font {
         /// to Gsubrs and adds to Map and list
         /// </summary>
         /// <param name="Font">the font</param>
-        protected internal virtual void BuildGSubrsUsed(int Font) {
+        public virtual void BuildGSubrsUsed(int Font) {
             int LBias = 0;
             int SizeOfNonCIDSubrsUsed = 0;
             if (fonts[Font].privateSubrs >= 0) {
@@ -599,7 +599,7 @@ namespace iText.IO.Font {
         /// <param name="hSubr">the Map for the lSubrs</param>
         /// <param name="lSubr">the list for the lSubrs</param>
         /// <param name="LSubrsOffsets"/>
-        protected internal virtual void ReadASubr(int begin, int end, int GBias, int LBias, ICollection<int> hSubr
+        public virtual void ReadASubr(int begin, int end, int GBias, int LBias, ICollection<int> hSubr
             , IList<int> lSubr, int[] LSubrsOffsets) {
             // Clear the stack for the subrs
             EmptyStack();
@@ -688,7 +688,7 @@ namespace iText.IO.Font {
         /// Function Checks how the current operator effects the run time stack after being run
         /// An operator may increase or decrease the stack size
         /// </summary>
-        protected internal virtual void HandelStack() {
+        public virtual void HandelStack() {
             // Find out what the operator does to the stack
             int StackHandel = StackOpp();
             if (StackHandel < 2) {
@@ -713,7 +713,7 @@ namespace iText.IO.Font {
 
         /// <summary>Function checks the key and return the change to the stack after the operator</summary>
         /// <returns>The change in the stack. 2-&gt; flush the stack</returns>
-        protected internal virtual int StackOpp() {
+        public virtual int StackOpp() {
             switch (key) {
                 case "ifelse": {
                     return -3;
@@ -757,7 +757,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>Empty the Type2 Stack</summary>
-        protected internal virtual void EmptyStack() {
+        public virtual void EmptyStack() {
             // Null the arguments
             for (int i = 0; i < arg_count; i++) {
                 args[i] = null;
@@ -766,7 +766,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>Pop one element from the stack</summary>
-        protected internal virtual void PopStack() {
+        public virtual void PopStack() {
             if (arg_count > 0) {
                 args[arg_count - 1] = null;
                 arg_count--;
@@ -774,12 +774,12 @@ namespace iText.IO.Font {
         }
 
         /// <summary>Add an item to the stack</summary>
-        protected internal virtual void PushStack() {
+        public virtual void PushStack() {
             arg_count++;
         }
 
         /// <summary>The function reads the next command after the file pointer is set</summary>
-        protected internal virtual void ReadCommand() {
+        public virtual void ReadCommand() {
             key = null;
             bool gotKey = false;
             // Until a key is found
@@ -856,7 +856,7 @@ namespace iText.IO.Font {
         /// <param name="GBias">the bias of the Global Subrs</param>
         /// <param name="LSubrsOffsets">The Offsets array of the subroutines</param>
         /// <returns>The number of hints in the subroutine read.</returns>
-        protected internal virtual int CalcHints(int begin, int end, int LBias, int GBias, int[] LSubrsOffsets) {
+        public virtual int CalcHints(int begin, int end, int LBias, int GBias, int[] LSubrsOffsets) {
             // Goto beginning of the subr
             Seek(begin);
             while (GetPosition() < end) {
@@ -930,7 +930,7 @@ namespace iText.IO.Font {
         /// <param name="Used">the Map of the used objects</param>
         /// <param name="OperatorForUnusedEntries">the operator inserted into the data stream for unused entries</param>
         /// <returns>the new index subset version</returns>
-        protected internal virtual byte[] BuildNewIndex(int[] Offsets, ICollection<int> Used, byte OperatorForUnusedEntries
+        public virtual byte[] BuildNewIndex(int[] Offsets, ICollection<int> Used, byte OperatorForUnusedEntries
             ) {
             int unusedCount = 0;
             int Offset = 0;
@@ -983,7 +983,7 @@ namespace iText.IO.Font {
         /// <param name="Offsets">the offset array of the original index</param>
         /// <param name="OperatorForUnusedEntries">the operator inserted into the data stream for unused entries</param>
         /// <returns>the new index subset version</returns>
-        protected internal virtual byte[] BuildNewIndexAndCopyAllGSubrs(int[] Offsets, byte OperatorForUnusedEntries
+        public virtual byte[] BuildNewIndexAndCopyAllGSubrs(int[] Offsets, byte OperatorForUnusedEntries
             ) {
             int unusedCount = 0;
             int Offset = 0;
@@ -1030,7 +1030,7 @@ namespace iText.IO.Font {
         /// <param name="NewOffsets">the subsetted offset array</param>
         /// <param name="NewObjects">the subsetted object array</param>
         /// <returns>the new index created</returns>
-        protected internal virtual byte[] AssembleIndex(int[] NewOffsets, byte[] NewObjects) {
+        public virtual byte[] AssembleIndex(int[] NewOffsets, byte[] NewObjects) {
             // Calc the index' count field
             char Count = (char)(NewOffsets.Length - 1);
             // Calc the size of the object array
@@ -1087,7 +1087,7 @@ namespace iText.IO.Font {
         /// <summary>The function builds the new output stream according to the subset process</summary>
         /// <param name="Font">the font</param>
         /// <returns>the subsetted font stream</returns>
-        protected internal virtual byte[] BuildNewFile(int Font) {
+        public virtual byte[] BuildNewFile(int Font) {
             // Prepare linked list for new font components
             OutputList = new LinkedList<CFFFont.Item>();
             // copy the header of the font
@@ -1239,7 +1239,7 @@ namespace iText.IO.Font {
         }
 
         /// <summary>Function Copies the header from the original fileto the output list</summary>
-        protected internal virtual void CopyHeader() {
+        public virtual void CopyHeader() {
             Seek(0);
             int major = GetCard8();
             int minor = GetCard8();
@@ -1253,7 +1253,7 @@ namespace iText.IO.Font {
         /// <param name="Count">the count field of the index</param>
         /// <param name="Offsize">the offsize field of the index</param>
         /// <param name="First">the first offset of the index</param>
-        protected internal virtual void BuildIndexHeader(int Count, int Offsize, int First) {
+        public virtual void BuildIndexHeader(int Count, int Offsize, int First) {
             // Add the count field
             OutputList.AddLast(new CFFFont.UInt16Item((char)Count));
             // Add the offsize field
@@ -1295,7 +1295,7 @@ namespace iText.IO.Font {
         /// <param name="fdselectRef">OffsetItem for the FDSelect</param>
         /// <param name="charsetRef">OffsetItem for the CharSet</param>
         /// <param name="charstringsRef">OffsetItem for the CharString</param>
-        protected internal virtual void CreateKeys(CFFFont.OffsetItem fdarrayRef, CFFFont.OffsetItem fdselectRef, 
+        public virtual void CreateKeys(CFFFont.OffsetItem fdarrayRef, CFFFont.OffsetItem fdselectRef, 
             CFFFont.OffsetItem charsetRef, CFFFont.OffsetItem charstringsRef) {
             // create an FDArray key
             OutputList.AddLast(fdarrayRef);
@@ -1318,7 +1318,7 @@ namespace iText.IO.Font {
         /// to accommodate the CID rules
         /// </summary>
         /// <param name="Font">the font</param>
-        protected internal virtual void CreateNewStringIndex(int Font) {
+        public virtual void CreateNewStringIndex(int Font) {
             String fdFontName = fonts[Font].name + "-OneRange";
             if (fdFontName.Length > 127) {
                 fdFontName = fdFontName.JSubstring(0, 127);
@@ -1369,7 +1369,7 @@ namespace iText.IO.Font {
         /// </remarks>
         /// <param name="fdselectRef">OffsetItem for the FDSelect</param>
         /// <param name="nglyphs">the number of glyphs in the font</param>
-        protected internal virtual void CreateFDSelect(CFFFont.OffsetItem fdselectRef, int nglyphs) {
+        public virtual void CreateFDSelect(CFFFont.OffsetItem fdselectRef, int nglyphs) {
             OutputList.AddLast(new CFFFont.MarkerItem(fdselectRef));
             // format identifier
             OutputList.AddLast(new CFFFont.UInt8Item((char)3));
@@ -1390,7 +1390,7 @@ namespace iText.IO.Font {
         /// </remarks>
         /// <param name="charsetRef">OffsetItem for the CharSet</param>
         /// <param name="nglyphs">the number of glyphs in the font</param>
-        protected internal virtual void CreateCharset(CFFFont.OffsetItem charsetRef, int nglyphs) {
+        public virtual void CreateCharset(CFFFont.OffsetItem charsetRef, int nglyphs) {
             OutputList.AddLast(new CFFFont.MarkerItem(charsetRef));
             // format identifier
             OutputList.AddLast(new CFFFont.UInt8Item((char)2));
@@ -1409,7 +1409,7 @@ namespace iText.IO.Font {
         /// <param name="fdarrayRef">OffsetItem for the FDArray</param>
         /// <param name="privateRef">OffsetItem for the Private Dict</param>
         /// <param name="Font">the font</param>
-        protected internal virtual void CreateFDArray(CFFFont.OffsetItem fdarrayRef, CFFFont.OffsetItem privateRef
+        public virtual void CreateFDArray(CFFFont.OffsetItem fdarrayRef, CFFFont.OffsetItem privateRef
             , int Font) {
             OutputList.AddLast(new CFFFont.MarkerItem(fdarrayRef));
             // Build the header (count=offsize=first=1)
@@ -1601,7 +1601,7 @@ namespace iText.IO.Font {
         /// <summary>Function computes the size of an index</summary>
         /// <param name="indexOffset">The offset for the computed index</param>
         /// <returns>The size of the index</returns>
-        protected internal virtual int CountEntireIndexRange(int indexOffset) {
+        public virtual int CountEntireIndexRange(int indexOffset) {
             // Go to the beginning of the index
             Seek(indexOffset);
             // Read the count field

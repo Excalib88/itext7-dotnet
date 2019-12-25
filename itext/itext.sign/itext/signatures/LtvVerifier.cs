@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using Org.BouncyCastle.Ocsp;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509;
@@ -57,38 +58,38 @@ namespace iText.Signatures {
     /// <summary>Verifies the signatures in an LTV document.</summary>
     public class LtvVerifier : RootStoreVerifier {
         /// <summary>The Logger instance</summary>
-        protected internal static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Signatures.LtvVerifier)
-            );
+        //public static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Signatures.LtvVerifier)
+        //    );
 
         /// <summary>Option to specify level of verification; signing certificate only or the entire chain.</summary>
-        protected internal LtvVerification.CertificateOption option = LtvVerification.CertificateOption.SIGNING_CERTIFICATE;
+        public LtvVerification.CertificateOption option = LtvVerification.CertificateOption.SIGNING_CERTIFICATE;
 
         /// <summary>Verify root.</summary>
-        protected internal bool verifyRootCertificate = true;
+        public bool verifyRootCertificate = true;
 
         /// <summary>A document object for the revision that is being verified.</summary>
-        protected internal PdfDocument document;
+        public PdfDocument document;
 
         /// <summary>The fields in the revision that is being verified.</summary>
-        protected internal PdfAcroForm acroForm;
+        public PdfAcroForm acroForm;
 
         /// <summary>The date the revision was signed, or <c>null</c> for the highest revision.</summary>
-        protected internal DateTime signDate;
+        public DateTime signDate;
 
         /// <summary>The signature that covers the revision.</summary>
-        protected internal String signatureName;
+        public String signatureName;
 
         /// <summary>The PdfPKCS7 object for the signature.</summary>
-        protected internal PdfPKCS7 pkcs7;
+        public PdfPKCS7 pkcs7;
 
         /// <summary>Indicates if we're working with the latest revision.</summary>
-        protected internal bool latestRevision = true;
+        public bool latestRevision = true;
 
         /// <summary>The document security store for the revision that is being verified</summary>
-        protected internal PdfDictionary dss;
+        public PdfDictionary dss;
 
         /// <summary>The meta info</summary>
-        protected internal IMetaInfo metaInfo;
+        public IMetaInfo metaInfo;
 
         private SignatureUtil sgnUtil;
 
@@ -144,7 +145,7 @@ namespace iText.Signatures {
 
         /// <summary>Verifies a document level timestamp.</summary>
         public virtual IList<VerificationOK> VerifySignature() {
-            LOGGER.Info("Verifying signature.");
+            //LOGGER.Info("Verifying signature.");
             IList<VerificationOK> result = new List<VerificationOK>();
             // Get the certificate chain
             X509Certificate[] chain = pkcs7.GetSignCertificateChain();
@@ -166,7 +167,7 @@ namespace iText.Signatures {
                     issuerCert = (X509Certificate)chain[i];
                 }
                 // now lets verify the certificate
-                LOGGER.Info(signCert.SubjectDN.ToString());
+                //LOGGER.Info(signCert.SubjectDN.ToString());
                 IList<VerificationOK> list = Verify(signCert, issuerCert, signDate);
                 if (list.Count == 0) {
                     try {
@@ -211,7 +212,7 @@ namespace iText.Signatures {
                     chain[i - 1].Verify(chain[i].GetPublicKey());
                 }
             }
-            LOGGER.Info("All certificates are valid on " + signDate.ToString());
+            //LOGGER.Info("All certificates are valid on " + signDate.ToString());
         }
 
         /// <summary>Verifies certificates against a list of CRLs and OCSP responses.</summary>
@@ -242,7 +243,7 @@ namespace iText.Signatures {
 
         /// <summary>Switches to the previous revision.</summary>
         public virtual void SwitchToPreviousRevision() {
-            LOGGER.Info("Switching to previous revision.");
+            //LOGGER.Info("Switching to previous revision.");
             latestRevision = false;
             dss = document.GetCatalog().GetPdfObject().GetAsDictionary(PdfName.DSS);
             DateTime cal = pkcs7.GetTimeStampDate();
@@ -261,11 +262,11 @@ namespace iText.Signatures {
                 names = sgnUtil.GetSignatureNames();
                 signatureName = names[names.Count - 1];
                 pkcs7 = CoversWholeDocument();
-                LOGGER.Info(MessageFormatUtil.Format("Checking {0}signature {1}", pkcs7.IsTsp() ? "document-level timestamp "
-                     : "", signatureName));
+                //LOGGER.Info(MessageFormatUtil.Format("Checking {0}signature {1}", pkcs7.IsTsp() ? "document-level timestamp "
+                //     : "", signatureName));
             }
             else {
-                LOGGER.Info("No signatures in revision");
+                //LOGGER.Info("No signatures in revision");
                 pkcs7 = null;
             }
         }
@@ -314,7 +315,7 @@ namespace iText.Signatures {
             return ocsps;
         }
 
-        protected internal virtual void InitLtvVerifier(PdfDocument document) {
+        public virtual void InitLtvVerifier(PdfDocument document) {
             this.document = document;
             this.acroForm = PdfAcroForm.GetAcroForm(document, true);
             this.sgnUtil = new SignatureUtil(document);
@@ -322,8 +323,8 @@ namespace iText.Signatures {
             signatureName = names[names.Count - 1];
             this.signDate = DateTimeUtil.GetCurrentUtcTime();
             pkcs7 = CoversWholeDocument();
-            LOGGER.Info(MessageFormatUtil.Format("Checking {0}signature {1}", pkcs7.IsTsp() ? "document-level timestamp "
-                 : "", signatureName));
+            //LOGGER.Info(MessageFormatUtil.Format("Checking {0}signature {1}", pkcs7.IsTsp() ? "document-level timestamp "
+            //     : "", signatureName));
         }
 
         /// <summary>
@@ -331,16 +332,16 @@ namespace iText.Signatures {
         /// and throws an exception if the document was altered
         /// </summary>
         /// <returns>a PdfPKCS7 object</returns>
-        protected internal virtual PdfPKCS7 CoversWholeDocument() {
+        public virtual PdfPKCS7 CoversWholeDocument() {
             PdfPKCS7 pkcs7 = sgnUtil.ReadSignatureData(signatureName);
             if (sgnUtil.SignatureCoversWholeDocument(signatureName)) {
-                LOGGER.Info("The timestamp covers whole document.");
+                //LOGGER.Info("The timestamp covers whole document.");
             }
             else {
                 throw new VerificationException((X509Certificate)null, "Signature doesn't cover whole document.");
             }
             if (pkcs7.VerifySignatureIntegrityAndAuthenticity()) {
-                LOGGER.Info("The signed document has not been modified.");
+                //LOGGER.Info("The signed document has not been modified.");
                 return pkcs7;
             }
             else {

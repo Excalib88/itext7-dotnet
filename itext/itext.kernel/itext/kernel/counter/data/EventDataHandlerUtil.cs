@@ -45,7 +45,8 @@ using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Threading;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 
 namespace iText.Kernel.Counter.Data {
@@ -86,8 +87,8 @@ namespace iText.Kernel.Counter.Data {
 #endif
             }
             catch (SecurityException) {
-                LogManager.GetLogger(typeof(iText.Kernel.Counter.Data.EventDataHandlerUtil)).Error(iText.IO.LogMessageConstant
-                    .UNABLE_TO_REGISTER_EVENT_DATA_HANDLER_SHUTDOWN_HOOK);
+                //LogManager.GetLogger(typeof(iText.Kernel.Counter.Data.EventDataHandlerUtil)).Error(iText.IO.LogMessageConstant
+                //    .UNABLE_TO_REGISTER_EVENT_DATA_HANDLER_SHUTDOWN_HOOK);
             }
             catch (Exception) {
             }
@@ -118,8 +119,8 @@ namespace iText.Kernel.Counter.Data {
                     }
 #endif
                     catch (Exception any) {
-                        LogManager.GetLogger(typeof(iText.Kernel.Counter.Data.EventDataHandlerUtil)).Error(iText.IO.LogMessageConstant
-                            .UNEXPECTED_EVENT_HANDLER_SERVICE_THREAD_EXCEPTION, any);
+                        //LogManager.GetLogger(typeof(iText.Kernel.Counter.Data.EventDataHandlerUtil)).Error(iText.IO.LogMessageConstant
+                        //    .UNEXPECTED_EVENT_HANDLER_SERVICE_THREAD_EXCEPTION, any);
                         break;
                     }
                 }

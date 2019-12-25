@@ -55,7 +55,7 @@ namespace iText.Kernel.Pdf.Annot {
         /// see
         /// <see cref="PdfAnnotation.MakeAnnotation(iText.Kernel.Pdf.PdfObject)"/>
         /// </summary>
-        protected internal PdfCircleAnnotation(PdfDictionary pdfObject)
+        public PdfCircleAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

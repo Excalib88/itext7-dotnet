@@ -58,7 +58,7 @@ namespace iText.Svg.Renderers.Impl {
             attributesAndStyles = new Dictionary<String, String>();
         }
 
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             PdfCanvas cv = context.GetCurrentCanvas();
             cv.WriteLiteral("% rect\n");
             float x = 0.0f;

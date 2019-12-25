@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.StyledXmlParser.Css;
 using iText.StyledXmlParser.Css.Resolve.Shorthand;
@@ -56,7 +57,7 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
         /* (non-Javadoc)
         * @see com.itextpdf.styledxmlparser.css.resolve.shorthand.impl.AbstractBorderShorthandResolver#getPrefix()
         */
-        protected internal override String GetPrefix() {
+        public override String GetPrefix() {
             return CommonCssConstants.BORDER;
         }
 
@@ -72,9 +73,9 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
                     resolvedProps.AddAll(shorthandResolver.ResolveShorthand(prop.GetExpression()));
                 }
                 else {
-                    ILog logger = LogManager.GetLogger(typeof(BorderShorthandResolver));
-                    logger.Error(MessageFormatUtil.Format("Cannot find a shorthand resolver for the \"{0}\" property. " + "Expected border-width, border-style or border-color properties."
-                        , prop.GetProperty()));
+                    //ILog logger = LogManager.GetLogger(typeof(BorderShorthandResolver));
+                    //logger.Error(MessageFormatUtil.Format("Cannot find a shorthand resolver for the \"{0}\" property. " + "Expected border-width, border-style or border-color properties."
+                    //    , prop.GetProperty()));
                 }
             }
             return resolvedProps;

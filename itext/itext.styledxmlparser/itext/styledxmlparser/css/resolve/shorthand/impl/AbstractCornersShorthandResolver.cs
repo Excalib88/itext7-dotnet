@@ -67,11 +67,11 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
 
         /// <summary>Gets the prefix of a property.</summary>
         /// <returns>the prefix</returns>
-        protected internal abstract String GetPrefix();
+        public abstract String GetPrefix();
 
         /// <summary>Gets the postfix of a property.</summary>
         /// <returns>the postfix</returns>
-        protected internal abstract String GetPostfix();
+        public abstract String GetPostfix();
 
         /* (non-Javadoc)
         * @see com.itextpdf.styledxmlparser.css.resolve.shorthand.IShorthandResolver#resolveShorthand(java.lang.String)

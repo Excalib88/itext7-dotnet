@@ -58,10 +58,10 @@ namespace iText.Kernel.Pdf.Canvas {
     /// </remarks>
     public class CanvasTag {
         /// <summary>The type of the tag.</summary>
-        protected internal PdfName role;
+        public PdfName role;
 
         /// <summary>The properties of the tag.</summary>
-        protected internal PdfDictionary properties;
+        public PdfDictionary properties;
 
         /// <summary>
         /// Creates a tag that is referenced to the document's tag structure (i.e.

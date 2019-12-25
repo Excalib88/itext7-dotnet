@@ -48,7 +48,7 @@ using System.Text;
 namespace iText.IO.Font.Cmap {
     /// <author>psoares</author>
     public class CMapByteCid : AbstractCMap {
-        protected internal class Cursor {
+        public class Cursor {
             public int offset;
 
             public int length;
@@ -84,7 +84,7 @@ namespace iText.IO.Font.Cmap {
             return sb.ToString();
         }
 
-        protected internal virtual int DecodeSingle(byte[] cidBytes, CMapByteCid.Cursor cursor) {
+        public virtual int DecodeSingle(byte[] cidBytes, CMapByteCid.Cursor cursor) {
             int end = cursor.offset + cursor.length;
             int currentPlane = 0;
             while (cursor.offset < end) {

@@ -154,7 +154,7 @@ namespace iText.Layout.Borders {
         /// <param name="initialGap">the initial size of the gap</param>
         /// <returns>the adjusted size of the gap</returns>
         [System.ObsoleteAttribute(@"logic moved to super-class")]
-        protected internal override float GetDotsGap(double distance, float initialGap) {
+        public override float GetDotsGap(double distance, float initialGap) {
             return base.GetDotsGap(distance, initialGap);
         }
     }

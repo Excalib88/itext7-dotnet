@@ -45,11 +45,11 @@ using System.Collections.Generic;
 
 namespace iText.IO.Font.Otf {
     public abstract class ContextualSubTable {
-        protected internal OpenTypeFontTableReader openReader;
+        public OpenTypeFontTableReader openReader;
 
-        protected internal int lookupFlag;
+        public int lookupFlag;
 
-        protected internal ContextualSubTable(OpenTypeFontTableReader openReader, int lookupFlag) {
+        public ContextualSubTable(OpenTypeFontTableReader openReader, int lookupFlag) {
             this.openReader = openReader;
             this.lookupFlag = lookupFlag;
         }
@@ -83,7 +83,7 @@ namespace iText.IO.Font.Otf {
 
         /// <summary>Gets a set of rules, which start with given glyph id.</summary>
         /// <param name="startId">id of the first glyph in the sequence.</param>
-        protected internal abstract IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startId);
+        public abstract IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startId);
 
         /// <summary>Checks if given glyph line at the given position matches given rule.</summary>
         /// <returns>
@@ -92,7 +92,7 @@ namespace iText.IO.Font.Otf {
         /// </returns>
         /// <param name="line"/>
         /// <param name="rule"/>
-        protected internal virtual int CheckIfContextMatch(GlyphLine line, ContextualSubstRule rule) {
+        public virtual int CheckIfContextMatch(GlyphLine line, ContextualSubstRule rule) {
             int j;
             OpenTableLookup.GlyphIndexer gidx = new OpenTableLookup.GlyphIndexer();
             gidx.line = line;

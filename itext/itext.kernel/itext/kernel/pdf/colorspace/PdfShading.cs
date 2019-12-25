@@ -155,11 +155,11 @@ namespace iText.Kernel.Pdf.Colorspace {
             return shading;
         }
 
-        protected internal PdfShading(PdfDictionary pdfObject)
+        public PdfShading(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 
-        protected internal PdfShading(PdfDictionary pdfObject, int type, PdfColorSpace colorSpace)
+        public PdfShading(PdfDictionary pdfObject, int type, PdfColorSpace colorSpace)
             : base(pdfObject) {
             GetPdfObject().Put(PdfName.ShadingType, new PdfNumber(type));
             if (colorSpace is PdfSpecialCs.Pattern) {
@@ -252,7 +252,7 @@ namespace iText.Kernel.Pdf.Colorspace {
             base.Flush();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
@@ -263,7 +263,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         /// that defines color at every point in the domain by a specified mathematical function.
         /// </summary>
         public class FunctionBased : PdfShading {
-            protected internal FunctionBased(PdfDictionary pdfDictionary)
+            public FunctionBased(PdfDictionary pdfDictionary)
                 : base(pdfDictionary) {
             }
 
@@ -400,7 +400,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         /// and extends indefinitely perpendicular to that axis.
         /// </summary>
         public class Axial : PdfShading {
-            protected internal Axial(PdfDictionary pdfDictionary)
+            public Axial(PdfDictionary pdfDictionary)
                 : base(pdfDictionary) {
             }
 
@@ -656,7 +656,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         /// This type of shading shall not be used with an Indexed colour space
         /// </remarks>
         public class Radial : PdfShading {
-            protected internal Radial(PdfDictionary pdfDictionary)
+            public Radial(PdfDictionary pdfDictionary)
                 : base(pdfDictionary) {
             }
 
@@ -993,7 +993,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         /// shall be specified for each vertex in place of the colour components c1...cn.
         /// </remarks>
         public class FreeFormGouraudShadedTriangleMesh : PdfShading {
-            protected internal FreeFormGouraudShadedTriangleMesh(PdfStream pdfStream)
+            public FreeFormGouraudShadedTriangleMesh(PdfStream pdfStream)
                 : base(pdfStream) {
             }
 
@@ -1212,7 +1212,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         /// except there is no edge flag.
         /// </remarks>
         public class LatticeFormGouraudShadedTriangleMesh : PdfShading {
-            protected internal LatticeFormGouraudShadedTriangleMesh(PdfStream pdfStream)
+            public LatticeFormGouraudShadedTriangleMesh(PdfStream pdfStream)
                 : base(pdfStream) {
             }
 
@@ -1423,7 +1423,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         /// shall be specified by a single parametric value t rather than by n separate colour components c1...cn.
         /// </remarks>
         public class CoonsPatchMesh : PdfShading {
-            protected internal CoonsPatchMesh(PdfStream pdfStream)
+            public CoonsPatchMesh(PdfStream pdfStream)
                 : base(pdfStream) {
             }
 
@@ -1637,7 +1637,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         /// For the format of data stream, that defines patches, see ISO-320001 Table 86.
         /// </remarks>
         public class TensorProductPatchMesh : PdfShading {
-            protected internal TensorProductPatchMesh(PdfStream pdfStream)
+            public TensorProductPatchMesh(PdfStream pdfStream)
                 : base(pdfStream) {
             }
 

@@ -53,14 +53,14 @@ namespace iText.IO.Image {
 
         private bool direct;
 
-        protected internal TiffImageData(Uri url, bool recoverFromImageError, int page, bool direct)
+        public TiffImageData(Uri url, bool recoverFromImageError, int page, bool direct)
             : base(url, ImageType.TIFF) {
             this.recoverFromImageError = recoverFromImageError;
             this.page = page;
             this.direct = direct;
         }
 
-        protected internal TiffImageData(byte[] bytes, bool recoverFromImageError, int page, bool direct)
+        public TiffImageData(byte[] bytes, bool recoverFromImageError, int page, bool direct)
             : base(bytes, ImageType.TIFF) {
             this.recoverFromImageError = recoverFromImageError;
             this.page = page;

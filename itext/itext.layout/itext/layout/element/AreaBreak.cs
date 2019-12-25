@@ -58,7 +58,7 @@ namespace iText.Layout.Element {
     /// size as the current one.
     /// </remarks>
     public class AreaBreak : AbstractElement<iText.Layout.Element.AreaBreak> {
-        protected internal PageSize pageSize;
+        public PageSize pageSize;
 
         /// <summary>Creates an AreaBreak.</summary>
         /// <remarks>
@@ -118,7 +118,7 @@ namespace iText.Layout.Element {
             return this.GetProperty<AreaBreakType?>(Property.AREA_BREAK_TYPE);
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new AreaBreakRenderer(this);
         }
     }

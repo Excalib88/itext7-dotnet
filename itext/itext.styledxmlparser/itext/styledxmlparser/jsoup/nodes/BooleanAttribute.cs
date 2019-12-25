@@ -51,7 +51,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             : base(key, "") {
         }
 
-        protected internal override bool IsBooleanAttribute() {
+        public override bool IsBooleanAttribute() {
             return true;
         }
     }

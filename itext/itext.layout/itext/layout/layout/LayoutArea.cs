@@ -52,10 +52,10 @@ namespace iText.Layout.Layout {
     /// </summary>
     public class LayoutArea {
         /// <summary>The number of page on which the area is located.</summary>
-        protected internal int pageNumber;
+        public int pageNumber;
 
         /// <summary>The area's bounding box</summary>
-        protected internal Rectangle bBox;
+        public Rectangle bBox;
 
         /// <summary>
         /// Creates the area for content

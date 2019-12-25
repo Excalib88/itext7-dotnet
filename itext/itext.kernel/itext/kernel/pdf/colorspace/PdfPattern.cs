@@ -57,7 +57,7 @@ namespace iText.Kernel.Pdf.Colorspace {
     /// For mor information see paragraph 8.7 in ISO-32000-1.
     /// </remarks>
     public abstract class PdfPattern : PdfObjectWrapper<PdfDictionary> {
-        protected internal PdfPattern(PdfDictionary pdfObject)
+        public PdfPattern(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 
@@ -135,7 +135,7 @@ namespace iText.Kernel.Pdf.Colorspace {
             base.Flush();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 

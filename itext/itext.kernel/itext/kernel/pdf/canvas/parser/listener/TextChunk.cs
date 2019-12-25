@@ -46,9 +46,9 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
     /// <summary>Represents a chunk of text, it's orientation, and location relative to the orientation vector</summary>
     public class TextChunk {
         /// <summary>the text of the chunk</summary>
-        protected internal readonly String text;
+        public readonly String text;
 
-        protected internal readonly ITextChunkLocation location;
+        public readonly ITextChunkLocation location;
 
         public TextChunk(String @string, ITextChunkLocation loc) {
             this.text = @string;

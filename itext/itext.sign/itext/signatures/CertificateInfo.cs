@@ -142,8 +142,10 @@ namespace iText.Signatures {
 
             /// <summary>Constructs an X509 name.</summary>
             /// <param name="seq">an ASN1 Sequence</param>
-            public X500Name(Asn1Sequence seq) {
-                IEnumerator e = seq.GetObjects();
+            public X500Name(Asn1Sequence seq)
+            {
+                Console.WriteLine("Unsupported method");
+                IEnumerator e = null;//;seq.GetObjects();
                 while (e.MoveNext()) {
                     Asn1Set set = (Asn1Set)e.Current;
                     for (int i = 0; i < set.Count; i++) {
@@ -290,14 +292,14 @@ namespace iText.Signatures {
         /// <summary>Get the issuer fields from an X509 Certificate.</summary>
         /// <param name="cert">an X509Certificate</param>
         /// <returns>an X500Name</returns>
-        public static CertificateInfo.X500Name GetIssuerFields(X509Certificate cert) {
-            try {
-                return new CertificateInfo.X500Name((Asn1Sequence)CertificateInfo.GetIssuer(cert.GetTbsCertificate()));
-            }
-            catch (Exception e) {
-                throw new PdfException(e);
-            }
-        }
+        //public static CertificateInfo.X500Name GetIssuerFields(X509Certificate cert) {
+        //    try {
+        //        return new CertificateInfo.X500Name((Asn1Sequence)CertificateInfo.GetIssuer(cert.GetTbsCertificate()));
+        //    }
+        //    catch (Exception e) {
+        //        throw new PdfException(e);
+        //    }
+        //}
 
         /// <summary>Get the "issuer" from the TBSCertificate bytes that are passed in.</summary>
         /// <param name="enc">a TBSCertificate in a byte array</param>
@@ -317,10 +319,10 @@ namespace iText.Signatures {
         /// <summary>Get the subject fields from an X509 Certificate.</summary>
         /// <param name="cert">an X509Certificate</param>
         /// <returns>an X500Name</returns>
-        public static CertificateInfo.X500Name GetSubjectFields(X509Certificate cert) {
+        public static X500Name GetSubjectFields(X509Certificate cert) {
             try {
                 if (cert != null) {
-                    return new CertificateInfo.X500Name((Asn1Sequence)CertificateInfo.GetSubject(cert.GetTbsCertificate()));
+                    return new X500Name((Asn1Sequence)GetSubject(cert.GetTbsCertificate()));
                 }
             }
             catch (Exception e) {

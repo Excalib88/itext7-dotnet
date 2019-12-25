@@ -46,7 +46,7 @@ using iText.IO.Font.Otf;
 
 namespace iText.IO.Font.Otf.Lookuptype6 {
     public abstract class SubTableLookup6 : ContextualSubTable {
-        protected internal SubTableLookup6(OpenTypeFontTableReader openReader, int lookupFlag)
+        public SubTableLookup6(OpenTypeFontTableReader openReader, int lookupFlag)
             : base(openReader, lookupFlag) {
         }
 
@@ -72,7 +72,7 @@ namespace iText.IO.Font.Otf.Lookuptype6 {
         /// <param name="line"/>
         /// <param name="rule"/>
         /// <param name="startIdx"/>
-        protected internal virtual bool CheckIfLookaheadContextMatch(GlyphLine line, ContextualSubstRule rule, int
+        public virtual bool CheckIfLookaheadContextMatch(GlyphLine line, ContextualSubstRule rule, int
              startIdx) {
             int j;
             OpenTableLookup.GlyphIndexer gidx = new OpenTableLookup.GlyphIndexer();
@@ -90,7 +90,7 @@ namespace iText.IO.Font.Otf.Lookuptype6 {
         /// <summary>Checks if given glyph line at the given position matches given rule.</summary>
         /// <param name="line"/>
         /// <param name="rule"/>
-        protected internal virtual bool CheckIfBacktrackContextMatch(GlyphLine line, ContextualSubstRule rule) {
+        public virtual bool CheckIfBacktrackContextMatch(GlyphLine line, ContextualSubstRule rule) {
             int j;
             OpenTableLookup.GlyphIndexer gidx = new OpenTableLookup.GlyphIndexer();
             gidx.line = line;

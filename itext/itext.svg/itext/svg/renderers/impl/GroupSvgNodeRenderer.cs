@@ -48,7 +48,7 @@ namespace iText.Svg.Renderers.Impl {
     /// <remarks>This renderer represents a branch in an SVG tree. It doesn't do anything aside from calling the superclass doDraw.
     ///     </remarks>
     public class GroupSvgNodeRenderer : AbstractBranchSvgNodeRenderer {
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             PdfCanvas currentCanvas = context.GetCurrentCanvas();
             foreach (ISvgNodeRenderer child in GetChildren()) {
                 currentCanvas.SaveState();

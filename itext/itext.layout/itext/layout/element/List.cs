@@ -64,7 +64,7 @@ namespace iText.Layout.Element {
     public class List : BlockElement<iText.Layout.Element.List> {
         public const String DEFAULT_LIST_SYMBOL = "- ";
 
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         /// <summary>
         /// Creates a List with the
@@ -302,7 +302,7 @@ namespace iText.Layout.Element {
             return tagProperties;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new ListRenderer(this);
         }
     }

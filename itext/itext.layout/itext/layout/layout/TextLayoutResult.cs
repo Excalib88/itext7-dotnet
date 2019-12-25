@@ -53,10 +53,10 @@ namespace iText.Layout.Layout {
         /// Indicates whether some word was splitted during
         /// <see cref="iText.Layout.Renderer.TextRenderer.Layout(LayoutContext)">layout</see>.
         /// </summary>
-        protected internal bool wordHasBeenSplit;
+        public bool wordHasBeenSplit;
 
         /// <summary>Indicates whether split was forced by new line symbol in text or not.</summary>
-        protected internal bool splitForcedByNewline;
+        public bool splitForcedByNewline;
 
         /// <summary>
         /// Creates the

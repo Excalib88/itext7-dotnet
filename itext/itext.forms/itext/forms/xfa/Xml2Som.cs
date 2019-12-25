@@ -53,19 +53,19 @@ namespace iText.Forms.Xfa
 	internal class Xml2Som
 	{
 		/// <summary>The order the names appear in the XML, depth first.</summary>
-		protected internal IList<String> order;
+		public IList<String> order;
 
 		/// <summary>The mapping of full names to nodes.</summary>
-		protected internal IDictionary<String, XNode> name2Node;
+		public IDictionary<String, XNode> name2Node;
 
 		/// <summary>The data to do a search from the bottom hierarchy.</summary>
-		protected internal IDictionary<String, InverseStore> inverseSearch;
+		public IDictionary<String, InverseStore> inverseSearch;
 
 		/// <summary>A stack to be used when parsing.</summary>
-		protected internal Stack<String> stack;
+		public Stack<String> stack;
 
 		/// <summary>A temporary store for the repetition count.</summary>
-		protected internal int anform;
+		public int anform;
 
 		/// <summary>Escapes a SOM string fragment replacing "." with "\.".</summary>
 		/// <param name="s">the unescaped string</param>
@@ -121,7 +121,7 @@ namespace iText.Forms.Xfa
 		/// by '.'.
 		/// </summary>
 		/// <returns>the stack as the sequence of elements separated by '.'</returns>
-		protected internal virtual String PrintStack()
+		public virtual String PrintStack()
 		{
 			if (stack.Count == 0)
 			{

@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Font;
 using iText.IO.Font.Otf;
 using iText.Kernel;
@@ -143,11 +144,11 @@ namespace iText.Kernel.Font {
         /// </param>
         [System.ObsoleteAttribute(@"use iText.IO.Font.TrueTypeFont.UpdateUsedGlyphs(Java.Util.SortedSet{E}, bool, System.Collections.Generic.IList{E})"
             )]
-        protected internal virtual void AddRangeUni(ICollection<int> longTag) {
+        public virtual void AddRangeUni(ICollection<int> longTag) {
             ((TrueTypeFont)GetFontProgram()).UpdateUsedGlyphs((SortedSet<int>)longTag, subset, subsetRanges);
         }
 
-        protected internal override void AddFontStream(PdfDictionary fontDescriptor) {
+        public override void AddFontStream(PdfDictionary fontDescriptor) {
             if (embedded) {
                 PdfName fontFileName;
                 PdfStream fontStream;
@@ -164,8 +165,8 @@ namespace iText.Kernel.Font {
                             fontStream.Put(PdfName.Subtype, new PdfName("Type1C"));
                         }
                         catch (PdfException e) {
-                            ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfTrueTypeFont));
-                            logger.Error(e.Message);
+                            //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfTrueTypeFont));
+                            //logger.Error(e.Message);
                             fontStream = null;
                         }
                     }
@@ -194,8 +195,8 @@ namespace iText.Kernel.Font {
                             fontStream = GetPdfFontStream(fontStreamBytes, new int[] { fontStreamBytes.Length });
                         }
                         catch (PdfException e) {
-                            ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfTrueTypeFont));
-                            logger.Error(e.Message);
+                            //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Font.PdfTrueTypeFont));
+                            //logger.Error(e.Message);
                             fontStream = null;
                         }
                     }

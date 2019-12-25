@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font;
 using iText.IO.Font.Cmap;
 using iText.IO.Util;
@@ -51,7 +52,7 @@ using iText.Kernel.Pdf;
 namespace iText.Kernel.Font {
     /// <summary>This class allow to parse document font's encoding.</summary>
     internal class DocFontEncoding : FontEncoding {
-        protected internal DocFontEncoding() {
+        public DocFontEncoding() {
         }
 
         public static FontEncoding CreateDocFontEncoding(PdfObject encoding, CMapToUnicode toUnicode) {
@@ -123,9 +124,9 @@ namespace iText.Kernel.Font {
                     }
                     else {
                         if (currentNumber > 255) {
-                            ILog LOGGER = LogManager.GetLogger(typeof(iText.Kernel.Font.DocFontEncoding));
-                            LOGGER.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.DOCFONT_HAS_ILLEGAL_DIFFERENCES, ((PdfName
-                                )obj).GetValue()));
+                            //ILog LOGGER = LogManager.GetLogger(typeof(iText.Kernel.Font.DocFontEncoding));
+                            //LOGGER.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.DOCFONT_HAS_ILLEGAL_DIFFERENCES, ((PdfName
+                            //    )obj).GetValue()));
                         }
                         else {
                             /* don't return or break, because differences subarrays may

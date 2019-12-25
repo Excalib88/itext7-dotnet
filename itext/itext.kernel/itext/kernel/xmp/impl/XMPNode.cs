@@ -189,7 +189,7 @@ namespace iText.Kernel.XMP.Impl
 		/// checks if the provided node is a schema node and doesn't have any children anymore,
 		/// its deleted.
 		/// </summary>
-		protected internal virtual void CleanupChildren()
+		public virtual void CleanupChildren()
 		{
 			if (children.Count == 0)
 			{
@@ -683,7 +683,7 @@ namespace iText.Kernel.XMP.Impl
 		/// that its initialized.
 		/// </summary>
 		/// <returns>Returns list of children that is lazy initialized.</returns>
-		protected internal virtual IList GetChildren()
+		public virtual IList GetChildren()
 		{
 			if (children == null)
 			{
@@ -713,7 +713,7 @@ namespace iText.Kernel.XMP.Impl
 		/// and <code>addQualifier()</code>.
 		/// </summary>
 		/// <param name="parent">Sets the parent node.</param>
-		protected internal virtual void SetParent(iText.Kernel.XMP.Impl.XMPNode parent
+		public virtual void SetParent(iText.Kernel.XMP.Impl.XMPNode parent
 			)
 		{
 			this.parent = parent;

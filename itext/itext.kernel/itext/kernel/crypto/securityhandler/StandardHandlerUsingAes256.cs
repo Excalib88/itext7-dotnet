@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.IO;
-using Common.Logging;
+////using Common.Logging;
+
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
@@ -62,7 +63,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
 
         private bool isPdf2;
 
-        protected internal bool encryptMetadata;
+        public bool encryptMetadata;
 
         public StandardHandlerUsingAes256(PdfDictionary encryptionDictionary, byte[] userPassword, byte[] ownerPassword
             , int permissions, bool encryptMetadata, bool embeddedFilesOnly, PdfVersion version) {
@@ -240,9 +241,9 @@ namespace iText.Kernel.Crypto.Securityhandler {
                 bool? encryptMetadataEntry = encryptionDictionary.GetAsBool(PdfName.EncryptMetadata);
                 if (permissionsDecoded != permissions || encryptMetadataEntry != null && encryptMetadata != encryptMetadataEntry
                     ) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Crypto.Securityhandler.StandardHandlerUsingAes256));
-                    logger.Error(iText.IO.LogMessageConstant.ENCRYPTION_ENTRIES_P_AND_ENCRYPT_METADATA_NOT_CORRESPOND_PERMS_ENTRY
-                        );
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Crypto.Securityhandler.StandardHandlerUsingAes256));
+                    //logger.Error(iText.IO.LogMessageConstant.ENCRYPTION_ENTRIES_P_AND_ENCRYPT_METADATA_NOT_CORRESPOND_PERMS_ENTRY
+                        //);
                 }
                 this.permissions = permissionsDecoded;
                 this.encryptMetadata = encryptMetadata;

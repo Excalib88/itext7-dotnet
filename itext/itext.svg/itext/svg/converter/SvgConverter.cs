@@ -43,7 +43,6 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Common.Logging;
 using iText.IO.Util;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
@@ -73,8 +72,6 @@ namespace iText.Svg.Converter {
     public sealed class SvgConverter {
         private SvgConverter() {
         }
-
-        private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Svg.Converter.SvgConverter));
 
         private static void CheckNull(Object o) {
             if (o == null) {
@@ -1331,7 +1328,6 @@ namespace iText.Svg.Converter {
                 }
                 else {
                     //Log Warning
-                    LOGGER.Warn(SvgLogMessageConstant.MISSING_WIDTH);
                     //Set to browser default
                     width = CssUtils.ParseAbsoluteLength("300px");
                 }
@@ -1346,7 +1342,6 @@ namespace iText.Svg.Converter {
                 }
                 else {
                     //Log Warning
-                    LOGGER.Warn(SvgLogMessageConstant.MISSING_HEIGHT);
                     //Set to browser default
                     height = CssUtils.ParseAbsoluteLength("150px");
                 }

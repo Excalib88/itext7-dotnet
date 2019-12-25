@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.StyledXmlParser.Css;
 using iText.StyledXmlParser.Css.Resolve.Shorthand;
@@ -186,9 +187,9 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
         /// <param name="slashEncountered">indicates whether a slash was encountered</param>
         private void PutPropertyBasedOnType(int type, String value, String[] resolvedProps, bool slashEncountered) {
             if (type == UNDEFINED_TYPE) {
-                ILog logger = LogManager.GetLogger(typeof(BackgroundShorthandResolver));
-                logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.WAS_NOT_ABLE_TO_DEFINE_BACKGROUND_CSS_SHORTHAND_PROPERTIES
-                    , value));
+                //ILog logger = LogManager.GetLogger(typeof(BackgroundShorthandResolver));
+                //logger.Error(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.WAS_NOT_ABLE_TO_DEFINE_BACKGROUND_CSS_SHORTHAND_PROPERTIES
+                //    , value));
                 return;
             }
             if (type == BACKGROUND_POSITION_OR_SIZE_TYPE && !slashEncountered) {

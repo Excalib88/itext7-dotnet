@@ -65,7 +65,7 @@ namespace iText.IO.Font.Otf.Lookuptype5 {
             this.subClassSets = subClassSets;
         }
 
-        protected internal override IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startId) {
+        public override IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startId) {
             if (substCoverageGlyphIds.Contains(startId) && !openReader.IsSkip(startId, lookupFlag)) {
                 int gClass = classDefinition.GetOtfClass(startId);
                 return subClassSets[gClass];

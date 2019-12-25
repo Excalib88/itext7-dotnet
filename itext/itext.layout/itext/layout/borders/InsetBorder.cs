@@ -126,7 +126,7 @@ namespace iText.Layout.Borders {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override void SetInnerHalfColor(PdfCanvas canvas, Border.Side side) {
+        public override void SetInnerHalfColor(PdfCanvas canvas, Border.Side side) {
             switch (side) {
                 case Border.Side.TOP:
                 case Border.Side.LEFT: {
@@ -143,7 +143,7 @@ namespace iText.Layout.Borders {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override void SetOuterHalfColor(PdfCanvas canvas, Border.Side side) {
+        public override void SetOuterHalfColor(PdfCanvas canvas, Border.Side side) {
             switch (side) {
                 case Border.Side.TOP:
                 case Border.Side.LEFT: {

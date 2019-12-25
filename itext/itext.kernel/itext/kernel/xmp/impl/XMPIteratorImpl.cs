@@ -57,10 +57,10 @@ namespace iText.Kernel.XMP.Impl
 		private String baseNS = null;
 
 		/// <summary>flag to indicate that skipSiblings() has been called.</summary>
-		protected internal bool skipSiblings = false;
+		public bool skipSiblings = false;
 
 		/// <summary>flag to indicate that skipSiblings() has been called.</summary>
-		protected internal bool skipSubtree = false;
+		public bool skipSubtree = false;
 
 		/// <summary>the node iterator doing the work</summary>
 		private readonly IEnumerator nodeIterator = null;
@@ -164,19 +164,19 @@ namespace iText.Kernel.XMP.Impl
 		}
 
 		/// <returns>Exposes the options for inner class.</returns>
-		protected internal virtual IteratorOptions GetOptions()
+		public virtual IteratorOptions GetOptions()
 		{
 			return options;
 		}
 
 		/// <returns>Exposes the options for inner class.</returns>
-		protected internal virtual String GetBaseNS()
+		public virtual String GetBaseNS()
 		{
 			return baseNS;
 		}
 
 		/// <param name="baseNS">sets the baseNS from the inner class.</param>
-		protected internal virtual void SetBaseNS(String baseNS)
+		public virtual void SetBaseNS(String baseNS)
 		{
 			this.baseNS = baseNS;
 		}
@@ -250,17 +250,17 @@ namespace iText.Kernel.XMP.Impl
 			}
 
 			/// <returns> the childrenIterator </returns>
-			protected internal virtual IEnumerator GetChildrenIterator() {
+			public virtual IEnumerator GetChildrenIterator() {
 				return childrenIterator;
 			}
 
 
 			/// <returns> Returns the returnProperty. </returns>
-			protected internal virtual XMPPropertyInfo GetReturnProperty() {
+			public virtual XMPPropertyInfo GetReturnProperty() {
 				return returnProperty;
 			}
 
-			protected internal virtual void SetReturnProperty(XMPPropertyInfo value) {
+			public virtual void SetReturnProperty(XMPPropertyInfo value) {
 				returnProperty = value;
 			}
 
@@ -305,7 +305,7 @@ namespace iText.Kernel.XMP.Impl
 			/// <summary>
 			/// Sets the returnProperty as next item or recurses into <code>hasNext()</code>. </summary>
 			/// <returns> Returns if there is a next item to return.  </returns>
-			protected internal virtual bool ReportNode() {
+			public virtual bool ReportNode() {
 				state = ITERATE_CHILDREN;
 				if (visitedNode.GetParent() != null &&
 					(!outerInstance.GetOptions().IsJustLeafnodes() || !visitedNode.HasChildren())) {
@@ -345,7 +345,7 @@ namespace iText.Kernel.XMP.Impl
 			/// <param name="parentPath"> the path up to this node. </param>
 			/// <param name="currentIndex"> the current array index if an arrey is traversed </param>
 			/// <returns> Returns the updated path. </returns>
-			protected internal virtual String AccumulatePath(XMPNode currNode, string parentPath, int currentIndex) {
+			public virtual String AccumulatePath(XMPNode currNode, string parentPath, int currentIndex) {
 				String separator;
 				String segmentName;
 				if (currNode.GetParent() == null || currNode.GetOptions().IsSchemaNode()) {
@@ -376,7 +376,7 @@ namespace iText.Kernel.XMP.Impl
 			/// <param name="baseNs"> the base namespace to report </param>
 			/// <param name="path"> the full property path </param>
 			/// <returns> Returns a <code>XMPProperty</code>-object that serves representation of the node. </returns>
-			protected internal virtual XMPPropertyInfo CreatePropertyInfo(XMPNode node, String baseNS, String path) {
+			public virtual XMPPropertyInfo CreatePropertyInfo(XMPNode node, String baseNS, String path) {
 				String value = node.GetOptions().IsSchemaNode() ? null : node.GetValue();
 				return new XMPPropertyInfoImpl(node, baseNS, path, value);
 			}

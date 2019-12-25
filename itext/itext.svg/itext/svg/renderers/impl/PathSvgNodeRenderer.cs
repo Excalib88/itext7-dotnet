@@ -131,7 +131,7 @@ namespace iText.Svg.Renderers.Impl {
         /// </remarks>
         private ClosePath zOperator = null;
 
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             PdfCanvas canvas = context.GetCurrentCanvas();
             canvas.WriteLiteral("% path\n");
             currentPoint = new Point(0, 0);

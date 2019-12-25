@@ -63,7 +63,7 @@ namespace iText.Layout.Element {
     /// <see cref="ILeafElement">leaf elements</see>.
     /// </remarks>
     public class Paragraph : BlockElement<iText.Layout.Element.Paragraph> {
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         /// <summary>Creates a Paragraph.</summary>
         public Paragraph() {
@@ -255,7 +255,7 @@ namespace iText.Layout.Element {
             return tagProperties;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new ParagraphRenderer(this);
         }
 

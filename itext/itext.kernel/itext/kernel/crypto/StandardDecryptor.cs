@@ -43,7 +43,7 @@ address: sales@itextpdf.com
 */
 namespace iText.Kernel.Crypto {
     public class StandardDecryptor : IDecryptor {
-        protected internal ARCFOUREncryption arcfour;
+        public ARCFOUREncryption arcfour;
 
         /// <summary>Creates a new instance of StandardDecryption</summary>
         /// <param name="key"/>

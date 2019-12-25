@@ -117,7 +117,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.DefineOptionName(int)"/>
-        protected internal override String DefineOptionName(int option) {
+        public override String DefineOptionName(int option) {
             switch (option) {
                 case REQUIRE_XMP_META: {
                     return "REQUIRE_XMP_META";
@@ -146,7 +146,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.GetValidOptions()"/>
-        protected internal override int GetValidOptions() {
+        public override int GetValidOptions() {
             return REQUIRE_XMP_META | STRICT_ALIASING | FIX_CONTROL_CHARS | ACCEPT_LATIN_1 | OMIT_NORMALIZATION;
         }
     }

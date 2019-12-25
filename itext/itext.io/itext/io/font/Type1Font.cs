@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Font.Constants;
 using iText.IO.Font.Otf;
 using iText.IO.Source;
@@ -71,7 +72,7 @@ namespace iText.IO.Font {
 
         private int[] fontStreamLengths;
 
-        protected internal static iText.IO.Font.Type1Font CreateStandardFont(String name) {
+        public static iText.IO.Font.Type1Font CreateStandardFont(String name) {
             if (StandardFonts.IsStandardFont(name)) {
                 return new iText.IO.Font.Type1Font(name, null, null, null);
             }
@@ -80,17 +81,17 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal Type1Font() {
+        public Type1Font() {
             fontNames = new FontNames();
         }
 
-        protected internal Type1Font(String metricsPath, String binaryPath, byte[] afm, byte[] pfb)
+        public Type1Font(String metricsPath, String binaryPath, byte[] afm, byte[] pfb)
             : this() {
             fontParser = new Type1Parser(metricsPath, binaryPath, afm, pfb);
             Process();
         }
 
-        protected internal Type1Font(String baseFont)
+        public Type1Font(String baseFont)
             : this() {
             GetFontNames().SetFontName(baseFont);
         }
@@ -190,13 +191,13 @@ namespace iText.IO.Font {
                 int bytePtr = 0;
                 for (int k = 0; k < 3; ++k) {
                     if (raf.Read() != 0x80) {
-                        ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
-                        logger.Error(iText.IO.LogMessageConstant.START_MARKER_MISSING_IN_PFB_FILE);
+                        //ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
+                        //logger.Error(iText.IO.LogMessageConstant.START_MARKER_MISSING_IN_PFB_FILE);
                         return null;
                     }
                     if (raf.Read() != PFB_TYPES[k]) {
-                        ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
-                        logger.Error("incorrect.segment.type.in.pfb.file");
+                        //ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
+                        //logger.Error("incorrect.segment.type.in.pfb.file");
                         return null;
                     }
                     int size = raf.Read();
@@ -207,8 +208,8 @@ namespace iText.IO.Font {
                     while (size != 0) {
                         int got = raf.Read(fontStreamBytes, bytePtr, size);
                         if (got < 0) {
-                            ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
-                            logger.Error("premature.end.in.pfb.file");
+                            //ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
+                            //logger.Error("premature.end.in.pfb.file");
                             return null;
                         }
                         bytePtr += got;
@@ -218,8 +219,8 @@ namespace iText.IO.Font {
                 return fontStreamBytes;
             }
             catch (Exception) {
-                ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
-                logger.Error("type1.font.file.exception");
+                //ILog logger = LogManager.GetLogger(typeof(iText.IO.Font.Type1Font));
+                //logger.Error("type1.font.file.exception");
                 return null;
             }
             finally {
@@ -241,7 +242,7 @@ namespace iText.IO.Font {
             return Object.Equals(fontParser.GetAfmPath(), fontProgram);
         }
 
-        protected internal virtual void Process() {
+        public virtual void Process() {
             RandomAccessFileOrArray raf = fontParser.GetMetricsFile();
             String line;
             bool startKernPairs = false;

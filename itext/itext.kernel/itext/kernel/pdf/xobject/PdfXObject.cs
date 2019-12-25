@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.Kernel;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Filespec;
@@ -53,7 +54,7 @@ namespace iText.Kernel.Pdf.Xobject {
     /// <seealso cref="PdfFormXObject"/>
     /// <seealso cref="PdfImageXObject"/>
     public abstract class PdfXObject : PdfObjectWrapper<PdfStream> {
-        protected internal PdfXObject(PdfStream pdfObject)
+        public PdfXObject(PdfStream pdfObject)
             : base(pdfObject) {
         }
 
@@ -124,8 +125,8 @@ namespace iText.Kernel.Pdf.Xobject {
         /// <param name="fs">file specification dictionary of associated file</param>
         public virtual void AddAssociatedFile(PdfFileSpec fs) {
             if (null == ((PdfDictionary)fs.GetPdfObject()).Get(PdfName.AFRelationship)) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Xobject.PdfXObject));
-                logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Xobject.PdfXObject));
+                //logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
             }
             PdfArray afArray = GetPdfObject().GetAsArray(PdfName.AF);
             if (afArray == null) {
@@ -147,7 +148,7 @@ namespace iText.Kernel.Pdf.Xobject {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
     }

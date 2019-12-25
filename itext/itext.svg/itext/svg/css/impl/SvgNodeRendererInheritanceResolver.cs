@@ -78,7 +78,7 @@ namespace iText.Svg.Css.Impl {
             }
         }
 
-        protected internal virtual void ApplyStyles(ISvgNodeRenderer parent, ISvgNodeRenderer child) {
+        public virtual void ApplyStyles(ISvgNodeRenderer parent, ISvgNodeRenderer child) {
             if (parent != null && child != null) {
                 IDictionary<String, String> childStyles = child.GetAttributeMapCopy();
                 if (childStyles == null) {

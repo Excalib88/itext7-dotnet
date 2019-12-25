@@ -49,9 +49,9 @@ using iText.Layout.Renderer;
 namespace iText.Layout {
     /// <summary>This class is used for convenient multi-column Document Layouting</summary>
     public class ColumnDocumentRenderer : DocumentRenderer {
-        protected internal Rectangle[] columns;
+        public Rectangle[] columns;
 
-        protected internal int nextAreaNumber;
+        public int nextAreaNumber;
 
         /// <summary>Creates a ColumnDocumentRenderer.</summary>
         /// <remarks>
@@ -111,7 +111,7 @@ namespace iText.Layout {
             return new iText.Layout.ColumnDocumentRenderer(document, immediateFlush, columns);
         }
 
-        protected internal override LayoutArea UpdateCurrentArea(LayoutResult overflowResult) {
+        public override LayoutArea UpdateCurrentArea(LayoutResult overflowResult) {
             if (overflowResult != null && overflowResult.GetAreaBreak() != null && overflowResult.GetAreaBreak().GetAreaType
                 () != AreaBreakType.NEXT_AREA) {
                 nextAreaNumber = 0;

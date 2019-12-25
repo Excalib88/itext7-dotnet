@@ -43,7 +43,6 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
 using iText.Kernel.Font;
 using iText.Kernel.Log;
 using iText.Kernel.Pdf;
@@ -76,7 +75,7 @@ namespace iText.Pdfa {
     /// <see cref="iText.Kernel.Pdf.PdfAConformanceLevel"/>.
     /// </remarks>
     public class PdfADocument : PdfDocument {
-        protected internal PdfAChecker checker;
+        public PdfAChecker checker;
 
         /// <summary>Constructs a new PdfADocument for writing purposes, i.e. from scratch.</summary>
         /// <remarks>
@@ -244,7 +243,7 @@ namespace iText.Pdfa {
             return checker.GetConformanceLevel();
         }
 
-        protected override void AddCustomMetadataExtensions(XMPMeta xmpMeta) {
+        public override void AddCustomMetadataExtensions(XMPMeta xmpMeta) {
             if (this.IsTagged()) {
                 try {
                     if (xmpMeta.GetPropertyInteger(XMPConst.NS_PDFUA_ID, XMPConst.PART) != null) {
@@ -253,13 +252,13 @@ namespace iText.Pdfa {
                     }
                 }
                 catch (XMPException exc) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Pdfa.PdfADocument));
-                    logger.Error(iText.IO.LogMessageConstant.EXCEPTION_WHILE_UPDATING_XMPMETADATA, exc);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Pdfa.PdfADocument));
+                    //logger.Error(iText.IO.LogMessageConstant.EXCEPTION_WHILE_UPDATING_XMPMETADATA, exc);
                 }
             }
         }
 
-        protected override void UpdateXmpMetadata() {
+        public override void UpdateXmpMetadata() {
             try {
                 XMPMeta xmpMeta = UpdateDefaultXmpMetadata();
                 xmpMeta.SetProperty(XMPConst.NS_PDFA_ID, XMPConst.PART, checker.GetConformanceLevel().GetPart());
@@ -269,16 +268,16 @@ namespace iText.Pdfa {
                 SetXmpMetadata(xmpMeta);
             }
             catch (XMPException e) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Pdfa.PdfADocument));
-                logger.Error(iText.IO.LogMessageConstant.EXCEPTION_WHILE_UPDATING_XMPMETADATA, e);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Pdfa.PdfADocument));
+                //logger.Error(iText.IO.LogMessageConstant.EXCEPTION_WHILE_UPDATING_XMPMETADATA, e);
             }
         }
 
-        protected override void CheckIsoConformance() {
+        public override void CheckIsoConformance() {
             checker.CheckDocument(catalog);
         }
 
-        protected override void FlushObject(PdfObject pdfObject, bool canBeInObjStm) {
+        public override void FlushObject(PdfObject pdfObject, bool canBeInObjStm) {
             MarkObjectAsMustBeFlushed(pdfObject);
             if (isClosing || checker.ObjectIsChecked(pdfObject)) {
                 base.FlushObject(pdfObject, canBeInObjStm);
@@ -287,14 +286,14 @@ namespace iText.Pdfa {
 
         //suppress the call
         //TODO log unsuccessful call
-        protected override void FlushFonts() {
+        public override void FlushFonts() {
             foreach (PdfFont pdfFont in GetDocumentFonts()) {
                 checker.CheckFont(pdfFont);
             }
             base.FlushFonts();
         }
 
-        protected internal virtual void SetChecker(PdfAConformanceLevel conformanceLevel) {
+        public virtual void SetChecker(PdfAConformanceLevel conformanceLevel) {
             switch (conformanceLevel.GetPart()) {
                 case "1": {
                     checker = new PdfA1Checker(conformanceLevel);
@@ -313,12 +312,12 @@ namespace iText.Pdfa {
             }
         }
 
-        protected override void InitTagStructureContext() {
+        public override void InitTagStructureContext() {
             tagStructureContext = new TagStructureContext(this, GetPdfVersionForPdfA(checker.GetConformanceLevel()));
         }
 
         [Obsolete]
-        protected override IList<ICounter> GetCounters() {
+        public override IList<ICounter> GetCounters() {
             return CounterManager.GetInstance().GetCounters(typeof(iText.Pdfa.PdfADocument));
         }
 

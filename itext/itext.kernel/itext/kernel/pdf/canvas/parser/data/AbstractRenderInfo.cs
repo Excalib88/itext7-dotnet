@@ -45,7 +45,7 @@ using iText.Kernel.Pdf.Canvas;
 
 namespace iText.Kernel.Pdf.Canvas.Parser.Data {
     public class AbstractRenderInfo : IEventData {
-        protected internal CanvasGraphicsState gs;
+        public CanvasGraphicsState gs;
 
         private bool graphicsStateIsPreserved;
 
@@ -75,7 +75,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Data {
         }
 
         // check if graphics state was released
-        protected internal virtual void CheckGraphicsState() {
+        public virtual void CheckGraphicsState() {
             if (null == gs) {
                 throw new InvalidOperationException(iText.IO.LogMessageConstant.GRAPHICS_STATE_WAS_DELETED);
             }

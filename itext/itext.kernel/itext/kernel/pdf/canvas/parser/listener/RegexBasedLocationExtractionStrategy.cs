@@ -152,7 +152,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
         /// </summary>
         /// <param name="tri"/>
         /// <returns/>
-        protected internal virtual IList<CharacterRenderInfo> ToCRI(TextRenderInfo tri) {
+        public virtual IList<CharacterRenderInfo> ToCRI(TextRenderInfo tri) {
             IList<CharacterRenderInfo> cris = new List<CharacterRenderInfo>();
             foreach (TextRenderInfo subTri in tri.GetCharacterRenderInfos()) {
                 cris.Add(new CharacterRenderInfo(subTri));
@@ -165,7 +165,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
         /// <c>CharacterRenderInfo</c>
         /// objects to
         /// <c>Rectangles</c>
-        /// This method is protected and not final so that custom implementations can choose to override it.
+        /// This method is public and not final so that custom implementations can choose to override it.
         /// E.g. other implementations may choose to add padding/margin to the Rectangles.
         /// This method also offers a convenient access point to the mapping of
         /// <c>CharacterRenderInfo</c>
@@ -182,7 +182,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
         /// </summary>
         /// <param name="cris"/>
         /// <returns/>
-        protected internal virtual IList<Rectangle> ToRectangles(IList<CharacterRenderInfo> cris) {
+        public virtual IList<Rectangle> ToRectangles(IList<CharacterRenderInfo> cris) {
             IList<Rectangle> retval = new List<Rectangle>();
             if (cris.IsEmpty()) {
                 return retval;

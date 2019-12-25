@@ -167,7 +167,7 @@ namespace iText.Kernel.Pdf.Navigation {
                 ).Add(right).Add(top).Add(zoom);
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
 

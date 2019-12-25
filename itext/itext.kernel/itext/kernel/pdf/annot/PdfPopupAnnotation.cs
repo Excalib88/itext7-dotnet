@@ -46,7 +46,7 @@ using iText.Kernel.Pdf;
 
 namespace iText.Kernel.Pdf.Annot {
     public class PdfPopupAnnotation : PdfAnnotation {
-        protected internal PdfAnnotation parent;
+        public PdfAnnotation parent;
 
         public PdfPopupAnnotation(Rectangle rect)
             : base(rect) {
@@ -56,7 +56,7 @@ namespace iText.Kernel.Pdf.Annot {
         /// see
         /// <see cref="PdfAnnotation.MakeAnnotation(iText.Kernel.Pdf.PdfObject)"/>
         /// </summary>
-        protected internal PdfPopupAnnotation(PdfDictionary pdfObject)
+        public PdfPopupAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

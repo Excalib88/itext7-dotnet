@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel;
 using iText.Kernel.Pdf.Action;
@@ -55,12 +56,12 @@ namespace iText.Kernel.Pdf {
     public class PdfCatalog : PdfObjectWrapper<PdfDictionary> {
         private readonly PdfPagesTree pageTree;
 
-        protected internal IDictionary<PdfName, PdfNameTree> nameTrees = new LinkedDictionary<PdfName, PdfNameTree
+        public IDictionary<PdfName, PdfNameTree> nameTrees = new LinkedDictionary<PdfName, PdfNameTree
             >();
 
-        protected internal PdfNumTree pageLabels;
+        public PdfNumTree pageLabels;
 
-        protected internal PdfOCProperties ocProperties;
+        public PdfOCProperties ocProperties;
 
         private const String OutlineRoot = "Outlines";
 
@@ -81,7 +82,7 @@ namespace iText.Kernel.Pdf {
             .SinglePage, PdfName.OneColumn, PdfName.TwoColumnLeft, PdfName.TwoColumnRight, PdfName.TwoPageLeft, PdfName
             .TwoPageRight));
 
-        protected internal PdfCatalog(PdfDictionary pdfObject)
+        public PdfCatalog(PdfDictionary pdfObject)
             : base(pdfObject) {
             if (pdfObject == null) {
                 throw new PdfException(PdfException.DocumentHasNoPdfCatalogObject);
@@ -92,7 +93,7 @@ namespace iText.Kernel.Pdf {
             pageTree = new PdfPagesTree(this);
         }
 
-        protected internal PdfCatalog(PdfDocument pdfDocument)
+        public PdfCatalog(PdfDocument pdfDocument)
             : this((PdfDictionary)new PdfDictionary().MakeIndirect(pdfDocument)) {
         }
 
@@ -145,8 +146,8 @@ namespace iText.Kernel.Pdf {
         /// <summary>PdfCatalog will be flushed in PdfDocument.close().</summary>
         /// <remarks>PdfCatalog will be flushed in PdfDocument.close(). User mustn't flush PdfCatalog!</remarks>
         public override void Flush() {
-            ILog logger = LogManager.GetLogger(typeof(PdfDocument));
-            logger.Warn("PdfCatalog cannot be flushed manually");
+            //ILog logger = LogManager.GetLogger(typeof(PdfDocument));
+            //logger.Warn("PdfCatalog cannot be flushed manually");
         }
 
         public virtual iText.Kernel.Pdf.PdfCatalog SetOpenAction(PdfDestination destination) {
@@ -327,7 +328,7 @@ namespace iText.Kernel.Pdf {
             return this;
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
@@ -335,7 +336,7 @@ namespace iText.Kernel.Pdf {
         /// True indicates that getOCProperties() was called, may have been modified,
         /// and thus its dictionary needs to be reconstructed.
         /// </summary>
-        protected internal virtual bool IsOCPropertiesMayHaveChanged() {
+        public virtual bool IsOCPropertiesMayHaveChanged() {
             return ocProperties != null;
         }
 

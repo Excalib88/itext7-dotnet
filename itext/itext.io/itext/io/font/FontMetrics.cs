@@ -43,7 +43,7 @@ address: sales@itextpdf.com
 */
 namespace iText.IO.Font {
     public class FontMetrics {
-        protected internal float normalizationCoef = 1f;
+        public float normalizationCoef = 1f;
 
         // head.unitsPerEm
         private int unitsPerEm = 1000;
@@ -235,112 +235,112 @@ namespace iText.IO.Font {
             return isFixedPitch;
         }
 
-        protected internal virtual void SetUnitsPerEm(int unitsPerEm) {
+        public virtual void SetUnitsPerEm(int unitsPerEm) {
             this.unitsPerEm = unitsPerEm;
             normalizationCoef = (float)FontProgram.UNITS_NORMALIZATION / unitsPerEm;
         }
 
-        protected internal virtual void UpdateBbox(float llx, float lly, float urx, float ury) {
+        public virtual void UpdateBbox(float llx, float lly, float urx, float ury) {
             bbox[0] = (int)(llx * normalizationCoef);
             bbox[1] = (int)(lly * normalizationCoef);
             bbox[2] = (int)(urx * normalizationCoef);
             bbox[3] = (int)(ury * normalizationCoef);
         }
 
-        protected internal virtual void SetNumberOfGlyphs(int numOfGlyphs) {
+        public virtual void SetNumberOfGlyphs(int numOfGlyphs) {
             this.numOfGlyphs = numOfGlyphs;
         }
 
-        protected internal virtual void SetGlyphWidths(int[] glyphWidths) {
+        public virtual void SetGlyphWidths(int[] glyphWidths) {
             this.glyphWidths = glyphWidths;
         }
 
-        protected internal virtual void SetTypoAscender(int typoAscender) {
+        public virtual void SetTypoAscender(int typoAscender) {
             this.typoAscender = (int)(typoAscender * normalizationCoef);
         }
 
-        protected internal virtual void SetTypoDescender(int typoDesctender) {
+        public virtual void SetTypoDescender(int typoDesctender) {
             this.typoDescender = (int)(typoDesctender * normalizationCoef);
         }
 
-        protected internal virtual void SetCapHeight(int capHeight) {
+        public virtual void SetCapHeight(int capHeight) {
             this.capHeight = (int)(capHeight * normalizationCoef);
         }
 
-        protected internal virtual void SetXHeight(int xHeight) {
+        public virtual void SetXHeight(int xHeight) {
             this.xHeight = (int)(xHeight * normalizationCoef);
         }
 
-        protected internal virtual void SetItalicAngle(float italicAngle) {
+        public virtual void SetItalicAngle(float italicAngle) {
             this.italicAngle = italicAngle;
         }
 
-        protected internal virtual void SetAscender(int ascender) {
+        public virtual void SetAscender(int ascender) {
             this.ascender = (int)(ascender * normalizationCoef);
         }
 
-        protected internal virtual void SetDescender(int descender) {
+        public virtual void SetDescender(int descender) {
             this.descender = (int)(descender * normalizationCoef);
         }
 
-        protected internal virtual void SetLineGap(int lineGap) {
+        public virtual void SetLineGap(int lineGap) {
             this.lineGap = (int)(lineGap * normalizationCoef);
         }
 
-        protected internal virtual void SetWinAscender(int winAscender) {
+        public virtual void SetWinAscender(int winAscender) {
             this.winAscender = (int)(winAscender * normalizationCoef);
         }
 
-        protected internal virtual void SetWinDescender(int winDescender) {
+        public virtual void SetWinDescender(int winDescender) {
             this.winDescender = (int)(winDescender * normalizationCoef);
         }
 
-        protected internal virtual void SetAdvanceWidthMax(int advanceWidthMax) {
+        public virtual void SetAdvanceWidthMax(int advanceWidthMax) {
             this.advanceWidthMax = (int)(advanceWidthMax * normalizationCoef);
         }
 
-        protected internal virtual void SetUnderlinePosition(int underlinePosition) {
+        public virtual void SetUnderlinePosition(int underlinePosition) {
             this.underlinePosition = (int)(underlinePosition * normalizationCoef);
         }
 
-        protected internal virtual void SetUnderlineThickness(int underineThickness) {
+        public virtual void SetUnderlineThickness(int underineThickness) {
             this.underlineThickness = underineThickness;
         }
 
-        protected internal virtual void SetStrikeoutPosition(int strikeoutPosition) {
+        public virtual void SetStrikeoutPosition(int strikeoutPosition) {
             this.strikeoutPosition = (int)(strikeoutPosition * normalizationCoef);
         }
 
-        protected internal virtual void SetStrikeoutSize(int strikeoutSize) {
+        public virtual void SetStrikeoutSize(int strikeoutSize) {
             this.strikeoutSize = (int)(strikeoutSize * normalizationCoef);
         }
 
-        protected internal virtual void SetSubscriptSize(int subscriptSize) {
+        public virtual void SetSubscriptSize(int subscriptSize) {
             this.subscriptSize = (int)(subscriptSize * normalizationCoef);
         }
 
-        protected internal virtual void SetSubscriptOffset(int subscriptOffset) {
+        public virtual void SetSubscriptOffset(int subscriptOffset) {
             this.subscriptOffset = (int)(subscriptOffset * normalizationCoef);
         }
 
-        protected internal virtual void SetSuperscriptSize(int superscriptSize) {
+        public virtual void SetSuperscriptSize(int superscriptSize) {
             this.superscriptSize = superscriptSize;
         }
 
-        protected internal virtual void SetSuperscriptOffset(int superscriptOffset) {
+        public virtual void SetSuperscriptOffset(int superscriptOffset) {
             this.superscriptOffset = (int)(superscriptOffset * normalizationCoef);
         }
 
-        //todo change to protected!
+        //todo change to public!
         public virtual void SetStemV(int stemV) {
             this.stemV = stemV;
         }
 
-        protected internal virtual void SetStemH(int stemH) {
+        public virtual void SetStemH(int stemH) {
             this.stemH = stemH;
         }
 
-        protected internal virtual void SetIsFixedPitch(bool isFixedPitch) {
+        public virtual void SetIsFixedPitch(bool isFixedPitch) {
             this.isFixedPitch = isFixedPitch;
         }
     }

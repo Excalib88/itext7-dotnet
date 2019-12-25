@@ -78,7 +78,7 @@ namespace iText.Layout.Layout {
         /// which indicates whether the content was added or not
         /// and, if yes, was it added fully or partially.
         /// </summary>
-        protected internal int status;
+        public int status;
 
         /// <summary>
         /// The area occupied by the content during its
@@ -89,7 +89,7 @@ namespace iText.Layout.Layout {
         /// <see cref="iText.Layout.Renderer.IRenderer.Layout(LayoutContext)">layouting</see>.
         /// which indicates whether the content was added or not and, if yes, was it added fully or partially.
         /// </remarks>
-        protected internal LayoutArea occupiedArea;
+        public LayoutArea occupiedArea;
 
         /// <summary>
         /// The split renderer created during
@@ -100,7 +100,7 @@ namespace iText.Layout.Layout {
         /// <see cref="iText.Layout.Renderer.IRenderer.Layout(LayoutContext)">layouting</see>.
         /// This renderer will be used to draw the splitted part of content.
         /// </remarks>
-        protected internal IRenderer splitRenderer;
+        public IRenderer splitRenderer;
 
         /// <summary>
         /// The overflow renderer created during
@@ -111,9 +111,9 @@ namespace iText.Layout.Layout {
         /// <see cref="iText.Layout.Renderer.IRenderer.Layout(LayoutContext)">layouting</see>.
         /// This renderer will be used to draw the overflowed part of content.
         /// </remarks>
-        protected internal IRenderer overflowRenderer;
+        public IRenderer overflowRenderer;
 
-        protected internal AreaBreak areaBreak;
+        public AreaBreak areaBreak;
 
         /// <summary>
         /// The first renderer to produce
@@ -121,7 +121,7 @@ namespace iText.Layout.Layout {
         /// during
         /// <see cref="iText.Layout.Renderer.IRenderer.Layout(LayoutContext)"/>.
         /// </summary>
-        protected internal IRenderer causeOfNothing;
+        public IRenderer causeOfNothing;
 
         /// <summary>
         /// Creates the

@@ -49,7 +49,7 @@ using iText.Kernel.Pdf.Xobject;
 
 namespace iText.Barcodes {
     public abstract class Barcode2D {
-        protected internal const float DEFAULT_MODULE_SIZE = 1;
+        public const float DEFAULT_MODULE_SIZE = 1;
 
         /// <summary>
         /// Gets the maximum area that the barcode and the text, if

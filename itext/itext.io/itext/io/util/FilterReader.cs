@@ -58,10 +58,10 @@ namespace iText.IO.Util {
     /// @since       JDK1.1
     /// </summary>
     public abstract class FilterReader : TextReader {
-        protected TextReader inp;
+        public TextReader inp;
         private Object lockObj = new Object();
 
-        protected FilterReader(TextReader inp) {
+        public FilterReader(TextReader inp) {
             this.inp = inp;
         }
 

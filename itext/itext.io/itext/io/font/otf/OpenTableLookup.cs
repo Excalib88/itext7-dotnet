@@ -43,13 +43,13 @@ address: sales@itextpdf.com
 */
 namespace iText.IO.Font.Otf {
     public abstract class OpenTableLookup {
-        protected internal int lookupFlag;
+        public int lookupFlag;
 
-        protected internal int[] subTableLocations;
+        public int[] subTableLocations;
 
-        protected internal OpenTypeFontTableReader openReader;
+        public OpenTypeFontTableReader openReader;
 
-        protected internal OpenTableLookup(OpenTypeFontTableReader openReader, int lookupFlag, int[] subTableLocations
+        public OpenTableLookup(OpenTypeFontTableReader openReader, int lookupFlag, int[] subTableLocations
             ) {
             this.lookupFlag = lookupFlag;
             this.subTableLocations = subTableLocations;
@@ -75,13 +75,13 @@ namespace iText.IO.Font.Otf {
             return false;
         }
 
-        protected internal virtual void ReadSubTables() {
+        public virtual void ReadSubTables() {
             foreach (int subTableLocation in subTableLocations) {
                 ReadSubTable(subTableLocation);
             }
         }
 
-        protected internal abstract void ReadSubTable(int subTableLocation);
+        public abstract void ReadSubTable(int subTableLocation);
 
         public class GlyphIndexer {
             public GlyphLine line;

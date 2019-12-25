@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font;
 using iText.IO.Font.Otf;
 using iText.IO.Util;
@@ -81,7 +82,7 @@ namespace iText.Layout.Renderer {
     /// <see cref="DrawContext"/>.
     /// </remarks>
     public class TextRenderer : AbstractRenderer, ILeafElementRenderer {
-        protected internal const float TEXT_SPACE_COEFF = FontProgram.UNITS_NORMALIZATION;
+        public const float TEXT_SPACE_COEFF = FontProgram.UNITS_NORMALIZATION;
 
         private const float ITALIC_ANGLE = 0.21256f;
 
@@ -89,24 +90,24 @@ namespace iText.Layout.Renderer {
 
         private const float TYPO_ASCENDER_SCALE_COEFF = 1.2f;
 
-        protected internal float yLineOffset;
+        public float yLineOffset;
 
         // font should be stored only during converting original string to GlyphLine, however now it's not true
         private PdfFont font;
 
-        protected internal GlyphLine text;
+        public GlyphLine text;
 
-        protected internal GlyphLine line;
+        public GlyphLine line;
 
-        protected internal String strToBeConverted;
+        public String strToBeConverted;
 
-        protected internal bool otfFeaturesApplied = false;
+        public bool otfFeaturesApplied = false;
 
-        protected internal float tabAnchorCharacterPosition = -1;
+        public float tabAnchorCharacterPosition = -1;
 
-        protected internal IList<int[]> reversedRanges;
+        public IList<int[]> reversedRanges;
 
-        protected internal GlyphLine savedWordBreakAtLineEnding;
+        public GlyphLine savedWordBreakAtLineEnding;
 
         /// <summary>Creates a TextRenderer from its corresponding layout object.</summary>
         /// <param name="textElement">
@@ -134,7 +135,7 @@ namespace iText.Layout.Renderer {
             this.strToBeConverted = text;
         }
 
-        protected internal TextRenderer(iText.Layout.Renderer.TextRenderer other)
+        public TextRenderer(iText.Layout.Renderer.TextRenderer other)
             : base(other) {
             this.text = other.text;
             this.line = other.line;
@@ -182,9 +183,9 @@ namespace iText.Layout.Renderer {
             int currentTextPos = text.start;
             UnitValue fontSize = (UnitValue)this.GetPropertyAsUnitValue(Property.FONT_SIZE);
             if (!fontSize.IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .FONT_SIZE));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .FONT_SIZE));
             }
             float textRise = (float)this.GetPropertyAsFloat(Property.TEXT_RISE);
             float? characterSpacing = this.GetPropertyAsFloat(Property.CHARACTER_SPACING);
@@ -617,9 +618,9 @@ namespace iText.Layout.Renderer {
 
         public override void Draw(DrawContext drawContext) {
             if (occupiedArea == null) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
-                    "Drawing won't be performed."));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
+                //    "Drawing won't be performed."));
                 return;
             }
             // Set up marked content before super.draw so that annotations are placed within marked content
@@ -655,9 +656,9 @@ namespace iText.Layout.Renderer {
             if (line.end > line.start || savedWordBreakAtLineEnding != null) {
                 UnitValue fontSize = this.GetPropertyAsUnitValue(Property.FONT_SIZE);
                 if (!fontSize.IsPointValue()) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
-                    logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                        .FONT_SIZE));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
+                    //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                    //    .FONT_SIZE));
                 }
                 TransparentColor fontColor = GetPropertyAsTransparentColor(Property.FONT_COLOR);
                 int? textRenderingMode = this.GetProperty<int?>(Property.TEXT_RENDERING_MODE);
@@ -875,9 +876,9 @@ namespace iText.Layout.Renderer {
             }
             UnitValue fontSize = (UnitValue)this.GetPropertyAsUnitValue(Property.FONT_SIZE);
             if (!fontSize.IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .FONT_SIZE));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .FONT_SIZE));
             }
             float? characterSpacing = this.GetPropertyAsFloat(Property.CHARACTER_SPACING);
             float? wordSpacing = this.GetPropertyAsFloat(Property.WORD_SPACING);
@@ -1051,11 +1052,11 @@ namespace iText.Layout.Renderer {
             return font is PdfType0Font && font.GetFontProgram() is TrueTypeFont;
         }
 
-        protected internal override float? GetFirstYLineRecursively() {
+        public override float? GetFirstYLineRecursively() {
             return GetYLine();
         }
 
-        protected internal override float? GetLastYLineRecursively() {
+        public override float? GetLastYLineRecursively() {
             return GetYLine();
         }
 
@@ -1065,11 +1066,11 @@ namespace iText.Layout.Renderer {
         /// which is the result of the layout call.
         /// </summary>
         /// <returns>the length of the line</returns>
-        protected internal virtual int LineLength() {
+        public virtual int LineLength() {
             return line.end > 0 ? line.end - line.start : 0;
         }
 
-        protected internal virtual int BaseCharactersCount() {
+        public virtual int BaseCharactersCount() {
             int count = 0;
             for (int i = line.start; i < line.end; i++) {
                 Glyph glyph = line.Get(i);
@@ -1086,7 +1087,7 @@ namespace iText.Layout.Renderer {
             return result.GetMinMaxWidth();
         }
 
-        protected internal virtual int GetNumberOfSpaces() {
+        public virtual int GetNumberOfSpaces() {
             if (line.end <= 0) {
                 return 0;
             }
@@ -1100,15 +1101,15 @@ namespace iText.Layout.Renderer {
             return spaces;
         }
 
-        protected internal virtual iText.Layout.Renderer.TextRenderer CreateSplitRenderer() {
+        public virtual iText.Layout.Renderer.TextRenderer CreateSplitRenderer() {
             return (iText.Layout.Renderer.TextRenderer)GetNextRenderer();
         }
 
-        protected internal virtual iText.Layout.Renderer.TextRenderer CreateOverflowRenderer() {
+        public virtual iText.Layout.Renderer.TextRenderer CreateOverflowRenderer() {
             return (iText.Layout.Renderer.TextRenderer)GetNextRenderer();
         }
 
-        protected internal virtual iText.Layout.Renderer.TextRenderer[] Split(int initialOverflowTextPos) {
+        public virtual iText.Layout.Renderer.TextRenderer[] Split(int initialOverflowTextPos) {
             iText.Layout.Renderer.TextRenderer splitRenderer = CreateSplitRenderer();
             splitRenderer.SetText(text, text.start, initialOverflowTextPos);
             splitRenderer.font = font;
@@ -1128,7 +1129,7 @@ namespace iText.Layout.Renderer {
             return new iText.Layout.Renderer.TextRenderer[] { splitRenderer, overflowRenderer };
         }
 
-        protected internal virtual void DrawSingleUnderline(Underline underline, TransparentColor fontStrokeColor, 
+        public virtual void DrawSingleUnderline(Underline underline, TransparentColor fontStrokeColor, 
             PdfCanvas canvas, float fontSize, float italicAngleTan) {
             TransparentColor underlineColor = underline.GetColor() != null ? new TransparentColor(underline.GetColor()
                 , underline.GetOpacity()) : fontStrokeColor;
@@ -1150,12 +1151,12 @@ namespace iText.Layout.Renderer {
             canvas.RestoreState();
         }
 
-        protected internal virtual float CalculateLineWidth() {
+        public virtual float CalculateLineWidth() {
             UnitValue fontSize = this.GetPropertyAsUnitValue(Property.FONT_SIZE);
             if (!fontSize.IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .FONT_SIZE));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .FONT_SIZE));
             }
             return GetGlyphLineWidth(line, fontSize.GetValue(), (float)this.GetPropertyAsFloat(Property.HORIZONTAL_SCALING
                 , 1f), this.GetPropertyAsFloat(Property.CHARACTER_SPACING), this.GetPropertyAsFloat(Property.WORD_SPACING
@@ -1173,7 +1174,7 @@ namespace iText.Layout.Renderer {
         /// <see cref="TextRenderer"/>
         /// has been created.
         /// </returns>
-        protected internal virtual bool ResolveFonts(IList<IRenderer> addTo) {
+        public virtual bool ResolveFonts(IList<IRenderer> addTo) {
             Object font = this.GetProperty<Object>(Property.FONT);
             if (font is PdfFont) {
                 addTo.Add(this);
@@ -1183,9 +1184,9 @@ namespace iText.Layout.Renderer {
                 if (font is String || font is String[]) {
                     if (font is String) {
                         // TODO remove this if-clause before 7.2
-                        ILog logger = LogManager.GetLogger(typeof(AbstractRenderer));
-                        logger.Warn(iText.IO.LogMessageConstant.FONT_PROPERTY_OF_STRING_TYPE_IS_DEPRECATED_USE_STRINGS_ARRAY_INSTEAD
-                            );
+                        //ILog logger = LogManager.GetLogger(typeof(AbstractRenderer));
+                        //logger.Warn(iText.IO.LogMessageConstant.FONT_PROPERTY_OF_STRING_TYPE_IS_DEPRECATED_USE_STRINGS_ARRAY_INSTEAD
+                        //    );
                         IList<String> splitFontFamily = FontFamilySplitter.SplitFontFamily((String)font);
                         font = splitFontFamily.ToArray(new String[splitFontFamily.Count]);
                     }
@@ -1218,7 +1219,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual void SetGlyphLineAndFont(GlyphLine gl, PdfFont font) {
+        public virtual void SetGlyphLineAndFont(GlyphLine gl, PdfFont font) {
             this.text = gl;
             this.font = font;
             this.otfFeaturesApplied = false;
@@ -1226,7 +1227,7 @@ namespace iText.Layout.Renderer {
             SetProperty(Property.FONT, font);
         }
 
-        protected internal virtual iText.Layout.Renderer.TextRenderer CreateCopy(GlyphLine gl, PdfFont font) {
+        public virtual iText.Layout.Renderer.TextRenderer CreateCopy(GlyphLine gl, PdfFont font) {
             iText.Layout.Renderer.TextRenderer copy = new iText.Layout.Renderer.TextRenderer(this);
             copy.SetGlyphLineAndFont(gl, font);
             return copy;
@@ -1361,8 +1362,8 @@ namespace iText.Layout.Renderer {
                 catch (InvalidCastException) {
                     font = ResolveFirstPdfFont();
                     if (!String.IsNullOrEmpty(strToBeConverted)) {
-                        ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
-                        logger.Error(iText.IO.LogMessageConstant.FONT_PROPERTY_MUST_BE_PDF_FONT_OBJECT);
+                        //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.TextRenderer));
+                        //logger.Error(iText.IO.LogMessageConstant.FONT_PROPERTY_MUST_BE_PDF_FONT_OBJECT);
                     }
                 }
                 text = ConvertToGlyphLine(strToBeConverted);

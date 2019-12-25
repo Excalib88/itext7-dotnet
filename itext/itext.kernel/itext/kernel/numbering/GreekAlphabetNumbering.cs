@@ -59,11 +59,11 @@ namespace iText.Kernel.Numbering {
     /// So we use standard 24 letter Greek alphabet
     /// </remarks>
     public class GreekAlphabetNumbering {
-        protected internal static readonly char[] ALPHABET_LOWERCASE;
+        public static readonly char[] ALPHABET_LOWERCASE;
 
-        protected internal static readonly char[] ALPHABET_UPPERCASE;
+        public static readonly char[] ALPHABET_UPPERCASE;
 
-        protected internal const int ALPHABET_LENGTH = 24;
+        public const int ALPHABET_LENGTH = 24;
 
         static GreekAlphabetNumbering() {
             ALPHABET_LOWERCASE = new char[ALPHABET_LENGTH];

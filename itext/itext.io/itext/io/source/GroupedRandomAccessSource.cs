@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+////using Common.Logging;
+
 
 namespace iText.IO.Source {
     /// <summary>
@@ -91,7 +92,7 @@ namespace iText.IO.Source {
         /// </remarks>
         /// <param name="offset">the offset</param>
         /// <returns>the index of the input source that contains the specified offset, or 0 if unknown</returns>
-        protected internal virtual int GetStartingSourceIndex(long offset) {
+        public virtual int GetStartingSourceIndex(long offset) {
             if (offset >= currentSourceEntry.firstByte) {
                 return currentSourceEntry.index;
             }
@@ -129,7 +130,7 @@ namespace iText.IO.Source {
         /// <remarks>Called when a given source is no longer the active source.  This gives subclasses the abilty to release resources, if appropriate.
         ///     </remarks>
         /// <param name="source">the source that is no longer the active source</param>
-        protected internal virtual void SourceReleased(IRandomAccessSource source) {
+        public virtual void SourceReleased(IRandomAccessSource source) {
         }
 
         // by default, do nothing
@@ -137,7 +138,7 @@ namespace iText.IO.Source {
         /// <remarks>Called when a given source is about to become the active source.  This gives subclasses the abilty to retrieve resources, if appropriate.
         ///     </remarks>
         /// <param name="source">the source that is about to become the active source</param>
-        protected internal virtual void SourceInUse(IRandomAccessSource source) {
+        public virtual void SourceInUse(IRandomAccessSource source) {
         }
 
         // by default, do nothing
@@ -206,13 +207,13 @@ namespace iText.IO.Source {
                         firstThrownIOExc = ex;
                     }
                     else {
-                        ILog logger = LogManager.GetLogger(typeof(iText.IO.Source.GroupedRandomAccessSource));
-                        logger.Error(iText.IO.LogMessageConstant.ONE_OF_GROUPED_SOURCES_CLOSING_FAILED, ex);
+                        //ILog logger = LogManager.GetLogger(typeof(iText.IO.Source.GroupedRandomAccessSource));
+                        //logger.Error(iText.IO.LogMessageConstant.ONE_OF_GROUPED_SOURCES_CLOSING_FAILED, ex);
                     }
                 }
                 catch (Exception ex) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.IO.Source.GroupedRandomAccessSource));
-                    logger.Error(iText.IO.LogMessageConstant.ONE_OF_GROUPED_SOURCES_CLOSING_FAILED, ex);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.IO.Source.GroupedRandomAccessSource));
+                    //logger.Error(iText.IO.LogMessageConstant.ONE_OF_GROUPED_SOURCES_CLOSING_FAILED, ex);
                 }
             }
             if (firstThrownIOExc != null) {

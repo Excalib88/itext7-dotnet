@@ -49,13 +49,13 @@ namespace System.util.zlib {
     /// Summary description for DeflaterOutputStream.
     /// </summary>
     public class ZInflaterInputStream : Stream {
-        protected ZStream z=new ZStream();
-        protected int flushLevel=JZlib.Z_NO_FLUSH;
+        public ZStream z=new ZStream();
+        public int flushLevel=JZlib.Z_NO_FLUSH;
         private const int BUFSIZE = 4192;
-        protected byte[] buf=new byte[BUFSIZE];
+        public byte[] buf=new byte[BUFSIZE];
         private byte[] buf1=new byte[1];
 
-        protected Stream inp=null;
+        public Stream inp=null;
         private bool nomoreinput=false;
 
         public ZInflaterInputStream(Stream inp) : this(inp, false) {

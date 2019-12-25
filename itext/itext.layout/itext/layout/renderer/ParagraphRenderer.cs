@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Geom;
 using iText.Layout.Borders;
@@ -71,9 +72,9 @@ namespace iText.Layout.Renderer {
     /// <see cref="DrawContext"/>.
     /// </remarks>
     public class ParagraphRenderer : BlockRenderer {
-        protected internal float previousDescent = 0;
+        public float previousDescent = 0;
 
-        protected internal IList<LineRenderer> lines = null;
+        public IList<LineRenderer> lines = null;
 
         /// <summary>Creates a ParagraphRenderer from its corresponding layout object.</summary>
         /// <param name="modelElement">
@@ -418,8 +419,8 @@ namespace iText.Layout.Renderer {
                 ApplyRotationLayout(layoutContext.GetArea().GetBBox().Clone());
                 if (IsNotFittingLayoutArea(layoutContext.GetArea())) {
                     if (IsNotFittingWidth(layoutContext.GetArea()) && !IsNotFittingHeight(layoutContext.GetArea())) {
-                        LogManager.GetLogger(GetType()).Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ELEMENT_DOES_NOT_FIT_AREA
-                            , "It fits by height so it will be forced placed"));
+                        //LogManager.GetLogger(GetType()).Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ELEMENT_DOES_NOT_FIT_AREA
+                        //    , "It fits by height so it will be forced placed"));
                     }
                     else {
                         if (!true.Equals(GetPropertyAsBoolean(Property.FORCED_PLACEMENT))) {
@@ -503,14 +504,14 @@ namespace iText.Layout.Renderer {
             return lines;
         }
 
-        protected internal override float? GetFirstYLineRecursively() {
+        public override float? GetFirstYLineRecursively() {
             if (lines == null || lines.Count == 0) {
                 return null;
             }
             return lines[0].GetFirstYLineRecursively();
         }
 
-        protected internal override float? GetLastYLineRecursively() {
+        public override float? GetLastYLineRecursively() {
             if (!AllowLastYLineRecursiveExtraction()) {
                 return null;
             }
@@ -534,7 +535,7 @@ namespace iText.Layout.Renderer {
             return (iText.Layout.Renderer.ParagraphRenderer)GetNextRenderer();
         }
 
-        protected internal virtual iText.Layout.Renderer.ParagraphRenderer CreateOverflowRenderer(IRenderer parent
+        public virtual iText.Layout.Renderer.ParagraphRenderer CreateOverflowRenderer(IRenderer parent
             ) {
             iText.Layout.Renderer.ParagraphRenderer overflowRenderer = CreateOverflowRenderer();
             overflowRenderer.parent = parent;
@@ -543,14 +544,14 @@ namespace iText.Layout.Renderer {
             return overflowRenderer;
         }
 
-        protected internal virtual iText.Layout.Renderer.ParagraphRenderer CreateSplitRenderer(IRenderer parent) {
+        public virtual iText.Layout.Renderer.ParagraphRenderer CreateSplitRenderer(IRenderer parent) {
             iText.Layout.Renderer.ParagraphRenderer splitRenderer = CreateSplitRenderer();
             splitRenderer.parent = parent;
             splitRenderer.AddAllProperties(GetOwnProperties());
             return splitRenderer;
         }
 
-        protected internal override AbstractRenderer CreateOverflowRenderer(int layoutResult) {
+        public override AbstractRenderer CreateOverflowRenderer(int layoutResult) {
             return CreateOverflowRenderer(parent);
         }
 
@@ -589,7 +590,7 @@ namespace iText.Layout.Renderer {
             return rotation != null ? RotationUtils.CountRotationMinMaxWidth(minMaxWidth, this) : minMaxWidth;
         }
 
-        protected internal virtual iText.Layout.Renderer.ParagraphRenderer[] Split() {
+        public virtual iText.Layout.Renderer.ParagraphRenderer[] Split() {
             iText.Layout.Renderer.ParagraphRenderer splitRenderer = CreateSplitRenderer(parent);
             splitRenderer.occupiedArea = occupiedArea;
             splitRenderer.isLastRendererForModelElement = false;

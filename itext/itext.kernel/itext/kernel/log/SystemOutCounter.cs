@@ -58,7 +58,7 @@ namespace iText.Kernel.Log {
         /// The name of the class for which the ICounter was created
         /// (or iText if no name is available)
         /// </summary>
-        protected internal String name;
+        public String name;
 
         public SystemOutCounter(String name) {
             this.name = name;

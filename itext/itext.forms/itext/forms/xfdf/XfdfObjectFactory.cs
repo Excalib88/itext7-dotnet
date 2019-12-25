@@ -44,7 +44,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Forms;
 using iText.IO.Util;
 using iText.Kernel.Pdf;
@@ -52,7 +53,7 @@ using iText.Kernel.Pdf.Annot;
 
 namespace iText.Forms.Xfdf {
     public class XfdfObjectFactory {
-        private static ILog logger = LogManager.GetLogger(typeof(XfdfObjectFactory));
+        //private static ILog logger = LogManager.GetLogger(typeof(XfdfObjectFactory));
 
         /// <summary>Extracts data from pdf document acroform and annotations into XfdfObject.</summary>
         /// <remarks>
@@ -118,7 +119,7 @@ namespace iText.Forms.Xfdf {
                     xfdfObject.SetF(new FObject(href.Value));
                 }
                 else {
-                    logger.Info(XfdfConstants.EMPTY_F_LEMENT);
+                    //logger.Info(XfdfConstants.EMPTY_F_LEMENT);
                 }
             }
         }
@@ -137,7 +138,7 @@ namespace iText.Forms.Xfdf {
                 xfdfObject.SetIds(idsObject);
             }
             else {
-                logger.Info(XfdfConstants.EMPTY_IDS_ELEMENT);
+                //logger.Info(XfdfConstants.EMPTY_IDS_ELEMENT);
             }
         }
 
@@ -299,7 +300,7 @@ namespace iText.Forms.Xfdf {
                     }
 
                     default: {
-                        logger.Warn(iText.IO.LogMessageConstant.XFDF_UNSUPPORTED_ANNOTATION_ATTRIBUTE);
+                        //logger.Warn(iText.IO.LogMessageConstant.XFDF_UNSUPPORTED_ANNOTATION_ATTRIBUTE);
                         break;
                     }
                 }
@@ -338,7 +339,7 @@ namespace iText.Forms.Xfdf {
                     parentField.SetValue(valueTextNode.InnerText);
                 }
                 else {
-                    logger.Info(XfdfConstants.EMPTY_FIELD_VALUE_ELEMENT);
+                    //logger.Info(XfdfConstants.EMPTY_FIELD_VALUE_ELEMENT);
                 }
                 return;
             }
@@ -360,7 +361,7 @@ namespace iText.Forms.Xfdf {
                 }
             }
             else {
-                logger.Info(XfdfConstants.EMPTY_FIELD_NAME_ELEMENT);
+                //logger.Info(XfdfConstants.EMPTY_FIELD_NAME_ELEMENT);
             }
             XmlNodeList children = parentNode.ChildNodes;
             for (int temp = 0; temp < children.Count; temp++) {

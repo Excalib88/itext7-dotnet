@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.StyledXmlParser.Css;
 using iText.StyledXmlParser.Css.Resolve.Shorthand;
@@ -76,9 +77,9 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
         */
         public virtual IList<CssDeclaration> ResolveShorthand(String shorthandExpression) {
             if (UNSUPPORTED_VALUES_OF_FONT_SHORTHAND.Contains(shorthandExpression)) {
-                ILog logger = LogManager.GetLogger(typeof(FontShorthandResolver));
-                logger.Error(MessageFormatUtil.Format("The \"{0}\" value of CSS shorthand property \"font\" is not supported"
-                    , shorthandExpression));
+                //ILog logger = LogManager.GetLogger(typeof(FontShorthandResolver));
+                //logger.Error(MessageFormatUtil.Format("The \"{0}\" value of CSS shorthand property \"font\" is not supported"
+                //    , shorthandExpression));
             }
             if (CommonCssConstants.INITIAL.Equals(shorthandExpression) || CommonCssConstants.INHERIT.Equals(shorthandExpression
                 )) {

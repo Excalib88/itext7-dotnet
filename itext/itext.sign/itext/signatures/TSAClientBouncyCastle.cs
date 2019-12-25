@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Cmp;
 using Org.BouncyCastle.Crypto;
@@ -73,25 +74,25 @@ namespace iText.Signatures {
         public const int DEFAULTTOKENSIZE = 4096;
 
         /// <summary>The Logger instance.</summary>
-        private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Signatures.TSAClientBouncyCastle));
+        //private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Signatures.TSAClientBouncyCastle));
 
         /// <summary>URL of the Time Stamp Authority</summary>
-        protected internal String tsaURL;
+        public String tsaURL;
 
         /// <summary>TSA Username</summary>
-        protected internal String tsaUsername;
+        public String tsaUsername;
 
         /// <summary>TSA password</summary>
-        protected internal String tsaPassword;
+        public String tsaPassword;
 
         /// <summary>An interface that allows you to inspect the timestamp info.</summary>
-        protected internal ITSAInfoBouncyCastle tsaInfo;
+        public ITSAInfoBouncyCastle tsaInfo;
 
         /// <summary>Estimate of the received time stamp token</summary>
-        protected internal int tokenSizeEstimate;
+        public int tokenSizeEstimate;
 
         /// <summary>Hash algorithm</summary>
-        protected internal String digestAlgorithm;
+        public String digestAlgorithm;
 
         /// <summary>TSA request policy</summary>
         private String tsaReqPolicy;
@@ -206,7 +207,7 @@ namespace iText.Signatures {
             TimeStampTokenInfo tsTokenInfo = tsToken.TimeStampInfo;
             // to view details
             byte[] encoded = tsToken.GetEncoded();
-            LOGGER.Info("Timestamp generated: " + tsTokenInfo.GenTime);
+            //LOGGER.Info("Timestamp generated: " + tsTokenInfo.GenTime);
             if (tsaInfo != null) {
                 tsaInfo.InspectTimeStampTokenInfo(tsTokenInfo);
             }
@@ -217,7 +218,7 @@ namespace iText.Signatures {
 
         /// <summary>Get timestamp token - communications layer</summary>
         /// <returns>- byte[] - TSA response, raw bytes (RFC 3161 encoded)</returns>
-        protected internal virtual byte[] GetTSAResponse(byte[] requestBytes) {
+        public virtual byte[] GetTSAResponse(byte[] requestBytes) {
             // Setup the TSA connection
             SignUtils.TsaResponse response = SignUtils.GetTsaResponseForUserRequest(tsaURL, requestBytes, tsaUsername, 
                 tsaPassword);

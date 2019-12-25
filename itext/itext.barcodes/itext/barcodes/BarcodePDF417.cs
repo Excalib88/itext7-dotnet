@@ -108,63 +108,63 @@ namespace iText.Barcodes {
         /// <seealso cref="SetMacroSegmentCount(int)"/>
         public const int PDF417_USE_MACRO = 256;
 
-        protected internal const int START_PATTERN = 0x1fea8;
+        public const int START_PATTERN = 0x1fea8;
 
-        protected internal const int STOP_PATTERN = 0x3fa29;
+        public const int STOP_PATTERN = 0x3fa29;
 
-        protected internal const int START_CODE_SIZE = 17;
+        public const int START_CODE_SIZE = 17;
 
-        protected internal const int STOP_SIZE = 18;
+        public const int STOP_SIZE = 18;
 
-        protected internal const int MOD = 929;
+        public const int MOD = 929;
 
-        protected internal const int ALPHA = 0x10000;
+        public const int ALPHA = 0x10000;
 
-        protected internal const int LOWER = 0x20000;
+        public const int LOWER = 0x20000;
 
-        protected internal const int MIXED = 0x40000;
+        public const int MIXED = 0x40000;
 
-        protected internal const int PUNCTUATION = 0x80000;
+        public const int PUNCTUATION = 0x80000;
 
-        protected internal const int ISBYTE = 0x100000;
+        public const int ISBYTE = 0x100000;
 
-        protected internal const int BYTESHIFT = 913;
+        public const int BYTESHIFT = 913;
 
-        protected internal const int PL = 25;
+        public const int PL = 25;
 
-        protected internal const int LL = 27;
+        public const int LL = 27;
 
-        protected internal const int AS = 27;
+        public const int AS = 27;
 
-        protected internal const int ML = 28;
+        public const int ML = 28;
 
-        protected internal const int AL = 28;
+        public const int AL = 28;
 
-        protected internal const int PS = 29;
+        public const int PS = 29;
 
-        protected internal const int PAL = 29;
+        public const int PAL = 29;
 
-        protected internal const int SPACE = 26;
+        public const int SPACE = 26;
 
-        protected internal const int TEXT_MODE = 900;
+        public const int TEXT_MODE = 900;
 
-        protected internal const int BYTE_MODE_6 = 924;
+        public const int BYTE_MODE_6 = 924;
 
-        protected internal const int BYTE_MODE = 901;
+        public const int BYTE_MODE = 901;
 
-        protected internal const int NUMERIC_MODE = 902;
+        public const int NUMERIC_MODE = 902;
 
-        protected internal const int ABSOLUTE_MAX_TEXT_SIZE = 5420;
+        public const int ABSOLUTE_MAX_TEXT_SIZE = 5420;
 
-        protected internal const int MAX_DATA_CODEWORDS = 926;
+        public const int MAX_DATA_CODEWORDS = 926;
 
-        protected internal const int MACRO_SEGMENT_ID = 928;
+        public const int MACRO_SEGMENT_ID = 928;
 
-        protected internal const int MACRO_LAST_SEGMENT = 922;
+        public const int MACRO_LAST_SEGMENT = 922;
 
-        protected internal const float DEFAUL_MODULE_WIDTH = 1;
+        public const float DEFAUL_MODULE_WIDTH = 1;
 
-        protected internal const float DEFAUL_MODULE_HEIGHT = 1;
+        public const float DEFAUL_MODULE_HEIGHT = 1;
 
         private const String MIXED_SET = "0123456789&\r\t,:#-.$/+%*=^";
 
@@ -457,11 +457,11 @@ namespace iText.Barcodes {
             , 600, 325, 498, 655, 357, 752, 768, 223, 849, 647, 63, 310, 863, 251, 366, 304, 282, 738, 675, 410, 389
             , 244, 31, 121, 303, 263 } };
 
-        protected internal int bitPtr;
+        public int bitPtr;
 
-        protected internal int cwPtr;
+        public int cwPtr;
 
-        protected internal BarcodePDF417.SegmentList segmentList;
+        public BarcodePDF417.SegmentList segmentList;
 
         private int macroSegmentCount = 0;
 
@@ -918,7 +918,7 @@ namespace iText.Barcodes {
             this.yHeight = yHeight;
         }
 
-        protected internal virtual void OutCodeword17(int codeword) {
+        public virtual void OutCodeword17(int codeword) {
             int bytePtr = bitPtr / 8;
             int bit = bitPtr - bytePtr * 8;
             outBits[bytePtr++] |= (byte)(codeword >> 9 + bit);
@@ -928,7 +928,7 @@ namespace iText.Barcodes {
             bitPtr += 17;
         }
 
-        protected internal virtual void OutCodeword18(int codeword) {
+        public virtual void OutCodeword18(int codeword) {
             int bytePtr = bitPtr / 8;
             int bit = bitPtr - bytePtr * 8;
             outBits[bytePtr++] |= (byte)(codeword >> 10 + bit);
@@ -941,19 +941,19 @@ namespace iText.Barcodes {
             bitPtr += 18;
         }
 
-        protected internal virtual void OutCodeword(int codeword) {
+        public virtual void OutCodeword(int codeword) {
             OutCodeword17(codeword);
         }
 
-        protected internal virtual void OutStopPattern() {
+        public virtual void OutStopPattern() {
             OutCodeword18(STOP_PATTERN);
         }
 
-        protected internal virtual void OutStartPattern() {
+        public virtual void OutStartPattern() {
             OutCodeword17(START_PATTERN);
         }
 
-        protected internal virtual void OutPaintCode() {
+        public virtual void OutPaintCode() {
             int codePtr = 0;
             bitColumns = START_CODE_SIZE * (codeColumns + 3) + STOP_SIZE;
             int lenBits = ((bitColumns - 1) / 8 + 1) * codeRows;
@@ -1010,7 +1010,7 @@ namespace iText.Barcodes {
             }
         }
 
-        protected internal virtual void CalculateErrorCorrection(int dest) {
+        public virtual void CalculateErrorCorrection(int dest) {
             if (errorLevel < 0 || errorLevel > 8) {
                 errorLevel = 0;
             }
@@ -1033,37 +1033,37 @@ namespace iText.Barcodes {
             }
         }
 
-        protected internal virtual void TextCompaction(int start, int length) {
+        public virtual void TextCompaction(int start, int length) {
             TextCompaction(code, start, length);
         }
 
-        protected internal virtual void BasicNumberCompaction(int start, int length) {
+        public virtual void BasicNumberCompaction(int start, int length) {
             BasicNumberCompaction(code, start, length);
         }
 
-        protected internal virtual int GetTextTypeAndValue(int maxLength, int idx) {
+        public virtual int GetTextTypeAndValue(int maxLength, int idx) {
             return GetTextTypeAndValue(code, maxLength, idx);
         }
 
-        protected internal virtual bool CheckSegmentType(BarcodePDF417.Segment segment, char type) {
+        public virtual bool CheckSegmentType(BarcodePDF417.Segment segment, char type) {
             if (segment == null) {
                 return false;
             }
             return segment.type == type;
         }
 
-        protected internal virtual int GetSegmentLength(BarcodePDF417.Segment segment) {
+        public virtual int GetSegmentLength(BarcodePDF417.Segment segment) {
             if (segment == null) {
                 return 0;
             }
             return segment.end - segment.start;
         }
 
-        protected internal virtual void NumberCompaction(int start, int length) {
+        public virtual void NumberCompaction(int start, int length) {
             NumberCompaction(code, start, length);
         }
 
-        protected internal virtual void ByteCompaction6(int start) {
+        public virtual void ByteCompaction6(int start) {
             int length = 6;
             int ret = cwPtr;
             int retLast = 4;
@@ -1089,7 +1089,7 @@ namespace iText.Barcodes {
             }
         }
 
-        protected internal virtual void Assemble() {
+        public virtual void Assemble() {
             int k;
             if (segmentList.Size() == 0) {
                 return;
@@ -1124,7 +1124,7 @@ namespace iText.Barcodes {
             }
         }
 
-        protected internal static int MaxPossibleErrorLevel(int remain) {
+        public static int MaxPossibleErrorLevel(int remain) {
             int level = 8;
             int size = 512;
             while (level > 0) {
@@ -1137,7 +1137,7 @@ namespace iText.Barcodes {
             return 0;
         }
 
-        protected internal virtual void DumpList() {
+        public virtual void DumpList() {
             if (segmentList.Size() == 0) {
                 return;
             }
@@ -1158,7 +1158,7 @@ namespace iText.Barcodes {
             }
         }
 
-        protected internal virtual int GetMaxSquare() {
+        public virtual int GetMaxSquare() {
             if (codeColumns > 21) {
                 codeColumns = 29;
                 codeRows = 32;
@@ -1594,7 +1594,7 @@ namespace iText.Barcodes {
             }
         }
 
-        protected internal class Segment {
+        public class Segment {
             public char type;
 
             public int start;
@@ -1608,8 +1608,8 @@ namespace iText.Barcodes {
             }
         }
 
-        protected internal class SegmentList {
-            protected internal IList<BarcodePDF417.Segment> list = new List<BarcodePDF417.Segment>();
+        public class SegmentList {
+            public IList<BarcodePDF417.Segment> list = new List<BarcodePDF417.Segment>();
 
             public virtual void Add(char type, int start, int end) {
                 list.Add(new BarcodePDF417.Segment(type, start, end));

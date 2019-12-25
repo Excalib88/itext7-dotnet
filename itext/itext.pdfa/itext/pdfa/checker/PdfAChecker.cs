@@ -111,17 +111,17 @@ namespace iText.Pdfa.Checker {
         /// </remarks>
         public const int maxGsStackDepth = 28;
 
-        protected internal PdfAConformanceLevel conformanceLevel;
+        public PdfAConformanceLevel conformanceLevel;
 
-        protected internal String pdfAOutputIntentColorSpace;
+        public String pdfAOutputIntentColorSpace;
 
-        protected internal int gsStackDepth = 0;
+        public int gsStackDepth = 0;
 
-        protected internal bool rgbIsUsed = false;
+        public bool rgbIsUsed = false;
 
-        protected internal bool cmykIsUsed = false;
+        public bool cmykIsUsed = false;
 
-        protected internal bool grayIsUsed = false;
+        public bool grayIsUsed = false;
 
         /// <summary>Contains some objects that are already checked.</summary>
         /// <remarks>
@@ -132,12 +132,12 @@ namespace iText.Pdfa.Checker {
         /// that shall be checked are able to be changed) shouldn't be marked as checked if they are not to be
         /// flushed immediately.
         /// </remarks>
-        protected internal ICollection<PdfObject> checkedObjects = new HashSet<PdfObject>();
+        public ICollection<PdfObject> checkedObjects = new HashSet<PdfObject>();
 
-        protected internal IDictionary<PdfObject, PdfColorSpace> checkedObjectsColorspace = new Dictionary<PdfObject
+        public IDictionary<PdfObject, PdfColorSpace> checkedObjectsColorspace = new Dictionary<PdfObject
             , PdfColorSpace>();
 
-        protected internal PdfAChecker(PdfAConformanceLevel conformanceLevel) {
+        public PdfAChecker(PdfAConformanceLevel conformanceLevel) {
             this.conformanceLevel = conformanceLevel;
         }
 
@@ -375,52 +375,52 @@ namespace iText.Pdfa.Checker {
         public virtual void CheckFontGlyphs(PdfFont font, PdfStream contentStream) {
         }
 
-        protected internal virtual void CheckPageTransparency(PdfDictionary pageDict, PdfDictionary pageResources) {
+        public virtual void CheckPageTransparency(PdfDictionary pageDict, PdfDictionary pageResources) {
         }
 
-        protected internal abstract ICollection<PdfName> GetForbiddenActions();
+        public abstract ICollection<PdfName> GetForbiddenActions();
 
-        protected internal abstract ICollection<PdfName> GetAllowedNamedActions();
+        public abstract ICollection<PdfName> GetAllowedNamedActions();
 
-        protected internal abstract void CheckAction(PdfDictionary action);
+        public abstract void CheckAction(PdfDictionary action);
 
-        protected internal abstract void CheckAnnotation(PdfDictionary annotDic);
+        public abstract void CheckAnnotation(PdfDictionary annotDic);
 
-        protected internal abstract void CheckCatalogValidEntries(PdfDictionary catalogDict);
+        public abstract void CheckCatalogValidEntries(PdfDictionary catalogDict);
 
-        protected internal abstract void CheckColorsUsages();
+        public abstract void CheckColorsUsages();
 
-        protected internal abstract void CheckImage(PdfStream image, PdfDictionary currentColorSpaces);
+        public abstract void CheckImage(PdfStream image, PdfDictionary currentColorSpaces);
 
-        protected internal abstract void CheckFileSpec(PdfDictionary fileSpec);
+        public abstract void CheckFileSpec(PdfDictionary fileSpec);
 
-        protected internal abstract void CheckForm(PdfDictionary form);
+        public abstract void CheckForm(PdfDictionary form);
 
-        protected internal abstract void CheckFormXObject(PdfStream form);
+        public abstract void CheckFormXObject(PdfStream form);
 
-        protected internal abstract void CheckLogicalStructure(PdfDictionary catalog);
+        public abstract void CheckLogicalStructure(PdfDictionary catalog);
 
-        protected internal abstract void CheckMetaData(PdfDictionary catalog);
+        public abstract void CheckMetaData(PdfDictionary catalog);
 
-        protected internal abstract void CheckNonSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont);
+        public abstract void CheckNonSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont);
 
-        protected internal abstract void CheckOutputIntents(PdfDictionary catalog);
+        public abstract void CheckOutputIntents(PdfDictionary catalog);
 
-        protected internal abstract void CheckPageObject(PdfDictionary page, PdfDictionary pageResources);
+        public abstract void CheckPageObject(PdfDictionary page, PdfDictionary pageResources);
 
-        protected internal abstract void CheckPageSize(PdfDictionary page);
+        public abstract void CheckPageSize(PdfDictionary page);
 
-        protected internal abstract void CheckPdfNumber(PdfNumber number);
+        public abstract void CheckPdfNumber(PdfNumber number);
 
-        protected internal abstract void CheckPdfStream(PdfStream stream);
+        public abstract void CheckPdfStream(PdfStream stream);
 
-        protected internal abstract void CheckPdfString(PdfString @string);
+        public abstract void CheckPdfString(PdfString @string);
 
-        protected internal abstract void CheckSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont);
+        public abstract void CheckSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont);
 
-        protected internal abstract void CheckTrailer(PdfDictionary trailer);
+        public abstract void CheckTrailer(PdfDictionary trailer);
 
-        protected internal virtual void CheckResources(PdfDictionary resources) {
+        public virtual void CheckResources(PdfDictionary resources) {
             if (resources == null) {
                 return;
             }
@@ -467,16 +467,16 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal static bool CheckFlag(int flags, int flag) {
+        public static bool CheckFlag(int flags, int flag) {
             return (flags & flag) != 0;
         }
 
-        protected internal static bool CheckStructure(PdfAConformanceLevel conformanceLevel) {
+        public static bool CheckStructure(PdfAConformanceLevel conformanceLevel) {
             return conformanceLevel == PdfAConformanceLevel.PDF_A_1A || conformanceLevel == PdfAConformanceLevel.PDF_A_2A
                  || conformanceLevel == PdfAConformanceLevel.PDF_A_3A;
         }
 
-        protected internal virtual bool IsAlreadyChecked(PdfDictionary dictionary) {
+        public virtual bool IsAlreadyChecked(PdfDictionary dictionary) {
             if (checkedObjects.Contains(dictionary)) {
                 return true;
             }
@@ -484,7 +484,7 @@ namespace iText.Pdfa.Checker {
             return false;
         }
 
-        protected internal virtual void CheckResourcesOfAppearanceStreams(PdfDictionary appearanceStreamsDict) {
+        public virtual void CheckResourcesOfAppearanceStreams(PdfDictionary appearanceStreamsDict) {
             foreach (PdfObject val in appearanceStreamsDict.Values()) {
                 if (val is PdfDictionary) {
                     PdfDictionary ap = (PdfDictionary)val;

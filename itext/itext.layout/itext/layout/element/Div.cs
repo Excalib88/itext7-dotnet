@@ -64,7 +64,7 @@ namespace iText.Layout.Element {
     /// The concept is very similar to that of the div tag in HTML.
     /// </remarks>
     public class Div : BlockElement<Div> {
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         /// <summary>Adds any block element to the div's contents.</summary>
         /// <param name="element">
@@ -116,7 +116,7 @@ namespace iText.Layout.Element {
             return this;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new DivRenderer(this);
         }
     }

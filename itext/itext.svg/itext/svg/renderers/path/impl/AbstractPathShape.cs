@@ -51,15 +51,15 @@ namespace iText.Svg.Renderers.Path.Impl {
     /// <summary>This class handles common behaviour in IPathShape implementations</summary>
     public abstract class AbstractPathShape : IPathShape {
         /// <summary>The properties of this shape.</summary>
-        protected internal IDictionary<String, String> properties;
+        public IDictionary<String, String> properties;
 
         /// <summary>Whether this is a relative operator or not.</summary>
-        protected internal bool relative;
+        public bool relative;
 
-        protected internal readonly IOperatorConverter copier;
+        public readonly IOperatorConverter copier;
 
         // Original coordinates from path instruction, according to the (x1 y1 x2 y2 x y)+ spec
-        protected internal String[] coordinates;
+        public String[] coordinates;
 
         public AbstractPathShape()
             : this(false) {
@@ -78,7 +78,7 @@ namespace iText.Svg.Renderers.Path.Impl {
             return this.relative;
         }
 
-        protected internal virtual Point CreatePoint(String coordX, String coordY) {
+        public virtual Point CreatePoint(String coordX, String coordY) {
             return new Point((double)CssUtils.ParseDouble(coordX), (double)CssUtils.ParseDouble(coordY));
         }
 

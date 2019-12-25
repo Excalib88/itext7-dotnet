@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel;
 using iText.Kernel.Pdf;
@@ -81,7 +82,7 @@ namespace iText.Kernel.Pdf.Tagutils {
 
         private PdfStructElem rootTagElement;
 
-        protected internal TagTreePointer autoTaggingPointer;
+        public TagTreePointer autoTaggingPointer;
 
         private PdfVersion tagStructureTargetVersion;
 
@@ -437,8 +438,8 @@ namespace iText.Kernel.Pdf.Tagutils {
             int maxIters = 100;
             while (mappingResolver.CurrentRoleShallBeMappedToStandard()) {
                 if (++i > maxIters) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.TagStructureContext));
-                    logger.Error(ComposeTooMuchTransitiveMappingsException(role, @namespace));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.TagStructureContext));
+                    //logger.Error(ComposeTooMuchTransitiveMappingsException(role, @namespace));
                     return null;
                 }
                 if (!mappingResolver.ResolveNextMapping()) {
@@ -709,8 +710,8 @@ namespace iText.Kernel.Pdf.Tagutils {
                     throw new PdfException(exMessage);
                 }
                 else {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.TagStructureContext));
-                    logger.Warn(exMessage);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.TagStructureContext));
+                    //logger.Warn(exMessage);
                 }
             }
         }
@@ -768,7 +769,7 @@ namespace iText.Kernel.Pdf.Tagutils {
                 IRoleMappingResolver resolvedMapping = ResolveMappingToStandardOrDomainSpecificRole(firstKid.GetRole().GetValue
                     (), firstKid.GetNamespace());
                 if (resolvedMapping == null || !resolvedMapping.CurrentRoleIsStandard()) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.TagStructureContext));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.TagStructureContext));
                     String nsStr;
                     if (firstKid.GetNamespace() != null) {
                         nsStr = firstKid.GetNamespace().GetNamespaceName();
@@ -776,8 +777,8 @@ namespace iText.Kernel.Pdf.Tagutils {
                     else {
                         nsStr = StandardNamespaces.GetDefault();
                     }
-                    logger.Warn(String.Format(iText.IO.LogMessageConstant.EXISTING_TAG_STRUCTURE_ROOT_IS_NOT_STANDARD, firstKid
-                        .GetRole().GetValue(), nsStr));
+                    //logger.Warn(String.Format(iText.IO.LogMessageConstant.EXISTING_TAG_STRUCTURE_ROOT_IS_NOT_STANDARD, firstKid
+                        //.GetRole().GetValue(), nsStr));
                 }
                 if (resolvedMapping == null || !StandardNamespaces.PDF_1_7.Equals(resolvedMapping.GetNamespace().GetNamespaceName
                     ())) {

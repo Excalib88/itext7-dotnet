@@ -51,7 +51,7 @@ namespace iText.Kernel.Pdf.Colorspace {
         public static readonly ICollection<PdfName> directColorSpaces = new HashSet<PdfName>(JavaUtil.ArraysAsList
             (PdfName.DeviceGray, PdfName.DeviceRGB, PdfName.DeviceCMYK, PdfName.Pattern));
 
-        protected internal PdfColorSpace(PdfObject pdfObject)
+        public PdfColorSpace(PdfObject pdfObject)
             : base(pdfObject) {
         }
 

@@ -536,7 +536,7 @@ namespace iText.Kernel {
         public const String QuadPointArrayLengthIsNotAMultipleOfEight = "The QuadPoint Array length is not a multiple of 8.";
 
         /// <summary>Object for more details</summary>
-        protected internal Object @object;
+        public Object @object;
 
         private IList<Object> messageParams;
 
@@ -610,7 +610,7 @@ namespace iText.Kernel {
 
         /// <summary>Gets additional params for Exception message.</summary>
         /// <returns>array of additional params</returns>
-        protected internal virtual Object[] GetMessageParams() {
+        public virtual Object[] GetMessageParams() {
             Object[] parameters = new Object[messageParams.Count];
             for (int i = 0; i < messageParams.Count; i++) {
                 parameters[i] = messageParams[i];

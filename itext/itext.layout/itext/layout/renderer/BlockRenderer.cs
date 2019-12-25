@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf.Canvas;
@@ -58,7 +59,7 @@ using iText.Layout.Tagging;
 
 namespace iText.Layout.Renderer {
     public abstract class BlockRenderer : AbstractRenderer {
-        protected internal BlockRenderer(IElement modelElement)
+        public BlockRenderer(IElement modelElement)
             : base(modelElement) {
         }
 
@@ -428,8 +429,8 @@ namespace iText.Layout.Renderer {
                 ApplyRotationLayout(layoutContext.GetArea().GetBBox().Clone());
                 if (IsNotFittingLayoutArea(layoutContext.GetArea())) {
                     if (IsNotFittingWidth(layoutContext.GetArea()) && !IsNotFittingHeight(layoutContext.GetArea())) {
-                        LogManager.GetLogger(GetType()).Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ELEMENT_DOES_NOT_FIT_AREA
-                            , "It fits by height so it will be forced placed"));
+                        //LogManager.GetLogger(GetType()).Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ELEMENT_DOES_NOT_FIT_AREA
+                        //    , "It fits by height so it will be forced placed"));
                     }
                     else {
                         if (!true.Equals(GetPropertyAsBoolean(Property.FORCED_PLACEMENT))) {
@@ -453,7 +454,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual AbstractRenderer CreateSplitRenderer(int layoutResult) {
+        public virtual AbstractRenderer CreateSplitRenderer(int layoutResult) {
             AbstractRenderer splitRenderer = (AbstractRenderer)GetNextRenderer();
             splitRenderer.parent = parent;
             splitRenderer.modelElement = modelElement;
@@ -463,7 +464,7 @@ namespace iText.Layout.Renderer {
             return splitRenderer;
         }
 
-        protected internal virtual AbstractRenderer CreateOverflowRenderer(int layoutResult) {
+        public virtual AbstractRenderer CreateOverflowRenderer(int layoutResult) {
             AbstractRenderer overflowRenderer = (AbstractRenderer)GetNextRenderer();
             overflowRenderer.parent = parent;
             overflowRenderer.modelElement = modelElement;
@@ -473,9 +474,9 @@ namespace iText.Layout.Renderer {
 
         public override void Draw(DrawContext drawContext) {
             if (occupiedArea == null) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.BlockRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
-                    "Drawing won't be performed."));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.BlockRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
+                //    "Drawing won't be performed."));
                 return;
             }
             bool isTagged = drawContext.IsTaggingEnabled();
@@ -551,9 +552,9 @@ namespace iText.Layout.Renderer {
             float? rotationAngle = this.GetProperty<float?>(Property.ROTATION_ANGLE);
             if (rotationAngle != null) {
                 if (!HasOwnProperty(Property.ROTATION_INITIAL_WIDTH) || !HasOwnProperty(Property.ROTATION_INITIAL_HEIGHT)) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.BlockRenderer));
-                    logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ROTATION_WAS_NOT_CORRECTLY_PROCESSED_FOR_RENDERER
-                        , GetType().Name));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.BlockRenderer));
+                    //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ROTATION_WAS_NOT_CORRECTLY_PROCESSED_FOR_RENDERER
+                    //    , GetType().Name));
                 }
                 else {
                     bBox.SetWidth((float)this.GetPropertyAsFloat(Property.ROTATION_INITIAL_WIDTH));
@@ -563,7 +564,7 @@ namespace iText.Layout.Renderer {
             return bBox;
         }
 
-        protected internal virtual void ApplyVerticalAlignment() {
+        public virtual void ApplyVerticalAlignment() {
             VerticalAlignment? verticalAlignment = this.GetProperty<VerticalAlignment?>(Property.VERTICAL_ALIGNMENT);
             if (verticalAlignment == null || verticalAlignment == VerticalAlignment.TOP || childRenderers.IsEmpty()) {
                 return;
@@ -611,7 +612,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual void ApplyRotationLayout(Rectangle layoutBox) {
+        public virtual void ApplyRotationLayout(Rectangle layoutBox) {
             float angle = (float)this.GetPropertyAsFloat(Property.ROTATION_ANGLE);
             float x = occupiedArea.GetBBox().GetX();
             float y = occupiedArea.GetBBox().GetY();
@@ -680,7 +681,7 @@ namespace iText.Layout.Renderer {
         /// <see cref="iText.Kernel.Geom.AffineTransform"/>
         /// that rotates the content and places it inside occupied area.
         /// </returns>
-        protected internal virtual AffineTransform CreateRotationTransformInsideOccupiedArea() {
+        public virtual AffineTransform CreateRotationTransformInsideOccupiedArea() {
             float? angle = this.GetProperty<float?>(Property.ROTATION_ANGLE);
             AffineTransform rotationTransform = AffineTransform.GetRotateInstance((float)angle);
             Rectangle contentBox = this.GetOccupiedAreaBBox();
@@ -694,13 +695,13 @@ namespace iText.Layout.Renderer {
             return rotationTransform;
         }
 
-        protected internal virtual void BeginRotationIfApplied(PdfCanvas canvas) {
+        public virtual void BeginRotationIfApplied(PdfCanvas canvas) {
             float? angle = this.GetPropertyAsFloat(Property.ROTATION_ANGLE);
             if (angle != null) {
                 if (!HasOwnProperty(Property.ROTATION_INITIAL_HEIGHT)) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.BlockRenderer));
-                    logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ROTATION_WAS_NOT_CORRECTLY_PROCESSED_FOR_RENDERER
-                        , GetType().Name));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.BlockRenderer));
+                    //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.ROTATION_WAS_NOT_CORRECTLY_PROCESSED_FOR_RENDERER
+                    //    , GetType().Name));
                 }
                 else {
                     AffineTransform transform = CreateRotationTransformInsideOccupiedArea();
@@ -709,7 +710,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual void EndRotationIfApplied(PdfCanvas canvas) {
+        public virtual void EndRotationIfApplied(PdfCanvas canvas) {
             float? angle = this.GetPropertyAsFloat(Property.ROTATION_ANGLE);
             if (angle != null && HasOwnProperty(Property.ROTATION_INITIAL_HEIGHT)) {
                 canvas.RestoreState();
@@ -812,7 +813,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual float ApplyBordersPaddingsMargins(Rectangle parentBBox, Border[] borders, UnitValue
+        public virtual float ApplyBordersPaddingsMargins(Rectangle parentBBox, Border[] borders, UnitValue
             [] paddings) {
             float parentWidth = parentBBox.GetWidth();
             ApplyMargins(parentBBox, false);

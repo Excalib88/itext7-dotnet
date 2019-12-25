@@ -69,12 +69,12 @@ namespace iText.Layout.Renderer {
             return base.GetModelElement();
         }
 
-        protected internal override float? RetrieveWidth(float parentBoxWidth) {
+        public override float? RetrieveWidth(float parentBoxWidth) {
             return null;
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override AbstractRenderer CreateSplitRenderer(int layoutResult) {
+        public override AbstractRenderer CreateSplitRenderer(int layoutResult) {
             iText.Layout.Renderer.CellRenderer splitRenderer = (iText.Layout.Renderer.CellRenderer)GetNextRenderer();
             splitRenderer.parent = parent;
             splitRenderer.modelElement = modelElement;
@@ -85,7 +85,7 @@ namespace iText.Layout.Renderer {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override AbstractRenderer CreateOverflowRenderer(int layoutResult) {
+        public override AbstractRenderer CreateOverflowRenderer(int layoutResult) {
             iText.Layout.Renderer.CellRenderer overflowRenderer = (iText.Layout.Renderer.CellRenderer)GetNextRenderer(
                 );
             overflowRenderer.parent = parent;
@@ -137,7 +137,7 @@ namespace iText.Layout.Renderer {
         }
 
         // Do nothing here. Border drawing for cells is done on TableRenderer.
-        protected internal override Rectangle ApplyBorderBox(Rectangle rect, Border[] borders, bool reverse) {
+        public override Rectangle ApplyBorderBox(Rectangle rect, Border[] borders, bool reverse) {
             if (BorderCollapsePropertyValue.SEPARATE.Equals(parent.GetProperty<BorderCollapsePropertyValue?>(Property.
                 BORDER_COLLAPSE))) {
                 base.ApplyBorderBox(rect, borders, reverse);
@@ -146,7 +146,7 @@ namespace iText.Layout.Renderer {
             return rect;
         }
 
-        protected internal override Rectangle ApplyMargins(Rectangle rect, UnitValue[] margins, bool reverse) {
+        public override Rectangle ApplyMargins(Rectangle rect, UnitValue[] margins, bool reverse) {
             // If borders are separated, process border's spacing here.
             if (BorderCollapsePropertyValue.SEPARATE.Equals(parent.GetProperty<BorderCollapsePropertyValue?>(Property.
                 BORDER_COLLAPSE))) {
@@ -155,7 +155,7 @@ namespace iText.Layout.Renderer {
             return rect;
         }
 
-        protected internal virtual Rectangle ApplySpacings(Rectangle rect, bool reverse) {
+        public virtual Rectangle ApplySpacings(Rectangle rect, bool reverse) {
             if (BorderCollapsePropertyValue.SEPARATE.Equals(parent.GetProperty<BorderCollapsePropertyValue?>(Property.
                 BORDER_COLLAPSE))) {
                 float? verticalBorderSpacing = this.parent.GetProperty<float?>(Property.VERTICAL_BORDER_SPACING);
@@ -171,7 +171,7 @@ namespace iText.Layout.Renderer {
             return rect;
         }
 
-        protected internal virtual Rectangle ApplySpacings(Rectangle rect, float[] spacings, bool reverse) {
+        public virtual Rectangle ApplySpacings(Rectangle rect, float[] spacings, bool reverse) {
             if (BorderCollapsePropertyValue.SEPARATE.Equals(parent.GetProperty<BorderCollapsePropertyValue?>(Property.
                 BORDER_COLLAPSE))) {
                 rect.ApplyMargins(spacings[0] / 2, spacings[1] / 2, spacings[2] / 2, spacings[3] / 2, reverse);

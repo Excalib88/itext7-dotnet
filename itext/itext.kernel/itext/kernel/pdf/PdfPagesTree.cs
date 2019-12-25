@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel;
 
@@ -68,7 +69,7 @@ namespace iText.Kernel.Pdf {
 
         private PdfPages root;
 
-        private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPagesTree));
+        //private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPagesTree));
 
         /// <summary>Creates a PdfPages tree.</summary>
         /// <param name="pdfCatalog">
@@ -129,13 +130,13 @@ namespace iText.Kernel.Pdf {
                         pdfPage.parentPages = parents[parentIndex];
                     }
                     else {
-                        LOGGER.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PAGE_TREE_IS_BROKEN_FAILED_TO_RETRIEVE_PAGE
-                            , pageNum + 1));
+                        //LOGGER.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PAGE_TREE_IS_BROKEN_FAILED_TO_RETRIEVE_PAGE
+                            //, pageNum + 1));
                     }
                 }
                 else {
-                    LOGGER.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PAGE_TREE_IS_BROKEN_FAILED_TO_RETRIEVE_PAGE
-                        , pageNum + 1));
+                    //LOGGER.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PAGE_TREE_IS_BROKEN_FAILED_TO_RETRIEVE_PAGE
+                        //, pageNum + 1));
                 }
                 pages[pageNum] = pdfPage;
             }
@@ -274,7 +275,7 @@ namespace iText.Kernel.Pdf {
         public virtual PdfPage RemovePage(int pageNum) {
             PdfPage pdfPage = GetPage(pageNum);
             if (pdfPage.IsFlushed()) {
-                LOGGER.Warn(iText.IO.LogMessageConstant.REMOVING_PAGE_HAS_ALREADY_BEEN_FLUSHED);
+                //LOGGER.Warn(iText.IO.LogMessageConstant.REMOVING_PAGE_HAS_ALREADY_BEEN_FLUSHED);
             }
             if (InternalRemovePage(--pageNum)) {
                 return pdfPage;
@@ -298,7 +299,7 @@ namespace iText.Kernel.Pdf {
         /// root
         /// <see cref="PdfPages"/>
         /// </returns>
-        protected internal virtual PdfObject GenerateTree() {
+        public virtual PdfObject GenerateTree() {
             if (pageRefs.Count == 0) {
                 throw new PdfException(PdfException.DocumentHasNoPages);
             }
@@ -335,20 +336,20 @@ namespace iText.Kernel.Pdf {
             return root.GetPdfObject();
         }
 
-        protected internal virtual void ClearPageRefs() {
+        public virtual void ClearPageRefs() {
             pageRefs = null;
             pages = null;
         }
 
-        protected internal virtual IList<PdfPages> GetParents() {
+        public virtual IList<PdfPages> GetParents() {
             return parents;
         }
 
-        protected internal virtual PdfPages GetRoot() {
+        public virtual PdfPages GetRoot() {
             return root;
         }
 
-        protected internal virtual PdfPages FindPageParent(PdfPage pdfPage) {
+        public virtual PdfPages FindPageParent(PdfPage pdfPage) {
             int pageNum = GetPageNumber(pdfPage) - 1;
             int parentIndex = FindPageParent(pageNum);
             return parents[parentIndex];

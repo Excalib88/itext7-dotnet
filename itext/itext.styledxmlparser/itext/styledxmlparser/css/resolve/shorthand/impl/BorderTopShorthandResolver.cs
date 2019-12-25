@@ -52,7 +52,7 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
         /* (non-Javadoc)
         * @see com.itextpdf.styledxmlparser.css.resolve.shorthand.impl.AbstractBorderShorthandResolver#getPrefix()
         */
-        protected internal override String GetPrefix() {
+        public override String GetPrefix() {
             return CommonCssConstants.BORDER_TOP;
         }
     }

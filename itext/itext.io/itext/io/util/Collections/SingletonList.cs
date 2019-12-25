@@ -47,7 +47,7 @@ using System.Collections.Generic;
 
 namespace iText.IO.Util.Collections
 {
-    internal class SingletonList<T> : IList<T> {
+    public class SingletonList<T> : IList<T> {
         private readonly T element;
 
         public SingletonList(T obj) {

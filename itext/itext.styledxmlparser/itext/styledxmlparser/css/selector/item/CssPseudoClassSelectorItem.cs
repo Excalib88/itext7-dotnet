@@ -52,7 +52,7 @@ namespace iText.StyledXmlParser.Css.Selector.Item {
     /// </summary>
     public abstract class CssPseudoClassSelectorItem : ICssSelectorItem {
         /// <summary>The arguments.</summary>
-        protected internal String arguments;
+        public String arguments;
 
         /// <summary>The pseudo class.</summary>
         private String pseudoClass;
@@ -63,11 +63,11 @@ namespace iText.StyledXmlParser.Css.Selector.Item {
         /// instance.
         /// </summary>
         /// <param name="pseudoClass">the pseudo class name</param>
-        protected internal CssPseudoClassSelectorItem(String pseudoClass)
+        public CssPseudoClassSelectorItem(String pseudoClass)
             : this(pseudoClass, "") {
         }
 
-        protected internal CssPseudoClassSelectorItem(String pseudoClass, String arguments) {
+        public CssPseudoClassSelectorItem(String pseudoClass, String arguments) {
             this.pseudoClass = pseudoClass;
             this.arguments = arguments;
         }

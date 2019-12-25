@@ -89,11 +89,11 @@ namespace iText.IO.Codec {
 
             private int count;
 
-            protected internal byte[] data;
+            public byte[] data;
 
             private int offset;
 
-            protected internal FieldBase(int tag, int fieldType, int count) {
+            public FieldBase(int tag, int fieldType, int count) {
                 this.tag = tag;
                 this.fieldType = fieldType;
                 this.count = count;

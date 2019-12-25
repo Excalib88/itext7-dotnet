@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf.Canvas;
@@ -58,17 +59,17 @@ using iText.Layout.Tagging;
 
 namespace iText.Layout.Renderer {
     public class ImageRenderer : AbstractRenderer, ILeafElementRenderer {
-        protected internal float? fixedXPosition;
+        public float? fixedXPosition;
 
-        protected internal float? fixedYPosition;
+        public float? fixedYPosition;
 
-        protected internal float pivotY;
+        public float pivotY;
 
-        protected internal float deltaX;
+        public float deltaX;
 
-        protected internal float imageWidth;
+        public float imageWidth;
 
-        protected internal float imageHeight;
+        public float imageHeight;
 
         internal float[] matrix = new float[6];
 
@@ -179,15 +180,15 @@ namespace iText.Layout.Renderer {
             occupiedArea.GetBBox().SetWidth((float)width);
             UnitValue leftMargin = this.GetPropertyAsUnitValue(Property.MARGIN_LEFT);
             if (!leftMargin.IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ImageRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_LEFT));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ImageRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_LEFT));
             }
             UnitValue topMargin = this.GetPropertyAsUnitValue(Property.MARGIN_TOP);
             if (!topMargin.IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ImageRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_TOP));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ImageRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_TOP));
             }
             if (0 != leftMargin.GetValue() || 0 != topMargin.GetValue()) {
                 TranslateImage(leftMargin.GetValue(), topMargin.GetValue(), t);
@@ -224,9 +225,9 @@ namespace iText.Layout.Renderer {
 
         public override void Draw(DrawContext drawContext) {
             if (occupiedArea == null) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ImageRenderer));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
-                    "Drawing won't be performed."));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ImageRenderer));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.OCCUPIED_AREA_HAS_NOT_BEEN_INITIALIZED, 
+                //    "Drawing won't be performed."));
                 return;
             }
             bool isRelativePosition = IsRelativePosition();
@@ -326,7 +327,7 @@ namespace iText.Layout.Renderer {
             return initialOccupiedAreaBBox;
         }
 
-        protected internal override Rectangle ApplyPaddings(Rectangle rect, UnitValue[] paddings, bool reverse) {
+        public override Rectangle ApplyPaddings(Rectangle rect, UnitValue[] paddings, bool reverse) {
             return rect;
         }
 
@@ -349,7 +350,7 @@ namespace iText.Layout.Renderer {
                 .GetInfWidth(), AbstractRenderer.INF))))).GetMinMaxWidth();
         }
 
-        protected internal virtual iText.Layout.Renderer.ImageRenderer AutoScale(LayoutArea layoutArea) {
+        public virtual iText.Layout.Renderer.ImageRenderer AutoScale(LayoutArea layoutArea) {
             Rectangle area = layoutArea.GetBBox().Clone();
             ApplyMargins(area, false);
             ApplyBorderBox(area, false);

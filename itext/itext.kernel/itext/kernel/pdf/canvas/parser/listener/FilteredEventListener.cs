@@ -49,9 +49,9 @@ using iText.Kernel.Pdf.Canvas.Parser.Filter;
 namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
     /// <summary>An event listener which filters events on the fly before passing them on to the delegate.</summary>
     public class FilteredEventListener : IEventListener {
-        protected internal readonly IList<IEventListener> delegates;
+        public readonly IList<IEventListener> delegates;
 
-        protected internal readonly IList<IEventFilter[]> filters;
+        public readonly IList<IEventFilter[]> filters;
 
         /// <summary>
         /// Constructs a

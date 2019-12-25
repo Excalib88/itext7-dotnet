@@ -75,7 +75,7 @@ namespace iText.Kernel.Pdf.Annot {
             return GetPdfObject().KeySet();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

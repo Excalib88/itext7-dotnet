@@ -509,10 +509,10 @@ namespace iText.Kernel.Pdf.Canvas.Parser.ClipperLib {
     };
 
     public class ClipperBase {
-        protected const double horizontal = -3.4E+38;
-        protected const int Skip = -2;
-        protected const int Unassigned = -1;
-        protected const double tolerance = 1.0E-20;
+        public const double horizontal = -3.4E+38;
+        public const int Skip = -2;
+        public const int Unassigned = -1;
+        public const double tolerance = 1.0E-20;
         internal static bool near_zero(double val) { return (val > -tolerance) && (val < tolerance); }
 
 #if use_int32
@@ -604,7 +604,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.ClipperLib {
         }
         //------------------------------------------------------------------------------
 
-        protected static bool SlopesEqual(IntPoint pt1, IntPoint pt2,
+        public static bool SlopesEqual(IntPoint pt1, IntPoint pt2,
             IntPoint pt3, bool UseFullRange) {
             if (UseFullRange)
                 return Int128.Int128Mul(pt1.Y - pt2.Y, pt2.X - pt3.X) ==
@@ -615,7 +615,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.ClipperLib {
         }
         //------------------------------------------------------------------------------
 
-        protected static bool SlopesEqual(IntPoint pt1, IntPoint pt2,
+        public static bool SlopesEqual(IntPoint pt1, IntPoint pt2,
             IntPoint pt3, IntPoint pt4, bool UseFullRange) {
             if (UseFullRange)
                 return Int128.Int128Mul(pt1.Y - pt2.Y, pt3.X - pt4.X) ==
@@ -1056,7 +1056,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.ClipperLib {
         }
         //------------------------------------------------------------------------------
 
-        protected void PopLocalMinima() {
+        public void PopLocalMinima() {
             if (m_CurrentLM == null)
                 return;
             m_CurrentLM = m_CurrentLM.Next;
@@ -1074,7 +1074,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.ClipperLib {
         }
         //------------------------------------------------------------------------------
 
-        protected virtual void Reset() {
+        public virtual void Reset() {
             m_CurrentLM = m_MinimaList;
             if (m_CurrentLM == null)
                 return; //ie nothing to process
@@ -1233,7 +1233,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.ClipperLib {
         }
         //------------------------------------------------------------------------------
 
-        protected override void Reset() {
+        public override void Reset() {
             base.Reset();
             m_Scanbeam = null;
             m_Maxima = null;

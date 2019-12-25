@@ -47,7 +47,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Font;
 using iText.IO.Util;
 using iText.Kernel.Counter.Event;
@@ -1458,8 +1459,8 @@ namespace iText.Kernel.Utils {
                     PdfNumber outLeftover = FlattenNumTree(outNumTree, null, outItems);
                     PdfNumber cmpLeftover = FlattenNumTree(cmpNumTree, null, cmpItems);
                     if (outLeftover != null) {
-                        LogManager.GetLogger(typeof(iText.Kernel.Utils.CompareTool)).Warn(iText.IO.LogMessageConstant.NUM_TREE_SHALL_NOT_END_WITH_KEY
-                            );
+                        //LogManager.GetLogger(typeof(iText.Kernel.Utils.CompareTool)).Warn(iText.IO.LogMessageConstant.NUM_TREE_SHALL_NOT_END_WITH_KEY
+                            //);
                         if (cmpLeftover == null) {
                             if (compareResult != null && currentPath != null) {
                                 compareResult.AddError(currentPath, "Number tree unexpectedly ends with a key");
@@ -1468,8 +1469,7 @@ namespace iText.Kernel.Utils {
                         }
                     }
                     if (cmpLeftover != null) {
-                        LogManager.GetLogger(typeof(iText.Kernel.Utils.CompareTool)).Warn(iText.IO.LogMessageConstant.NUM_TREE_SHALL_NOT_END_WITH_KEY
-                            );
+                        //LogManager.GetLogger(typeof(iText.Kernel.Utils.CompareTool)).Warn(iText.IO.LogMessageConstant.NUM_TREE_SHALL_NOT_END_WITH_KEY);
                         if (outLeftover == null) {
                             if (compareResult != null && currentPath != null) {
                                 compareResult.AddError(currentPath, "Number tree was expected to end with a key (although it is invalid according to the specification), but ended with a value"
@@ -2073,10 +2073,10 @@ namespace iText.Kernel.Utils {
         /// <summary>Class containing results of the comparison of two documents.</summary>
         public class CompareResult {
             // LinkedHashMap to retain order. HashMap has different order in Java6/7 and Java8
-            protected internal IDictionary<CompareTool.ObjectPath, String> differences = new LinkedDictionary<CompareTool.ObjectPath
+            public IDictionary<CompareTool.ObjectPath, String> differences = new LinkedDictionary<CompareTool.ObjectPath
                 , String>();
 
-            protected internal int messageLimit = 1;
+            public int messageLimit = 1;
 
             /// <summary>Creates new empty instance of CompareResult with given limit of difference messages.</summary>
             /// <param name="messageLimit">maximum number of difference messages to be handled by this CompareResult.</param>
@@ -2144,11 +2144,11 @@ namespace iText.Kernel.Utils {
                 XmlUtils.WriteXmlDocToStream(xmlReport, stream);
             }
 
-            protected internal virtual bool IsMessageLimitReached() {
+            public virtual bool IsMessageLimitReached() {
                 return this.differences.Count >= this.messageLimit;
             }
 
-            protected internal virtual void AddError(CompareTool.ObjectPath path, String message) {
+            public virtual void AddError(CompareTool.ObjectPath path, String message) {
                 if (this.differences.Count < this.messageLimit) {
                     this.differences.Put(((CompareTool.ObjectPath)path.Clone()), message);
                 }
@@ -2173,14 +2173,14 @@ namespace iText.Kernel.Utils {
         /// infinite loops during comparison.
         /// </remarks>
         public class ObjectPath {
-            protected internal PdfIndirectReference baseCmpObject;
+            public PdfIndirectReference baseCmpObject;
 
-            protected internal PdfIndirectReference baseOutObject;
+            public PdfIndirectReference baseOutObject;
 
-            protected internal Stack<CompareTool.ObjectPath.LocalPathItem> path = new Stack<CompareTool.ObjectPath.LocalPathItem
+            public Stack<CompareTool.ObjectPath.LocalPathItem> path = new Stack<CompareTool.ObjectPath.LocalPathItem
                 >();
 
-            protected internal Stack<CompareTool.ObjectPath.IndirectPathItem> indirects = new Stack<CompareTool.ObjectPath.IndirectPathItem
+            public Stack<CompareTool.ObjectPath.IndirectPathItem> indirects = new Stack<CompareTool.ObjectPath.IndirectPathItem
                 >();
 
             /// <summary>Creates empty ObjectPath.</summary>
@@ -2190,7 +2190,7 @@ namespace iText.Kernel.Utils {
             /// <summary>Creates ObjectPath with corresponding base objects in two documents.</summary>
             /// <param name="baseCmpObject">base object in cmp document.</param>
             /// <param name="baseOutObject">base object in out document.</param>
-            protected internal ObjectPath(PdfIndirectReference baseCmpObject, PdfIndirectReference baseOutObject) {
+            public ObjectPath(PdfIndirectReference baseCmpObject, PdfIndirectReference baseOutObject) {
                 this.baseCmpObject = baseCmpObject;
                 this.baseOutObject = baseOutObject;
                 indirects.Push(new CompareTool.ObjectPath.IndirectPathItem(this, baseCmpObject, baseOutObject));
@@ -2367,7 +2367,7 @@ namespace iText.Kernel.Utils {
                     CompareTool.ObjectPath)obj).path);
             }
 
-            protected internal virtual Object Clone() {
+            public virtual Object Clone() {
                 return new CompareTool.ObjectPath(baseCmpObject, baseOutObject, (Stack<CompareTool.ObjectPath.LocalPathItem
                     >)path.Clone(), (Stack<CompareTool.ObjectPath.IndirectPathItem>)indirects.Clone());
             }
@@ -2429,7 +2429,7 @@ namespace iText.Kernel.Utils {
                 /// <summary>Creates an xml node that describes this direct path item.</summary>
                 /// <param name="document">xml document, to which this xml node will be added.</param>
                 /// <returns>an xml node describing direct path item.</returns>
-                protected internal abstract XmlElement ToXmlNode(XmlDocument document);
+                public abstract XmlElement ToXmlNode(XmlDocument document);
             }
 
             /// <summary>
@@ -2490,7 +2490,7 @@ namespace iText.Kernel.Utils {
                     return key;
                 }
 
-                protected internal override XmlElement ToXmlNode(XmlDocument document) {
+                public override XmlElement ToXmlNode(XmlDocument document) {
                     XmlElement element = document.CreateElement("dictKey");
                     element.AppendChild(document.CreateTextNode(key.ToString()));
                     return element;
@@ -2551,7 +2551,7 @@ namespace iText.Kernel.Utils {
                     return index;
                 }
 
-                protected internal override XmlElement ToXmlNode(XmlDocument document) {
+                public override XmlElement ToXmlNode(XmlDocument document) {
                     XmlElement element = document.CreateElement("arrayIndex");
                     element.AppendChild(document.CreateTextNode(index.ToString()));
                     return element;
@@ -2603,7 +2603,7 @@ namespace iText.Kernel.Utils {
                     return obj.GetType() == GetType() && offset == ((CompareTool.ObjectPath.OffsetPathItem)obj).offset;
                 }
 
-                protected internal override XmlElement ToXmlNode(XmlDocument document) {
+                public override XmlElement ToXmlNode(XmlDocument document) {
                     XmlElement element = document.CreateElement("offset");
                     element.AppendChild(document.CreateTextNode(offset.ToString()));
                     return element;
@@ -2665,7 +2665,7 @@ namespace iText.Kernel.Utils {
                     )obj).path);
             }
 
-            protected internal override Object Clone() {
+            public override Object Clone() {
                 return new CompareTool.TrailerPath(cmpDocument, outDocument, (Stack<CompareTool.ObjectPath.LocalPathItem>)
                     path.Clone());
             }

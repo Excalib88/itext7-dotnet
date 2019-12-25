@@ -58,71 +58,71 @@ namespace iText.Barcodes {
 
         public const int ALIGN_CENTER = 3;
 
-        protected internal PdfDocument document;
+        public PdfDocument document;
 
         /// <summary>The minimum bar width.</summary>
-        protected internal float x;
+        public float x;
 
         /// <summary>
         /// The bar multiplier for wide bars or the distance between
         /// bars for Postnet and Planet.
         /// </summary>
-        protected internal float n;
+        public float n;
 
         /// <summary>The text font.</summary>
         /// <remarks>The text font. <c>null</c> if no text.</remarks>
-        protected internal PdfFont font;
+        public PdfFont font;
 
         /// <summary>
         /// The size of the text or the height of the shorter bar
         /// in Postnet.
         /// </summary>
-        protected internal float size;
+        public float size;
 
         /// <summary>If positive, the text distance under the bars.</summary>
         /// <remarks>
         /// If positive, the text distance under the bars. If zero or negative,
         /// the text distance above the bars.
         /// </remarks>
-        protected internal float baseline;
+        public float baseline;
 
         /// <summary>The height of the bars.</summary>
-        protected internal float barHeight;
+        public float barHeight;
 
         /// <summary>The text alignment.</summary>
-        protected internal int textAlignment;
+        public int textAlignment;
 
         /// <summary>The optional checksum generation.</summary>
-        protected internal bool generateChecksum;
+        public bool generateChecksum;
 
         /// <summary>Shows the generated checksum in the the text.</summary>
-        protected internal bool checksumText;
+        public bool checksumText;
 
         /// <summary>
         /// Show the start and stop character '*' in the text for
         /// the barcode 39 or 'ABCD' for codabar.
         /// </summary>
-        protected internal bool startStopText;
+        public bool startStopText;
 
         /// <summary>Generates extended barcode 39.</summary>
-        protected internal bool extended;
+        public bool extended;
 
         /// <summary>The code to generate.</summary>
-        protected internal String code = "";
+        public String code = "";
 
         /// <summary>Show the guard bars for barcode EAN.</summary>
-        protected internal bool guardBars;
+        public bool guardBars;
 
         /// <summary>The code type.</summary>
-        protected internal int codeType;
+        public int codeType;
 
         /// <summary>The ink spreading.</summary>
-        protected internal float inkSpreading = 0;
+        public float inkSpreading = 0;
 
         /// <summary>The alternate text to be used, if present.</summary>
-        protected internal String altText;
+        public String altText;
 
-        protected internal Barcode1D(PdfDocument document) {
+        public Barcode1D(PdfDocument document) {
             this.document = document;
         }
 
@@ -428,7 +428,7 @@ namespace iText.Barcodes {
             SetX(x * width / GetBarcodeSize().GetWidth());
         }
 
-        protected internal virtual float GetDescender() {
+        public virtual float GetDescender() {
             float sizeCoef = size / FontProgram.UNITS_NORMALIZATION;
             return font.GetFontProgram().GetFontMetrics().GetTypoDescender() * sizeCoef;
         }

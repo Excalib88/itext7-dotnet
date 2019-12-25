@@ -238,7 +238,7 @@ namespace iText.IO.Util {
         /// in the hashtable exceeds this hashtable's capacity and load
         /// factor.
         /// </remarks>
-        protected internal virtual void Rehash() {
+        public virtual void Rehash() {
             int oldCapacity = table.Length;
             IntHashtable.Entry[] oldMap = table;
             int newCapacity = oldCapacity * 2 + 1;
@@ -379,7 +379,7 @@ namespace iText.IO.Util {
                 return value;
             }
 
-            protected internal virtual Object Clone() {
+            public virtual Object Clone() {
                 return new IntHashtable.Entry(key, value, next != null ? (IntHashtable.Entry)next.Clone() : null);
             }
 

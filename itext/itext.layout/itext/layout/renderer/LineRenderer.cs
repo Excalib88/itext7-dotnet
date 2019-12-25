@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font.Otf;
 using iText.IO.Util;
 using iText.Kernel.Geom;
@@ -58,14 +59,14 @@ namespace iText.Layout.Renderer {
         // AbstractRenderer.EPS is not enough here
         private const float MIN_MAX_WIDTH_CORRECTION_EPS = 0.001f;
 
-        private static readonly ILog logger = LogManager.GetLogger(typeof(LineRenderer));
+        //private static readonly ILog logger = LogManager.GetLogger(typeof(LineRenderer));
 
-        protected internal float maxAscent;
+        public float maxAscent;
 
-        protected internal float maxDescent;
+        public float maxDescent;
 
         // bidi levels
-        protected internal byte[] levels;
+        public byte[] levels;
 
         private float maxTextAscent;
 
@@ -303,9 +304,9 @@ namespace iText.Layout.Renderer {
                             }
                             bbox.SetWidth(inlineBlockWidth);
                             if (childBlockMinMaxWidth.GetMinWidth() > bbox.GetWidth()) {
-                                if (logger.IsWarnEnabled) {
-                                    logger.Warn(iText.IO.LogMessageConstant.INLINE_BLOCK_ELEMENT_WILL_BE_CLIPPED);
-                                }
+                                //if (logger.IsWarnEnabled) {
+                                //    logger.Warn(iText.IO.LogMessageConstant.INLINE_BLOCK_ELEMENT_WILL_BE_CLIPPED);
+                                //}
                                 childRenderer.SetProperty(Property.FORCED_PLACEMENT, true);
                             }
                         }
@@ -482,9 +483,9 @@ namespace iText.Layout.Renderer {
                             else {
                                 if (isInlineBlockChild && childResult.GetOverflowRenderer().GetChildRenderers().Count == 0 && childResult.
                                     GetStatus() == LayoutResult.PARTIAL) {
-                                    if (logger.IsWarnEnabled) {
-                                        logger.Warn(iText.IO.LogMessageConstant.INLINE_BLOCK_ELEMENT_WILL_BE_CLIPPED);
-                                    }
+                                    //if (logger.IsWarnEnabled) {
+                                    //    logger.Warn(iText.IO.LogMessageConstant.INLINE_BLOCK_ELEMENT_WILL_BE_CLIPPED);
+                                    //}
                                 }
                                 else {
                                     split[1].childRenderers.Add(childResult.GetOverflowRenderer());
@@ -720,11 +721,11 @@ namespace iText.Layout.Renderer {
             return new LineRenderer();
         }
 
-        protected internal override float? GetFirstYLineRecursively() {
+        public override float? GetFirstYLineRecursively() {
             return GetYLine();
         }
 
-        protected internal override float? GetLastYLineRecursively() {
+        public override float? GetLastYLineRecursively() {
             return GetYLine();
         }
 
@@ -771,7 +772,7 @@ namespace iText.Layout.Renderer {
             GetOccupiedArea().GetBBox().SetWidth(width);
         }
 
-        protected internal virtual int GetNumberOfSpaces() {
+        public virtual int GetNumberOfSpaces() {
             int spaces = 0;
             foreach (IRenderer child in childRenderers) {
                 if (child is TextRenderer && !FloatingHelper.IsRendererFloating(child)) {
@@ -786,7 +787,7 @@ namespace iText.Layout.Renderer {
         /// Gets the total lengths of characters in this line. Other elements (images, tables) are not taken
         /// into account.
         /// </remarks>
-        protected internal virtual int Length() {
+        public virtual int Length() {
             int length = 0;
             foreach (IRenderer child in childRenderers) {
                 if (child is TextRenderer && !FloatingHelper.IsRendererFloating(child)) {
@@ -797,7 +798,7 @@ namespace iText.Layout.Renderer {
         }
 
         /// <summary>Returns the number of base characters, i.e. non-mark characters</summary>
-        protected internal virtual int BaseCharactersCount() {
+        public virtual int BaseCharactersCount() {
             int count = 0;
             foreach (IRenderer child in childRenderers) {
                 if (child is TextRenderer && !FloatingHelper.IsRendererFloating(child)) {
@@ -815,15 +816,15 @@ namespace iText.Layout.Renderer {
             return sb.ToString();
         }
 
-        protected internal virtual LineRenderer CreateSplitRenderer() {
+        public virtual LineRenderer CreateSplitRenderer() {
             return (LineRenderer)GetNextRenderer();
         }
 
-        protected internal virtual LineRenderer CreateOverflowRenderer() {
+        public virtual LineRenderer CreateOverflowRenderer() {
             return (LineRenderer)GetNextRenderer();
         }
 
-        protected internal virtual LineRenderer[] Split() {
+        public virtual LineRenderer[] Split() {
             LineRenderer splitRenderer = CreateSplitRenderer();
             splitRenderer.occupiedArea = occupiedArea.Clone();
             splitRenderer.parent = parent;
@@ -841,7 +842,7 @@ namespace iText.Layout.Renderer {
             return new LineRenderer[] { splitRenderer, overflowRenderer };
         }
 
-        protected internal virtual LineRenderer AdjustChildrenYLine() {
+        public virtual LineRenderer AdjustChildrenYLine() {
             float actualYLine = occupiedArea.GetBBox().GetY() + occupiedArea.GetBBox().GetHeight() - maxAscent;
             foreach (IRenderer renderer in childRenderers) {
                 if (FloatingHelper.IsRendererFloating(renderer)) {
@@ -861,7 +862,7 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal virtual void ApplyLeading(float deltaY) {
+        public virtual void ApplyLeading(float deltaY) {
             occupiedArea.GetBBox().MoveUp(deltaY);
             occupiedArea.GetBBox().DecreaseHeight(deltaY);
             foreach (IRenderer child in childRenderers) {
@@ -872,7 +873,7 @@ namespace iText.Layout.Renderer {
         }
 
         // TODO for floats we don't apply any leading for the moment (and therefore line-height for pdf2html is not entirely supported in terms of floats)
-        protected internal virtual LineRenderer TrimLast() {
+        public virtual LineRenderer TrimLast() {
             int lastIndex = childRenderers.Count;
             IRenderer lastRenderer = null;
             while (--lastIndex >= 0) {
@@ -913,8 +914,8 @@ namespace iText.Layout.Renderer {
                 case Leading.MULTIPLIED: {
                     UnitValue fontSize = this.GetProperty<UnitValue>(Property.FONT_SIZE, UnitValue.CreatePointValue(0f));
                     if (!fontSize.IsPointValue()) {
-                        logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                            .FONT_SIZE));
+                        //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                        //    .FONT_SIZE));
                     }
                     // In HTML, depending on whether <!DOCTYPE html> is present or not, and if present then depending on the version,
                     // the behavior id different. In one case, bottom leading indent is added for images, in the other it is not added.
@@ -944,8 +945,8 @@ namespace iText.Layout.Renderer {
                 case Leading.MULTIPLIED: {
                     UnitValue fontSize = this.GetProperty<UnitValue>(Property.FONT_SIZE, UnitValue.CreatePointValue(0f));
                     if (!fontSize.IsPointValue()) {
-                        logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                            .FONT_SIZE));
+                        //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                        //    .FONT_SIZE));
                     }
                     // In HTML, depending on whether <!DOCTYPE html> is present or not, and if present then depending on the version,
                     // the behavior id different. In one case, bottom leading indent is added for images, in the other it is not added.
@@ -973,22 +974,22 @@ namespace iText.Layout.Renderer {
                     if (child is TextRenderer) {
                         currentWidth = ((TextRenderer)child).CalculateLineWidth();
                         UnitValue[] margins = ((TextRenderer)child).GetMargins();
-                        if (!margins[1].IsPointValue() && logger.IsErrorEnabled) {
-                            logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "right margin"
-                                ));
+                        if (!margins[1].IsPointValue()) {
+                            //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "right margin"
+                            //    ));
                         }
-                        if (!margins[3].IsPointValue() && logger.IsErrorEnabled) {
-                            logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "left margin"
-                                ));
+                        if (!margins[3].IsPointValue() ) {
+                            //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "left margin"
+                            //    ));
                         }
                         UnitValue[] paddings = ((TextRenderer)child).GetPaddings();
-                        if (!paddings[1].IsPointValue() && logger.IsErrorEnabled) {
-                            logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "right padding"
-                                ));
+                        if (!paddings[1].IsPointValue()) {
+                            //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "right padding"
+                            //    ));
                         }
-                        if (!paddings[3].IsPointValue() && logger.IsErrorEnabled) {
-                            logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "left padding"
-                                ));
+                        if (!paddings[3].IsPointValue() /*&& logger.IsErrorEnabled*/) {
+                            //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, "left padding"
+                            //    ));
                         }
                         currentWidth += margins[1].GetValue() + margins[3].GetValue() + paddings[1].GetValue() + paddings[3].GetValue
                             ();

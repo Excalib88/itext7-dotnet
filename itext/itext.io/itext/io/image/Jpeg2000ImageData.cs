@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 
 namespace iText.IO.Image {
     public class Jpeg2000ImageData : ImageData {
@@ -87,19 +88,19 @@ namespace iText.IO.Image {
             }
         }
 
-        protected internal Jpeg2000ImageData.Parameters parameters;
+        public Jpeg2000ImageData.Parameters parameters;
 
-        protected internal Jpeg2000ImageData(Uri url)
+        public Jpeg2000ImageData(Uri url)
             : base(url, ImageType.JPEG2000) {
         }
 
-        protected internal Jpeg2000ImageData(byte[] bytes)
+        public Jpeg2000ImageData(byte[] bytes)
             : base(bytes, ImageType.JPEG2000) {
         }
 
         public override bool CanImageBeInline() {
-            ILog logger = LogManager.GetLogger(typeof(ImageData));
-            logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_JPXDECODE_FILTER);
+            //ILog logger = LogManager.GetLogger(typeof(ImageData));
+            //logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_JPXDECODE_FILTER);
             return false;
         }
 

@@ -52,7 +52,7 @@ namespace iText.Svg.Renderers.Impl {
     /// Different from being added to the ignored list as this Renderer will allow its children to be processed.
     /// </remarks>
     public class NoDrawOperationSvgNodeRenderer : AbstractSvgNodeRenderer {
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             throw new NotSupportedException(SvgLogMessageConstant.DRAW_NO_DRAW);
         }
 

@@ -67,19 +67,19 @@ namespace iText.Layout {
     public class Document : RootElement<iText.Layout.Document> {
         [System.ObsoleteAttribute(@"To be removed in 7.2. Use iText.Layout.Properties.Property.MARGIN_LEFT instead."
             )]
-        protected internal float leftMargin = 36;
+        public float leftMargin = 36;
 
         [System.ObsoleteAttribute(@"To be removed in 7.2. Use iText.Layout.Properties.Property.MARGIN_RIGHT instead."
             )]
-        protected internal float rightMargin = 36;
+        public float rightMargin = 36;
 
         [System.ObsoleteAttribute(@"To be removed in 7.2. Use iText.Layout.Properties.Property.MARGIN_TOP instead."
             )]
-        protected internal float topMargin = 36;
+        public float topMargin = 36;
 
         [System.ObsoleteAttribute(@"To be removed in 7.2. Use iText.Layout.Properties.Property.MARGIN_BOTTOM instead."
             )]
-        protected internal float bottomMargin = 36;
+        public float bottomMargin = 36;
 
         /// <summary>
         /// Creates a document from a
@@ -338,7 +338,7 @@ namespace iText.Layout {
             }
         }
 
-        protected internal override RootRenderer EnsureRootRendererNotNull() {
+        public override RootRenderer EnsureRootRendererNotNull() {
             if (rootRenderer == null) {
                 rootRenderer = new DocumentRenderer(this, immediateFlush);
             }
@@ -346,7 +346,7 @@ namespace iText.Layout {
         }
 
         /// <summary>Checks whether a method is invoked at the closed document</summary>
-        protected internal virtual void CheckClosingStatus() {
+        public virtual void CheckClosingStatus() {
             if (GetPdfDocument().IsClosed()) {
                 throw new PdfException(PdfException.DocumentClosedItIsImpossibleToExecuteAction);
             }

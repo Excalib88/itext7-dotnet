@@ -93,7 +93,7 @@ namespace iText.IO.Font {
         private IDictionary<String, int[]> tableDirectory;
 
         /// <summary>The file in use.</summary>
-        protected internal RandomAccessFileOrArray rf;
+        public RandomAccessFileOrArray rf;
 
         /// <summary>The file name.</summary>
         private String fileName;

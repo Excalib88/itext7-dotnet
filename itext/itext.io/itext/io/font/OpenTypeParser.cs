@@ -202,10 +202,10 @@ namespace iText.IO.Font {
         }
 
         /// <summary>The file name.</summary>
-        protected internal String fileName;
+        public String fileName;
 
         /// <summary>The file in use.</summary>
-        protected internal RandomAccessFileOrArray raf;
+        public RandomAccessFileOrArray raf;
 
         /// <summary>The index for the TTC font.</summary>
         /// <remarks>
@@ -213,42 +213,42 @@ namespace iText.IO.Font {
         /// <c>int</c>
         /// for a TTF file.
         /// </remarks>
-        protected internal int ttcIndex = -1;
+        public int ttcIndex = -1;
 
         /// <summary>The offset from the start of the file to the table directory.</summary>
         /// <remarks>
         /// The offset from the start of the file to the table directory.
         /// It is 0 for TTF and may vary for TTC depending on the chosen font.
         /// </remarks>
-        protected internal int directoryOffset;
+        public int directoryOffset;
 
         /// <summary>The font name.</summary>
         /// <remarks>The font name. This name is usually extracted from the table 'name' with the 'Name ID' 6.</remarks>
-        protected internal String fontName;
+        public String fontName;
 
         /// <summary>All the names of the Names-Table.</summary>
-        protected internal IDictionary<int, IList<String[]>> allNameEntries;
+        public IDictionary<int, IList<String[]>> allNameEntries;
 
         /// <summary>Indicate, that the font contains 'CFF ' table.</summary>
-        protected internal bool cff = false;
+        public bool cff = false;
 
         /// <summary>Offset to 'CFF ' table.</summary>
-        protected internal int cffOffset;
+        public int cffOffset;
 
         /// <summary>Length of 'CFF ' table.</summary>
-        protected internal int cffLength;
+        public int cffLength;
 
         private int[] glyphWidthsByIndex;
 
-        protected internal OpenTypeParser.HeaderTable head;
+        public OpenTypeParser.HeaderTable head;
 
-        protected internal OpenTypeParser.HorizontalHeader hhea;
+        public OpenTypeParser.HorizontalHeader hhea;
 
-        protected internal OpenTypeParser.WindowsMetrics os_2;
+        public OpenTypeParser.WindowsMetrics os_2;
 
-        protected internal OpenTypeParser.PostTable post;
+        public OpenTypeParser.PostTable post;
 
-        protected internal OpenTypeParser.CmapTable cmaps;
+        public OpenTypeParser.CmapTable cmaps;
 
         /// <summary>Contains the location of the several tables.</summary>
         /// <remarks>
@@ -257,7 +257,7 @@ namespace iText.IO.Font {
         /// is the offset from the start of the file and position 1 is the length
         /// of the table.
         /// </remarks>
-        protected internal IDictionary<String, int[]> tables;
+        public IDictionary<String, int[]> tables;
 
         public OpenTypeParser(byte[] ttf) {
             raf = new RandomAccessFileOrArray(new RandomAccessSourceFactory().CreateSource(ttf));
@@ -491,7 +491,7 @@ namespace iText.IO.Font {
 
         /// <summary>Reads the font data.</summary>
         /// <param name="all">if true, all tables will be read, otherwise only 'head', 'name', and 'os/2'.</param>
-        protected internal virtual void LoadTables(bool all) {
+        public virtual void LoadTables(bool all) {
             ReadNameTable();
             ReadHeadTable();
             ReadOs_2Table();
@@ -512,7 +512,7 @@ namespace iText.IO.Font {
         /// </remarks>
         /// <param name="name">the full name</param>
         /// <returns>the simple file name</returns>
-        protected internal static String GetTTCName(String name) {
+        public static String GetTTCName(String name) {
             if (name == null) {
                 return null;
             }
@@ -525,7 +525,7 @@ namespace iText.IO.Font {
             }
         }
 
-        protected internal virtual void CheckCff() {
+        public virtual void CheckCff() {
             int[] table_location;
             table_location = tables.Get("CFF ");
             if (table_location != null) {
@@ -544,7 +544,7 @@ namespace iText.IO.Font {
         /// and
         /// <see cref="HeaderTable.unitsPerEm"/>.
         /// </remarks>
-        protected internal virtual void ReadGlyphWidths() {
+        public virtual void ReadGlyphWidths() {
             int numberOfHMetrics = hhea.numberOfHMetrics;
             int unitsPerEm = head.unitsPerEm;
             int[] table_location;
@@ -578,7 +578,7 @@ namespace iText.IO.Font {
         /// 
         /// <see cref="HeaderTable.unitsPerEm"/>.
         /// </param>
-        protected internal virtual IntHashtable ReadKerning(int unitsPerEm) {
+        public virtual IntHashtable ReadKerning(int unitsPerEm) {
             int[] table_location;
             table_location = tables.Get("kern");
             IntHashtable kerning = new IntHashtable();
@@ -613,7 +613,7 @@ namespace iText.IO.Font {
         /// 
         /// <see cref="HeaderTable.unitsPerEm"/>
         /// </param>
-        protected internal virtual int[][] ReadBbox(int unitsPerEm) {
+        public virtual int[][] ReadBbox(int unitsPerEm) {
             int[] tableLocation;
             tableLocation = tables.Get("head");
             if (tableLocation == null) {
@@ -671,7 +671,7 @@ namespace iText.IO.Font {
             return bboxes;
         }
 
-        protected internal virtual int ReadNumGlyphs() {
+        public virtual int ReadNumGlyphs() {
             int[] table_location = tables.Get("maxp");
             if (table_location == null) {
                 return 65536;
@@ -1005,7 +1005,7 @@ namespace iText.IO.Font {
         /// <summary>Gets a glyph width.</summary>
         /// <param name="glyph">the glyph to get the width of</param>
         /// <returns>the width of the glyph in normalized 1000 units (TrueTypeFont.UNITS_NORMALIZATION)</returns>
-        protected internal virtual int GetGlyphWidth(int glyph) {
+        public virtual int GetGlyphWidth(int glyph) {
             if (glyph >= glyphWidthsByIndex.Length) {
                 glyph = glyphWidthsByIndex.Length - 1;
             }

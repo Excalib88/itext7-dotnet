@@ -83,15 +83,15 @@ namespace iText.Kernel.Pdf {
             return value ? "true" : "false";
         }
 
-        protected internal override void GenerateContent() {
+        public override void GenerateContent() {
             content = value ? True : False;
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfBoolean();
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfBoolean @bool = (iText.Kernel.Pdf.PdfBoolean)from;
             value = @bool.value;

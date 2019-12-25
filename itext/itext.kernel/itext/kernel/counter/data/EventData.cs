@@ -81,7 +81,7 @@ namespace iText.Kernel.Counter.Data {
             return count;
         }
 
-        protected internal virtual void MergeWith(iText.Kernel.Counter.Data.EventData<T> data) {
+        public virtual void MergeWith(iText.Kernel.Counter.Data.EventData<T> data) {
             this.count += data.GetCount();
         }
     }

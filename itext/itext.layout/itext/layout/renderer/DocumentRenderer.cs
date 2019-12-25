@@ -55,9 +55,9 @@ using iText.Layout.Tagging;
 
 namespace iText.Layout.Renderer {
     public class DocumentRenderer : RootRenderer {
-        protected internal Document document;
+        public Document document;
 
-        protected internal IList<int> wrappedContentPage = new List<int>();
+        public IList<int> wrappedContentPage = new List<int>();
 
         public DocumentRenderer(Document document)
             : this(document, true) {
@@ -83,7 +83,7 @@ namespace iText.Layout.Renderer {
             return new iText.Layout.Renderer.DocumentRenderer(document, immediateFlush);
         }
 
-        protected internal override LayoutArea UpdateCurrentArea(LayoutResult overflowResult) {
+        public override LayoutArea UpdateCurrentArea(LayoutResult overflowResult) {
             FlushWaitingDrawingElements();
             LayoutTaggingHelper taggingHelper = this.GetProperty<LayoutTaggingHelper>(Property.TAGGING_HELPER);
             if (taggingHelper != null) {
@@ -111,7 +111,7 @@ namespace iText.Layout.Renderer {
             return (currentArea = new RootLayoutArea(currentPageNumber, GetCurrentPageEffectiveArea(lastPageSize)));
         }
 
-        protected internal override void FlushSingleRenderer(IRenderer resultRenderer) {
+        public override void FlushSingleRenderer(IRenderer resultRenderer) {
             Transform transformProp = resultRenderer.GetProperty<Transform>(Property.TRANSFORM);
             if (!waitingDrawingElements.Contains(resultRenderer)) {
                 ProcessWaitingDrawing(resultRenderer, transformProp, waitingDrawingElements);
@@ -140,7 +140,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual PageSize AddNewPage(PageSize customPageSize) {
+        public virtual PageSize AddNewPage(PageSize customPageSize) {
             if (customPageSize != null) {
                 document.GetPdfDocument().AddNewPage(customPageSize);
             }

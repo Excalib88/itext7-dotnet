@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel;
 using iText.Kernel.Events;
@@ -87,13 +88,13 @@ namespace iText.Kernel.Pdf {
         /// </summary>
         private bool pageRotationInverseMatrixWritten = false;
 
-        protected internal PdfPage(PdfDictionary pdfObject)
+        public PdfPage(PdfDictionary pdfObject)
             : base(pdfObject) {
             SetForbidRelease();
             EnsureObjectIsAddedToDocument(pdfObject);
         }
 
-        protected internal PdfPage(PdfDocument pdfDocument, PageSize pageSize)
+        public PdfPage(PdfDocument pdfDocument, PageSize pageSize)
             : this((PdfDictionary)new PdfDictionary().MakeIndirect(pdfDocument)) {
             PdfStream contentStream = (PdfStream)new PdfStream().MakeIndirect(pdfDocument);
             GetPdfObject().Put(PdfName.Contents, contentStream);
@@ -105,7 +106,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal PdfPage(PdfDocument pdfDocument)
+        public PdfPage(PdfDocument pdfDocument)
             : this(pdfDocument, pdfDocument.GetDefaultPageSize()) {
         }
 
@@ -530,8 +531,8 @@ namespace iText.Kernel.Pdf {
             else {
                 if (!toDocument.GetWriter().isUserWarnedAboutAcroFormCopying && GetDocument().GetCatalog().GetPdfObject().
                     ContainsKey(PdfName.AcroForm)) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
-                    logger.Warn(iText.IO.LogMessageConstant.SOURCE_DOCUMENT_HAS_ACROFORM_DICTIONARY);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
+                    //logger.Warn(iText.IO.LogMessageConstant.SOURCE_DOCUMENT_HAS_ACROFORM_DICTIONARY);
                     toDocument.GetWriter().isUserWarnedAboutAcroFormCopying = true;
                 }
             }
@@ -696,11 +697,11 @@ namespace iText.Kernel.Pdf {
             int mediaBoxSize;
             if ((mediaBoxSize = mediaBox.Size()) != 4) {
                 if (mediaBoxSize > 4) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
-                    if (logger.IsErrorEnabled) {
-                        logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.WRONG_MEDIABOX_SIZE_TOO_MANY_ARGUMENTS, 
-                            mediaBoxSize));
-                    }
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
+                    //if (logger.IsErrorEnabled) {
+                    //    logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.WRONG_MEDIABOX_SIZE_TOO_MANY_ARGUMENTS, 
+                    //        mediaBoxSize));
+                    //}
                 }
                 if (mediaBoxSize < 4) {
                     throw new PdfException(PdfException.WRONGMEDIABOXSIZETOOFEWARGUMENTS).SetMessageParams(mediaBox.Size());
@@ -839,8 +840,8 @@ namespace iText.Kernel.Pdf {
         public virtual iText.Kernel.Pdf.PdfPage SetArtBox(Rectangle rectangle) {
             if (GetPdfObject().GetAsRectangle(PdfName.TrimBox) != null) {
                 GetPdfObject().Remove(PdfName.TrimBox);
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
-                logger.Warn(iText.IO.LogMessageConstant.ONLY_ONE_OF_ARTBOX_OR_TRIMBOX_CAN_EXIST_IN_THE_PAGE);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
+                //logger.Warn(iText.IO.LogMessageConstant.ONLY_ONE_OF_ARTBOX_OR_TRIMBOX_CAN_EXIST_IN_THE_PAGE);
             }
             Put(PdfName.ArtBox, new PdfArray(rectangle));
             return this;
@@ -878,8 +879,8 @@ namespace iText.Kernel.Pdf {
         public virtual iText.Kernel.Pdf.PdfPage SetTrimBox(Rectangle rectangle) {
             if (GetPdfObject().GetAsRectangle(PdfName.ArtBox) != null) {
                 GetPdfObject().Remove(PdfName.ArtBox);
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
-                logger.Warn(iText.IO.LogMessageConstant.ONLY_ONE_OF_ARTBOX_OR_TRIMBOX_CAN_EXIST_IN_THE_PAGE);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
+                //logger.Warn(iText.IO.LogMessageConstant.ONLY_ONE_OF_ARTBOX_OR_TRIMBOX_CAN_EXIST_IN_THE_PAGE);
             }
             Put(PdfName.TrimBox, new PdfArray(rectangle));
             return this;
@@ -1491,8 +1492,8 @@ namespace iText.Kernel.Pdf {
         /// <param name="fs">file specification dictionary of associated file</param>
         public virtual void AddAssociatedFile(String description, PdfFileSpec fs) {
             if (null == ((PdfDictionary)fs.GetPdfObject()).Get(PdfName.AFRelationship)) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
-                logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfPage));
+                //logger.Error(iText.IO.LogMessageConstant.ASSOCIATED_FILE_SPEC_SHALL_INCLUDE_AFRELATIONSHIP);
             }
             if (null != description) {
                 GetDocument().GetCatalog().AddNameToNameTree(description, fs.GetPdfObject(), PdfName.EmbeddedFiles);
@@ -1552,7 +1553,7 @@ namespace iText.Kernel.Pdf {
             parentPages = null;
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 

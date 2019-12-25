@@ -42,68 +42,69 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 
 namespace iText.Kernel.Pdf {
     public abstract class PdfPrimitiveObject : PdfObject {
-        protected internal byte[] content = null;
+        public byte[] content = null;
 
-        protected internal bool directOnly;
+        public bool directOnly;
 
-        protected internal PdfPrimitiveObject()
+        public PdfPrimitiveObject()
             : base() {
         }
 
-        protected internal PdfPrimitiveObject(bool directOnly)
+        public PdfPrimitiveObject(bool directOnly)
             : base() {
             this.directOnly = directOnly;
         }
 
         /// <summary>Initialize PdfPrimitiveObject from the passed bytes.</summary>
         /// <param name="content">byte content, shall not be null.</param>
-        protected internal PdfPrimitiveObject(byte[] content)
+        public PdfPrimitiveObject(byte[] content)
             : this() {
             System.Diagnostics.Debug.Assert(content != null);
             this.content = content;
         }
 
-        protected internal byte[] GetInternalContent() {
+        public byte[] GetInternalContent() {
             if (content == null) {
                 GenerateContent();
             }
             return content;
         }
 
-        protected internal virtual bool HasContent() {
+        public virtual bool HasContent() {
             return content != null;
         }
 
-        protected internal abstract void GenerateContent();
+        public abstract void GenerateContent();
 
         public override PdfObject MakeIndirect(PdfDocument document, PdfIndirectReference reference) {
             if (!directOnly) {
                 return base.MakeIndirect(document, reference);
             }
             else {
-                ILog logger = LogManager.GetLogger(typeof(PdfObject));
-                logger.Warn(iText.IO.LogMessageConstant.DIRECTONLY_OBJECT_CANNOT_BE_INDIRECT);
+                //ILog logger = LogManager.GetLogger(typeof(PdfObject));
+                //logger.Warn(iText.IO.LogMessageConstant.DIRECTONLY_OBJECT_CANNOT_BE_INDIRECT);
             }
             return this;
         }
 
-        protected internal override PdfObject SetIndirectReference(PdfIndirectReference indirectReference) {
+        public override PdfObject SetIndirectReference(PdfIndirectReference indirectReference) {
             if (!directOnly) {
                 base.SetIndirectReference(indirectReference);
             }
             else {
-                ILog logger = LogManager.GetLogger(typeof(PdfObject));
-                logger.Warn(iText.IO.LogMessageConstant.DIRECTONLY_OBJECT_CANNOT_BE_INDIRECT);
+                //ILog logger = LogManager.GetLogger(typeof(PdfObject));
+                //logger.Warn(iText.IO.LogMessageConstant.DIRECTONLY_OBJECT_CANNOT_BE_INDIRECT);
             }
             return this;
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfPrimitiveObject @object = (iText.Kernel.Pdf.PdfPrimitiveObject)from;
             if (@object.content != null) {
@@ -111,7 +112,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual int CompareContent(iText.Kernel.Pdf.PdfPrimitiveObject o) {
+        public virtual int CompareContent(iText.Kernel.Pdf.PdfPrimitiveObject o) {
             for (int i = 0; i < Math.Min(content.Length, o.content.Length); i++) {
                 if (content[i] > o.content[i]) {
                     return 1;

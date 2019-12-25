@@ -47,19 +47,19 @@ using Org.BouncyCastle.X509;
 namespace iText.Kernel.Pdf {
     /// <summary>Allows configuration of output PDF encryption.</summary>
     public class EncryptionProperties {
-        protected internal int encryptionAlgorithm;
+        public int encryptionAlgorithm;
 
         // StandardEncryption properties
-        protected internal byte[] userPassword;
+        public byte[] userPassword;
 
-        protected internal byte[] ownerPassword;
+        public byte[] ownerPassword;
 
-        protected internal int standardEncryptPermissions;
+        public int standardEncryptPermissions;
 
         // PublicKeyEncryption properties
-        protected internal X509Certificate[] publicCertificates;
+        public X509Certificate[] publicCertificates;
 
-        protected internal int[] publicKeyEncryptPermissions;
+        public int[] publicKeyEncryptPermissions;
 
         /// <summary>Sets the encryption options for the document.</summary>
         /// <param name="userPassword">

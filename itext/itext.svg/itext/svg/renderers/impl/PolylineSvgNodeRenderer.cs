@@ -61,9 +61,9 @@ namespace iText.Svg.Renderers.Impl {
         /// <see cref="iText.Kernel.Geom.Point"/>
         /// objects representing the path to be drawn by the polyline tag
         /// </summary>
-        protected internal IList<Point> points = new List<Point>();
+        public IList<Point> points = new List<Point>();
 
-        protected internal virtual IList<Point> GetPoints() {
+        public virtual IList<Point> GetPoints() {
             return this.points;
         }
 
@@ -83,7 +83,7 @@ namespace iText.Svg.Renderers.Impl {
         /// if pointsAttribute does not have a valid list of numerical x,y pairs.
         /// </remarks>
         /// <param name="pointsAttribute">A string of space separated x,y value pairs</param>
-        protected internal virtual void SetPoints(String pointsAttribute) {
+        public virtual void SetPoints(String pointsAttribute) {
             if (pointsAttribute == null) {
                 return;
             }
@@ -103,7 +103,7 @@ namespace iText.Svg.Renderers.Impl {
 
         /// <summary>Draws this element to a canvas-like object maintained in the context.</summary>
         /// <param name="context">the object that knows the place to draw this element and maintains its state</param>
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             String pointsAttribute = attributesAndStyles.ContainsKey(SvgConstants.Attributes.POINTS) ? attributesAndStyles
                 .Get(SvgConstants.Attributes.POINTS) : null;
             SetPoints(pointsAttribute);

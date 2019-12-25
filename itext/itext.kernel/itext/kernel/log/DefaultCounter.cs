@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Codec;
 
 namespace iText.Kernel.Log {
@@ -62,7 +63,7 @@ namespace iText.Kernel.Log {
 
         private int repeat_level = 10000;
 
-        private ILog logger;
+        //private ILog logger;
 
         private static byte[] message_1 = Convert.FromBase64String("DQoNCllvdSBhcmUgdXNpbmcgaVRleHQgdW5kZXIgdGhlIEFHUEwuDQoNCklmIHR"
              + "oaXMgaXMgeW91ciBpbnRlbnRpb24sIHlvdSBoYXZlIHB1Ymxpc2hlZCB5b3VyIG" + "93biBzb3VyY2UgY29kZSBhcyBBR1BMIHNvZnR3YXJlIHRvby4NClBsZWFzZSBsZ"
@@ -105,10 +106,10 @@ namespace iText.Kernel.Log {
                     else {
                         repeat_level = repeat[2];
                     }
-                    if (logger == null) {
-                        logger = LogManager.GetLogger(this.GetType());
-                    }
-                    logger.Info(message);
+                    //if (logger == null) {
+                    //    logger = LogManager.GetLogger(this.GetType());
+                    //}
+                    //logger.Info(message);
                 }
                 count = 0;
             }

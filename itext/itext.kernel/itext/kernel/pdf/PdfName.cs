@@ -1801,7 +1801,7 @@ namespace iText.Kernel.Pdf {
 
         public static readonly iText.Kernel.Pdf.PdfName Zoom = CreateDirectName("Zoom");
 
-        protected internal String value = null;
+        public String value = null;
 
         /// <summary>map strings to all known static names</summary>
         public static IDictionary<String, iText.Kernel.Pdf.PdfName> staticNames;
@@ -1871,7 +1871,7 @@ namespace iText.Kernel.Pdf {
             return GetValue().GetHashCode();
         }
 
-        protected internal virtual void GenerateValue() {
+        public virtual void GenerateValue() {
             StringBuilder buf = new StringBuilder();
             try {
                 for (int k = 0; k < content.Length; ++k) {
@@ -1891,7 +1891,7 @@ namespace iText.Kernel.Pdf {
             value = buf.ToString();
         }
 
-        protected internal override void GenerateContent() {
+        public override void GenerateContent() {
             int length = value.Length;
             ByteBuffer buf = new ByteBuffer(length + 20);
             char c;
@@ -1987,11 +1987,11 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfName();
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfName name = (iText.Kernel.Pdf.PdfName)from;
             value = name.value;

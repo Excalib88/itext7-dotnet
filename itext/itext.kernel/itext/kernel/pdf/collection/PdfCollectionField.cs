@@ -71,9 +71,9 @@ namespace iText.Kernel.Pdf.Collection {
         /// <summary>A possible type of collection field.</summary>
         public const int SIZE = 7;
 
-        protected internal int subType;
+        public int subType;
 
-        protected internal PdfCollectionField(PdfDictionary pdfObject)
+        public PdfCollectionField(PdfDictionary pdfObject)
             : base(pdfObject) {
             String subType = pdfObject.GetAsName(PdfName.Subtype).GetValue();
             switch (subType) {
@@ -221,7 +221,7 @@ namespace iText.Kernel.Pdf.Collection {
                 ().GetAsName(PdfName.N).GetValue());
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

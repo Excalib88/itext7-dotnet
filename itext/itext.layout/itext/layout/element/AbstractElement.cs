@@ -59,11 +59,11 @@ namespace iText.Layout.Element {
     /// <typeparam name="T">the type of the implementation</typeparam>
     public abstract class AbstractElement<T> : ElementPropertyContainer<T>, IElement
         where T : IElement {
-        protected internal IRenderer nextRenderer;
+        public IRenderer nextRenderer;
 
-        protected internal IList<IElement> childElements = new List<IElement>();
+        public IList<IElement> childElements = new List<IElement>();
 
-        protected internal ICollection<Style> styles;
+        public ICollection<Style> styles;
 
         public virtual IRenderer GetRenderer() {
             if (nextRenderer != null) {
@@ -171,6 +171,6 @@ namespace iText.Layout.Element {
             return (T)(Object)this;
         }
 
-        protected internal abstract IRenderer MakeNewRenderer();
+        public abstract IRenderer MakeNewRenderer();
     }
 }

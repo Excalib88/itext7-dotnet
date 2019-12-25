@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font;
 using iText.IO.Util;
 using iText.Kernel.Colors;
@@ -70,21 +71,21 @@ namespace iText.Pdfa.Checker {
     /// The specification implemented by this class is ISO 19005-1
     /// </remarks>
     public class PdfA1Checker : PdfAChecker {
-        protected internal static readonly ICollection<PdfName> forbiddenAnnotations = new HashSet<PdfName>(JavaUtil.ArraysAsList
+        public static readonly ICollection<PdfName> forbiddenAnnotations = new HashSet<PdfName>(JavaUtil.ArraysAsList
             (PdfName.Sound, PdfName.Movie, PdfName.FileAttachment));
 
-        protected internal static readonly ICollection<PdfName> contentAnnotations = new HashSet<PdfName>(JavaUtil.ArraysAsList
+        public static readonly ICollection<PdfName> contentAnnotations = new HashSet<PdfName>(JavaUtil.ArraysAsList
             (PdfName.Text, PdfName.FreeText, PdfName.Line, PdfName.Square, PdfName.Circle, PdfName.Stamp, PdfName.
             Ink, PdfName.Popup));
 
-        protected internal static readonly ICollection<PdfName> forbiddenActions = new HashSet<PdfName>(JavaUtil.ArraysAsList
+        public static readonly ICollection<PdfName> forbiddenActions = new HashSet<PdfName>(JavaUtil.ArraysAsList
             (PdfName.Launch, PdfName.Sound, PdfName.Movie, PdfName.ResetForm, PdfName.ImportData, PdfName.JavaScript
             , PdfName.Hide));
 
-        protected internal static readonly ICollection<PdfName> allowedNamedActions = new HashSet<PdfName>(JavaUtil.ArraysAsList
+        public static readonly ICollection<PdfName> allowedNamedActions = new HashSet<PdfName>(JavaUtil.ArraysAsList
             (PdfName.NextPage, PdfName.PrevPage, PdfName.FirstPage, PdfName.LastPage));
 
-        protected internal static readonly ICollection<PdfName> allowedRenderingIntents = new HashSet<PdfName>(JavaUtil.ArraysAsList
+        public static readonly ICollection<PdfName> allowedRenderingIntents = new HashSet<PdfName>(JavaUtil.ArraysAsList
             (PdfName.RelativeColorimetric, PdfName.AbsoluteColorimetric, PdfName.Perceptual, PdfName.Saturation));
 
         /// <summary>Creates a PdfA1Checker with the required conformance level</summary>
@@ -171,15 +172,15 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override ICollection<PdfName> GetForbiddenActions() {
+        public override ICollection<PdfName> GetForbiddenActions() {
             return forbiddenActions;
         }
 
-        protected internal override ICollection<PdfName> GetAllowedNamedActions() {
+        public override ICollection<PdfName> GetAllowedNamedActions() {
             return allowedNamedActions;
         }
 
-        protected internal override void CheckColorsUsages() {
+        public override void CheckColorsUsages() {
             if ((rgbIsUsed || cmykIsUsed || grayIsUsed) && pdfAOutputIntentColorSpace == null) {
                 throw new PdfAConformanceException(PdfAConformanceException.IF_DEVICE_RGB_CMYK_GRAY_USED_IN_FILE_THAT_FILE_SHALL_CONTAIN_PDFA_OUTPUTINTENT
                     );
@@ -261,7 +262,7 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckNonSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont) {
+        public override void CheckNonSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont) {
             String encoding = trueTypeFont.GetFontEncoding().GetBaseEncoding();
             // non-symbolic true type font will always has an encoding entry in font dictionary in itext7
             if (!PdfEncodings.WINANSI.Equals(encoding) && !PdfEncodings.MACROMAN.Equals(encoding) || trueTypeFont.GetFontEncoding
@@ -271,7 +272,7 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont) {
+        public override void CheckSymbolicTrueTypeFont(PdfTrueTypeFont trueTypeFont) {
             if (trueTypeFont.GetFontEncoding().HasDifferences()) {
                 throw new PdfAConformanceException(PdfAConformanceException.ALL_SYMBOLIC_TRUE_TYPE_FONTS_SHALL_NOT_SPECIFY_ENCODING
                     );
@@ -279,7 +280,7 @@ namespace iText.Pdfa.Checker {
         }
 
         // if symbolic font encoding doesn't have differences, itext7 won't write encoding for such font
-        protected internal override void CheckImage(PdfStream image, PdfDictionary currentColorSpaces) {
+        public override void CheckImage(PdfStream image, PdfDictionary currentColorSpaces) {
             PdfColorSpace colorSpace = null;
             if (IsAlreadyChecked(image)) {
                 colorSpace = checkedObjectsColorspace.Get(image);
@@ -308,7 +309,7 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckFormXObject(PdfStream form) {
+        public override void CheckFormXObject(PdfStream form) {
             if (IsAlreadyChecked(form)) {
                 return;
             }
@@ -335,7 +336,7 @@ namespace iText.Pdfa.Checker {
             CheckResources(form.GetAsDictionary(PdfName.Resources));
         }
 
-        protected internal override void CheckLogicalStructure(PdfDictionary catalog) {
+        public override void CheckLogicalStructure(PdfDictionary catalog) {
             if (CheckStructure(conformanceLevel)) {
                 PdfDictionary markInfo = catalog.GetAsDictionary(PdfName.MarkInfo);
                 if (markInfo == null || markInfo.GetAsBoolean(PdfName.Marked) == null || !markInfo.GetAsBoolean(PdfName.Marked
@@ -344,20 +345,20 @@ namespace iText.Pdfa.Checker {
                         );
                 }
                 if (!catalog.ContainsKey(PdfName.Lang)) {
-                    ILog logger = LogManager.GetLogger(typeof(PdfAChecker));
-                    logger.Warn(PdfAConformanceLogMessageConstant.CATALOG_SHOULD_CONTAIN_LANG_ENTRY);
+                    //ILog logger = LogManager.GetLogger(typeof(PdfAChecker));
+                    //logger.Warn(PdfAConformanceLogMessageConstant.CATALOG_SHOULD_CONTAIN_LANG_ENTRY);
                 }
             }
         }
 
-        protected internal override void CheckMetaData(PdfDictionary catalog) {
+        public override void CheckMetaData(PdfDictionary catalog) {
             if (!catalog.ContainsKey(PdfName.Metadata)) {
                 throw new PdfAConformanceException(PdfAConformanceException.A_CATALOG_DICTIONARY_SHALL_CONTAIN_METADATA_ENTRY
                     );
             }
         }
 
-        protected internal override void CheckOutputIntents(PdfDictionary catalog) {
+        public override void CheckOutputIntents(PdfDictionary catalog) {
             PdfArray outputIntents = catalog.GetAsArray(PdfName.OutputIntents);
             if (outputIntents == null) {
                 return;
@@ -376,17 +377,17 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckPdfNumber(PdfNumber number) {
+        public override void CheckPdfNumber(PdfNumber number) {
             if (Math.Abs(number.LongValue()) > GetMaxRealValue() && number.ToString().Contains(".")) {
                 throw new PdfAConformanceException(PdfAConformanceException.REAL_NUMBER_IS_OUT_OF_RANGE);
             }
         }
 
-        protected internal virtual double GetMaxRealValue() {
+        public virtual double GetMaxRealValue() {
             return 32767;
         }
 
-        protected internal override void CheckPdfStream(PdfStream stream) {
+        public override void CheckPdfStream(PdfStream stream) {
             if (stream.ContainsKey(PdfName.F) || stream.ContainsKey(PdfName.FFilter) || stream.ContainsKey(PdfName.FDecodeParams
                 )) {
                 throw new PdfAConformanceException(PdfAConformanceException.STREAM_OBJECT_DICTIONARY_SHALL_NOT_CONTAIN_THE_F_FFILTER_OR_FDECODEPARAMS_KEYS
@@ -409,27 +410,27 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckPdfString(PdfString @string) {
+        public override void CheckPdfString(PdfString @string) {
             if (@string.GetValueBytes().Length > GetMaxStringLength()) {
                 throw new PdfAConformanceException(PdfAConformanceException.PDF_STRING_IS_TOO_LONG);
             }
         }
 
-        protected internal virtual int GetMaxStringLength() {
+        public virtual int GetMaxStringLength() {
             return 65535;
         }
 
-        protected internal override void CheckPageSize(PdfDictionary page) {
+        public override void CheckPageSize(PdfDictionary page) {
         }
 
-        protected internal override void CheckFileSpec(PdfDictionary fileSpec) {
+        public override void CheckFileSpec(PdfDictionary fileSpec) {
             if (fileSpec.ContainsKey(PdfName.EF)) {
                 throw new PdfAConformanceException(PdfAConformanceException.FILE_SPECIFICATION_DICTIONARY_SHALL_NOT_CONTAIN_THE_EF_KEY
                     );
             }
         }
 
-        protected internal override void CheckAnnotation(PdfDictionary annotDic) {
+        public override void CheckAnnotation(PdfDictionary annotDic) {
             PdfName subtype = annotDic.GetAsName(PdfName.Subtype);
             if (subtype == null) {
                 throw new PdfAConformanceException(PdfAConformanceException.ANNOTATION_TYPE_0_IS_NOT_PERMITTED).SetMessageParams
@@ -502,7 +503,7 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckForm(PdfDictionary form) {
+        public override void CheckForm(PdfDictionary form) {
             if (form == null) {
                 return;
             }
@@ -526,7 +527,7 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckAction(PdfDictionary action) {
+        public override void CheckAction(PdfDictionary action) {
             if (IsAlreadyChecked(action)) {
                 return;
             }
@@ -548,7 +549,7 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckCatalogValidEntries(PdfDictionary catalogDict) {
+        public override void CheckCatalogValidEntries(PdfDictionary catalogDict) {
             if (catalogDict.ContainsKey(PdfName.AA)) {
                 throw new PdfAConformanceException(PdfAConformanceException.A_CATALOG_DICTIONARY_SHALL_NOT_CONTAIN_AA_ENTRY
                     );
@@ -565,7 +566,7 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckPageObject(PdfDictionary pageDict, PdfDictionary pageResources) {
+        public override void CheckPageObject(PdfDictionary pageDict, PdfDictionary pageResources) {
             PdfDictionary actions = pageDict.GetAsDictionary(PdfName.AA);
             if (actions != null) {
                 foreach (PdfName key in actions.KeySet()) {
@@ -580,14 +581,14 @@ namespace iText.Pdfa.Checker {
             }
         }
 
-        protected internal override void CheckTrailer(PdfDictionary trailer) {
+        public override void CheckTrailer(PdfDictionary trailer) {
             if (trailer.ContainsKey(PdfName.Encrypt)) {
                 throw new PdfAConformanceException(PdfAConformanceException.KEYWORD_ENCRYPT_SHALL_NOT_BE_USED_IN_THE_TRAILER_DICTIONARY
                     );
             }
         }
 
-        protected internal virtual PdfArray GetFormFields(PdfArray array) {
+        public virtual PdfArray GetFormFields(PdfArray array) {
             PdfArray fields = new PdfArray();
             foreach (PdfObject field in array) {
                 PdfArray kids = ((PdfDictionary)field).GetAsArray(PdfName.Kids);

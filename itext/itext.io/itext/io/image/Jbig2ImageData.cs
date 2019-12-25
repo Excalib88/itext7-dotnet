@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Codec;
 using iText.IO.Source;
 
@@ -50,12 +51,12 @@ namespace iText.IO.Image {
     public class Jbig2ImageData : ImageData {
         private int page;
 
-        protected internal Jbig2ImageData(Uri url, int page)
+        public Jbig2ImageData(Uri url, int page)
             : base(url, ImageType.JBIG2) {
             this.page = page;
         }
 
-        protected internal Jbig2ImageData(byte[] bytes, int page)
+        public Jbig2ImageData(byte[] bytes, int page)
             : base(bytes, ImageType.JBIG2) {
             this.page = page;
         }
@@ -91,8 +92,8 @@ namespace iText.IO.Image {
         }
 
         public override bool CanImageBeInline() {
-            ILog logger = LogManager.GetLogger(typeof(ImageData));
-            logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_JBIG2DECODE_FILTER);
+            //ILog logger = LogManager.GetLogger(typeof(ImageData));
+            //logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_JBIG2DECODE_FILTER);
             return false;
         }
     }

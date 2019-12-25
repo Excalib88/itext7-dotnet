@@ -51,7 +51,7 @@ using iText.Kernel.Pdf.Xobject;
 
 namespace iText.Kernel.Pdf.Filespec {
     public class PdfFileSpec : PdfObjectWrapper<PdfObject> {
-        protected internal PdfFileSpec(PdfObject pdfObject)
+        public PdfFileSpec(PdfObject pdfObject)
             : base(pdfObject) {
         }
 
@@ -355,7 +355,7 @@ namespace iText.Kernel.Pdf.Filespec {
             return this;
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
     }

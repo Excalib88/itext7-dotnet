@@ -45,7 +45,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using  Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Cms;
 using Org.BouncyCastle.Asn1.Esf;
@@ -197,7 +196,9 @@ namespace iText.Signatures {
                 version = ((DerInteger)content[0]).Value.IntValue;
                 // the digestAlgorithms
                 digestalgos = new HashSet<String>();
-                IEnumerator e_1 = ((Asn1Set)content[1]).GetObjects();
+                Console.WriteLine("Unsupported method");
+
+                IEnumerator e_1 = null;//((Asn1Set)content[1]).GetObjects();
                 while (e_1.MoveNext()) {
                     Asn1Sequence s = (Asn1Sequence)e_1.Current;
                     DerObjectIdentifier o = (DerObjectIdentifier)s[0];

@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Forms.Fields;
 using iText.IO.Util;
 using iText.Kernel.Pdf;
@@ -72,7 +73,7 @@ namespace iText.Forms {
 
         private PdfDocument documentTo;
 
-        private static ILog logger = LogManager.GetLogger(typeof(PdfPageFormCopier));
+        //private static ILog logger = LogManager.GetLogger(typeof(PdfPageFormCopier));
 
         public virtual void Copy(PdfPage fromPage, PdfPage toPage) {
             if (documentFrom != fromPage.GetDocument()) {
@@ -109,8 +110,8 @@ namespace iText.Forms {
         private PdfFormField MakeFormField(PdfObject fieldDict) {
             PdfFormField field = PdfFormField.MakeFormField(fieldDict, documentTo);
             if (field == null) {
-                logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.CANNOT_CREATE_FORMFIELD, fieldDict.GetIndirectReference
-                    ()));
+                //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.CANNOT_CREATE_FORMFIELD, fieldDict.GetIndirectReference
+                //    ()));
             }
             return field;
         }
@@ -191,8 +192,8 @@ namespace iText.Forms {
         private PdfFormField MergeFieldsWithTheSameName(PdfFormField newField) {
             String fullFieldName = newField.GetFieldName().ToUnicodeString();
             PdfString fieldName = newField.GetPdfObject().GetAsString(PdfName.T);
-            logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.DOCUMENT_ALREADY_HAS_FIELD, fullFieldName
-                ));
+            //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.DOCUMENT_ALREADY_HAS_FIELD, fullFieldName
+            //    ));
             PdfFormField existingField = formTo.GetField(fullFieldName);
             if (existingField.IsFlushed()) {
                 int index = 0;

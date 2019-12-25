@@ -53,13 +53,13 @@ namespace iText.Signatures {
     /// </summary>
     public class VerificationOK {
         /// <summary>The certificate that was verified successfully.</summary>
-        protected internal X509Certificate certificate;
+        public X509Certificate certificate;
 
         /// <summary>The CertificateVerifier that was used for verifying.</summary>
-        protected internal Type verifierClass;
+        public Type verifierClass;
 
         /// <summary>The reason why the certificate verified successfully.</summary>
-        protected internal String message;
+        public String message;
 
         /// <summary>Creates a VerificationOK object</summary>
         /// <param name="certificate">the certificate that was successfully verified</param>

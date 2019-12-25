@@ -57,7 +57,7 @@ namespace iText.Kernel.Counter {
         /// The name of the class for which the ICounter was created
         /// (or iText if no name is available)
         /// </summary>
-        protected internal String name;
+        public String name;
 
         public SystemOutEventCounter(String name) {
             this.name = name;
@@ -71,7 +71,7 @@ namespace iText.Kernel.Counter {
             : this(cls.FullName) {
         }
 
-        protected internal override void OnEvent(IEvent @event, IMetaInfo metaInfo) {
+        public override void OnEvent(IEvent @event, IMetaInfo metaInfo) {
             System.Console.Out.WriteLine(MessageFormatUtil.Format("[{0}] {1} event", name, @event.GetEventType()));
         }
     }

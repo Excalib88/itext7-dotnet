@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.StyledXmlParser.Css;
 using iText.StyledXmlParser.Css.Resolve.Shorthand;
@@ -66,7 +67,7 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
 
         /// <summary>Gets the prefix of a property.</summary>
         /// <returns>the prefix</returns>
-        protected internal abstract String GetPrefix();
+        public abstract String GetPrefix();
 
         /* (non-Javadoc)
         * @see com.itextpdf.styledxmlparser.css.resolve.shorthand.IShorthandResolver#resolveShorthand(java.lang.String)
@@ -86,9 +87,9 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
             String borderWidthValue = null;
             foreach (String value in props) {
                 if (CommonCssConstants.INITIAL.Equals(value) || CommonCssConstants.INHERIT.Equals(value)) {
-                    ILog logger = LogManager.GetLogger(typeof(AbstractBorderShorthandResolver));
-                    logger.Warn(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.INVALID_CSS_PROPERTY_DECLARATION
-                        , shorthandExpression));
+                    //ILog logger = LogManager.GetLogger(typeof(AbstractBorderShorthandResolver));
+                    //logger.Warn(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.INVALID_CSS_PROPERTY_DECLARATION
+                    //    , shorthandExpression));
                     return JavaCollectionsUtil.EmptyList<CssDeclaration>();
                 }
                 if (CommonCssConstants.BORDER_WIDTH_VALUES.Contains(value) || CssUtils.IsNumericValue(value) || CssUtils.IsMetricValue

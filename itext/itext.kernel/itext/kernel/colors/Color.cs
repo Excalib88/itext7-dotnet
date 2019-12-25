@@ -50,10 +50,10 @@ namespace iText.Kernel.Colors {
     /// <summary>Represents a color</summary>
     public class Color {
         /// <summary>The color space of the color</summary>
-        protected internal PdfColorSpace colorSpace;
+        public PdfColorSpace colorSpace;
 
         /// <summary>The color value of the color</summary>
-        protected internal float[] colorValue;
+        public float[] colorValue;
 
         /// <summary>Creates a Color of certain color space and color value.</summary>
         /// <remarks>
@@ -62,7 +62,7 @@ namespace iText.Kernel.Colors {
         /// </remarks>
         /// <param name="colorSpace">the color space to which the created Color object relates</param>
         /// <param name="colorValue">the color value of the created Color object</param>
-        protected internal Color(PdfColorSpace colorSpace, float[] colorValue) {
+        public Color(PdfColorSpace colorSpace, float[] colorValue) {
             this.colorSpace = colorSpace;
             if (colorValue == null) {
                 this.colorValue = new float[colorSpace.GetNumberOfComponents()];

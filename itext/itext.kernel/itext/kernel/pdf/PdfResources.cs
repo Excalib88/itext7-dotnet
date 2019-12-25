@@ -379,20 +379,20 @@ namespace iText.Kernel.Pdf {
             return shading is PdfDictionary ? PdfShading.MakeShading((PdfDictionary)shading) : null;
         }
 
-        protected internal virtual bool IsReadOnly() {
+        public virtual bool IsReadOnly() {
             return readOnly;
         }
 
-        protected internal virtual void SetReadOnly(bool readOnly) {
+        public virtual void SetReadOnly(bool readOnly) {
             this.readOnly = readOnly;
         }
 
-        protected internal virtual bool IsModified() {
+        public virtual bool IsModified() {
             return isModified;
         }
 
         [System.ObsoleteAttribute(@"Please use SetModified() .")]
-        protected internal virtual void SetModified(bool isModified) {
+        public virtual void SetModified(bool isModified) {
             this.isModified = isModified;
         }
 
@@ -600,7 +600,7 @@ namespace iText.Kernel.Pdf {
             return null;
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
 
@@ -610,7 +610,7 @@ namespace iText.Kernel.Pdf {
             return AddResource(resource.GetPdfObject(), nameGen);
         }
 
-        protected internal virtual void AddResource(PdfObject resource, PdfName resType, PdfName resName) {
+        public virtual void AddResource(PdfObject resource, PdfName resType, PdfName resName) {
             if (resType.Equals(PdfName.XObject)) {
                 CheckAndResolveCircularReferences(resource);
             }
@@ -641,7 +641,7 @@ namespace iText.Kernel.Pdf {
             return resName;
         }
 
-        protected internal virtual void BuildResources(PdfDictionary dictionary) {
+        public virtual void BuildResources(PdfDictionary dictionary) {
             foreach (PdfName resourceType in dictionary.KeySet()) {
                 if (GetPdfObject().Get(resourceType) == null) {
                     GetPdfObject().Put(resourceType, new PdfDictionary());

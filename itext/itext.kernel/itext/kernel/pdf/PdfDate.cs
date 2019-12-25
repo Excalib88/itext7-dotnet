@@ -218,7 +218,7 @@ namespace iText.Kernel.Pdf {
             return d.ToLocalTime();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
 

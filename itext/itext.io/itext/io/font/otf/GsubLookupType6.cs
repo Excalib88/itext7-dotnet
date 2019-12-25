@@ -47,12 +47,12 @@ using iText.IO.Font.Otf.Lookuptype6;
 namespace iText.IO.Font.Otf {
     /// <summary>LookupType 6: Chaining Contextual Substitution Subtable</summary>
     public class GsubLookupType6 : GsubLookupType5 {
-        protected internal GsubLookupType6(OpenTypeFontTableReader openReader, int lookupFlag, int[] subTableLocations
+        public GsubLookupType6(OpenTypeFontTableReader openReader, int lookupFlag, int[] subTableLocations
             )
             : base(openReader, lookupFlag, subTableLocations) {
         }
 
-        protected internal override void ReadSubTableFormat1(int subTableLocation) {
+        public override void ReadSubTableFormat1(int subTableLocation) {
             IDictionary<int, IList<ContextualSubstRule>> substMap = new Dictionary<int, IList<ContextualSubstRule>>();
             int coverageOffset = openReader.rf.ReadUnsignedShort();
             int chainSubRuleSetCount = openReader.rf.ReadUnsignedShort();
@@ -81,7 +81,7 @@ namespace iText.IO.Font.Otf {
             subTables.Add(new SubTableLookup6Format1(openReader, lookupFlag, substMap));
         }
 
-        protected internal override void ReadSubTableFormat2(int subTableLocation) {
+        public override void ReadSubTableFormat2(int subTableLocation) {
             int coverageOffset = openReader.rf.ReadUnsignedShort();
             int backtrackClassDefOffset = openReader.rf.ReadUnsignedShort();
             int inputClassDefOffset = openReader.rf.ReadUnsignedShort();
@@ -129,7 +129,7 @@ namespace iText.IO.Font.Otf {
             subTables.Add(t);
         }
 
-        protected internal override void ReadSubTableFormat3(int subTableLocation) {
+        public override void ReadSubTableFormat3(int subTableLocation) {
             int backtrackGlyphCount = openReader.rf.ReadUnsignedShort();
             int[] backtrackCoverageOffsets = openReader.ReadUShortArray(backtrackGlyphCount, subTableLocation);
             int inputGlyphCount = openReader.rf.ReadUnsignedShort();

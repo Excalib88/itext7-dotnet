@@ -124,7 +124,7 @@ namespace iText.Kernel.Pdf.Tagging {
             return this;
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

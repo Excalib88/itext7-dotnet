@@ -161,7 +161,7 @@ namespace iText.Signatures {
         /// <param name="document">PdfDocument</param>
         /// <param name="pageRect">Rectangle of the appearance</param>
         /// <param name="pageNumber">Number of the page the appearance should be on</param>
-        protected internal PdfSignatureAppearance(PdfDocument document, Rectangle pageRect, int pageNumber) {
+        public PdfSignatureAppearance(PdfDocument document, Rectangle pageRect, int pageNumber) {
             this.document = document;
             this.pageRect = new Rectangle(pageRect);
             this.rect = new Rectangle(pageRect.GetWidth(), pageRect.GetHeight());
@@ -463,7 +463,7 @@ namespace iText.Signatures {
         /// <seealso><a href="http://partners.adobe.com/asn/developer/pdfs/tn/ppkappearances.pdf">PPKAppearances.pdf</a> for further details
         ///     </seealso>
         /// <returns>a top-level signature appearance</returns>
-        protected internal virtual PdfFormXObject GetAppearance() {
+        public virtual PdfFormXObject GetAppearance() {
             PdfCanvas canvas;
             if (IsInvisible()) {
                 PdfFormXObject appearance = new PdfFormXObject(new Rectangle(0, 0));
@@ -682,20 +682,20 @@ namespace iText.Signatures {
 
         /// <summary>Returns the signature date.</summary>
         /// <returns>the signature date</returns>
-        protected internal virtual DateTime GetSignDate() {
+        public virtual DateTime GetSignDate() {
             return signDate;
         }
 
         /// <summary>Sets the signature date.</summary>
         /// <param name="signDate">A new signature date</param>
-        protected internal virtual iText.Signatures.PdfSignatureAppearance SetSignDate(DateTime signDate) {
+        public virtual iText.Signatures.PdfSignatureAppearance SetSignDate(DateTime signDate) {
             this.signDate = signDate;
             return this;
         }
 
         /// <summary>Set the field name of the appearance.</summary>
         /// <param name="fieldName">name of the field</param>
-        protected internal virtual iText.Signatures.PdfSignatureAppearance SetFieldName(String fieldName) {
+        public virtual iText.Signatures.PdfSignatureAppearance SetFieldName(String fieldName) {
             this.fieldName = fieldName;
             return this;
         }

@@ -48,9 +48,9 @@ using iText.IO.Font.Otf.Lookuptype5;
 namespace iText.IO.Font.Otf {
     /// <summary>LookupType 5: Contextual Substitution Subtable</summary>
     public class GsubLookupType5 : OpenTableLookup {
-        protected internal IList<ContextualSubTable> subTables;
+        public IList<ContextualSubTable> subTables;
 
-        protected internal GsubLookupType5(OpenTypeFontTableReader openReader, int lookupFlag, int[] subTableLocations
+        public GsubLookupType5(OpenTypeFontTableReader openReader, int lookupFlag, int[] subTableLocations
             )
             : base(openReader, lookupFlag, subTableLocations) {
             subTables = new List<ContextualSubTable>();
@@ -92,7 +92,7 @@ namespace iText.IO.Font.Otf {
             return changed;
         }
 
-        protected internal override void ReadSubTable(int subTableLocation) {
+        public override void ReadSubTable(int subTableLocation) {
             openReader.rf.Seek(subTableLocation);
             int substFormat = openReader.rf.ReadShort();
             if (substFormat == 1) {
@@ -113,7 +113,7 @@ namespace iText.IO.Font.Otf {
             }
         }
 
-        protected internal virtual void ReadSubTableFormat1(int subTableLocation) {
+        public virtual void ReadSubTableFormat1(int subTableLocation) {
             IDictionary<int, IList<ContextualSubstRule>> substMap = new Dictionary<int, IList<ContextualSubstRule>>();
             int coverageOffset = openReader.rf.ReadUnsignedShort();
             int subRuleSetCount = openReader.rf.ReadUnsignedShort();
@@ -137,7 +137,7 @@ namespace iText.IO.Font.Otf {
             subTables.Add(new SubTableLookup5Format1(openReader, lookupFlag, substMap));
         }
 
-        protected internal virtual void ReadSubTableFormat2(int subTableLocation) {
+        public virtual void ReadSubTableFormat2(int subTableLocation) {
             int coverageOffset = openReader.rf.ReadUnsignedShort();
             int classDefOffset = openReader.rf.ReadUnsignedShort();
             int subClassSetCount = openReader.rf.ReadUnsignedShort();
@@ -172,7 +172,7 @@ namespace iText.IO.Font.Otf {
             subTables.Add(t);
         }
 
-        protected internal virtual void ReadSubTableFormat3(int subTableLocation) {
+        public virtual void ReadSubTableFormat3(int subTableLocation) {
             int glyphCount = openReader.rf.ReadUnsignedShort();
             int substCount = openReader.rf.ReadUnsignedShort();
             int[] coverageOffsets = openReader.ReadUShortArray(glyphCount, subTableLocation);

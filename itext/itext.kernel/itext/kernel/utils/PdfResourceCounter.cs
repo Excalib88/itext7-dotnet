@@ -70,7 +70,7 @@ namespace iText.Kernel.Utils {
         /// list of resources. If not, it is just processed.
         /// </remarks>
         /// <param name="obj">the object to process</param>
-        protected internal void Process(PdfObject obj) {
+        public void Process(PdfObject obj) {
             PdfIndirectReference @ref = obj.GetIndirectReference();
             if (@ref == null) {
                 LoopOver(obj);
@@ -88,7 +88,7 @@ namespace iText.Kernel.Utils {
         /// we need to loop over the entries and process them one by one.
         /// </summary>
         /// <param name="obj">the object to examine</param>
-        protected internal void LoopOver(PdfObject obj) {
+        public void LoopOver(PdfObject obj) {
             switch (obj.GetObjectType()) {
                 case PdfObject.ARRAY: {
                     PdfArray array = (PdfArray)obj;

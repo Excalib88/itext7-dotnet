@@ -66,9 +66,9 @@ namespace iText.Layout.Properties {
         /// <summary>A leading type related to the font size and the resulting bounding box.</summary>
         public const int MULTIPLIED = 2;
 
-        protected internal int type;
+        public int type;
 
-        protected internal float value;
+        public float value;
 
         /// <summary>Creates a Leading object.</summary>
         /// <param name="type">

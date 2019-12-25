@@ -47,7 +47,7 @@ using iText.IO.Font.Constants;
 
 namespace iText.IO.Font {
     public class FontNames {
-        protected internal IDictionary<int, IList<String[]>> allNames;
+        public IDictionary<int, IList<String[]>> allNames;
 
         // name, ID = 4
         private String[][] fullName;
@@ -125,7 +125,7 @@ namespace iText.IO.Font {
         /// integer form 100 to 900. See
         /// <see cref="iText.IO.Font.Constants.FontWeights"/>.
         /// </param>
-        protected internal virtual void SetFontWeight(int weight) {
+        public virtual void SetFontWeight(int weight) {
             this.weight = FontWeights.NormalizeFontWeight(weight);
         }
 
@@ -144,7 +144,7 @@ namespace iText.IO.Font {
         /// 
         /// <see cref="iText.IO.Font.Constants.FontStretches"/>.
         /// </param>
-        protected internal virtual void SetFontStretch(String fontStretch) {
+        public virtual void SetFontStretch(String fontStretch) {
             this.fontStretch = fontStretch;
         }
 
@@ -180,43 +180,43 @@ namespace iText.IO.Font {
             return (macStyle & FontMacStyleFlags.EXTENDED) != 0;
         }
 
-        protected internal virtual void SetAllNames(IDictionary<int, IList<String[]>> allNames) {
+        public virtual void SetAllNames(IDictionary<int, IList<String[]>> allNames) {
             this.allNames = allNames;
         }
 
-        protected internal virtual void SetFullName(String[][] fullName) {
+        public virtual void SetFullName(String[][] fullName) {
             this.fullName = fullName;
         }
 
-        protected internal virtual void SetFullName(String fullName) {
+        public virtual void SetFullName(String fullName) {
             this.fullName = new String[][] { new String[] { "", "", "", fullName } };
         }
 
-        protected internal virtual void SetFontName(String psFontName) {
+        public virtual void SetFontName(String psFontName) {
             this.fontName = psFontName;
         }
 
-        protected internal virtual void SetCidFontName(String cidFontName) {
+        public virtual void SetCidFontName(String cidFontName) {
             this.cidFontName = cidFontName;
         }
 
-        protected internal virtual void SetFamilyName(String[][] familyName) {
+        public virtual void SetFamilyName(String[][] familyName) {
             this.familyName = familyName;
         }
 
-        protected internal virtual void SetFamilyName(String familyName) {
+        public virtual void SetFamilyName(String familyName) {
             this.familyName = new String[][] { new String[] { "", "", "", familyName } };
         }
 
-        protected internal virtual void SetStyle(String style) {
+        public virtual void SetStyle(String style) {
             this.style = style;
         }
 
-        protected internal virtual void SetSubfamily(String subfamily) {
+        public virtual void SetSubfamily(String subfamily) {
             this.subfamily = new String[][] { new String[] { "", "", "", subfamily } };
         }
 
-        protected internal virtual void SetSubfamily(String[][] subfamily) {
+        public virtual void SetSubfamily(String[][] subfamily) {
             this.subfamily = subfamily;
         }
 
@@ -227,15 +227,15 @@ namespace iText.IO.Font {
         /// <see cref="iText.IO.Font.Constants.FontMacStyleFlags"/>
         /// </remarks>
         /// <param name="macStyle"/>
-        protected internal virtual void SetMacStyle(int macStyle) {
+        public virtual void SetMacStyle(int macStyle) {
             this.macStyle = macStyle;
         }
 
-        protected internal virtual int GetMacStyle() {
+        public virtual int GetMacStyle() {
             return macStyle;
         }
 
-        protected internal virtual void SetAllowEmbedding(bool allowEmbedding) {
+        public virtual void SetAllowEmbedding(bool allowEmbedding) {
             this.allowEmbedding = allowEmbedding;
         }
 

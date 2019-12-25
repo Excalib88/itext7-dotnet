@@ -49,11 +49,11 @@ namespace iText.Kernel.Numbering {
     /// English alphabet letter representations.
     /// </summary>
     public class EnglishAlphabetNumbering {
-        protected internal static readonly char[] ALPHABET_LOWERCASE;
+        public static readonly char[] ALPHABET_LOWERCASE;
 
-        protected internal static readonly char[] ALPHABET_UPPERCASE;
+        public static readonly char[] ALPHABET_UPPERCASE;
 
-        protected internal const int ALPHABET_LENGTH = 26;
+        public const int ALPHABET_LENGTH = 26;
 
         static EnglishAlphabetNumbering() {
             ALPHABET_LOWERCASE = new char[ALPHABET_LENGTH];

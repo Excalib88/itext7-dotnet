@@ -45,11 +45,11 @@ using iText.Kernel.Pdf;
 
 namespace iText.Kernel.Pdf.Colorspace {
     public abstract class PdfDeviceCs : PdfColorSpace {
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
 
-        protected internal PdfDeviceCs(PdfName pdfObject)
+        public PdfDeviceCs(PdfName pdfObject)
             : base(pdfObject) {
         }
 

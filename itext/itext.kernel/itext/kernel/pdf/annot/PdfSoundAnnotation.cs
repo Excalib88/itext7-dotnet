@@ -64,7 +64,7 @@ namespace iText.Kernel.Pdf.Annot {
         }
 
         /// <seealso cref="PdfAnnotation.MakeAnnotation(iText.Kernel.Pdf.PdfObject)"/>
-        protected internal PdfSoundAnnotation(PdfDictionary pdfObject)
+        public PdfSoundAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

@@ -52,14 +52,14 @@ namespace iText.StyledXmlParser.Css.Resolve.Shorthand.Impl {
         /* (non-Javadoc)
         * @see com.itextpdf.styledxmlparser.css.resolve.shorthand.impl.AbstractBoxShorthandResolver#getPrefix()
         */
-        protected internal override String GetPrefix() {
+        public override String GetPrefix() {
             return CommonCssConstants.BORDER;
         }
 
         /* (non-Javadoc)
         * @see com.itextpdf.styledxmlparser.css.resolve.shorthand.impl.AbstractBoxShorthandResolver#getPostfix()
         */
-        protected internal override String GetPostfix() {
+        public override String GetPostfix() {
             return "-color";
         }
     }

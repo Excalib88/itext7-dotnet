@@ -60,19 +60,19 @@ namespace iText.Layout {
     /// <typeparam name="T">this type</typeparam>
     public abstract class RootElement<T> : ElementPropertyContainer<T>, IDisposable
         where T : IPropertyContainer {
-        protected internal bool immediateFlush = true;
+        public bool immediateFlush = true;
 
-        protected internal PdfDocument pdfDocument;
+        public PdfDocument pdfDocument;
 
-        protected internal IList<IElement> childElements = new List<IElement>();
+        public IList<IElement> childElements = new List<IElement>();
 
-        protected internal PdfFont defaultFont;
+        public PdfFont defaultFont;
 
-        protected internal FontProvider defaultFontProvider;
+        public FontProvider defaultFontProvider;
 
-        protected internal ISplitCharacters defaultSplitCharacters;
+        public ISplitCharacters defaultSplitCharacters;
 
-        protected internal RootRenderer rootRenderer;
+        public RootRenderer rootRenderer;
 
         private LayoutTaggingHelper defaultLayoutTaggingHelper;
 
@@ -367,9 +367,9 @@ namespace iText.Layout {
             return (T)(Object)this;
         }
 
-        protected internal abstract RootRenderer EnsureRootRendererNotNull();
+        public abstract RootRenderer EnsureRootRendererNotNull();
 
-        protected internal virtual void CreateAndAddRendererSubTree(IElement element) {
+        public virtual void CreateAndAddRendererSubTree(IElement element) {
             IRenderer rendererSubTreeRoot = element.CreateRendererSubTree();
             LayoutTaggingHelper taggingHelper = InitTaggingHelperIfNeeded();
             if (taggingHelper != null) {

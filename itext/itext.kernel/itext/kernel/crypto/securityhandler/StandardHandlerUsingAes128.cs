@@ -86,7 +86,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             }
         }
 
-        protected internal override void SetSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool encryptMetadata
+        public override void SetSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool encryptMetadata
             , bool embeddedFilesOnly) {
             if (!encryptMetadata) {
                 encryptionDictionary.Put(PdfName.EncryptMetadata, PdfBoolean.FALSE);

@@ -109,7 +109,7 @@ namespace iText.StyledXmlParser.Jsoup.Parser {
         }
 
         internal abstract class Tag : Token {
-            protected internal String tagName;
+            public String tagName;
 
             private String pendingAttributeName;
 

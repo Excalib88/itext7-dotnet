@@ -56,7 +56,7 @@ namespace iText.IO.Font.Otf.Lookuptype6 {
             this.substitutionRule = rule;
         }
 
-        protected internal override IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startId) {
+        public override IList<ContextualSubstRule> GetSetOfRulesForStartGlyph(int startId) {
             SubTableLookup6Format3.SubstRuleFormat3 ruleFormat3 = (SubTableLookup6Format3.SubstRuleFormat3)this.substitutionRule;
             if (ruleFormat3.inputCoverages[0].Contains(startId) && !openReader.IsSkip(startId, lookupFlag)) {
                 return JavaCollectionsUtil.SingletonList<ContextualSubstRule>(this.substitutionRule);

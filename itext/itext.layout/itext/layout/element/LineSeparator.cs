@@ -62,7 +62,7 @@ namespace iText.Layout.Element {
     /// This might be thought of as an HTML's &lt;hr&gt; element alternative.
     /// </remarks>
     public class LineSeparator : BlockElement<iText.Layout.Element.LineSeparator> {
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         /// <summary>
         /// Creates a custom line separator with line style defined by custom
@@ -81,7 +81,7 @@ namespace iText.Layout.Element {
             return tagProperties;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new LineSeparatorRenderer(this);
         }
     }

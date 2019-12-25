@@ -358,7 +358,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.DefineOptionName(int)"/>
-        protected internal override String DefineOptionName(int option) {
+        public override String DefineOptionName(int option) {
             switch (option) {
                 case OMIT_PACKET_WRAPPER: {
                     return "OMIT_PACKET_WRAPPER";
@@ -396,7 +396,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.GetValidOptions()"/>
-        protected internal override int GetValidOptions() {
+        public override int GetValidOptions() {
             return OMIT_PACKET_WRAPPER | READONLY_PACKET | USE_COMPACT_FORMAT | 
                         //		USE_CANONICAL_FORMAT |
                         INCLUDE_THUMBNAIL_PAD | OMIT_XMPMETA_ELEMENT | EXACT_PACKET_LENGTH | SORT;

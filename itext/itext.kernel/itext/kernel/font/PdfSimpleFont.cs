@@ -53,28 +53,28 @@ using iText.Kernel.Pdf;
 namespace iText.Kernel.Font {
     public abstract class PdfSimpleFont<T> : PdfFont
         where T : FontProgram {
-        protected internal FontEncoding fontEncoding;
+        public FontEncoding fontEncoding;
 
         /// <summary>Forces the output of the width array.</summary>
         /// <remarks>Forces the output of the width array. Only matters for the 14 built-in fonts.</remarks>
-        protected internal bool forceWidthsOutput = false;
+        public bool forceWidthsOutput = false;
 
         /// <summary>The array used with single byte encodings.</summary>
-        protected internal byte[] shortTag = new byte[256];
+        public byte[] shortTag = new byte[256];
 
         /// <summary>Currently only exists for the fonts that are parsed from the document.</summary>
         /// <remarks>
         /// Currently only exists for the fonts that are parsed from the document.
         /// In the future, we might provide possibility to add custom mappings after a font has been created from a font file.
         /// </remarks>
-        protected internal CMapToUnicode toUnicode;
+        public CMapToUnicode toUnicode;
 
-        protected internal PdfSimpleFont(PdfDictionary fontDictionary)
+        public PdfSimpleFont(PdfDictionary fontDictionary)
             : base(fontDictionary) {
             toUnicode = FontUtil.ProcessToUnicode(fontDictionary.Get(PdfName.ToUnicode));
         }
 
-        protected internal PdfSimpleFont()
+        public PdfSimpleFont()
             : base() {
         }
 
@@ -310,7 +310,7 @@ namespace iText.Kernel.Font {
             this.forceWidthsOutput = forceWidthsOutput;
         }
 
-        protected internal virtual void FlushFontData(String fontName, PdfName subtype) {
+        public virtual void FlushFontData(String fontName, PdfName subtype) {
             GetPdfObject().Put(PdfName.Subtype, subtype);
             if (fontName != null && fontName.Length > 0) {
                 GetPdfObject().Put(PdfName.BaseFont, new PdfName(fontName));
@@ -415,7 +415,7 @@ namespace iText.Kernel.Font {
             }
         }
 
-        protected internal virtual bool IsBuiltInFont() {
+        public virtual bool IsBuiltInFont() {
             return false;
         }
 
@@ -428,7 +428,7 @@ namespace iText.Kernel.Font {
         /// the PdfDictionary containing the font descriptor or
         /// <see langword="null"/>.
         /// </returns>
-        protected internal override PdfDictionary GetFontDescriptor(String fontName) {
+        public override PdfDictionary GetFontDescriptor(String fontName) {
             System.Diagnostics.Debug.Assert(fontName != null && fontName.Length > 0);
             FontMetrics fontMetrics = fontProgram.GetFontMetrics();
             FontNames fontNames = fontProgram.GetFontNames();
@@ -466,9 +466,9 @@ namespace iText.Kernel.Font {
             return fontDescriptor;
         }
 
-        protected internal abstract void AddFontStream(PdfDictionary fontDescriptor);
+        public abstract void AddFontStream(PdfDictionary fontDescriptor);
 
-        protected internal virtual void SetFontProgram(T fontProgram) {
+        public virtual void SetFontProgram(T fontProgram) {
             this.fontProgram = fontProgram;
         }
     }

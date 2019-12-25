@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
@@ -66,9 +67,9 @@ namespace iText.Layout {
     /// API and the low-level <em>kernel</em> API.
     /// </remarks>
     public class Canvas : RootElement<iText.Layout.Canvas> {
-        protected internal PdfCanvas pdfCanvas;
+        public PdfCanvas pdfCanvas;
 
-        protected internal Rectangle rootArea;
+        public Rectangle rootArea;
 
         /// <summary>
         /// Is initialized and used only when Canvas element autotagging is enabled, see
@@ -79,7 +80,7 @@ namespace iText.Layout {
         /// <see cref="EnableAutoTagging(iText.Kernel.Pdf.PdfPage)"/>.
         /// It is also used to determine if autotagging is enabled.
         /// </remarks>
-        protected internal PdfPage page;
+        public PdfPage page;
 
         private bool isCanvasOfPage;
 
@@ -196,8 +197,8 @@ namespace iText.Layout {
         /// <param name="page">the page, on which this canvas will be rendered.</param>
         public virtual void EnableAutoTagging(PdfPage page) {
             if (IsCanvasOfPage() && this.page != page) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Canvas));
-                logger.Error(iText.IO.LogMessageConstant.PASSED_PAGE_SHALL_BE_ON_WHICH_CANVAS_WILL_BE_RENDERED);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Canvas));
+                //logger.Error(iText.IO.LogMessageConstant.PASSED_PAGE_SHALL_BE_ON_WHICH_CANVAS_WILL_BE_RENDERED);
             }
             this.page = page;
         }
@@ -282,7 +283,7 @@ namespace iText.Layout {
             }
         }
 
-        protected internal override RootRenderer EnsureRootRendererNotNull() {
+        public override RootRenderer EnsureRootRendererNotNull() {
             if (rootRenderer == null) {
                 rootRenderer = new CanvasRenderer(this, immediateFlush);
             }

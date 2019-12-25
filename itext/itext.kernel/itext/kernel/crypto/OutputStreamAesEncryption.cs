@@ -47,7 +47,7 @@ using iText.Kernel;
 
 namespace iText.Kernel.Crypto {
     public class OutputStreamAesEncryption : OutputStreamEncryption {
-        protected internal AESCipher cipher;
+        public AESCipher cipher;
 
         private bool finished;
 

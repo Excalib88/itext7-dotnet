@@ -88,7 +88,7 @@ namespace iText.Kernel.Pdf.Function {
             base.Flush();
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 

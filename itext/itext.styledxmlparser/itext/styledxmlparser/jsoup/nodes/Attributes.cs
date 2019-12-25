@@ -61,7 +61,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
     /// </remarks>
     /// <author>Jonathan Hedley, jonathan@hedley.net</author>
     public class Attributes : IEnumerable<iText.StyledXmlParser.Jsoup.Nodes.Attribute> {
-        protected internal const String dataPrefix = "data-";
+        public const String dataPrefix = "data-";
 
         private LinkedDictionary<String, iText.StyledXmlParser.Jsoup.Nodes.Attribute> attributes = null;
 

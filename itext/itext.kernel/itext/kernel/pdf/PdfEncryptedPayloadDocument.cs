@@ -71,7 +71,7 @@ namespace iText.Kernel.Pdf {
             return PdfEncryptedPayload.ExtractFrom(fileSpec);
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
     }

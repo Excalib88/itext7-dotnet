@@ -60,7 +60,7 @@ namespace iText.Kernel.Events {
         public const String END_PAGE = "EndPdfPage";
 
         /// <summary>The PdfPage associated with this event.</summary>
-        protected internal PdfPage page;
+        public PdfPage page;
 
         /// <summary>The PdfDocument associated with this event.</summary>
         private PdfDocument document;

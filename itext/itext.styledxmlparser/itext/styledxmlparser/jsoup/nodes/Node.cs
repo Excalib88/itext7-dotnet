@@ -73,7 +73,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
         /// <summary>Create a new Node.</summary>
         /// <param name="baseUri">base URI</param>
         /// <param name="attributes">attributes (not null, but may be empty)</param>
-        protected internal Node(String baseUri, iText.StyledXmlParser.Jsoup.Nodes.Attributes attributes) {
+        public Node(String baseUri, iText.StyledXmlParser.Jsoup.Nodes.Attributes attributes) {
             Validate.NotNull(baseUri);
             Validate.NotNull(attributes);
             childNodes = EMPTY_NODES;
@@ -81,13 +81,13 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             this.attributes = attributes;
         }
 
-        protected internal Node(String baseUri)
+        public Node(String baseUri)
             : this(baseUri, new iText.StyledXmlParser.Jsoup.Nodes.Attributes()) {
         }
 
         /// <summary>Default constructor.</summary>
         /// <remarks>Default constructor. Doesn't setup base uri, children, or attributes; use with caution.</remarks>
-        protected internal Node() {
+        public Node() {
             childNodes = EMPTY_NODES;
             attributes = null;
         }
@@ -279,7 +279,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             return childNodes.Count;
         }
 
-        protected internal virtual iText.StyledXmlParser.Jsoup.Nodes.Node[] ChildNodesAsArray() {
+        public virtual iText.StyledXmlParser.Jsoup.Nodes.Node[] ChildNodesAsArray() {
             return childNodes.ToArray(new iText.StyledXmlParser.Jsoup.Nodes.Node[ChildNodeSize()]);
         }
 
@@ -457,14 +457,14 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             parentNode.ReplaceChild(this, @in);
         }
 
-        protected internal virtual void SetParentNode(iText.StyledXmlParser.Jsoup.Nodes.Node parentNode) {
+        public virtual void SetParentNode(iText.StyledXmlParser.Jsoup.Nodes.Node parentNode) {
             if (this.parentNode != null) {
                 this.parentNode.RemoveChild(this);
             }
             this.parentNode = parentNode;
         }
 
-        protected internal virtual void ReplaceChild(iText.StyledXmlParser.Jsoup.Nodes.Node @out, iText.StyledXmlParser.Jsoup.Nodes.Node
+        public virtual void ReplaceChild(iText.StyledXmlParser.Jsoup.Nodes.Node @out, iText.StyledXmlParser.Jsoup.Nodes.Node
              @in) {
             Validate.IsTrue(@out.parentNode == this);
             Validate.NotNull(@in);
@@ -478,7 +478,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             @out.parentNode = null;
         }
 
-        protected internal virtual void RemoveChild(iText.StyledXmlParser.Jsoup.Nodes.Node @out) {
+        public virtual void RemoveChild(iText.StyledXmlParser.Jsoup.Nodes.Node @out) {
             Validate.IsTrue(@out.parentNode == this);
             int index = @out.siblingIndex;
             childNodes.JRemoveAt(index);
@@ -486,7 +486,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             @out.parentNode = null;
         }
 
-        protected internal virtual void AddChildren(params iText.StyledXmlParser.Jsoup.Nodes.Node[] children) {
+        public virtual void AddChildren(params iText.StyledXmlParser.Jsoup.Nodes.Node[] children) {
             //most used. short circuit addChildren(int), which hits reindex children and array copy
             foreach (iText.StyledXmlParser.Jsoup.Nodes.Node child in children) {
                 ReparentChild(child);
@@ -496,7 +496,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             }
         }
 
-        protected internal virtual void AddChildren(int index, params iText.StyledXmlParser.Jsoup.Nodes.Node[] children
+        public virtual void AddChildren(int index, params iText.StyledXmlParser.Jsoup.Nodes.Node[] children
             ) {
             Validate.NoNullElements(children);
             EnsureChildNodes();
@@ -508,13 +508,13 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             }
         }
 
-        protected internal virtual void EnsureChildNodes() {
+        public virtual void EnsureChildNodes() {
             if (childNodes == EMPTY_NODES) {
                 childNodes = new List<iText.StyledXmlParser.Jsoup.Nodes.Node>(4);
             }
         }
 
-        protected internal virtual void ReparentChild(iText.StyledXmlParser.Jsoup.Nodes.Node child) {
+        public virtual void ReparentChild(iText.StyledXmlParser.Jsoup.Nodes.Node child) {
             if (child.parentNode != null) {
                 child.parentNode.RemoveChild(child);
             }
@@ -593,7 +593,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             return siblingIndex;
         }
 
-        protected internal virtual void SetSiblingIndex(int siblingIndex) {
+        public virtual void SetSiblingIndex(int siblingIndex) {
             this.siblingIndex = siblingIndex;
         }
 
@@ -615,7 +615,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             return accum.ToString();
         }
 
-        protected internal virtual void OuterHtml(StringBuilder accum) {
+        public virtual void OuterHtml(StringBuilder accum) {
             new NodeTraversor(new Node.OuterHtmlVisitor(accum, GetOutputSettings())).Traverse(this);
         }
 
@@ -653,7 +653,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             return OuterHtml();
         }
 
-        protected internal virtual void Indent(StringBuilder accum, int depth, OutputSettings @out) {
+        public virtual void Indent(StringBuilder accum, int depth, OutputSettings @out) {
             accum.Append("\n").Append(iText.StyledXmlParser.Jsoup.Helper.StringUtil.Padding(depth * @out.IndentAmount(
                 )));
         }
@@ -716,7 +716,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
         * Return a clone of the node using the given parent (which can be null).
         * Not a deep copy of children.
         */
-        protected internal virtual iText.StyledXmlParser.Jsoup.Nodes.Node DoClone(iText.StyledXmlParser.Jsoup.Nodes.Node
+        public virtual iText.StyledXmlParser.Jsoup.Nodes.Node DoClone(iText.StyledXmlParser.Jsoup.Nodes.Node
              parent) {
             iText.StyledXmlParser.Jsoup.Nodes.Node clone;
             clone = (iText.StyledXmlParser.Jsoup.Nodes.Node)MemberwiseClone();

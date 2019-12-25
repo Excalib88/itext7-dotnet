@@ -49,13 +49,13 @@ namespace iText.IO.Image {
 
         private bool noHeader;
 
-        protected internal BmpImageData(Uri url, bool noHeader, int size)
+        public BmpImageData(Uri url, bool noHeader, int size)
             : base(url, ImageType.BMP) {
             this.noHeader = noHeader;
             this.size = size;
         }
 
-        protected internal BmpImageData(byte[] bytes, bool noHeader, int size)
+        public BmpImageData(byte[] bytes, bool noHeader, int size)
             : base(bytes, ImageType.BMP) {
             this.noHeader = noHeader;
             this.size = size;

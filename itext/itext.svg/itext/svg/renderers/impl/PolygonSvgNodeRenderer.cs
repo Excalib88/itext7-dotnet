@@ -58,7 +58,7 @@ namespace iText.Svg.Renderers.Impl {
         /// <see cref="ConnectPoints()"/>
         /// to create a path between the first and last point if it doesn't already exist
         /// </summary>
-        protected internal override void SetPoints(String pointsAttribute) {
+        public override void SetPoints(String pointsAttribute) {
             base.SetPoints(pointsAttribute);
             ConnectPoints();
         }

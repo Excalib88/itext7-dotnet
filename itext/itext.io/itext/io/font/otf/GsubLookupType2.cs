@@ -75,7 +75,7 @@ namespace iText.IO.Font.Otf {
             return changed;
         }
 
-        protected internal override void ReadSubTable(int subTableLocation) {
+        public override void ReadSubTable(int subTableLocation) {
             openReader.rf.Seek(subTableLocation);
             int substFormat = openReader.rf.ReadUnsignedShort();
             if (substFormat == 1) {

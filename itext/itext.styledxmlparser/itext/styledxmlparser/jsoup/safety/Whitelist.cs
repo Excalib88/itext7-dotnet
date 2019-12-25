@@ -522,7 +522,7 @@ namespace iText.StyledXmlParser.Jsoup.Safety {
         /// <summary>Test if the supplied tag is allowed by this whitelist</summary>
         /// <param name="tag">test tag</param>
         /// <returns>true if allowed</returns>
-        protected internal virtual bool IsSafeTag(String tag) {
+        public virtual bool IsSafeTag(String tag) {
             return tagNames.Contains(Whitelist.TagName.ValueOf(tag));
         }
 
@@ -531,7 +531,7 @@ namespace iText.StyledXmlParser.Jsoup.Safety {
         /// <param name="el">element under test, to confirm protocol</param>
         /// <param name="attr">attribute under test</param>
         /// <returns>true if allowed</returns>
-        protected internal virtual bool IsSafeAttribute(String tagName, iText.StyledXmlParser.Jsoup.Nodes.Element 
+        public virtual bool IsSafeAttribute(String tagName, iText.StyledXmlParser.Jsoup.Nodes.Element 
             el, iText.StyledXmlParser.Jsoup.Nodes.Attribute attr) {
             Whitelist.TagName tag = Whitelist.TagName.ValueOf(tagName);
             Whitelist.AttributeKey key = Whitelist.AttributeKey.ValueOf(attr.Key);

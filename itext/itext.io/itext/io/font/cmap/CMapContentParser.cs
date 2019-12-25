@@ -225,7 +225,7 @@ namespace iText.IO.Font.Cmap {
         }
 
         // TODO: Duplicates PdfName.generateValue (REFACTOR)
-        protected internal static String DecodeName(byte[] content) {
+        public static String DecodeName(byte[] content) {
             StringBuilder buf = new StringBuilder();
             try {
                 for (int k = 0; k < content.Length; ++k) {

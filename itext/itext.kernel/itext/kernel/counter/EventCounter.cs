@@ -95,6 +95,6 @@ namespace iText.Kernel.Counter {
         /// <see cref="iText.Kernel.Counter.Event.IMetaInfo"/>
         /// that can hold information about event origin
         /// </param>
-        protected internal abstract void OnEvent(IEvent @event, IMetaInfo metaInfo);
+        public abstract void OnEvent(IEvent @event, IMetaInfo metaInfo);
     }
 }

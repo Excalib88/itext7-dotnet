@@ -52,13 +52,13 @@ namespace iText.StyledXmlParser.Jsoup.Parser {
 
         internal Tokeniser tokeniser;
 
-        protected internal Document doc;
+        public Document doc;
 
         // current doc we are building into
-        protected internal List<iText.StyledXmlParser.Jsoup.Nodes.Element> stack;
+        public List<iText.StyledXmlParser.Jsoup.Nodes.Element> stack;
 
         // the stack of open elements
-        protected internal String baseUri;
+        public String baseUri;
 
         // current base uri, for creating new elements
         internal Token currentToken;
@@ -93,7 +93,7 @@ namespace iText.StyledXmlParser.Jsoup.Parser {
             return doc;
         }
 
-        protected internal virtual void RunParser() {
+        public virtual void RunParser() {
             while (true) {
                 Token token = tokeniser.Read();
                 Process(token);
@@ -106,7 +106,7 @@ namespace iText.StyledXmlParser.Jsoup.Parser {
 
         internal abstract bool Process(Token token);
 
-        protected internal virtual bool ProcessStartTag(String name) {
+        public virtual bool ProcessStartTag(String name) {
             if (currentToken == start) {
                 // don't recycle an in-use token
                 return Process(new Token.StartTag().Name(name));
@@ -124,7 +124,7 @@ namespace iText.StyledXmlParser.Jsoup.Parser {
             return Process(start);
         }
 
-        protected internal virtual bool ProcessEndTag(String name) {
+        public virtual bool ProcessEndTag(String name) {
             if (currentToken == end) {
                 // don't recycle an in-use token
                 return Process(new Token.EndTag().Name(name));
@@ -132,7 +132,7 @@ namespace iText.StyledXmlParser.Jsoup.Parser {
             return Process(((Token.Tag)end.Reset()).Name(name));
         }
 
-        protected internal virtual iText.StyledXmlParser.Jsoup.Nodes.Element CurrentElement() {
+        public virtual iText.StyledXmlParser.Jsoup.Nodes.Element CurrentElement() {
             int size = stack.Count;
             return size > 0 ? stack[size - 1] : null;
         }

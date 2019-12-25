@@ -247,7 +247,7 @@ namespace iText.IO {
         public const String _1UnsupportedJpegMarker2 = "{0} unsupported jpeg marker {1}.";
 
         /// <summary>Object for more details</summary>
-        protected internal Object obj;
+        public Object obj;
 
         private IList<Object> messageParams;
 
@@ -312,7 +312,7 @@ namespace iText.IO {
         }
 
         /// <summary>Gets additional params for Exception message.</summary>
-        protected internal virtual Object[] GetMessageParams() {
+        public virtual Object[] GetMessageParams() {
             Object[] parameters = new Object[messageParams.Count];
             for (int i = 0; i < messageParams.Count; i++) {
                 parameters[i] = messageParams[i];

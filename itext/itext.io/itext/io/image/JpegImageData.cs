@@ -45,11 +45,11 @@ using System;
 
 namespace iText.IO.Image {
     public class JpegImageData : ImageData {
-        protected internal JpegImageData(Uri url)
+        public JpegImageData(Uri url)
             : base(url, ImageType.JPEG) {
         }
 
-        protected internal JpegImageData(byte[] bytes)
+        public JpegImageData(byte[] bytes)
             : base(bytes, ImageType.JPEG) {
         }
     }

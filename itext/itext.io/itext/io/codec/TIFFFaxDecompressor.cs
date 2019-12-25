@@ -56,9 +56,9 @@ namespace iText.IO.Codec {
         /// 2 = LSB-to-MSB (flipped)
         /// </pre>
         /// </remarks>
-        protected internal int fillOrder;
+        public int fillOrder;
 
-        protected internal int compression;
+        public int compression;
 
         private int t4Options;
 
@@ -68,16 +68,16 @@ namespace iText.IO.Codec {
 
         // Variables set by T4Options
         /// <summary>Uncompressed mode flag: 1 if uncompressed, 0 if not.</summary>
-        protected internal int uncompressedMode = 0;
+        public int uncompressedMode = 0;
 
         /// <summary>
         /// EOL padding flag: 1 if fill bits have been added before an EOL such
         /// that the EOL ends on a byte boundary, 0 otherwise.
         /// </summary>
-        protected internal int fillBits = 0;
+        public int fillBits = 0;
 
         /// <summary>Coding dimensionality: 1 for 2-dimensional, 0 for 1-dimensional.</summary>
-        protected internal int oneD;
+        public int oneD;
 
         private byte[] data;
 

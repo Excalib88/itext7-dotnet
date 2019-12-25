@@ -200,22 +200,22 @@ namespace iText.Kernel.Counter.Data {
             return waitTime;
         }
 
-        protected internal virtual void OnSuccess(V data) {
+        public virtual void OnSuccess(V data) {
             ResetWaitTime();
         }
 
-        protected internal virtual void OnFailure(V data) {
+        public virtual void OnFailure(V data) {
             IncreaseWaitTime();
         }
 
         /// <summary>Is called when exception is thrown in process.</summary>
         /// <param name="exception">caught exception</param>
         /// <returns>whether processing is treated as success</returns>
-        protected internal virtual bool OnProcessException(Exception exception) {
+        public virtual bool OnProcessException(Exception exception) {
             return false;
         }
 
-        protected internal abstract bool Process(V data);
+        public abstract bool Process(V data);
 
         private bool TryProcess(V data) {
             try {

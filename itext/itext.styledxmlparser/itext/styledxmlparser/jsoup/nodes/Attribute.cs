@@ -123,7 +123,7 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             return accum.ToString();
         }
 
-        protected internal virtual void Html(StringBuilder accum, OutputSettings @out) {
+        public virtual void Html(StringBuilder accum, OutputSettings @out) {
             accum.Append(key);
             if (!ShouldCollapseAttribute(@out)) {
                 accum.Append("=\"");
@@ -151,19 +151,19 @@ namespace iText.StyledXmlParser.Jsoup.Nodes {
             return new iText.StyledXmlParser.Jsoup.Nodes.Attribute(unencodedKey, value);
         }
 
-        protected internal virtual bool IsDataAttribute() {
+        public virtual bool IsDataAttribute() {
             return key.StartsWith(Attributes.dataPrefix) && key.Length > Attributes.dataPrefix.Length;
         }
 
         /// <summary>Collapsible if it's a boolean attribute and value is empty or same as name</summary>
         /// <param name="out">Outputsettings</param>
         /// <returns>Returns whether collapsible or not</returns>
-        protected internal bool ShouldCollapseAttribute(OutputSettings @out) {
+        public bool ShouldCollapseAttribute(OutputSettings @out) {
             return ("".Equals(value) || value.EqualsIgnoreCase(key)) && @out.Syntax() == Syntax.html && IsBooleanAttribute
                 ();
         }
 
-        protected internal virtual bool IsBooleanAttribute() {
+        public virtual bool IsBooleanAttribute() {
             return iText.IO.Util.JavaUtil.ArraysBinarySearch(booleanAttributes, key) >= 0;
         }
 

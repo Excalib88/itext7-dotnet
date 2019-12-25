@@ -123,7 +123,7 @@ namespace iText.Kernel.Pdf.Annot {
         /// see
         /// <see cref="PdfAnnotation.MakeAnnotation(iText.Kernel.Pdf.PdfObject)"/>
         /// </param>
-        protected internal PdfTrapNetworkAnnotation(PdfDictionary pdfObject)
+        public PdfTrapNetworkAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

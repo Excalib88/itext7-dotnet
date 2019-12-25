@@ -46,17 +46,17 @@ using iText.Kernel.Pdf.Tagging;
 
 namespace iText.Kernel.Pdf.Tagutils {
     public class TagReference {
-        protected internal TagTreePointer tagPointer;
+        public TagTreePointer tagPointer;
 
-        protected internal int insertIndex;
+        public int insertIndex;
 
-        protected internal PdfStructElem referencedTag;
+        public PdfStructElem referencedTag;
 
-        protected internal PdfName role;
+        public PdfName role;
 
-        protected internal PdfDictionary properties;
+        public PdfDictionary properties;
 
-        protected internal TagReference(PdfStructElem referencedTag, TagTreePointer tagPointer, int insertIndex) {
+        public TagReference(PdfStructElem referencedTag, TagTreePointer tagPointer, int insertIndex) {
             this.role = referencedTag.GetRole();
             this.referencedTag = referencedTag;
             this.tagPointer = tagPointer;

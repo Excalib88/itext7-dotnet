@@ -41,7 +41,8 @@ source product.
 For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel;
 using iText.Kernel.Crypto;
 
@@ -68,18 +69,18 @@ namespace iText.Kernel.Pdf {
         public const byte STRING = 10;
 
         /// <summary>Indicates if the object has been flushed.</summary>
-        protected internal const short FLUSHED = 1;
+        public const short FLUSHED = 1;
 
         /// <summary>Indicates that the indirect reference of the object could be reused or have to be marked as free.
         ///     </summary>
-        protected internal const short FREE = 1 << 1;
+        public const short FREE = 1 << 1;
 
         /// <summary>Indicates that definition of the indirect reference of the object still not found (e.g. keys in XRefStm).
         ///     </summary>
-        protected internal const short READING = 1 << 2;
+        public const short READING = 1 << 2;
 
         /// <summary>Indicates that object changed (is used in append mode).</summary>
-        protected internal const short MODIFIED = 1 << 3;
+        public const short MODIFIED = 1 << 3;
 
         /// <summary>Indicates that the indirect reference of the object represents ObjectStream from original document.
         ///     </summary>
@@ -88,7 +89,7 @@ namespace iText.Kernel.Pdf {
         /// When PdfReader read ObjectStream reference marked as OriginalObjectStream
         /// to avoid further reusing.
         /// </remarks>
-        protected internal const short ORIGINAL_OBJECT_STREAM = 1 << 4;
+        public const short ORIGINAL_OBJECT_STREAM = 1 << 4;
 
         /// <summary>For internal usage only.</summary>
         /// <remarks>
@@ -96,7 +97,7 @@ namespace iText.Kernel.Pdf {
         /// Option is needed to build the correct PDF objects tree when closing the document.
         /// As a result it avoids writing unused (removed) objects.
         /// </remarks>
-        protected internal const short MUST_BE_FLUSHED = 1 << 5;
+        public const short MUST_BE_FLUSHED = 1 << 5;
 
         /// <summary>Indicates that the object shall be indirect when it is written to the document.</summary>
         /// <remarks>
@@ -104,7 +105,7 @@ namespace iText.Kernel.Pdf {
         /// It is used to postpone the creation of indirect reference for the objects that shall be indirect,
         /// so it is possible to create such objects without PdfDocument instance.
         /// </remarks>
-        protected internal const short MUST_BE_INDIRECT = 1 << 6;
+        public const short MUST_BE_INDIRECT = 1 << 6;
 
         /// <summary>Indicates that the object is highly sensitive and we do not want to release it even if release() is called.
         ///     </summary>
@@ -114,23 +115,23 @@ namespace iText.Kernel.Pdf {
         /// flag is set (we do not want to release changed objects).
         /// The flag is set automatically for some wrappers that need document even in reader mode (FormFields etc).
         /// </remarks>
-        protected internal const short FORBID_RELEASE = 1 << 7;
+        public const short FORBID_RELEASE = 1 << 7;
 
         /// <summary>
         /// Indicates that we do not want this object to be ever written into the resultant document
         /// (because of multiple objects read from the same reference inconsistency).
         /// </summary>
-        protected internal const short READ_ONLY = 1 << 8;
+        public const short READ_ONLY = 1 << 8;
 
         /// <summary>Indicates that this object is not encrypted in the encrypted document.</summary>
         /// <remarks>
         /// Indicates that this object is not encrypted in the encrypted document.
         /// E.g. digital signature dictionary /Contents entry shall not be encrypted.
         /// </remarks>
-        protected internal const short UNENCRYPTED = 1 << 9;
+        public const short UNENCRYPTED = 1 << 9;
 
         /// <summary>If object is flushed the indirect reference is kept here.</summary>
-        protected internal PdfIndirectReference indirectReference = null;
+        public PdfIndirectReference indirectReference = null;
 
         /// <summary>Indicate same special states of PdfIndirectObject or PdfObject like @see Free, @see Reading, @see Modified.
         ///     </summary>
@@ -165,8 +166,8 @@ namespace iText.Kernel.Pdf {
                 PdfDocument document = GetIndirectReference().GetDocument();
                 if (document != null) {
                     if (document.IsAppendMode() && !IsModified()) {
-                        ILog logger = LogManager.GetLogger(typeof(PdfObject));
-                        logger.Info(iText.IO.LogMessageConstant.PDF_OBJECT_FLUSHING_NOT_PERFORMED);
+                        //ILog logger = LogManager.GetLogger(typeof(PdfObject));
+                        //logger.Info(iText.IO.LogMessageConstant.PDF_OBJECT_FLUSHING_NOT_PERFORMED);
                         return;
                     }
                     document.CheckIsoConformance(this, IsoKey.PDF_OBJECT);
@@ -363,8 +364,8 @@ namespace iText.Kernel.Pdf {
         public virtual void Release() {
             // In case ForbidRelease flag is set, release will not be performed.
             if (IsReleaseForbidden()) {
-                ILog logger = LogManager.GetLogger(typeof(PdfObject));
-                logger.Warn(iText.IO.LogMessageConstant.FORBID_RELEASE_IS_SET);
+                //ILog logger = LogManager.GetLogger(typeof(PdfObject));
+                //logger.Warn(iText.IO.LogMessageConstant.FORBID_RELEASE_IS_SET);
             }
             else {
                 if (indirectReference != null && indirectReference.GetReader() != null && !indirectReference.CheckState(FLUSHED
@@ -475,9 +476,9 @@ namespace iText.Kernel.Pdf {
 
         /// <summary>Creates new instance of object.</summary>
         /// <returns>new instance of object.</returns>
-        protected internal abstract PdfObject NewInstance();
+        public abstract PdfObject NewInstance();
 
-        protected internal virtual PdfObject SetIndirectReference(PdfIndirectReference indirectReference) {
+        public virtual PdfObject SetIndirectReference(PdfIndirectReference indirectReference) {
             this.indirectReference = indirectReference;
             return this;
         }
@@ -485,20 +486,20 @@ namespace iText.Kernel.Pdf {
         /// <summary>Checks state of the flag of current object.</summary>
         /// <param name="state">special flag to check</param>
         /// <returns>true if the state was set.</returns>
-        protected internal virtual bool CheckState(short state) {
+        public virtual bool CheckState(short state) {
             return (this.state & state) == state;
         }
 
         /// <summary>Sets special states of current object.</summary>
         /// <param name="state">special flag of current object</param>
-        protected internal virtual PdfObject SetState(short state) {
+        public virtual PdfObject SetState(short state) {
             this.state |= state;
             return this;
         }
 
         /// <summary>Clear state of the flag of current object.</summary>
         /// <param name="state">special flag state to clear</param>
-        protected internal virtual PdfObject ClearState(short state) {
+        public virtual PdfObject ClearState(short state) {
             this.state &= (short)~state;
             return this;
         }
@@ -506,7 +507,7 @@ namespace iText.Kernel.Pdf {
         /// <summary>Copies object content from object 'from'.</summary>
         /// <param name="from">object to copy content from.</param>
         /// <param name="document">document to copy object to.</param>
-        protected internal virtual void CopyContent(PdfObject from, PdfDocument document) {
+        public virtual void CopyContent(PdfObject from, PdfDocument document) {
             if (IsFlushed()) {
                 throw new PdfException(PdfException.CannotCopyFlushedObject, this);
             }

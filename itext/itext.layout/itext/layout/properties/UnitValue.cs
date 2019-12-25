@@ -51,9 +51,9 @@ namespace iText.Layout.Properties {
 
         public const int PERCENT = 2;
 
-        protected internal int unitType;
+        public int unitType;
 
-        protected internal float value;
+        public float value;
 
         /// <summary>Creates a UnitValue object with a specified type and value.</summary>
         /// <param name="unitType">

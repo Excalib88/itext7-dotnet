@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Annot;
@@ -234,8 +235,8 @@ namespace iText.Kernel.Pdf.Action {
                 }
             }
             if (null == resultAnnotation) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfTarget));
-                logger.Error(iText.IO.LogMessageConstant.SOME_TARGET_FIELDS_ARE_NOT_SET_OR_INCORRECT);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Action.PdfTarget));
+                //logger.Error(iText.IO.LogMessageConstant.SOME_TARGET_FIELDS_ARE_NOT_SET_OR_INCORRECT);
             }
             return resultAnnotation;
         }
@@ -279,7 +280,7 @@ namespace iText.Kernel.Pdf.Action {
         }
 
         /// <summary><inheritDoc/></summary>
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

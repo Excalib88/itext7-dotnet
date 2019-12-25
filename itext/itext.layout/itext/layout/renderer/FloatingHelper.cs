@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.Kernel.Colors;
 using iText.Kernel.Geom;
@@ -136,14 +137,14 @@ namespace iText.Layout.Renderer {
             tableRenderer.SetProperty(Property.HORIZONTAL_ALIGNMENT, null);
             UnitValue[] margins = tableRenderer.GetMargins();
             if (!margins[1].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.FloatingHelper));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_RIGHT));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.FloatingHelper));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_RIGHT));
             }
             if (!margins[3].IsPointValue()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.FloatingHelper));
-                logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                    .MARGIN_LEFT));
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.FloatingHelper));
+                //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                //    .MARGIN_LEFT));
             }
             AdjustBlockAreaAccordingToFloatRenderers(floatRendererAreas, layoutBox, tableWidth + margins[1].GetValue()
                  + margins[3].GetValue(), FloatPropertyValue.LEFT.Equals(floatPropertyValue));

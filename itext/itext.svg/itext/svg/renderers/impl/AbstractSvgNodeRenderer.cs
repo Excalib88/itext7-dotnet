@@ -58,7 +58,7 @@ namespace iText.Svg.Renderers.Impl {
     /// </summary>
     public abstract class AbstractSvgNodeRenderer : ISvgNodeRenderer {
         /// <summary>Map that contains attributes and styles used for drawing operations</summary>
-        protected internal IDictionary<String, String> attributesAndStyles;
+        public IDictionary<String, String> attributesAndStyles;
 
         internal bool partOfClipPath;
 
@@ -136,7 +136,7 @@ namespace iText.Svg.Renderers.Impl {
 
         /// <summary>Method to see if a certain renderer can use fill.</summary>
         /// <returns>true if the renderer can use fill</returns>
-        protected internal virtual bool CanElementFill() {
+        public virtual bool CanElementFill() {
             return true;
         }
 
@@ -151,7 +151,7 @@ namespace iText.Svg.Renderers.Impl {
         /// Helper method for deep copying logic
         /// </summary>
         /// <param name="deepCopy">renderer to insert the deep copied attributes into</param>
-        protected internal virtual void DeepCopyAttributesAndStyles(ISvgNodeRenderer deepCopy) {
+        public virtual void DeepCopyAttributesAndStyles(ISvgNodeRenderer deepCopy) {
             IDictionary<String, String> stylesDeepCopy = new Dictionary<String, String>();
             if (this.attributesAndStyles != null) {
                 stylesDeepCopy.AddAll(this.attributesAndStyles);
@@ -161,7 +161,7 @@ namespace iText.Svg.Renderers.Impl {
 
         /// <summary>Draws this element to a canvas-like object maintained in the context.</summary>
         /// <param name="context">the object that knows the place to draw this element and maintains its state</param>
-        protected internal abstract void DoDraw(SvgDrawContext context);
+        public abstract void DoDraw(SvgDrawContext context);
 
         internal static float GetAlphaFromRGBA(String value) {
             try {

@@ -65,7 +65,7 @@ namespace iText.Layout.Element {
     public abstract class BlockElement<T> : AbstractElement<T>, IAccessibleElement, IBlockElement
         where T : IElement {
         /// <summary>Creates a BlockElement.</summary>
-        protected internal BlockElement() {
+        public BlockElement() {
         }
 
         public override T1 GetDefaultProperty<T1>(int property) {

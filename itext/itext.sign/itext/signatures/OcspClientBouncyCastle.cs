@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Ocsp;
 using Org.BouncyCastle.X509;
@@ -54,8 +55,8 @@ namespace iText.Signatures {
     /// <author>Paulo Soarees</author>
     public class OcspClientBouncyCastle : IOcspClient {
         /// <summary>The Logger instance.</summary>
-        private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Signatures.OcspClientBouncyCastle)
-            );
+        //private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.Signatures.OcspClientBouncyCastle)
+        //    );
 
         private readonly OCSPVerifier verifier;
 
@@ -95,7 +96,7 @@ namespace iText.Signatures {
                 return basicResponse;
             }
             catch (Exception ex) {
-                LOGGER.Error(ex.Message);
+                //LOGGER.Error(ex.Message);
             }
             return null;
         }
@@ -132,7 +133,7 @@ namespace iText.Signatures {
                 }
             }
             catch (Exception ex) {
-                LOGGER.Error(ex.Message);
+                //LOGGER.Error(ex.Message);
             }
             return null;
         }
@@ -160,7 +161,7 @@ namespace iText.Signatures {
             if (url == null) {
                 return null;
             }
-            LOGGER.Info("Getting OCSP from " + url);
+            //LOGGER.Info("Getting OCSP from " + url);
             OcspReq request = GenerateOCSPRequest(rootCert, checkCert.SerialNumber);
             byte[] array = request.GetEncoded();
             Uri urlt = new Uri(url);

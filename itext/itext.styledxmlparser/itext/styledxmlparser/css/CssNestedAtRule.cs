@@ -58,7 +58,7 @@ namespace iText.StyledXmlParser.Css {
         private String ruleParameters;
 
         /// <summary>The body.</summary>
-        protected internal IList<CssStatement> body;
+        public IList<CssStatement> body;
 
         /// <summary>
         /// Creates a

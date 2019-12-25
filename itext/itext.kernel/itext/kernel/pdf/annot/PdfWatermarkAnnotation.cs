@@ -54,7 +54,7 @@ namespace iText.Kernel.Pdf.Annot {
         /// see
         /// <see cref="PdfAnnotation.MakeAnnotation(iText.Kernel.Pdf.PdfObject)"/>
         /// </summary>
-        protected internal PdfWatermarkAnnotation(PdfDictionary pdfObject)
+        public PdfWatermarkAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

@@ -227,7 +227,7 @@ namespace iText.Forms {
             FORM_FILLING_AND_ANNOTATION
         }
 
-        protected override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
     }

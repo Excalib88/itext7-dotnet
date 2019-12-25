@@ -49,10 +49,10 @@ using iText.Kernel.Pdf.Canvas;
 namespace iText.Barcodes {
     public class BarcodeEANSUPP : Barcode1D {
         /// <summary>The barcode with the EAN/UPC.</summary>
-        protected internal Barcode1D ean;
+        public Barcode1D ean;
 
         /// <summary>The barcode with the supplemental.</summary>
-        protected internal Barcode1D supp;
+        public Barcode1D supp;
 
         /// <summary>Creates new combined barcode.</summary>
         /// <param name="ean">the EAN/UPC barcode</param>

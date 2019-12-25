@@ -53,9 +53,9 @@ namespace iText.IO.Font.Otf {
 
         public int idx;
 
-        protected internal IList<Glyph> glyphs;
+        public IList<Glyph> glyphs;
 
-        protected internal IList<GlyphLine.ActualText> actualText;
+        public IList<GlyphLine.ActualText> actualText;
 
         public GlyphLine() {
             this.glyphs = new List<Glyph>();
@@ -84,7 +84,7 @@ namespace iText.IO.Font.Otf {
         /// <param name="actualText">corresponding list containing the actual text the glyphs represent</param>
         /// <param name="start">starting index of the slice</param>
         /// <param name="end">terminating index of the slice</param>
-        protected internal GlyphLine(IList<Glyph> glyphs, IList<GlyphLine.ActualText> actualText, int start, int end
+        public GlyphLine(IList<Glyph> glyphs, IList<GlyphLine.ActualText> actualText, int start, int end
             )
             : this(glyphs, start, end) {
             this.actualText = actualText;
@@ -435,7 +435,7 @@ namespace iText.IO.Font.Otf {
             }
         }
 
-        protected internal class ActualText {
+        public class ActualText {
             public String value;
 
             public ActualText(String value) {

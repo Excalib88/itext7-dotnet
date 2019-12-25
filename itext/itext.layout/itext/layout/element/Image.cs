@@ -42,7 +42,8 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Image;
 using iText.Kernel;
 using iText.Kernel.Pdf.Canvas.Wmf;
@@ -57,9 +58,9 @@ using iText.Layout.Tagging;
 namespace iText.Layout.Element {
     /// <summary>A layout element that represents an image for inclusion in the document model.</summary>
     public class Image : AbstractElement<iText.Layout.Element.Image>, ILeafElement, IAccessibleElement {
-        protected internal PdfXObject xObject;
+        public PdfXObject xObject;
 
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         /// <summary>
         /// Creates an
@@ -462,8 +463,8 @@ namespace iText.Layout.Element {
             if (HasProperty(Property.AUTO_SCALE_WIDTH) && HasProperty(Property.AUTO_SCALE_HEIGHT) && autoScale && ((bool
                 )this.GetProperty<bool?>(Property.AUTO_SCALE_WIDTH) || (bool)this.GetProperty<bool?>(Property.AUTO_SCALE_HEIGHT
                 ))) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Layout.Element.Image));
-                logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_AMBIGUOUS_SCALE);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Element.Image));
+                //logger.Warn(iText.IO.LogMessageConstant.IMAGE_HAS_AMBIGUOUS_SCALE);
             }
             SetProperty(Property.AUTO_SCALE, autoScale);
             return this;
@@ -713,7 +714,7 @@ namespace iText.Layout.Element {
             return tagProperties;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new ImageRenderer(this);
         }
 

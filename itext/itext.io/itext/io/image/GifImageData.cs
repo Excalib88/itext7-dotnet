@@ -59,11 +59,11 @@ namespace iText.IO.Image {
 
         private Uri url;
 
-        protected internal GifImageData(Uri url) {
+        public GifImageData(Uri url) {
             this.url = url;
         }
 
-        protected internal GifImageData(byte[] data) {
+        public GifImageData(byte[] data) {
             this.data = data;
         }
 
@@ -87,15 +87,15 @@ namespace iText.IO.Image {
             return frames;
         }
 
-        protected internal virtual byte[] GetData() {
+        public virtual byte[] GetData() {
             return data;
         }
 
-        protected internal virtual Uri GetUrl() {
+        public virtual Uri GetUrl() {
             return url;
         }
 
-        protected internal virtual void AddFrame(ImageData frame) {
+        public virtual void AddFrame(ImageData frame) {
             frames.Add(frame);
         }
 

@@ -66,7 +66,7 @@ namespace iText.StyledXmlParser.Css.Selector.Item {
         }
 
         /// <summary>Gets the nth arguments.</summary>
-        protected internal virtual void GetNthArguments() {
+        public virtual void GetNthArguments() {
             if (arguments.Matches("((-|\\+)?[0-9]*n(\\s*(-|\\+)\\s*[0-9]+)?|(-|\\+)?[0-9]+|odd|even)")) {
                 if (arguments.Equals("odd")) {
                     this.nthA = 2;
@@ -117,7 +117,7 @@ namespace iText.StyledXmlParser.Css.Selector.Item {
         /// <param name="node">a node</param>
         /// <param name="children">the children</param>
         /// <returns>true, if successful</returns>
-        protected internal virtual bool ResolveNth(INode node, IList<INode> children) {
+        public virtual bool ResolveNth(INode node, IList<INode> children) {
             if (!children.Contains(node)) {
                 return false;
             }

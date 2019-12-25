@@ -43,17 +43,18 @@ address: sales@itextpdf.com
 */
 using System;
 using System.IO;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Source;
 using iText.Kernel;
 
 namespace iText.Kernel.Pdf {
     /// <summary>Representation of a stream as described in the PDF Specification.</summary>
     public class PdfStream : PdfDictionary {
-        protected internal int compressionLevel;
+        public int compressionLevel;
 
         // Output stream associated with PDF stream.
-        protected internal PdfOutputStream outputStream;
+        public PdfOutputStream outputStream;
 
         private Stream inputStream;
 
@@ -158,7 +159,7 @@ namespace iText.Kernel.Pdf {
             : this((byte[])null) {
         }
 
-        protected internal PdfStream(Stream outputStream) {
+        public PdfStream(Stream outputStream) {
             this.outputStream = new PdfOutputStream(outputStream);
             this.compressionLevel = CompressionConstants.UNDEFINED_COMPRESSION;
             SetState(MUST_BE_INDIRECT);
@@ -240,8 +241,8 @@ namespace iText.Kernel.Pdf {
                 throw new PdfException(PdfException.CannotOperateWithFlushedPdfStream);
             }
             if (inputStream != null) {
-                LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfStream)).Warn("PdfStream was created by InputStream." + "getBytes() always returns null in this case"
-                    );
+                //LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfStream)).Warn("PdfStream was created by InputStream." + "getBytes() always returns null in this case"
+                //    );
                 return null;
             }
             byte[] bytes = null;
@@ -349,21 +350,21 @@ namespace iText.Kernel.Pdf {
             Remove(PdfName.DecodeParms);
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfStream();
         }
 
-        protected internal virtual long GetOffset() {
+        public virtual long GetOffset() {
             return offset;
         }
 
         /// <summary>Update length manually in case its correction.</summary>
         /// <seealso cref="PdfReader.CheckPdfStreamLength(PdfStream)"/>
-        protected internal virtual void UpdateLength(int length) {
+        public virtual void UpdateLength(int length) {
             this.length = length;
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfStream stream = (iText.Kernel.Pdf.PdfStream)from;
             System.Diagnostics.Debug.Assert(inputStream == null, "Try to copy the PdfStream that has been just created."
@@ -377,14 +378,14 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual void InitOutputStream(Stream stream) {
+        public virtual void InitOutputStream(Stream stream) {
             if (GetOutputStream() == null && inputStream == null) {
                 outputStream = new PdfOutputStream(stream != null ? stream : new ByteArrayOutputStream());
             }
         }
 
         /// <summary>Release content of PdfStream.</summary>
-        protected internal override void ReleaseContent() {
+        public override void ReleaseContent() {
             base.ReleaseContent();
             try {
                 if (outputStream != null) {
@@ -397,7 +398,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual Stream GetInputStream() {
+        public virtual Stream GetInputStream() {
             return inputStream;
         }
     }

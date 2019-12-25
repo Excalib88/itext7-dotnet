@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Util;
 using iText.StyledXmlParser;
 using iText.StyledXmlParser.Css.Media;
@@ -177,9 +178,9 @@ namespace iText.StyledXmlParser.Css {
                 stylesMap.Put(cssDeclaration.GetProperty(), cssDeclaration);
             }
             else {
-                ILog logger = LogManager.GetLogger(typeof(ICssResolver));
-                logger.Warn(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.INVALID_CSS_PROPERTY_DECLARATION
-                    , cssDeclaration));
+                //ILog logger = LogManager.GetLogger(typeof(ICssResolver));
+                //logger.Warn(MessageFormatUtil.Format(iText.StyledXmlParser.LogMessageConstant.INVALID_CSS_PROPERTY_DECLARATION
+                //    , cssDeclaration));
             }
         }
     }

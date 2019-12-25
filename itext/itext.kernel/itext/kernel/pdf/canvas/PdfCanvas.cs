@@ -203,26 +203,26 @@ namespace iText.Kernel.Pdf.Canvas {
         private static readonly PdfSpecialCs.Pattern pattern = new PdfSpecialCs.Pattern();
 
         /// <summary>a LIFO stack of graphics state saved states.</summary>
-        protected internal Stack<CanvasGraphicsState> gsStack = new Stack<CanvasGraphicsState>();
+        public Stack<CanvasGraphicsState> gsStack = new Stack<CanvasGraphicsState>();
 
         /// <summary>the current graphics state.</summary>
-        protected internal CanvasGraphicsState currentGs = new CanvasGraphicsState();
+        public CanvasGraphicsState currentGs = new CanvasGraphicsState();
 
         /// <summary>the content stream for this canvas object.</summary>
-        protected internal PdfStream contentStream;
+        public PdfStream contentStream;
 
         /// <summary>the resources for the page that this canvas belongs to.</summary>
         /// <seealso cref="iText.Kernel.Pdf.PdfResources"/>
-        protected internal PdfResources resources;
+        public PdfResources resources;
 
         /// <summary>the document that the resulting content stream of this canvas will be written to.</summary>
-        protected internal PdfDocument document;
+        public PdfDocument document;
 
         /// <summary>a counter variable for the marked content stack.</summary>
-        protected internal int mcDepth;
+        public int mcDepth;
 
         /// <summary>The list where we save/restore the layer depth.</summary>
-        protected internal IList<int> layerDepth;
+        public IList<int> layerDepth;
 
         /// <summary>Creates PdfCanvas from content stream of page, form XObject, pattern etc.</summary>
         /// <param name="contentStream">The content stream</param>
@@ -2135,7 +2135,7 @@ namespace iText.Kernel.Pdf.Canvas {
         /// <param name="d">an element of the transformation matrix</param>
         /// <param name="e">an element of the transformation matrix</param>
         /// <param name="f">an element of the transformation matrix</param>
-        protected internal virtual void AddInlineImage(PdfImageXObject imageXObject, float a, float b, float c, float
+        public virtual void AddInlineImage(PdfImageXObject imageXObject, float a, float b, float c, float
              d, float e, float f) {
             document.CheckIsoConformance(imageXObject.GetPdfObject(), IsoKey.INLINE_IMAGE, resources, contentStream);
             SaveState();

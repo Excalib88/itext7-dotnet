@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf.Canvas;
 using iText.Layout.Borders;
@@ -61,22 +62,22 @@ namespace iText.Layout.Renderer {
             : base(rows, numberOfColumns, tableBoundingBorders, largeTableIndexOffset) {
         }
 
-        protected internal override TableBorders DrawHorizontalBorder(int i, float startX, float y1, PdfCanvas canvas
+        public override TableBorders DrawHorizontalBorder(int i, float startX, float y1, PdfCanvas canvas
             , float[] countedColumnWidth) {
             return this;
         }
 
-        protected internal override TableBorders DrawVerticalBorder(int i, float startY, float x1, PdfCanvas canvas
+        public override TableBorders DrawVerticalBorder(int i, float startY, float x1, PdfCanvas canvas
             , IList<float> heights) {
             return this;
         }
 
-        protected internal override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
+        public override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
              isEmpty, bool force, bool reverse) {
             return ApplyTopTableBorder(occupiedBox, layoutBox, reverse);
         }
 
-        protected internal override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
+        public override TableBorders ApplyTopTableBorder(Rectangle occupiedBox, Rectangle layoutBox, bool
              reverse) {
             float topIndent = (reverse ? -1 : 1) * GetMaxTopWidth();
             layoutBox.DecreaseHeight(topIndent);
@@ -84,12 +85,12 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
+        public override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
             , bool isEmpty, bool force, bool reverse) {
             return ApplyBottomTableBorder(occupiedBox, layoutBox, reverse);
         }
 
-        protected internal override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
+        public override TableBorders ApplyBottomTableBorder(Rectangle occupiedBox, Rectangle layoutBox
             , bool reverse) {
             float bottomTableBorderWidth = (reverse ? -1 : 1) * GetMaxBottomWidth();
             layoutBox.DecreaseHeight(bottomTableBorderWidth);
@@ -97,37 +98,37 @@ namespace iText.Layout.Renderer {
             return this;
         }
 
-        protected internal override TableBorders ApplyLeftAndRightTableBorder(Rectangle layoutBox, bool reverse) {
+        public override TableBorders ApplyLeftAndRightTableBorder(Rectangle layoutBox, bool reverse) {
             if (null != layoutBox) {
                 layoutBox.ApplyMargins(0, rightBorderMaxWidth, 0, leftBorderMaxWidth, reverse);
             }
             return this;
         }
 
-        protected internal override TableBorders SkipFooter(Border[] borders) {
+        public override TableBorders SkipFooter(Border[] borders) {
             SetTableBoundingBorders(borders);
             return this;
         }
 
-        protected internal override TableBorders SkipHeader(Border[] borders) {
+        public override TableBorders SkipHeader(Border[] borders) {
             return this;
         }
 
-        protected internal override TableBorders CollapseTableWithFooter(TableBorders footerBordersHandler, bool hasContent
+        public override TableBorders CollapseTableWithFooter(TableBorders footerBordersHandler, bool hasContent
             ) {
             return this;
         }
 
-        protected internal override TableBorders CollapseTableWithHeader(TableBorders headerBordersHandler, bool updateBordersHandler
+        public override TableBorders CollapseTableWithHeader(TableBorders headerBordersHandler, bool updateBordersHandler
             ) {
             return this;
         }
 
-        protected internal override TableBorders FixHeaderOccupiedArea(Rectangle occupiedBox, Rectangle layoutBox) {
+        public override TableBorders FixHeaderOccupiedArea(Rectangle occupiedBox, Rectangle layoutBox) {
             return this;
         }
 
-        protected internal override TableBorders ApplyCellIndents(Rectangle box, float topIndent, float rightIndent
+        public override TableBorders ApplyCellIndents(Rectangle box, float topIndent, float rightIndent
             , float bottomIndent, float leftIndent, bool reverse) {
             box.ApplyMargins(topIndent, rightIndent, bottomIndent, leftIndent, false);
             return this;
@@ -141,11 +142,11 @@ namespace iText.Layout.Renderer {
             return horizontalBorders[index - largeTableIndexOffset];
         }
 
-        protected internal override float GetCellVerticalAddition(float[] indents) {
+        public override float GetCellVerticalAddition(float[] indents) {
             return 0;
         }
 
-        protected internal override TableBorders UpdateBordersOnNewPage(bool isOriginalNonSplitRenderer, bool isFooterOrHeader
+        public override TableBorders UpdateBordersOnNewPage(bool isOriginalNonSplitRenderer, bool isFooterOrHeader
             , TableRenderer currentRenderer, TableRenderer headerRenderer, TableRenderer footerRenderer) {
             if (!isFooterOrHeader) {
                 // collapse all cell borders
@@ -183,7 +184,7 @@ namespace iText.Layout.Renderer {
             return indents;
         }
 
-        protected internal override void BuildBordersArrays(CellRenderer cell, int row, int col, int[] rowspansToDeduct
+        public override void BuildBordersArrays(CellRenderer cell, int row, int col, int[] rowspansToDeduct
             ) {
             int colspan = (int)cell.GetPropertyAsInteger(Property.COLSPAN);
             int rowspan = (int)cell.GetPropertyAsInteger(Property.ROWSPAN);
@@ -211,7 +212,7 @@ namespace iText.Layout.Renderer {
             }
         }
 
-        protected internal virtual bool CheckAndReplaceBorderInArray(IList<IList<Border>> borderArray, int i, int 
+        public virtual bool CheckAndReplaceBorderInArray(IList<IList<Border>> borderArray, int i, int 
             j, Border borderToAdd, bool hasPriority) {
             //        if (borderArray.size() <= i) {
             //            for (int count = borderArray.size(); count <= i; count++) {
@@ -240,13 +241,13 @@ namespace iText.Layout.Renderer {
                 borders[j] = borderToAdd;
             }
             else {
-                ILog logger = LogManager.GetLogger(typeof(TableRenderer));
-                logger.Warn(iText.IO.LogMessageConstant.UNEXPECTED_BEHAVIOUR_DURING_TABLE_ROW_COLLAPSING);
+                //ILog logger = LogManager.GetLogger(typeof(TableRenderer));
+                //logger.Warn(iText.IO.LogMessageConstant.UNEXPECTED_BEHAVIOUR_DURING_TABLE_ROW_COLLAPSING);
             }
             return true;
         }
 
-        protected internal override TableBorders InitializeBorders() {
+        public override TableBorders InitializeBorders() {
             IList<Border> tempBorders;
             // initialize vertical borders
             while (2 * Math.Max(numberOfColumns, 1) > verticalBorders.Count) {

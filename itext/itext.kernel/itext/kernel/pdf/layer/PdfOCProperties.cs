@@ -210,20 +210,20 @@ namespace iText.Kernel.Pdf.Layer {
             return new List<PdfLayer>(layers);
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
         /// <summary>This method registers a new layer in the OCProperties.</summary>
         /// <param name="layer">the new layer</param>
-        protected internal virtual void RegisterLayer(PdfLayer layer) {
+        public virtual void RegisterLayer(PdfLayer layer) {
             if (layer == null) {
                 throw new ArgumentException("layer argument is null");
             }
             layers.Add(layer);
         }
 
-        protected internal virtual PdfDocument GetDocument() {
+        public virtual PdfDocument GetDocument() {
             return GetPdfObject().GetIndirectReference().GetDocument();
         }
 

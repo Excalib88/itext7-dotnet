@@ -106,7 +106,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.DefineOptionName(int)"/>
-        protected internal override String DefineOptionName(int option) {
+        public override String DefineOptionName(int option) {
             switch (option) {
                 case JUST_CHILDREN: {
                     return "JUST_CHILDREN";
@@ -131,7 +131,7 @@ namespace iText.Kernel.XMP.Options {
         }
 
         /// <seealso cref="Options.GetValidOptions()"/>
-        protected internal override int GetValidOptions() {
+        public override int GetValidOptions() {
             return JUST_CHILDREN | JUST_LEAFNODES | JUST_LEAFNAME | OMIT_QUALIFIERS;
         }
     }

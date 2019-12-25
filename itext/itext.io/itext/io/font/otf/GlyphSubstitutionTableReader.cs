@@ -60,7 +60,7 @@ namespace iText.IO.Font.Otf {
             StartReadingTable();
         }
 
-        protected internal override OpenTableLookup ReadLookupTable(int lookupType, int lookupFlag, int[] subTableLocations
+        public override OpenTableLookup ReadLookupTable(int lookupType, int lookupFlag, int[] subTableLocations
             ) {
             if (lookupType == 7) {
                 for (int k = 0; k < subTableLocations.Length; ++k) {

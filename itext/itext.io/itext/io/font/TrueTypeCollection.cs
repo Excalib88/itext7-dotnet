@@ -48,7 +48,7 @@ using iText.IO.Util;
 namespace iText.IO.Font {
     /// <summary>Use this class for working with true type collection font (*.ttc)</summary>
     public class TrueTypeCollection {
-        protected internal RandomAccessFileOrArray raf;
+        public RandomAccessFileOrArray raf;
 
         private int TTCSize = 0;
 

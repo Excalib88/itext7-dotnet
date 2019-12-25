@@ -57,7 +57,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             : base(encryptionDictionary, certificateKey, certificate, encryptMetadata) {
         }
 
-        protected internal override void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
+        public override void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
              encryptMetadata, bool embeddedFilesOnly) {
             encryptionDictionary.Put(PdfName.Filter, PdfName.Adobe_PubSec);
             PdfArray recipients = CreateRecipientsArray();

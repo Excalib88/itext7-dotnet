@@ -90,7 +90,7 @@ namespace iText.Svg.Renderers.Impl {
             return new float[][] { part, part };
         }
 
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             if (this.attributesAndStyles != null && this.attributesAndStyles.ContainsKey(SvgConstants.Attributes.TEXT_CONTENT
                 )) {
                 PdfCanvas currentCanvas = context.GetCurrentCanvas();
@@ -100,7 +100,7 @@ namespace iText.Svg.Renderers.Impl {
             }
         }
 
-        protected internal override bool CanElementFill() {
+        public override bool CanElementFill() {
             return false;
         }
     }

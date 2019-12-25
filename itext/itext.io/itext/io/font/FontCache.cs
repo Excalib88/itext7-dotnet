@@ -91,7 +91,7 @@ namespace iText.IO.Font {
         /// <see langword="true"/>
         /// if it is CJKFont.
         /// </returns>
-        protected internal static bool IsPredefinedCidFont(String fontName) {
+        public static bool IsPredefinedCidFont(String fontName) {
             if (!registryNames.ContainsKey(FONTS_PROP)) {
                 return false;
             }

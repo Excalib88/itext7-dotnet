@@ -47,10 +47,10 @@ namespace iText.Layout.Hyphenation {
     /// <summary>This is the class used to configure hyphenation on layout level</summary>
     public class HyphenationConfig {
         /// <summary>The Hyphenator object.</summary>
-        protected internal Hyphenator hyphenator;
+        public Hyphenator hyphenator;
 
         /// <summary>The hyphenation symbol used when hyphenating.</summary>
-        protected internal char hyphenSymbol = '-';
+        public char hyphenSymbol = '-';
 
         /// <summary>
         /// Constructs a new

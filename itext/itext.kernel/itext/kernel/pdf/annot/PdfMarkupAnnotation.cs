@@ -41,7 +41,8 @@ source product.
 For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
-using Common.Logging;
+//using Common.Logging;
+
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 
@@ -58,15 +59,15 @@ namespace iText.Kernel.Pdf.Annot {
     /// See also ISO-320001 12.5.6.2 "Markup Annotations".
     /// </remarks>
     public abstract class PdfMarkupAnnotation : PdfAnnotation {
-        protected internal PdfAnnotation inReplyTo = null;
+        public PdfAnnotation inReplyTo = null;
 
-        protected internal PdfPopupAnnotation popup = null;
+        public PdfPopupAnnotation popup = null;
 
-        protected internal PdfMarkupAnnotation(Rectangle rect)
+        public PdfMarkupAnnotation(Rectangle rect)
             : base(rect) {
         }
 
-        protected internal PdfMarkupAnnotation(PdfDictionary pdfObject)
+        public PdfMarkupAnnotation(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 
@@ -331,8 +332,8 @@ namespace iText.Kernel.Pdf.Annot {
                 if (popupObject != null) {
                     PdfAnnotation annotation = MakeAnnotation(popupObject);
                     if (!(annotation is PdfPopupAnnotation)) {
-                        ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfMarkupAnnotation));
-                        logger.Warn(iText.IO.LogMessageConstant.POPUP_ENTRY_IS_NOT_POPUP_ANNOTATION);
+                        //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Annot.PdfMarkupAnnotation));
+                        //logger.Warn(iText.IO.LogMessageConstant.POPUP_ENTRY_IS_NOT_POPUP_ANNOTATION);
                         return null;
                     }
                     popup = (PdfPopupAnnotation)annotation;

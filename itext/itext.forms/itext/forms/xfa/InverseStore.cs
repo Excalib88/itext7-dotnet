@@ -50,9 +50,9 @@ namespace iText.Forms.Xfa {
     /// beginning from the lower hierarchy.
     /// </summary>
     internal class InverseStore {
-        protected internal IList<String> part = new List<String>();
+        public IList<String> part = new List<String>();
 
-        protected internal IList<Object> follow = new List<Object>();
+        public IList<Object> follow = new List<Object>();
 
         /// <summary>
         /// Gets the full name by traversing the hierarchy using only the

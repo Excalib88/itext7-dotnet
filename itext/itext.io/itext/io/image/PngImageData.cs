@@ -45,11 +45,11 @@ using System;
 
 namespace iText.IO.Image {
     public class PngImageData : RawImageData {
-        protected internal PngImageData(byte[] bytes)
+        public PngImageData(byte[] bytes)
             : base(bytes, ImageType.PNG) {
         }
 
-        protected internal PngImageData(Uri url)
+        public PngImageData(Uri url)
             : base(url, ImageType.PNG) {
         }
     }

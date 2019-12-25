@@ -68,16 +68,16 @@ namespace iText.Kernel.Pdf {
             return "null";
         }
 
-        protected internal override void GenerateContent() {
+        public override void GenerateContent() {
             content = NullContent;
         }
 
         //Here we create new object, because if we use static object it can cause unpredictable behavior during copy objects
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfNull();
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
         }
 
         public override bool Equals(Object obj) {

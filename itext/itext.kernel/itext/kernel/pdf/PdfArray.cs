@@ -55,7 +55,7 @@ namespace iText.Kernel.Pdf {
     /// <see cref="PdfObject"/>.
     /// </remarks>
     public class PdfArray : PdfObject, IEnumerable<PdfObject> {
-        protected internal IList<PdfObject> list;
+        public IList<PdfObject> list;
 
         /// <summary>Create a new, empty PdfArray.</summary>
         public PdfArray()
@@ -564,11 +564,11 @@ namespace iText.Kernel.Pdf {
             return rslt;
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfArray();
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfArray array = (iText.Kernel.Pdf.PdfArray)from;
             foreach (PdfObject entry in array.list) {
@@ -577,7 +577,7 @@ namespace iText.Kernel.Pdf {
         }
 
         /// <summary>Release content of PdfArray.</summary>
-        protected internal virtual void ReleaseContent() {
+        public virtual void ReleaseContent() {
             list = null;
         }
 

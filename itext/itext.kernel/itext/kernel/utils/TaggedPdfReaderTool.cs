@@ -56,14 +56,14 @@ using iText.Kernel.Pdf.Tagging;
 namespace iText.Kernel.Utils {
     /// <summary>Converts a tagged PDF document into an XML file.</summary>
     public class TaggedPdfReaderTool {
-        protected internal PdfDocument document;
+        public PdfDocument document;
 
-        protected internal StreamWriter @out;
+        public StreamWriter @out;
 
-        protected internal String rootTag;
+        public String rootTag;
 
         // key - page dictionary; value - a mapping of mcids to text in them
-        protected internal IDictionary<PdfDictionary, IDictionary<int, String>> parsedTags = new Dictionary<PdfDictionary
+        public IDictionary<PdfDictionary, IDictionary<int, String>> parsedTags = new Dictionary<PdfDictionary
             , IDictionary<int, String>>();
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace iText.Kernel.Utils {
             return this;
         }
 
-        protected internal virtual void InspectKids(IList<IStructureNode> kids) {
+        public virtual void InspectKids(IList<IStructureNode> kids) {
             if (kids == null) {
                 return;
             }
@@ -130,7 +130,7 @@ namespace iText.Kernel.Utils {
             }
         }
 
-        protected internal virtual void InspectKid(IStructureNode kid) {
+        public virtual void InspectKid(IStructureNode kid) {
             try {
                 if (kid is PdfStructElem) {
                     PdfStructElem structElemKid = (PdfStructElem)kid;
@@ -166,7 +166,7 @@ namespace iText.Kernel.Utils {
             }
         }
 
-        protected internal virtual void InspectAttributes(PdfStructElem kid) {
+        public virtual void InspectAttributes(PdfStructElem kid) {
             PdfObject attrObj = kid.GetAttributes(false);
             if (attrObj != null) {
                 PdfDictionary attrDict;
@@ -192,7 +192,7 @@ namespace iText.Kernel.Utils {
             }
         }
 
-        protected internal virtual void ParseTag(PdfMcr kid) {
+        public virtual void ParseTag(PdfMcr kid) {
             int mcid = kid.GetMcid();
             PdfDictionary pageDic = kid.GetPageObject();
             String tagContent = "";
@@ -225,7 +225,7 @@ namespace iText.Kernel.Utils {
             }
         }
 
-        protected internal static String FixTagName(String tag) {
+        public static String FixTagName(String tag) {
             StringBuilder sb = new StringBuilder();
             for (int k = 0; k < tag.Length; ++k) {
                 char c = tag[k];
@@ -258,7 +258,7 @@ namespace iText.Kernel.Utils {
         /// <param name="s">the string to be escaped</param>
         /// <param name="onlyASCII">codes above 127 will always be escaped with &amp;#nn; if <c>true</c></param>
         /// <returns>the escaped string</returns>
-        protected internal static String EscapeXML(String s, bool onlyASCII) {
+        public static String EscapeXML(String s, bool onlyASCII) {
             char[] cc = s.ToCharArray();
             int len = cc.Length;
             StringBuilder sb = new StringBuilder();

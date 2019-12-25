@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Font.Constants;
 using iText.IO.Util;
 
@@ -54,7 +55,7 @@ namespace iText.IO.Font {
     /// without having to enter a path as parameter.
     /// </summary>
     internal class FontRegisterProvider {
-        private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.IO.Font.FontRegisterProvider));
+        //private static readonly ILog LOGGER = LogManager.GetLogger(typeof(iText.IO.Font.FontRegisterProvider));
 
         /// <summary>This is a map of postscriptfontnames of fonts and the path of their font file.</summary>
         private readonly IDictionary<String, String> fontNames = new Dictionary<String, String>();
@@ -114,7 +115,7 @@ namespace iText.IO.Font {
             return GetFontProgram(fontName, cached);
         }
 
-        protected internal virtual void RegisterStandardFonts() {
+        public virtual void RegisterStandardFonts() {
             fontNames.Put(StandardFonts.COURIER.ToLowerInvariant(), StandardFonts.COURIER);
             fontNames.Put(StandardFonts.COURIER_BOLD.ToLowerInvariant(), StandardFonts.COURIER_BOLD);
             fontNames.Put(StandardFonts.COURIER_OBLIQUE.ToLowerInvariant(), StandardFonts.COURIER_OBLIQUE);
@@ -131,7 +132,7 @@ namespace iText.IO.Font {
             fontNames.Put(StandardFonts.ZAPFDINGBATS.ToLowerInvariant(), StandardFonts.ZAPFDINGBATS);
         }
 
-        protected internal virtual void RegisterStandardFontFamilies() {
+        public virtual void RegisterStandardFontFamilies() {
             IList<String> family;
             family = new List<String>();
             family.Add(StandardFonts.COURIER);
@@ -159,7 +160,7 @@ namespace iText.IO.Font {
             fontFamilies.Put(StandardFontFamilies.ZAPFDINGBATS.ToLowerInvariant(), family);
         }
 
-        protected internal virtual FontProgram GetFontProgram(String fontName, bool cached) {
+        public virtual FontProgram GetFontProgram(String fontName, bool cached) {
             FontProgram fontProgram = null;
             fontName = fontNames.Get(fontName.ToLowerInvariant());
             if (fontName != null) {
@@ -272,7 +273,7 @@ namespace iText.IO.Font {
                         }
                     }
                 }
-                LOGGER.Trace(MessageFormatUtil.Format("Registered {0}", path));
+                //LOGGER.Trace(MessageFormatUtil.Format("Registered {0}", path));
             }
             catch (System.IO.IOException e) {
                 throw new iText.IO.IOException(e);
@@ -304,7 +305,7 @@ namespace iText.IO.Font {
         /// <param name="scanSubdirectories">recursively scan subdirectories if <c>true</c></param>
         /// <returns>the number of fonts registered</returns>
         internal virtual int RegisterFontDirectory(String dir, bool scanSubdirectories) {
-            LOGGER.Debug(MessageFormatUtil.Format("Registering directory {0}, looking for fonts", dir));
+            //LOGGER.Debug(MessageFormatUtil.Format("Registering directory {0}, looking for fonts", dir));
             int count = 0;
             try {
                 String[] files = FileUtil.ListFilesInDirectory(dir, scanSubdirectories);

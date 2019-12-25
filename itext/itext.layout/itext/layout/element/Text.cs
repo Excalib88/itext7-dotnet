@@ -63,9 +63,9 @@ namespace iText.Layout.Element {
     /// it is the smallest piece of content that may bear specific layout attributes.
     /// </remarks>
     public class Text : AbstractElement<iText.Layout.Element.Text>, ILeafElement, IAccessibleElement {
-        protected internal String text;
+        public String text;
 
-        protected internal DefaultAccessibilityProperties tagProperties;
+        public DefaultAccessibilityProperties tagProperties;
 
         /// <summary>Constructs a Text with its role initialized.</summary>
         /// <param name="text">
@@ -151,7 +151,7 @@ namespace iText.Layout.Element {
             return tagProperties;
         }
 
-        protected internal override IRenderer MakeNewRenderer() {
+        public override IRenderer MakeNewRenderer() {
             return new TextRenderer(this, text);
         }
     }

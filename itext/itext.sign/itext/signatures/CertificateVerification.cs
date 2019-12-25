@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using Org.BouncyCastle.Ocsp;
 using Org.BouncyCastle.Tsp;
 using Org.BouncyCastle.X509;
@@ -53,7 +54,7 @@ namespace iText.Signatures {
     /// <summary>This class consists of some methods that allow you to verify certificates.</summary>
     public class CertificateVerification {
         /// <summary>The Logger instance.</summary>
-        private static readonly ILog LOGGER = LogManager.GetLogger(typeof(CrlClientOnline));
+        //private static readonly ILog LOGGER = LogManager.GetLogger(typeof(CrlClientOnline));
 
         /// <summary>Verifies a single certificate for the current date.</summary>
         /// <param name="cert">the certificate to verify</param>
@@ -219,7 +220,7 @@ namespace iText.Signatures {
                 exceptionsThrown.Add(e);
             }
             foreach (Exception ex in exceptionsThrown) {
-                LOGGER.Error(ex.Message, ex);
+                //LOGGER.Error(ex.Message, ex);
             }
             return false;
         }
@@ -245,7 +246,7 @@ namespace iText.Signatures {
                 exceptionsThrown.Add(e);
             }
             foreach (Exception ex in exceptionsThrown) {
-                LOGGER.Error(ex.Message, ex);
+                //LOGGER.Error(ex.Message, ex);
             }
             return false;
         }

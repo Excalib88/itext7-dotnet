@@ -161,13 +161,13 @@ namespace iText.IO.Util {
 			Unread(cbuf, 0, cbuf.Length);
 		}
 
-		/// <summary>
-		/// Closes the stream and releases any system resources associated with
-		/// it. Once the stream has been closed, further read(),
-		/// unread(), ready(), or skip() invocations will throw an IOException.
-		/// Closing a previously closed stream has no effect.
-		/// </summary>
-	    protected override void Dispose(bool disposing) {
+        /// <summary>
+        /// Closes the stream and releases any system resources associated with
+        /// it. Once the stream has been closed, further read(),
+        /// unread(), ready(), or skip() invocations will throw an IOException.
+        /// Closing a previously closed stream has no effect.
+        /// </summary>
+        protected override void Dispose(bool disposing) {
 		    _buf = null;
 	        base.Dispose(disposing);
 	    }

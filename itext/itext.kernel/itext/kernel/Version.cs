@@ -44,8 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.IO;
 using System.Reflection;
-using Common.Logging;
-using Versions.Attributes;
+////using Common.Logging;
+
 
 namespace iText.Kernel {
     /// <summary>This class contains version information about iText.</summary>
@@ -369,12 +369,7 @@ namespace iText.Kernel {
             String licenseKeyClassFullName = null;
 
             Assembly kernelAssembly = typeof(Version).GetAssembly();
-            Attribute keyVersionAttr = kernelAssembly.GetCustomAttribute(typeof(KeyVersionAttribute));
-            if (keyVersionAttr is KeyVersionAttribute) {
-                String keyVersion = ((KeyVersionAttribute)keyVersionAttr).KeyVersion;
-                String format = "{0}, Version={1}, Culture=neutral, PublicKeyToken=8354ae6d2174ddca";
-                licenseKeyClassFullName = String.Format(format, licenseKeyClassPartialName, keyVersion);
-            }
+            
 
             Type type = null;
             if (licenseKeyClassFullName != null) {
@@ -386,14 +381,14 @@ namespace iText.Kernel {
                 }
 
                 if (type == null) {
-                    ILog logger = LogManager.GetLogger(typeof(Version));
+                    //ILog logger = LogManager.GetLogger(typeof(Version));
                     try {
                         type = System.Type.GetType(licenseKeyClassPartialName);
                     } catch {
                         // ignore
                     }
                     if (type == null && fileLoadExceptionMessage != null) {
-                        logger.Error(fileLoadExceptionMessage);
+                        //logger.Error(fileLoadExceptionMessage);
                     }
                 }
             }

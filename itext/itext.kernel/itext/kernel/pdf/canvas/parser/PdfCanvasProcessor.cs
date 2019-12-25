@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Source;
 using iText.IO.Util;
 using iText.Kernel;
@@ -63,28 +64,28 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
         public const String DEFAULT_OPERATOR = "DefaultOperator";
 
         /// <summary>Listener that will be notified of render events</summary>
-        protected internal readonly IEventListener eventListener;
+        public readonly IEventListener eventListener;
 
         /// <summary>
         /// Cache supported events in case the user's
         /// <see cref="iText.Kernel.Pdf.Canvas.Parser.Listener.IEventListener.GetSupportedEvents()"/>
         /// method is not very efficient
         /// </summary>
-        protected internal readonly ICollection<EventType> supportedEvents;
+        public readonly ICollection<EventType> supportedEvents;
 
-        protected internal Path currentPath = new Path();
+        public Path currentPath = new Path();
 
         /// <summary>
         /// Indicates whether the current clipping path should be modified by
         /// intersecting it with the current path.
         /// </summary>
-        protected internal bool isClip;
+        public bool isClip;
 
         /// <summary>
         /// Specifies the filling rule which should be applied while calculating
         /// new clipping path.
         /// </summary>
-        protected internal int clippingRule;
+        public int clippingRule;
 
         /// <summary>A map with all supported operators (PDF syntax).</summary>
         private IDictionary<String, IContentOperator> operators;
@@ -295,7 +296,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
         }
 
         /// <summary>Loads all the supported graphics and text state operators in a map.</summary>
-        protected internal virtual void PopulateOperators() {
+        public virtual void PopulateOperators() {
             RegisterContentOperator(DEFAULT_OPERATOR, new PdfCanvasProcessor.IgnoreOperator());
             RegisterContentOperator("q", new PdfCanvasProcessor.PushGraphicsStateOperator());
             RegisterContentOperator("Q", new PdfCanvasProcessor.PopGraphicsStateOperator());
@@ -414,7 +415,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
         /// <see cref="iText.Kernel.Pdf.Canvas.PdfCanvasConstants.FillingRule.EVEN_ODD"/>
         /// In case it isn't applicable pass any <c>byte</c> value.
         /// </param>
-        protected internal virtual void PaintPath(int operation, int rule) {
+        public virtual void PaintPath(int operation, int rule) {
             ParserGraphicsState gs = GetGraphicsState();
             PathRenderInfo renderInfo = new PathRenderInfo(this.markedContentStack, gs, currentPath, operation, rule, 
                 isClip, clippingRule);
@@ -430,7 +431,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
         /// <summary>Invokes an operator.</summary>
         /// <param name="operator">the PDF Syntax of the operator</param>
         /// <param name="operands">a list with operands</param>
-        protected internal virtual void InvokeOperator(PdfLiteral @operator, IList<PdfObject> operands) {
+        public virtual void InvokeOperator(PdfLiteral @operator, IList<PdfObject> operands) {
             IContentOperator op = operators.Get(@operator.ToString());
             if (op == null) {
                 op = operators.Get(DEFAULT_OPERATOR);
@@ -438,16 +439,16 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
             op.Invoke(this, @operator, operands);
         }
 
-        protected internal virtual PdfStream GetXObjectStream(PdfName xobjectName) {
+        public virtual PdfStream GetXObjectStream(PdfName xobjectName) {
             PdfDictionary xobjects = GetResources().GetResource(PdfName.XObject);
             return xobjects.GetAsStream(xobjectName);
         }
 
-        protected internal virtual PdfResources GetResources() {
+        public virtual PdfResources GetResources() {
             return resourcesStack.Peek();
         }
 
-        protected internal virtual void PopulateXObjectDoHandlers() {
+        public virtual void PopulateXObjectDoHandlers() {
             RegisterXObjectDoHandler(PdfName.Default, new PdfCanvasProcessor.IgnoreXObjectDoHandler());
             RegisterXObjectDoHandler(PdfName.Form, new PdfCanvasProcessor.FormXObjectDoHandler());
             if (supportedEvents == null || supportedEvents.Contains(EventType.RENDER_IMAGE)) {
@@ -467,7 +468,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
         /// </remarks>
         /// <param name="fontDict"/>
         /// <returns>the font</returns>
-        protected internal virtual PdfFont GetFont(PdfDictionary fontDict) {
+        public virtual PdfFont GetFont(PdfDictionary fontDict) {
             if (fontDict.GetIndirectReference() == null) {
                 return PdfFontFactory.CreateFont(fontDict);
             }
@@ -486,13 +487,13 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
         /// <summary>Add to the marked content stack</summary>
         /// <param name="tag">the tag of the marked content</param>
         /// <param name="dict">the PdfDictionary associated with the marked content</param>
-        protected internal virtual void BeginMarkedContent(PdfName tag, PdfDictionary dict) {
+        public virtual void BeginMarkedContent(PdfName tag, PdfDictionary dict) {
             markedContentStack.Push(new CanvasTag(tag).SetProperties(dict));
         }
 
         /// <summary>Remove the latest marked content from the stack.</summary>
         /// <remarks>Remove the latest marked content from the stack.  Keeps track of the BMC, BDC and EMC operators.</remarks>
-        protected internal virtual void EndMarkedContent() {
+        public virtual void EndMarkedContent() {
             markedContentStack.Pop();
         }
 
@@ -509,7 +510,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
         /// <summary>This is a proxy to pass only those events to the event listener which are supported by it.</summary>
         /// <param name="data">event data</param>
         /// <param name="type">event type</param>
-        protected internal virtual void EventOccurred(IEventData data, EventType type) {
+        public virtual void EventOccurred(IEventData data, EventType type) {
             if (supportedEvents == null || supportedEvents.Contains(type)) {
                 eventListener.EventOccurred(data, type);
             }
@@ -867,9 +868,9 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
                         throw;
                     }
                     else {
-                        ILog logger = LogManager.GetLogger(typeof(PdfCanvasProcessor));
-                        logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.FAILED_TO_PROCESS_A_TRANSFORMATION_MATRIX
-                            ));
+                        //ILog logger = LogManager.GetLogger(typeof(PdfCanvasProcessor));
+                        //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.FAILED_TO_PROCESS_A_TRANSFORMATION_MATRIX
+                        //    ));
                     }
                 }
             }
@@ -998,7 +999,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
 
         /// <summary>A handler that implements operator (Q).</summary>
         /// <remarks>A handler that implements operator (Q). For more information see Table 51 ISO-32000-1</remarks>
-        protected internal class PopGraphicsStateOperator : IContentOperator {
+        public class PopGraphicsStateOperator : IContentOperator {
             /// <summary><inheritDoc/></summary>
             public virtual void Invoke(PdfCanvasProcessor processor, PdfLiteral @operator, IList<PdfObject> operands) {
                 processor.gsStack.Pop();
@@ -1164,16 +1165,16 @@ namespace iText.Kernel.Pdf.Canvas.Parser {
                 PdfName dictionaryName = ((PdfName)operand1);
                 PdfDictionary properties = resources.GetResource(PdfName.Properties);
                 if (null == properties) {
-                    ILog logger = LogManager.GetLogger(typeof(PdfCanvasProcessor));
-                    logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PDF_REFERS_TO_NOT_EXISTING_PROPERTY_DICTIONARY
-                        , PdfName.Properties));
+                    //ILog logger = LogManager.GetLogger(typeof(PdfCanvasProcessor));
+                    //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PDF_REFERS_TO_NOT_EXISTING_PROPERTY_DICTIONARY
+                    //    , PdfName.Properties));
                     return null;
                 }
                 PdfDictionary propertiesDictionary = properties.GetAsDictionary(dictionaryName);
                 if (null == propertiesDictionary) {
-                    ILog logger = LogManager.GetLogger(typeof(PdfCanvasProcessor));
-                    logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PDF_REFERS_TO_NOT_EXISTING_PROPERTY_DICTIONARY
-                        , dictionaryName));
+                    //ILog logger = LogManager.GetLogger(typeof(PdfCanvasProcessor));
+                    //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PDF_REFERS_TO_NOT_EXISTING_PROPERTY_DICTIONARY
+                    //    , dictionaryName));
                     return null;
                 }
                 return properties.GetAsDictionary(dictionaryName);

@@ -48,25 +48,25 @@ using iText.Kernel.Pdf.Tagging;
 
 namespace iText.Kernel.Pdf.Tagutils {
     public class DefaultAccessibilityProperties : AccessibilityProperties {
-        protected internal String role;
+        public String role;
 
-        protected internal String language;
+        public String language;
 
-        protected internal String actualText;
+        public String actualText;
 
-        protected internal String alternateDescription;
+        public String alternateDescription;
 
-        protected internal String expansion;
+        public String expansion;
 
-        protected internal IList<PdfStructureAttributes> attributesList = new List<PdfStructureAttributes>();
+        public IList<PdfStructureAttributes> attributesList = new List<PdfStructureAttributes>();
 
-        protected internal String phoneme;
+        public String phoneme;
 
-        protected internal String phoneticAlphabet;
+        public String phoneticAlphabet;
 
-        protected internal PdfNamespace @namespace;
+        public PdfNamespace @namespace;
 
-        protected internal IList<TagTreePointer> refs = new List<TagTreePointer>();
+        public IList<TagTreePointer> refs = new List<TagTreePointer>();
 
         public DefaultAccessibilityProperties(String role) {
             this.role = role;

@@ -61,15 +61,15 @@ namespace iText.Forms.Fields {
 
         public static readonly int FF_RADIOS_IN_UNISON = MakeFieldFlag(26);
 
-        protected internal PdfButtonFormField(PdfDocument pdfDocument)
+        public PdfButtonFormField(PdfDocument pdfDocument)
             : base(pdfDocument) {
         }
 
-        protected internal PdfButtonFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
+        public PdfButtonFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
             : base(widget, pdfDocument) {
         }
 
-        protected internal PdfButtonFormField(PdfDictionary pdfObject)
+        public PdfButtonFormField(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

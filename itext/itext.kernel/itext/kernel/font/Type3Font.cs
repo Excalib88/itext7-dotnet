@@ -101,14 +101,14 @@ namespace iText.Kernel.Font {
         /// If full name is null, it will be set as well.
         /// </remarks>
         /// <param name="fontName">the PostScript name of the font, shall not be null or empty.</param>
-        protected internal override void SetFontName(String fontName) {
+        public override void SetFontName(String fontName) {
             //This dummy override allows PdfType3Font to set font name because of different modules.
             base.SetFontName(fontName);
         }
 
         /// <summary>Sets a preferred font family name.</summary>
         /// <param name="fontFamily">a preferred font family name.</param>
-        protected internal override void SetFontFamily(String fontFamily) {
+        public override void SetFontFamily(String fontFamily) {
             //This dummy override allows PdfType3Font to set font name because of different modules.
             base.SetFontFamily(fontFamily);
         }
@@ -118,7 +118,7 @@ namespace iText.Kernel.Font {
         /// integer form 100 to 900. See
         /// <see cref="iText.IO.Font.Constants.FontWeights"/>.
         /// </param>
-        protected internal override void SetFontWeight(int fontWeight) {
+        public override void SetFontWeight(int fontWeight) {
             //This dummy override allows PdfType3Font to set font name because of different modules.
             base.SetFontWeight(fontWeight);
         }
@@ -128,7 +128,7 @@ namespace iText.Kernel.Font {
         /// 
         /// <see cref="iText.IO.Font.Constants.FontStretches"/>.
         /// </param>
-        protected internal override void SetFontStretch(String fontWidth) {
+        public override void SetFontStretch(String fontWidth) {
             //This dummy override allows PdfType3Font to set font name because of different modules.
             base.SetFontStretch(fontWidth);
         }
@@ -140,7 +140,7 @@ namespace iText.Kernel.Font {
         /// Italic angle in counter-clockwise degrees from the vertical. Zero for upright text, negative for text that leans to the right (forward).
         /// </remarks>
         /// <param name="italicAngle">in counter-clockwise degrees from the vertical</param>
-        protected internal override void SetItalicAngle(int italicAngle) {
+        public override void SetItalicAngle(int italicAngle) {
             //This dummy override allows PdfType3Font to set the PostScript italicAngel because of different modules.
             //This dummy override allows PdfType3Font to set font name because of different modules.
             base.SetItalicAngle(italicAngle);

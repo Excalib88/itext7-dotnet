@@ -51,7 +51,7 @@ using iText.StyledXmlParser.Jsoup.Nodes;
 namespace iText.StyledXmlParser.Jsoup.Select {
     /// <summary>Evaluates that an element matches the selector.</summary>
     public abstract class Evaluator {
-        protected internal Evaluator() {
+        public Evaluator() {
         }
 
         /// <summary>Test if the element meets the evaluator's requirements.</summary>
@@ -383,9 +383,9 @@ namespace iText.StyledXmlParser.Jsoup.Select {
         }
 
         public abstract class CssNthEvaluator : Evaluator {
-            protected internal readonly int a;
+            public readonly int a;
 
-            protected internal readonly int b;
+            public readonly int b;
 
             public CssNthEvaluator(int a, int b) {
                 this.a = a;
@@ -420,9 +420,9 @@ namespace iText.StyledXmlParser.Jsoup.Select {
                     );
             }
 
-            protected internal abstract String GetPseudoClass();
+            public abstract String GetPseudoClass();
 
-            protected internal abstract int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
+            public abstract int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
                  element);
         }
 
@@ -433,12 +433,12 @@ namespace iText.StyledXmlParser.Jsoup.Select {
                 : base(a, b) {
             }
 
-            protected internal override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
+            public override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
                  element) {
                 return element.ElementSiblingIndex() + 1;
             }
 
-            protected internal override String GetPseudoClass() {
+            public override String GetPseudoClass() {
                 return "nth-child";
             }
         }
@@ -450,13 +450,13 @@ namespace iText.StyledXmlParser.Jsoup.Select {
                 : base(a, b) {
             }
 
-            protected internal override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
+            public override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
                  element) {
                 return ((iText.StyledXmlParser.Jsoup.Nodes.Element)element.Parent()).Children().Count - element.ElementSiblingIndex
                     ();
             }
 
-            protected internal override String GetPseudoClass() {
+            public override String GetPseudoClass() {
                 return "nth-last-child";
             }
         }
@@ -467,7 +467,7 @@ namespace iText.StyledXmlParser.Jsoup.Select {
                 : base(a, b) {
             }
 
-            protected internal override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
+            public override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
                  element) {
                 int pos = 0;
                 Elements family = ((iText.StyledXmlParser.Jsoup.Nodes.Element)element.Parent()).Children();
@@ -482,7 +482,7 @@ namespace iText.StyledXmlParser.Jsoup.Select {
                 return pos;
             }
 
-            protected internal override String GetPseudoClass() {
+            public override String GetPseudoClass() {
                 return "nth-of-type";
             }
         }
@@ -492,7 +492,7 @@ namespace iText.StyledXmlParser.Jsoup.Select {
                 : base(a, b) {
             }
 
-            protected internal override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
+            public override int CalculatePosition(iText.StyledXmlParser.Jsoup.Nodes.Element root, iText.StyledXmlParser.Jsoup.Nodes.Element
                  element) {
                 int pos = 0;
                 Elements family = ((iText.StyledXmlParser.Jsoup.Nodes.Element)element.Parent()).Children();
@@ -504,7 +504,7 @@ namespace iText.StyledXmlParser.Jsoup.Select {
                 return pos;
             }
 
-            protected internal override String GetPseudoClass() {
+            public override String GetPseudoClass() {
                 return "nth-last-of-type";
             }
         }

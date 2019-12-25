@@ -73,7 +73,7 @@ namespace iText.IO.Font.Otf {
             return false;
         }
 
-        protected internal override void ReadSubTable(int subTableLocation) {
+        public override void ReadSubTable(int subTableLocation) {
             openReader.rf.Seek(subTableLocation);
             int gposFormat = openReader.rf.ReadShort();
             switch (gposFormat) {
@@ -128,7 +128,7 @@ namespace iText.IO.Font.Otf {
                 return changed;
             }
 
-            protected internal virtual void ReadFormat(int subTableLocation) {
+            public virtual void ReadFormat(int subTableLocation) {
                 int coverage = openReader.rf.ReadUnsignedShort() + subTableLocation;
                 int valueFormat1 = openReader.rf.ReadUnsignedShort();
                 int valueFormat2 = openReader.rf.ReadUnsignedShort();
@@ -151,7 +151,7 @@ namespace iText.IO.Font.Otf {
                 }
             }
 
-            protected internal override void ReadSubTable(int subTableLocation) {
+            public override void ReadSubTable(int subTableLocation) {
             }
             //never called here
         }
@@ -203,7 +203,7 @@ namespace iText.IO.Font.Otf {
                 return true;
             }
 
-            protected internal virtual void ReadFormat(int subTableLocation) {
+            public virtual void ReadFormat(int subTableLocation) {
                 int coverage = openReader.rf.ReadUnsignedShort() + subTableLocation;
                 int valueFormat1 = openReader.rf.ReadUnsignedShort();
                 int valueFormat2 = openReader.rf.ReadUnsignedShort();
@@ -226,7 +226,7 @@ namespace iText.IO.Font.Otf {
                 classDef2 = openReader.ReadClassDefinition(locationClass2);
             }
 
-            protected internal override void ReadSubTable(int subTableLocation) {
+            public override void ReadSubTable(int subTableLocation) {
             }
             //never called here
         }

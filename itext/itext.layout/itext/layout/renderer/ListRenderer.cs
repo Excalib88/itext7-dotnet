@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using iText.IO.Font.Constants;
 using iText.IO.Util;
 using iText.Kernel.Font;
@@ -93,14 +94,14 @@ namespace iText.Layout.Renderer {
             return new iText.Layout.Renderer.ListRenderer((List)modelElement);
         }
 
-        protected internal override AbstractRenderer CreateSplitRenderer(int layoutResult) {
+        public override AbstractRenderer CreateSplitRenderer(int layoutResult) {
             AbstractRenderer splitRenderer = base.CreateSplitRenderer(layoutResult);
             splitRenderer.AddAllProperties(GetOwnProperties());
             splitRenderer.SetProperty(Property.LIST_SYMBOLS_INITIALIZED, true);
             return splitRenderer;
         }
 
-        protected internal override AbstractRenderer CreateOverflowRenderer(int layoutResult) {
+        public override AbstractRenderer CreateOverflowRenderer(int layoutResult) {
             AbstractRenderer overflowRenderer = base.CreateOverflowRenderer(layoutResult);
             overflowRenderer.AddAllProperties(GetOwnProperties());
             overflowRenderer.SetProperty(Property.LIST_SYMBOLS_INITIALIZED, true);
@@ -116,7 +117,7 @@ namespace iText.Layout.Renderer {
             return base.GetMinMaxWidth();
         }
 
-        protected internal virtual IRenderer MakeListSymbolRenderer(int index, IRenderer renderer) {
+        public virtual IRenderer MakeListSymbolRenderer(int index, IRenderer renderer) {
             IRenderer symbolRenderer = CreateListSymbolRenderer(index, renderer);
             // underlying should not be applied
             if (symbolRenderer != null) {
@@ -420,9 +421,9 @@ namespace iText.Layout.Renderer {
                     childRenderer.DeleteOwnProperty(Property.MARGIN_LEFT);
                     UnitValue marginLeftUV = childRenderer.GetProperty(Property.MARGIN_LEFT, UnitValue.CreatePointValue(0f));
                     if (!marginLeftUV.IsPointValue()) {
-                        ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ListRenderer));
-                        logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
-                            .MARGIN_LEFT));
+                        //ILog logger = LogManager.GetLogger(typeof(iText.Layout.Renderer.ListRenderer));
+                        //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.PROPERTY_IN_PERCENTS_NOT_SUPPORTED, Property
+                        //    .MARGIN_LEFT));
                     }
                     float calculatedMargin = marginLeftUV.GetValue();
                     if ((ListSymbolPosition)GetListItemOrListProperty(childRenderer, this, Property.LIST_SYMBOL_POSITION) == ListSymbolPosition

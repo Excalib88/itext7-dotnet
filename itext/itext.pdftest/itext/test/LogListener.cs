@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+//using Common.Logging;
+
 using Common.Logging.Simple;
 using iText.Test.Attributes;
 using NUnit.Framework;

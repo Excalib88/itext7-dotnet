@@ -57,14 +57,14 @@ namespace iText.Layout.Layout {
         /// <see cref="LayoutArea">area</see>
         /// the content to be placed on.
         /// </summary>
-        protected internal LayoutArea area;
+        public LayoutArea area;
 
-        protected internal MarginsCollapseInfo marginsCollapseInfo;
+        public MarginsCollapseInfo marginsCollapseInfo;
 
-        protected internal IList<Rectangle> floatRendererAreas = new List<Rectangle>();
+        public IList<Rectangle> floatRendererAreas = new List<Rectangle>();
 
         /// <summary>Indicates whether the height is clipped or not.</summary>
-        protected internal bool clippedHeight = false;
+        public bool clippedHeight = false;
 
         public LayoutContext(LayoutArea area) {
             this.area = area;

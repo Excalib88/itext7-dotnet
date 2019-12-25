@@ -242,7 +242,7 @@ namespace iText.Signatures {
             return this;
         }
 
-        protected override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 

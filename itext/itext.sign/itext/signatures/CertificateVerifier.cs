@@ -58,10 +58,10 @@ namespace iText.Signatures {
     /// </remarks>
     public class CertificateVerifier {
         /// <summary>The previous CertificateVerifier in the chain of verifiers.</summary>
-        protected internal iText.Signatures.CertificateVerifier verifier;
+        public iText.Signatures.CertificateVerifier verifier;
 
         /// <summary>Indicates if going online to verify a certificate is allowed.</summary>
-        protected internal bool onlineCheckingAllowed = true;
+        public bool onlineCheckingAllowed = true;
 
         /// <summary>Creates the final CertificateVerifier in a chain of verifiers.</summary>
         /// <param name="verifier">the previous verifier in the chain</param>

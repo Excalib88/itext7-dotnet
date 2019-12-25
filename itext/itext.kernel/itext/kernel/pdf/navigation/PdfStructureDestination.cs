@@ -123,7 +123,7 @@ namespace iText.Kernel.Pdf.Navigation {
             return null;
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
 

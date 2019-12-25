@@ -68,16 +68,16 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return new StandardDecryptor(nextObjectKey, 0, nextObjectKeySize);
         }
 
-        protected internal override String GetDigestAlgorithm() {
+        public override String GetDigestAlgorithm() {
             return "SHA-1";
         }
 
-        protected internal override void InitKey(byte[] globalKey, int keyLength) {
+        public override void InitKey(byte[] globalKey, int keyLength) {
             mkey = new byte[keyLength / 8];
             Array.Copy(globalKey, 0, mkey, 0, mkey.Length);
         }
 
-        protected internal override void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
+        public override void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
              encryptMetadata, bool embeddedFilesOnly) {
             encryptionDictionary.Put(PdfName.Filter, PdfName.Adobe_PubSec);
             encryptionDictionary.Put(PdfName.R, new PdfNumber(2));

@@ -57,7 +57,7 @@ namespace iText.Kernel.Pdf.Canvas.Parser.Listener {
     /// instances for each glyph occurred.
     /// </summary>
     public class GlyphEventListener : IEventListener {
-        protected internal readonly IEventListener delegate_;
+        public readonly IEventListener delegate_;
 
         /// <summary>
         /// Constructs a

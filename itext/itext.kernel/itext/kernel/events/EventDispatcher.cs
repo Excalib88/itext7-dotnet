@@ -51,7 +51,7 @@ namespace iText.Kernel.Events {
     /// implementations.
     /// </summary>
     public class EventDispatcher : IEventDispatcher {
-        protected internal IDictionary<String, IList<IEventHandler>> eventHandlers = new Dictionary<String, IList<
+        public IDictionary<String, IList<IEventHandler>> eventHandlers = new Dictionary<String, IList<
             IEventHandler>>();
 
         public virtual void AddEventHandler(String type, IEventHandler handler) {

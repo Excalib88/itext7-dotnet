@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Source;
 using iText.IO.Util;
 
@@ -57,7 +58,7 @@ namespace iText.Kernel.Pdf {
         // For internal usage only
         private PdfOutputStream duplicateStream = null;
 
-        protected internal WriterProperties properties;
+        public WriterProperties properties;
 
         /// <summary>Currently active object stream.</summary>
         /// <remarks>
@@ -79,7 +80,7 @@ namespace iText.Kernel.Pdf {
         private SmartModePdfObjectsSerializer smartModeSerializer = new SmartModePdfObjectsSerializer();
 
         //forewarned is forearmed
-        protected internal bool isUserWarnedAboutAcroFormCopying;
+        public bool isUserWarnedAboutAcroFormCopying;
 
         /// <summary>Create a PdfWriter writing to the passed File and with default writer properties.</summary>
         /// <param name="file">File to write to.</param>
@@ -176,7 +177,7 @@ namespace iText.Kernel.Pdf {
             return objectStream;
         }
 
-        protected internal virtual void InitCryptoIfSpecified(PdfVersion version) {
+        public virtual void InitCryptoIfSpecified(PdfVersion version) {
             EncryptionProperties encryptProps = properties.encryptionProperties;
             if (properties.IsStandardEncryptionUsed()) {
                 crypto = new PdfEncryption(encryptProps.userPassword, encryptProps.ownerPassword, encryptProps.standardEncryptPermissions
@@ -196,7 +197,7 @@ namespace iText.Kernel.Pdf {
         ///     </remarks>
         /// <param name="pdfObject">object to flush.</param>
         /// <param name="canBeInObjStm">indicates whether object can be placed into object stream.</param>
-        protected internal virtual void FlushObject(PdfObject pdfObject, bool canBeInObjStm) {
+        public virtual void FlushObject(PdfObject pdfObject, bool canBeInObjStm) {
             PdfIndirectReference indirectReference = pdfObject.GetIndirectReference();
             if (IsFullCompression() && canBeInObjStm) {
                 PdfObjectStream objectStream = GetObjectStream();
@@ -239,7 +240,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual PdfObject CopyObject(PdfObject obj, PdfDocument documentTo, bool allowDuplicating
+        public virtual PdfObject CopyObject(PdfObject obj, PdfDocument documentTo, bool allowDuplicating
             ) {
             if (obj is PdfIndirectReference) {
                 obj = ((PdfIndirectReference)obj).GetRefersTo();
@@ -248,8 +249,8 @@ namespace iText.Kernel.Pdf {
                 obj = PdfNull.PDF_NULL;
             }
             if (CheckTypeOfPdfDictionary(obj, PdfName.Catalog)) {
-                ILog logger = LogManager.GetLogger(typeof(PdfReader));
-                logger.Warn(iText.IO.LogMessageConstant.MAKE_COPY_OF_CATALOG_DICTIONARY_IS_FORBIDDEN);
+                //ILog logger = LogManager.GetLogger(typeof(PdfReader));
+                //logger.Warn(iText.IO.LogMessageConstant.MAKE_COPY_OF_CATALOG_DICTIONARY_IS_FORBIDDEN);
                 obj = PdfNull.PDF_NULL;
             }
             PdfIndirectReference indirectReference = obj.GetIndirectReference();
@@ -288,7 +289,7 @@ namespace iText.Kernel.Pdf {
 
         /// <summary>Writes object to body of PDF document.</summary>
         /// <param name="pdfObj">object to write.</param>
-        protected internal virtual void WriteToBody(PdfObject pdfObj) {
+        public virtual void WriteToBody(PdfObject pdfObj) {
             if (crypto != null) {
                 crypto.SetHashKeyForNextObject(pdfObj.GetIndirectReference().GetObjNumber(), pdfObj.GetIndirectReference()
                     .GetGenNumber());
@@ -300,7 +301,7 @@ namespace iText.Kernel.Pdf {
         }
 
         /// <summary>Writes PDF header.</summary>
-        protected internal virtual void WriteHeader() {
+        public virtual void WriteHeader() {
             WriteByte('%').WriteString(document.GetPdfVersion().ToString()).WriteString("\n%\u00e2\u00e3\u00cf\u00d3\n"
                 );
         }
@@ -313,7 +314,7 @@ namespace iText.Kernel.Pdf {
         /// <see cref="PdfIndirectReference">references</see>
         /// that are forbidden to be flushed automatically.
         /// </param>
-        protected internal virtual void FlushWaitingObjects(ICollection<PdfIndirectReference> forbiddenToFlush) {
+        public virtual void FlushWaitingObjects(ICollection<PdfIndirectReference> forbiddenToFlush) {
             PdfXrefTable xref = document.GetXref();
             bool needFlush = true;
             while (needFlush) {
@@ -345,7 +346,7 @@ namespace iText.Kernel.Pdf {
         /// <see cref="PdfIndirectReference">references</see>
         /// that are forbidden to be flushed automatically.
         /// </param>
-        protected internal virtual void FlushModifiedWaitingObjects(ICollection<PdfIndirectReference> forbiddenToFlush
+        public virtual void FlushModifiedWaitingObjects(ICollection<PdfIndirectReference> forbiddenToFlush
             ) {
             PdfXrefTable xref = document.GetXref();
             for (int i = 1; i < xref.Size(); i++) {

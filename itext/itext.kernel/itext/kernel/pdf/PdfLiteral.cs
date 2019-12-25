@@ -92,7 +92,7 @@ namespace iText.Kernel.Pdf {
             return content.Length;
         }
 
-        protected internal override void GenerateContent() {
+        public override void GenerateContent() {
         }
 
         public override bool Equals(Object o) {
@@ -104,11 +104,11 @@ namespace iText.Kernel.Pdf {
             return content == null ? 0 : JavaUtil.ArraysHashCode(content);
         }
 
-        protected internal override PdfObject NewInstance() {
+        public override PdfObject NewInstance() {
             return new iText.Kernel.Pdf.PdfLiteral();
         }
 
-        protected internal override void CopyContent(PdfObject from, PdfDocument document) {
+        public override void CopyContent(PdfObject from, PdfDocument document) {
             base.CopyContent(from, document);
             iText.Kernel.Pdf.PdfLiteral literal = (iText.Kernel.Pdf.PdfLiteral)from;
             this.content = literal.GetInternalContent();

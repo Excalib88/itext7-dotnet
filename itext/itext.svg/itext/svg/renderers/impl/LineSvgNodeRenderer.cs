@@ -53,7 +53,7 @@ namespace iText.Svg.Renderers.Impl {
     /// implementation for the &lt;line&gt; tag.
     /// </summary>
     public class LineSvgNodeRenderer : AbstractSvgNodeRenderer {
-        protected internal override void DoDraw(SvgDrawContext context) {
+        public override void DoDraw(SvgDrawContext context) {
             PdfCanvas canvas = context.GetCurrentCanvas();
             canvas.WriteLiteral("% line\n");
             if (attributesAndStyles.Count > 0) {
@@ -77,7 +77,7 @@ namespace iText.Svg.Renderers.Impl {
             }
         }
 
-        protected internal override bool CanElementFill() {
+        public override bool CanElementFill() {
             return false;
         }
 

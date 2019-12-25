@@ -42,7 +42,9 @@ For more information, please contact iText Software Corp. at this
 address: sales@itextpdf.com
 */
 using System.IO;
-using Common.Logging;
+////using Common.Logging;
+
+
 using iText.IO.Source;
 using iText.IO.Util;
 using iText.Kernel;
@@ -67,10 +69,10 @@ namespace iText.Kernel.Pdf {
         private byte[] duplicateContentBuffer = null;
 
         /// <summary>Document associated with PdfOutputStream.</summary>
-        protected internal PdfDocument document = null;
+        public PdfDocument document = null;
 
         /// <summary>Contains the business logic for cryptography.</summary>
-        protected internal PdfEncryption crypto;
+        public PdfEncryption crypto;
 
         /// <summary>Create a pdfOutputSteam writing to the passed OutputStream.</summary>
         /// <param name="outputStream">Outputstream to write to.</param>
@@ -182,9 +184,9 @@ namespace iText.Kernel.Pdf {
                 Write(key);
                 PdfObject value = pdfDictionary.Get(key, false);
                 if (value == null) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfOutputStream));
-                    logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.INVALID_KEY_VALUE_KEY_0_HAS_NULL_VALUE, key
-                        ));
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfOutputStream));
+                    //logger.Warn(MessageFormatUtil.Format(iText.IO.LogMessageConstant.INVALID_KEY_VALUE_KEY_0_HAS_NULL_VALUE, key
+                    //    ));
                     value = PdfNull.PDF_NULL;
                 }
                 if ((value.GetObjectType() == PdfObject.NUMBER || value.GetObjectType() == PdfObject.LITERAL || value.GetObjectType
@@ -212,15 +214,15 @@ namespace iText.Kernel.Pdf {
                 throw new PdfException(PdfException.PdfIndirectObjectBelongsToOtherPdfDocument);
             }
             if (indirectReference.IsFree()) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfOutputStream));
-                logger.Error(iText.IO.LogMessageConstant.FLUSHED_OBJECT_CONTAINS_FREE_REFERENCE);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfOutputStream));
+                //logger.Error(iText.IO.LogMessageConstant.FLUSHED_OBJECT_CONTAINS_FREE_REFERENCE);
                 Write(PdfNull.PDF_NULL);
             }
             else {
                 if (indirectReference.refersTo == null && (indirectReference.CheckState(PdfObject.MODIFIED) || indirectReference
                     .GetReader() == null || !(indirectReference.GetOffset() > 0 || indirectReference.GetIndex() >= 0))) {
-                    ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfOutputStream));
-                    logger.Error(iText.IO.LogMessageConstant.FLUSHED_OBJECT_CONTAINS_REFERENCE_WHICH_NOT_REFER_TO_ANY_OBJECT);
+                    //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfOutputStream));
+                    //logger.Error(iText.IO.LogMessageConstant.FLUSHED_OBJECT_CONTAINS_REFERENCE_WHICH_NOT_REFER_TO_ANY_OBJECT);
                     Write(PdfNull.PDF_NULL);
                 }
                 else {
@@ -398,7 +400,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual bool CheckEncryption(PdfStream pdfStream) {
+        public virtual bool CheckEncryption(PdfStream pdfStream) {
             if (crypto == null || crypto.IsEmbeddedFilesOnly()) {
                 return false;
             }
@@ -427,7 +429,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual bool ContainsFlateFilter(PdfStream pdfStream) {
+        public virtual bool ContainsFlateFilter(PdfStream pdfStream) {
             PdfObject filter = pdfStream.Get(PdfName.Filter);
             if (filter != null) {
                 if (filter.GetObjectType() == PdfObject.NAME) {
@@ -449,7 +451,7 @@ namespace iText.Kernel.Pdf {
             return false;
         }
 
-        protected internal virtual void UpdateCompressionFilter(PdfStream pdfStream) {
+        public virtual void UpdateCompressionFilter(PdfStream pdfStream) {
             PdfObject filter = pdfStream.Get(PdfName.Filter);
             if (filter == null) {
                 pdfStream.Put(PdfName.Filter, PdfName.FlateDecode);
@@ -485,7 +487,7 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual byte[] DecodeFlateBytes(PdfStream stream, byte[] bytes) {
+        public virtual byte[] DecodeFlateBytes(PdfStream stream, byte[] bytes) {
             PdfObject filterObject = stream.Get(PdfName.Filter);
             if (filterObject == null) {
                 return bytes;

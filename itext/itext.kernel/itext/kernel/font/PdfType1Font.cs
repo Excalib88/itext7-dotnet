@@ -134,7 +134,7 @@ namespace iText.Kernel.Font {
             }
         }
 
-        protected internal override bool IsBuiltInFont() {
+        public override bool IsBuiltInFont() {
             return ((Type1Font)GetFontProgram()).IsBuiltInFont();
         }
 
@@ -146,7 +146,7 @@ namespace iText.Kernel.Font {
         /// ,
         /// otherwise the font is read and output in a PdfStream object.
         /// </summary>
-        protected internal override void AddFontStream(PdfDictionary fontDescriptor) {
+        public override void AddFontStream(PdfDictionary fontDescriptor) {
             if (embedded) {
                 if (fontProgram is IDocFontProgram) {
                     IDocFontProgram docType1Font = (IDocFontProgram)fontProgram;

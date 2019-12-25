@@ -60,7 +60,7 @@ namespace iText.Layout.Renderer {
     /// current content area and initialize a new one.
     /// </remarks>
     public class AreaBreakRenderer : IRenderer {
-        protected internal AreaBreak areaBreak;
+        public AreaBreak areaBreak;
 
         /// <summary>Creates an AreaBreakRenderer.</summary>
         /// <param name="areaBreak">

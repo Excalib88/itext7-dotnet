@@ -132,7 +132,7 @@ namespace iText.Kernel.Pdf {
             GetPdfObject().Put(PdfName.S, subtype);
         }
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return false;
         }
     }

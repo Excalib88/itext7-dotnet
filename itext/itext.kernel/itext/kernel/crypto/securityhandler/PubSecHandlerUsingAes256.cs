@@ -62,16 +62,16 @@ namespace iText.Kernel.Crypto.Securityhandler {
         }
 
         // in AES256 we don't recalculate nextObjectKey
-        protected internal override String GetDigestAlgorithm() {
+        public override String GetDigestAlgorithm() {
             return "SHA-256";
         }
 
-        protected internal override void InitKey(byte[] globalKey, int keyLength) {
+        public override void InitKey(byte[] globalKey, int keyLength) {
             nextObjectKey = globalKey;
             nextObjectKeySize = 32;
         }
 
-        protected internal override void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
+        public override void SetPubSecSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool
              encryptMetadata, bool embeddedFilesOnly) {
             encryptionDictionary.Put(PdfName.Filter, PdfName.Adobe_PubSec);
             encryptionDictionary.Put(PdfName.SubFilter, PdfName.Adbe_pkcs7_s5);

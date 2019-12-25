@@ -65,15 +65,15 @@ namespace iText.Forms.Fields {
 
         public static readonly int FF_COMMIT_ON_SEL_CHANGE = MakeFieldFlag(27);
 
-        protected internal PdfChoiceFormField(PdfDocument pdfDocument)
+        public PdfChoiceFormField(PdfDocument pdfDocument)
             : base(pdfDocument) {
         }
 
-        protected internal PdfChoiceFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
+        public PdfChoiceFormField(PdfWidgetAnnotation widget, PdfDocument pdfDocument)
             : base(widget, pdfDocument) {
         }
 
-        protected internal PdfChoiceFormField(PdfDictionary pdfObject)
+        public PdfChoiceFormField(PdfDictionary pdfObject)
             : base(pdfObject) {
         }
 

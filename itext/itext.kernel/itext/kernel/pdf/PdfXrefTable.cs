@@ -44,7 +44,8 @@ address: sales@itextpdf.com
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Source;
 using iText.IO.Util;
 using iText.Kernel;
@@ -176,24 +177,24 @@ namespace iText.Kernel.Pdf {
 
         /// <summary>Creates next available indirect reference.</summary>
         /// <returns>created indirect reference.</returns>
-        protected internal virtual PdfIndirectReference CreateNextIndirectReference(PdfDocument document) {
+        public virtual PdfIndirectReference CreateNextIndirectReference(PdfDocument document) {
             PdfIndirectReference reference = new PdfIndirectReference(document, ++count);
             Add(reference);
             return (PdfIndirectReference)reference.SetState(PdfObject.MODIFIED);
         }
 
-        protected internal virtual void FreeReference(PdfIndirectReference reference) {
+        public virtual void FreeReference(PdfIndirectReference reference) {
             if (reference.IsFree()) {
                 return;
             }
             if (reference.CheckState(PdfObject.MUST_BE_FLUSHED)) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfXrefTable));
-                logger.Error(iText.IO.LogMessageConstant.INDIRECT_REFERENCE_USED_IN_FLUSHED_OBJECT_MADE_FREE);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfXrefTable));
+                //logger.Error(iText.IO.LogMessageConstant.INDIRECT_REFERENCE_USED_IN_FLUSHED_OBJECT_MADE_FREE);
                 return;
             }
             if (reference.CheckState(PdfObject.FLUSHED)) {
-                ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfXrefTable));
-                logger.Error(iText.IO.LogMessageConstant.ALREADY_FLUSHED_INDIRECT_OBJECT_MADE_FREE);
+                //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.PdfXrefTable));
+                //logger.Error(iText.IO.LogMessageConstant.ALREADY_FLUSHED_INDIRECT_OBJECT_MADE_FREE);
                 return;
             }
             reference.SetState(PdfObject.FREE).SetState(PdfObject.MODIFIED);
@@ -203,14 +204,14 @@ namespace iText.Kernel.Pdf {
             }
         }
 
-        protected internal virtual void SetCapacity(int capacity) {
+        public virtual void SetCapacity(int capacity) {
             if (capacity > xref.Length) {
                 ExtendXref(capacity);
             }
         }
 
         /// <summary>Writes cross reference table and trailer to PDF.</summary>
-        protected internal virtual void WriteXrefTableAndTrailer(PdfDocument document, PdfObject fileId, PdfObject
+        public virtual void WriteXrefTableAndTrailer(PdfDocument document, PdfObject fileId, PdfObject
              crypto) {
             PdfWriter writer = document.GetWriter();
             if (!document.properties.appendMode) {
@@ -411,7 +412,7 @@ namespace iText.Kernel.Pdf {
         /// of an outputted PDF file.
         /// </remarks>
         /// <param name="document">pdfDocument to write the fingerprint to</param>
-        protected internal static void WriteKeyInfo(PdfDocument document) {
+        public static void WriteKeyInfo(PdfDocument document) {
             PdfWriter writer = document.GetWriter();
             FingerPrint fingerPrint = document.GetFingerPrint();
             String platform = " for .NET";

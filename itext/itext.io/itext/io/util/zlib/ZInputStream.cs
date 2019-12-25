@@ -43,15 +43,15 @@ namespace System.util.zlib {
 	{
 		private const int BufferSize = 512;
 
-		protected ZStream z = new ZStream();
-		protected int flushLevel = JZlib.Z_NO_FLUSH;
+		public ZStream z = new ZStream();
+		public int flushLevel = JZlib.Z_NO_FLUSH;
 		// TODO Allow custom buf
-		protected byte[] buf = new byte[BufferSize];
-		protected byte[] buf1 = new byte[1];
-		protected bool compress;
+		public byte[] buf = new byte[BufferSize];
+		public byte[] buf1 = new byte[1];
+		public bool compress;
 
-		protected Stream input;
-		protected bool closed;
+		public Stream input;
+		public bool closed;
 
 		private bool nomoreinput = false;
 
@@ -92,7 +92,7 @@ namespace System.util.zlib {
 		public sealed override bool CanSeek { get { return false; } }
 		public sealed override bool CanWrite { get { return false; } }
 
-	    protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing) {
 	        if (disposing) {
 	            if (!closed)
 	            {

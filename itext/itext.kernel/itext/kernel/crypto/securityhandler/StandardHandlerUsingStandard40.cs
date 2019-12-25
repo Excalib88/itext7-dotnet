@@ -49,21 +49,21 @@ using iText.Kernel.Pdf;
 
 namespace iText.Kernel.Crypto.Securityhandler {
     public class StandardHandlerUsingStandard40 : StandardSecurityHandler {
-        protected internal static readonly byte[] pad = new byte[] { (byte)0x28, (byte)0xBF, (byte)0x4E, (byte)0x5E
+        public static readonly byte[] pad = new byte[] { (byte)0x28, (byte)0xBF, (byte)0x4E, (byte)0x5E
             , (byte)0x4E, (byte)0x75, (byte)0x8A, (byte)0x41, (byte)0x64, (byte)0x00, (byte)0x4E, (byte)0x56, (byte
             )0xFF, (byte)0xFA, (byte)0x01, (byte)0x08, (byte)0x2E, (byte)0x2E, (byte)0x00, (byte)0xB6, (byte)0xD0, 
             (byte)0x68, (byte)0x3E, (byte)0x80, (byte)0x2F, (byte)0x0C, (byte)0xA9, (byte)0xFE, (byte)0x64, (byte)
             0x53, (byte)0x69, (byte)0x7A };
 
-        protected internal static readonly byte[] metadataPad = new byte[] { (byte)255, (byte)255, (byte)255, (byte
+        public static readonly byte[] metadataPad = new byte[] { (byte)255, (byte)255, (byte)255, (byte
             )255 };
 
-        protected internal byte[] documentId;
+        public byte[] documentId;
 
         // stores key length of the main key
-        protected internal int keyLength;
+        public int keyLength;
 
-        protected internal ARCFOUREncryption arcfour = new ARCFOUREncryption();
+        public ARCFOUREncryption arcfour = new ARCFOUREncryption();
 
         public StandardHandlerUsingStandard40(PdfDictionary encryptionDictionary, byte[] userPassword, byte[] ownerPassword
             , int permissions, bool encryptMetadata, bool embeddedFilesOnly, byte[] documentId) {
@@ -105,13 +105,13 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return userPad;
         }
 
-        protected internal virtual void CalculatePermissions(int permissions) {
+        public virtual void CalculatePermissions(int permissions) {
             permissions |= PERMS_MASK_1_FOR_REVISION_2;
             permissions &= PERMS_MASK_2;
             this.permissions = permissions;
         }
 
-        protected internal virtual byte[] ComputeOwnerKey(byte[] userPad, byte[] ownerPad) {
+        public virtual byte[] ComputeOwnerKey(byte[] userPad, byte[] ownerPad) {
             byte[] ownerKey = new byte[32];
             byte[] digest = md5.Digest(ownerPad);
             arcfour.PrepareARCFOURKey(digest, 0, 5);
@@ -119,7 +119,7 @@ namespace iText.Kernel.Crypto.Securityhandler {
             return ownerKey;
         }
 
-        protected internal virtual void ComputeGlobalEncryptionKey(byte[] userPad, byte[] ownerKey, bool encryptMetadata
+        public virtual void ComputeGlobalEncryptionKey(byte[] userPad, byte[] ownerKey, bool encryptMetadata
             ) {
             mkey = new byte[keyLength / 8];
             // fixed by ujihara in order to follow PDF reference
@@ -143,20 +143,20 @@ namespace iText.Kernel.Crypto.Securityhandler {
             Array.Copy(digest, 0, mkey, 0, mkey.Length);
         }
 
-        protected internal virtual byte[] ComputeUserKey() {
+        public virtual byte[] ComputeUserKey() {
             byte[] userKey = new byte[32];
             arcfour.PrepareARCFOURKey(mkey);
             arcfour.EncryptARCFOUR(pad, userKey);
             return userKey;
         }
 
-        protected internal virtual void SetSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool encryptMetadata
+        public virtual void SetSpecificHandlerDicEntries(PdfDictionary encryptionDictionary, bool encryptMetadata
             , bool embeddedFilesOnly) {
             encryptionDictionary.Put(PdfName.R, new PdfNumber(2));
             encryptionDictionary.Put(PdfName.V, new PdfNumber(1));
         }
 
-        protected internal virtual bool IsValidPassword(byte[] uValue, byte[] userKey) {
+        public virtual bool IsValidPassword(byte[] uValue, byte[] userKey) {
             return !EqualsArray(uValue, userKey, 32);
         }
 

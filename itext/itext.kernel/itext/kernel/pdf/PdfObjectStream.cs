@@ -51,10 +51,10 @@ namespace iText.Kernel.Pdf {
         public const int MAX_OBJ_STREAM_SIZE = 200;
 
         /// <summary>Current object stream size (number of objects inside).</summary>
-        protected internal PdfNumber size = new PdfNumber(0);
+        public PdfNumber size = new PdfNumber(0);
 
         /// <summary>Stream containing object indices, a heading part of object stream.</summary>
-        protected internal PdfOutputStream indexStream;
+        public PdfOutputStream indexStream;
 
         public PdfObjectStream(PdfDocument doc)
             : this(doc, new ByteArrayOutputStream()) {
@@ -112,7 +112,7 @@ namespace iText.Kernel.Pdf {
             return indexStream;
         }
 
-        protected internal override void ReleaseContent() {
+        public override void ReleaseContent() {
             ReleaseContent(false);
         }
 

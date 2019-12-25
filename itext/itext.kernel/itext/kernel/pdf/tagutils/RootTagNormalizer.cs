@@ -42,7 +42,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Collections.Generic;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Tagging;
 
@@ -184,9 +185,9 @@ namespace iText.Kernel.Pdf.Tagutils {
             else {
                 mappingRole += "not standard role";
             }
-            ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.RootTagNormalizer));
-            logger.Warn(String.Format(iText.IO.LogMessageConstant.CREATED_ROOT_TAG_HAS_MAPPING, origRootTagNs, mappingRole
-                ));
+            //ILog logger = LogManager.GetLogger(typeof(iText.Kernel.Pdf.Tagutils.RootTagNormalizer));
+            //logger.Warn(String.Format(iText.IO.LogMessageConstant.CREATED_ROOT_TAG_HAS_MAPPING, origRootTagNs, mappingRole
+                //));
         }
     }
 }

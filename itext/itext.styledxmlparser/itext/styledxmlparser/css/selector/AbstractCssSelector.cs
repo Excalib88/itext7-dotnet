@@ -51,7 +51,7 @@ namespace iText.StyledXmlParser.Css.Selector {
     /// <summary>Abstract superclass for CSS Selectors.</summary>
     public abstract class AbstractCssSelector : ICssSelector {
         /// <summary>The selector items.</summary>
-        protected internal IList<ICssSelectorItem> selectorItems;
+        public IList<ICssSelectorItem> selectorItems;
 
         /// <summary>
         /// Creates a new

@@ -625,7 +625,7 @@ namespace iText.Kernel.XMP.Impl
 		/// <param name="propName">a property name or path</param>
 		/// <param name="valueType">the type of the value, see VALUE_...</param>
 		/// <returns>Returns an <code>XMPProperty</code></returns>
-		protected internal virtual XMPProperty GetProperty(String schemaNS, String propName
+		public virtual XMPProperty GetProperty(String schemaNS, String propName
 			, int valueType)
 		{
 			ParameterAsserts.AssertSchemaNS(schemaNS);
@@ -691,7 +691,7 @@ namespace iText.Kernel.XMP.Impl
 		/// Returns the node value as an object according to the
 		/// <code>valueType</code>.
 		/// </returns>
-		protected internal virtual Object GetPropertyObject(String schemaNS, String propName
+		public virtual Object GetPropertyObject(String schemaNS, String propName
 			, int valueType)
 		{
 			ParameterAsserts.AssertSchemaNS(schemaNS);

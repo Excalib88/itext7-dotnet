@@ -110,7 +110,7 @@ namespace iText.IO.Codec.Brotli.Dec
 			}
 		}
 
-	    protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing) {
 	        iText.IO.Codec.Brotli.Dec.State.Close(state);
 	    }
 

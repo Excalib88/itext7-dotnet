@@ -53,17 +53,17 @@ namespace iText.Layout.Properties {
     /// <see cref="Property.UNDERLINE"/>
     /// </remarks>
     public class Underline {
-        protected internal TransparentColor transparentColor;
+        public TransparentColor transparentColor;
 
-        protected internal float thickness;
+        public float thickness;
 
-        protected internal float thicknessMul;
+        public float thicknessMul;
 
-        protected internal float yPosition;
+        public float yPosition;
 
-        protected internal float yPositionMul;
+        public float yPositionMul;
 
-        protected internal int lineCapStyle = PdfCanvasConstants.LineCapStyle.BUTT;
+        public int lineCapStyle = PdfCanvasConstants.LineCapStyle.BUTT;
 
         /// <summary>Creates an Underline.</summary>
         /// <remarks>

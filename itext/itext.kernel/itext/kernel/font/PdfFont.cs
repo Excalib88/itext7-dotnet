@@ -52,32 +52,32 @@ using iText.Kernel.Pdf;
 
 namespace iText.Kernel.Font {
     public abstract class PdfFont : PdfObjectWrapper<PdfDictionary> {
-        protected internal FontProgram fontProgram;
+        public FontProgram fontProgram;
 
-        protected internal static readonly byte[] EMPTY_BYTES = new byte[0];
+        public static readonly byte[] EMPTY_BYTES = new byte[0];
 
-        protected internal static readonly double[] DEFAULT_FONT_MATRIX = new double[] { 0.001, 0, 0, 0.001, 0, 0 };
+        public static readonly double[] DEFAULT_FONT_MATRIX = new double[] { 0.001, 0, 0, 0.001, 0, 0 };
 
-        protected internal IDictionary<int, Glyph> notdefGlyphs = new Dictionary<int, Glyph>();
+        public IDictionary<int, Glyph> notdefGlyphs = new Dictionary<int, Glyph>();
 
         /// <summary>false, if the font comes from PdfDocument.</summary>
-        protected internal bool newFont = true;
+        public bool newFont = true;
 
         /// <summary>true if the font is to be embedded in the PDF.</summary>
-        protected internal bool embedded = false;
+        public bool embedded = false;
 
         /// <summary>Indicates if all the glyphs and widths for that particular encoding should be included in the document.
         ///     </summary>
-        protected internal bool subset = true;
+        public bool subset = true;
 
-        protected internal IList<int[]> subsetRanges;
+        public IList<int[]> subsetRanges;
 
-        protected internal PdfFont(PdfDictionary fontDictionary)
+        public PdfFont(PdfDictionary fontDictionary)
             : base(fontDictionary) {
             GetPdfObject().Put(PdfName.Type, PdfName.Font);
         }
 
-        protected internal PdfFont()
+        public PdfFont()
             : base(new PdfDictionary()) {
             GetPdfObject().Put(PdfName.Type, PdfName.Font);
         }
@@ -508,9 +508,9 @@ namespace iText.Kernel.Font {
             base.Flush();
         }
 
-        protected internal abstract PdfDictionary GetFontDescriptor(String fontName);
+        public abstract PdfDictionary GetFontDescriptor(String fontName);
 
-        protected internal override bool IsWrappedObjectMustBeIndirect() {
+        public override bool IsWrappedObjectMustBeIndirect() {
             return true;
         }
 
@@ -524,7 +524,7 @@ namespace iText.Kernel.Font {
         /// the font name prefixed with subset if isSubset and isEmbedded are true,
         /// otherwise original font name is returned intact.
         /// </returns>
-        protected internal static String UpdateSubsetPrefix(String fontName, bool isSubset, bool isEmbedded) {
+        public static String UpdateSubsetPrefix(String fontName, bool isSubset, bool isEmbedded) {
             if (isSubset && isEmbedded) {
                 StringBuilder s = new StringBuilder(fontName.Length + 7);
                 for (int k = 0; k < 6; ++k) {
@@ -552,7 +552,7 @@ namespace iText.Kernel.Font {
         /// <see langword="null"/>
         /// , if there is an error reading the font.
         /// </returns>
-        protected internal virtual PdfStream GetPdfFontStream(byte[] fontStreamBytes, int[] fontStreamLengths) {
+        public virtual PdfStream GetPdfFontStream(byte[] fontStreamBytes, int[] fontStreamLengths) {
             if (fontStreamBytes == null) {
                 throw new PdfException(PdfException.FontEmbeddingIssue);
             }
@@ -576,7 +576,7 @@ namespace iText.Kernel.Font {
         /// </param>
         /// <returns>single merged array consisting of pairs of integers, each of them denoting a range.</returns>
         [System.ObsoleteAttribute(@"The logic has been moved to iText.IO.Font.TrueTypeFont .")]
-        protected internal static int[] CompactRanges(IList<int[]> ranges) {
+        public static int[] CompactRanges(IList<int[]> ranges) {
             IList<int[]> simp = new List<int[]>();
             foreach (int[] range in ranges) {
                 for (int j = 0; j < range.Length; j += 2) {

@@ -43,7 +43,8 @@ address: sales@itextpdf.com
 */
 using System;
 using System.Text;
-using Common.Logging;
+////using Common.Logging;
+
 using iText.IO.Util;
 
 namespace iText.IO.Source {
@@ -105,15 +106,15 @@ namespace iText.IO.Source {
 
         public static readonly byte[] False = ByteUtils.GetIsoBytes("false");
 
-        protected internal PdfTokenizer.TokenType type;
+        public PdfTokenizer.TokenType type;
 
-        protected internal int reference;
+        public int reference;
 
-        protected internal int generation;
+        public int generation;
 
-        protected internal bool hexString;
+        public bool hexString;
 
-        protected internal ByteBuffer outBuf;
+        public ByteBuffer outBuf;
 
         private readonly RandomAccessFileOrArray file;
 
@@ -316,9 +317,9 @@ namespace iText.IO.Source {
                                 catch (Exception) {
                                     //warn about incorrect reference number
                                     //Exception: NumberFormatException for java, FormatException or OverflowException for .NET
-                                    ILog logger = LogManager.GetLogger(typeof(PdfTokenizer));
-                                    logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.INVALID_INDIRECT_REFERENCE, iText.IO.Util.JavaUtil.GetStringForBytes
-                                        (n1), iText.IO.Util.JavaUtil.GetStringForBytes(n2)));
+                                    //ILog logger = LogManager.GetLogger(typeof(PdfTokenizer));
+                                    //logger.Error(MessageFormatUtil.Format(iText.IO.LogMessageConstant.INVALID_INDIRECT_REFERENCE, iText.IO.Util.JavaUtil.GetStringForBytes
+                                    //    (n1), iText.IO.Util.JavaUtil.GetStringForBytes(n2)));
                                     reference = -1;
                                     generation = 0;
                                 }
@@ -588,7 +589,7 @@ namespace iText.IO.Source {
         /// byte[] for decrypting or for creating
         /// <see cref="System.String"/>.
         /// </returns>
-        protected internal static byte[] DecodeStringContent(byte[] content, int from, int to, bool hexWriting) {
+        public static byte[] DecodeStringContent(byte[] content, int from, int to, bool hexWriting) {
             ByteBuffer buffer = new ByteBuffer(to - from + 1);
             // <6954657874ae...>
             if (hexWriting) {
@@ -734,16 +735,16 @@ namespace iText.IO.Source {
         /// <param name="ch">int</param>
         /// <param name="isWhitespace">boolean</param>
         /// <returns>boolean</returns>
-        protected internal static bool IsWhitespace(int ch, bool isWhitespace) {
+        public static bool IsWhitespace(int ch, bool isWhitespace) {
             return ((isWhitespace && ch == 0) || ch == 9 || ch == 10 || ch == 12 || ch == 13 || ch == 32);
         }
 
-        protected internal static bool IsDelimiter(int ch) {
+        public static bool IsDelimiter(int ch) {
             return (ch == '(' || ch == ')' || ch == '<' || ch == '>' || ch == '[' || ch == ']' || ch == '/' || ch == '%'
                 );
         }
 
-        protected internal static bool IsDelimiterWhitespace(int ch) {
+        public static bool IsDelimiterWhitespace(int ch) {
             return delims[ch + 1];
         }
 
@@ -923,7 +924,7 @@ namespace iText.IO.Source {
         }
 
         [System.ObsoleteAttribute(@"Will be removed in 7.2. This inner class is not used anywhere")]
-        protected internal class ReusableRandomAccessSource : IRandomAccessSource {
+        public class ReusableRandomAccessSource : IRandomAccessSource {
             private ByteBuffer buffer;
 
             public ReusableRandomAccessSource(ByteBuffer buffer) {
